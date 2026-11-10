@@ -1,0 +1,475 @@
+# 来源：《CAM工程技能培训》第15章 p185–201；quote 为原文逐字片段
+
+# ---------- 阻抗类型 ----------
+- id: impedance.type.single_ended
+  rule: "单端(线)阻抗：指单根信号线测得的阻抗"
+  source_page: 185
+  quote: "单端(线)阻抗：英文 single ended impedance ,指单根信号线测得的阻抗"
+
+- id: impedance.type.differential
+  rule: "差分(动)阻抗：指差分驱动时在两条等宽等间距的传输线中测试到的阻抗"
+  source_page: 185
+  quote: "差分(动)阻抗：英文 differential impedance,指差分驱动时在两条等宽等间距的传 输线中测试到的阻抗"
+
+- id: impedance.type.coplanar
+  rule: "共面阻抗：信号线在其周围 GND/VCC(信号线到其两侧 GND/VCC间距相等)之间传输时所测试到的"
+  source_page: 185
+  quote: "共面阻抗：英文 coplanar impedance ,指信号线在其周围 GND/VCC(信号线到其两侧 GND/VCC间距相等)之间传输时所测试到的"
+
+# ---------- 影响因素（正比/反比） ----------
+- id: impedance.factor.er_inverse
+  rule: "介质介电常数，与阻抗值成反比"
+  source_page: 185
+  quote: "介质介电常数，与阻抗值成反比"
+
+- id: impedance.factor.h_direct
+  rule: "H1，H2，H3...：线路层与接地层间介质厚度,与阻抗值成正比"
+  source_page: 185
+  quote: "H1，H2，H3...：线路层与接地层间介质厚度,与阻抗值成正比"
+
+- id: impedance.factor.w_inverse
+  rule: "阻抗线线底宽度 W1 / 线面宽度 W2，与阻抗成反比"
+  source_page: 185
+  quote: "阻抗线线底宽度：W1 为原稿阻抗线宽，W2：阻抗线线面宽度,与阻抗成反比"
+
+- id: impedance.factor.t_inverse
+  rule: "铜厚与阻抗值成反比"
+  source_page: 186
+  quote: "铜厚与阻抗值成反比"
+
+- id: impedance.factor.spacing_direct
+  rule: "相邻线路与线路之间的间距,与阻抗值成正比（差动阻抗）"
+  source_page: 186
+  quote: "相邻线路与线路之间的间距,与阻抗值成正比（差动阻抗）"
+
+- id: impedance.factor.soldermask_inverse
+  rule: "基材阻焊厚度 / C2 线面阻焊厚度 / C3 线间阻焊厚度 / CEr 阻焊介电常数，均与阻抗值成反比"
+  source_page: 186
+  quote: "基材阻焊厚度,与阻抗值成反比 ；C2：线面阻焊厚度,与阻抗值成反比 ；C3：线间阻焊厚度, 与阻抗值成反比 ；CEr：阻焊介电常数，与阻抗值成反比"
+
+# ---------- 线宽补偿：W1 = W2 + Δ ----------
+- id: impedance.w1_w2.inner_hoz
+  rule: "内层底铜为 HOZ 时，W1=W2+0.3mil"
+  value: 0.3
+  unit: mil
+  applies_to: inner_layer_HOZ
+  source_page: 185
+  quote: "当内层底铜为 HOZ 时，W1=W2+0.3mil"
+
+- id: impedance.w1_w2.inner_1oz
+  rule: "内层底铜为 1OZ 时,W1=W2+0.5mil"
+  value: 0.5
+  unit: mil
+  applies_to: inner_layer_1OZ
+  source_page: 185
+  quote: "内层底铜为 1OZ 时，W1=W2+0.5mil"
+
+- id: impedance.w1_w2.inner_2oz
+  rule: "内层底铜为 2OZ 时 W1=W2+1.2mil"
+  value: 1.2
+  unit: mil
+  applies_to: inner_layer_2OZ
+  source_page: 185
+  quote: "当内层底铜为 2OZ 时 W1=W2+1.2mil"
+
+- id: impedance.w1_w2.outer_hoz
+  rule: "外层底铜为 HOZ,W1=W2+0.8mil"
+  value: 0.8
+  unit: mil
+  applies_to: outer_layer_HOZ
+  source_page: 185
+  quote: "当外层底铜为 HOZ,W1=W2+0.8mil"
+
+- id: impedance.w1_w2.outer_1oz
+  rule: "外层底铜为 1OZ 时,W1=W2+1.2mil"
+  value: 1.2
+  unit: mil
+  applies_to: outer_layer_1OZ
+  source_page: 185
+  quote: "外层底铜为 1OZ 时,W1=W2+1.2mil"
+
+- id: impedance.w1_w2.outer_2oz
+  rule: "外层层底铜为 2OZ 时,W1=W2+1.6mil"
+  value: 1.6
+  unit: mil
+  applies_to: outer_layer_2OZ
+  source_page: 185
+  quote: "外层层底铜为 2OZ 时,W1=W2+1.6mil"
+
+# ---------- 铜厚 T1 计算值 ----------
+- id: impedance.t1.inner_hoz
+  rule: "內层为基板铜厚,HOZ 按 15UM 计算"
+  value: 15
+  unit: um
+  applies_to: inner_layer_HOZ
+  source_page: 186
+  quote: "內层为基板铜厚,HOZ 按 15UM 计算"
+
+- id: impedance.t1.inner_1oz
+  rule: "内层 1OZ 按 30UM 计算"
+  value: 30
+  unit: um
+  applies_to: inner_layer_1OZ
+  source_page: 186
+  quote: "1OZ 按 30UM 计算"
+
+- id: impedance.t1.inner_2oz
+  rule: "内层 2OZ 按 65UM 计算"
+  value: 65
+  unit: um
+  applies_to: inner_layer_2OZ
+  source_page: 186
+  quote: "2OZ 按 65UM 计算"
+
+- id: impedance.t1.outer_definition
+  rule: "外层为铜箔厚度+镀铜厚度,依据孔铜規格而定"
+  applies_to: outer_layer
+  source_page: 186
+  quote: "外层为铜箔厚度+镀铜厚度,依据孔铜規格而定"
+
+- id: impedance.t1.outer_hoz.hole20
+  rule: "底铜为HOZ,孔铜(平均 20UM，最小 18UM )时,表铜按 45UM 计算"
+  value: 45
+  unit: um
+  applies_to: outer_layer_HOZ
+  source_page: 186
+  quote: "当底铜为HOZ,孔铜(平均 20UM，最小 18UM )时,表铜按 45UM 计算"
+
+- id: impedance.t1.outer_hoz.hole25
+  rule: "底铜为HOZ,孔铜（平均 25UM，最小 20UM）时，表铜按 50UM 计算"
+  value: 50
+  unit: um
+  applies_to: outer_layer_HOZ
+  source_page: 186
+  quote: "孔铜（平均 25UM，最小 20UM）时，表铜按 50UM 计算"
+
+- id: impedance.t1.outer_hoz.hole_min25
+  rule: "底铜为HOZ,孔铜单点最小 25UM 时，表铜按 55UM 计算"
+  value: 55
+  unit: um
+  applies_to: outer_layer_HOZ
+  source_page: 186
+  quote: "孔铜单点最小 25UM 时，表铜按 55UM 计算"
+
+- id: impedance.t1.outer_1oz.hole20
+  rule: "底铜为 1OZ,孔銅(平均 20UM，最小 18UM )时,表铜按 55UM 计算"
+  value: 55
+  unit: um
+  applies_to: outer_layer_1OZ
+  source_page: 186
+  quote: "当底铜为 1OZ,孔銅(平均 20UM，最小 18UM )时,表铜按 55UM 计算"
+
+- id: impedance.t1.outer_1oz.hole25
+  rule: "底铜为 1OZ,孔铜（平均 25UM，最小 20UM）时，表铜按 60UM 计算"
+  value: 60
+  unit: um
+  applies_to: outer_layer_1OZ
+  source_page: 186
+  quote: "孔铜（平均 25UM，最小 20UM）时，表铜按 60UM 计算"
+
+- id: impedance.t1.outer_1oz.hole_min25
+  rule: "底铜为 1OZ,孔铜单点最小 25UM 时，表铜按 65UM 计算"
+  value: 65
+  unit: um
+  applies_to: outer_layer_1OZ
+  source_page: 186
+  quote: "孔铜单点最小 25UM 时，表铜按 65UM 计算"
+
+# ---------- 阻焊厚度 C1/C2/C3、CEr ----------
+- id: impedance.soldermask.once.c1
+  rule: "印一次阻焊油墨，C1 值为 30UM"
+  value: 30
+  unit: um
+  applies_to: soldermask_once
+  source_page: 186
+  quote: "印一次阻焊油墨，C1 值为 30UM ，C2 值为 12UM ，C3 值为 30UM"
+
+- id: impedance.soldermask.once.c2
+  rule: "印一次阻焊油墨，C2 值为 12UM"
+  value: 12
+  unit: um
+  applies_to: soldermask_once
+  source_page: 186
+  quote: "印一次阻焊油墨，C1 值为 30UM ，C2 值为 12UM ，C3 值为 30UM"
+
+- id: impedance.soldermask.once.c3
+  rule: "印一次阻焊油墨，C3 值为 30UM"
+  value: 30
+  unit: um
+  applies_to: soldermask_once
+  source_page: 186
+  quote: "印一次阻焊油墨，C1 值为 30UM ，C2 值为 12UM ，C3 值为 30UM"
+
+- id: impedance.soldermask.twice.c1
+  rule: "印两次阻焊油墨，C1 值为 60UM"
+  value: 60
+  unit: um
+  applies_to: soldermask_twice
+  source_page: 186
+  quote: "印两次阻焊油墨，C1 值为 60UM ，C2 值为 25UM ，C3 值为 60UM"
+
+- id: impedance.soldermask.twice.c2
+  rule: "印两次阻焊油墨，C2 值为 25UM"
+  value: 25
+  unit: um
+  applies_to: soldermask_twice
+  source_page: 186
+  quote: "印两次阻焊油墨，C1 值为 60UM ，C2 值为 25UM ，C3 值为 60UM"
+
+- id: impedance.soldermask.twice.c3
+  rule: "印两次阻焊油墨，C3 值为 60UM"
+  value: 60
+  unit: um
+  applies_to: soldermask_twice
+  source_page: 186
+  quote: "印两次阻焊油墨，C1 值为 60UM ，C2 值为 25UM ，C3 值为 60UM"
+
+- id: impedance.soldermask.cer
+  rule: "CEr:按 3.4 计算"
+  value: 3.4
+  source_page: 186
+  quote: "CEr:按 3.4 计算"
+
+# ---------- 参数定义（POLAR SI9000） ----------
+- id: impedance.param.H1
+  rule: "H1：外层到VCC/GND间的介质厚度"
+  source_page: 187
+  quote: "H1：外层到VCC/GND间的介质厚度"
+
+- id: impedance.param.W1
+  rule: "W1: 原稿阻抗线宽（阻抗线线底宽度）"
+  source_page: 187
+  quote: "W1: 原稿阻抗线宽"
+
+- id: impedance.param.W2
+  rule: "W2：阻抗线线面宽度"
+  source_page: 187
+  quote: "W2：阻抗线线面宽度"
+
+- id: impedance.param.S1
+  rule: "S1：差动阻抗线间隙"
+  source_page: 187
+  quote: "S1：差动阻抗线间隙"
+
+- id: impedance.param.Er1
+  rule: "Er1: 介质层介电常数"
+  source_page: 187
+  quote: "Er1: 介质层介电常数"
+
+- id: impedance.param.T1
+  rule: "T1：线路铜厚，包括基板铜厚+电镀铜厚"
+  source_page: 187
+  quote: "T1：线路铜厚，包括基板铜厚+电镀铜厚"
+
+- id: impedance.param.T1_inner
+  rule: "内层模式中 T1: 阻抗线铜厚=基板铜厚"
+  source_page: 188
+  quote: "T1: 阻抗线铜厚=基板铜厚"
+
+- id: impedance.param.CEr
+  rule: "CEr: 阻抗介电常数（阻焊介电常数）"
+  source_page: 187
+  quote: "CEr: 阻抗介电常数"
+
+- id: impedance.param.C1
+  rule: "C1: 基材阻焊厚度"
+  source_page: 187
+  quote: "C1: 基材阻焊厚度"
+
+- id: impedance.param.C2
+  rule: "C2:线面阻焊厚度"
+  source_page: 187
+  quote: "C2:线面阻焊厚度"
+
+- id: impedance.param.C3
+  rule: "C3:差动阻抗线间阻焊厚度"
+  source_page: 187
+  quote: "C3:差动阻抗线间阻焊厚度"
+
+- id: impedance.param.D1
+  rule: "D1：阻抗线与GND/VCC之间的距离（共面阻抗）"
+  source_page: 194
+  quote: "D1：阻抗线与GND/VCC之间的距离"
+
+- id: impedance.param.REr
+  rule: "REr:差分阻抗线间填充树脂的介电常数"
+  source_page: 193
+  quote: "REr:差分阻抗线间填充树脂的介电常数"
+
+# ---------- 计算模式适用范围 ----------
+- id: impedance.model.surface_microstrip
+  rule: "Surface Microstrip：外层阻焊前阻抗计算"
+  applies_to: single_ended
+  source_page: 187
+  quote: "Surface Microstrip 适用范围： 外层阻焊前阻抗计算"
+
+- id: impedance.model.coated_microstrip
+  rule: "Coated Microstrip：外层阻焊后阻抗计算"
+  applies_to: single_ended
+  source_page: 188
+  quote: "Coated Microstrip 适用范围： 外层阻焊后阻抗计算"
+
+- id: impedance.model.embedded_microstrip
+  rule: "Embedded Microstrip：两个VCC/GND夹一个线路层之阻抗计算"
+  applies_to: single_ended
+  source_page: 188
+  quote: "Embedded Microstrip 适用范围:两个VCC/GND夹一个线路层之阻抗计算"
+
+- id: impedance.model.offset_stripline_1
+  rule: "Offset stripline：与外层相邻的第二个线路层阻抗计算（L1、L2均为线路层,L3为GND或VCC层,则L2层用此方式）"
+  applies_to: single_ended
+  source_page: 189
+  quote: "Offset stripline 适用范围:与外层相邻的第二个线路层阻抗计算 例如一个6层板,L1、L2均为线路层,L3为GND或VCC层,则L2 层的阻抗用此方式计算"
+
+- id: impedance.model.offset_stripline_2
+  rule: "Offset stripline：两个VCC/GND夹两个线路层之阻抗计算（L2,L5为GND/VCC，L3,L4为线路层）"
+  applies_to: single_ended
+  source_page: 189
+  quote: "两个VCC/GND夹两个线路层之阻抗计算;例如 一个6层板，L2,L5层为GND/VCC，L3,L4层为线路层需控制 阻抗"
+
+- id: impedance.model.skip_layer_reference
+  rule: "隔层参考：模式同2）仅多一介质层 / 同4）仅多两个介质层"
+  applies_to: single_ended
+  source_page: 190
+  quote: "阻抗计算模式同2），仅多一介质层"
+
+- id: impedance.model.edge_coupled_surface_microstrip
+  rule: "Edge-coupled Surface Microstrip：外层阻焊前差动阻抗计算"
+  applies_to: differential
+  source_page: 190
+  quote: "适用范围：外层阻焊前差动阻抗计算"
+
+- id: impedance.model.edge_coupled_coated_microstrip
+  rule: "Edge-coupled Coated Microstrip：外层阻焊后差动阻抗计算"
+  applies_to: differential
+  source_page: 191
+  quote: "Edge-coupled Coated Microstrip 适用范围：外层阻焊后差动阻抗计算"
+
+- id: impedance.model.edge_coupled_embedded_microstrip
+  rule: "Edge-coupled Embedded Microstrip：与外层相邻的第二个线路层差动阻抗计算"
+  applies_to: differential
+  source_page: 191
+  quote: "Edge-coupled Embedded Microstrip 适用范围:与外层相邻的第二个线路层差动阻抗计算"
+
+- id: impedance.model.edge_coupled_offset_stripline_1
+  rule: "Edge-coupled Offset stripline：两个VCC/GND夹一个线路层之阻抗计算"
+  applies_to: differential
+  source_page: 192
+  quote: "Edge-coupled Offset stripline 适用范围： 两个VCC/GND夹一个线路层之阻抗计算"
+
+- id: impedance.model.edge_coupled_offset_stripline_2
+  rule: "Edge-coupled Offset stripline：两个VCC/GND夹两个线路层之阻抗计算（L2、L5为GND/VCC,L3、L4为线路层）"
+  applies_to: differential
+  source_page: 192
+  quote: "两个VCC/GND夹两个线路层之阻抗计算:例如一个6层板,L2、L5层 为GND/VCC,L3、L4层为线路层需控制阻抗"
+
+- id: impedance.model.rer_note
+  rule: "当REr=Er2时，5）计算的阻抗值等于6）计算的阻抗值，一般情况下不用含线间填充树脂的模式计算"
+  applies_to: differential
+  source_page: 193
+  quote: "抗值则会等于6）计算的阻抗值，因此一般情况下不用类似于 模式（含线间填充树脂）计算阻抗值"
+  note: "原文首句「备注：当REr=Er2时，5）计算的阻」与 REr 定义在 -layout 中同行交错，quote 取其后连续部分"
+
+- id: impedance.model.surface_coplanar_waveguide
+  rule: "Surface coplanar waveguide：外层蚀刻后单线共面阻抗，参考层与阻抗线在同一层面；次外层为线路层非参考层"
+  applies_to: coplanar
+  source_page: 194
+  quote: "即阻抗线被周围GND/VCC包围，周围GND/VCC即为参考层面。而次 外层（innerlayer 2）为线路层，非GND/VCC（即非参考层）"
+  note: "原文首行「适用范围：外层蚀刻后单线共面阻抗，参考层与阻抗线在同一层面，」与模式标题行交错，quote 取其后连续部分"
+
+- id: impedance.model.coated_coplanar_strips
+  rule: "Coated coplanar strips：阻焊后单线共面阻抗，参考层与阻抗线在同一层面；次外层为线路层非参考层"
+  applies_to: coplanar
+  source_page: 194
+  quote: "适用范围：阻焊后单线共面阻抗，参考层与阻抗线在同一层面，即 阻抗线被周围GND/VCC包围，周围GND/VCC即为参考层面"
+
+- id: impedance.model.surface_coplanar_waveguide_with_ground
+  rule: "Surface coplanar waveguide with ground：外层蚀刻后单线共面阻抗，参考层为同一层面的GND/VCC和次外层GND/VCC层"
+  applies_to: coplanar
+  source_page: 195
+  quote: "适用范围：外层蚀刻后单线共面阻抗，参考层为同一层 面的GND/VCC和次外层GND/VCC层"
+
+- id: impedance.model.coated_coplanar_waveguide_with_ground
+  rule: "Coated coplanar waveguide with grond：阻焊后单线共面阻抗，参考层为同一层面的GND/VCC和次外层GND/VCC层"
+  applies_to: coplanar
+  source_page: 195
+  quote: "适用范围：阻焊后单线共面阻抗，参考层为同一层 面的GND/VCC和次外层GND/VCC层"
+
+- id: impedance.model.embedded_coplanar_waveguide
+  rule: "Embedded coplanar waveguide：内层单线共面阻抗，参考层为同一层面的GND/VCC；邻近层为线路层"
+  applies_to: coplanar
+  source_page: 196
+  quote: "适用范围：内层单线共面阻抗，参考层为同一层面的GND/VCC（阻 抗线被周围GND/VCC包围，周围GND/VCC即为参考层面）。而与其 邻近层为线路层，非GND/VCC"
+
+- id: impedance.model.embedded_coplanar_waveguide_with_ground
+  rule: "Embedded coplanar waveguide with ground：内层单线共面阻抗，参考层为同一层面的GND/VCC及与其邻近GND/VCC层"
+  applies_to: coplanar
+  source_page: 196
+  quote: "适用范围：内层单线共面阻抗,参考层为同一层面的GND/VCC及与其邻 近GND/VCC层"
+
+- id: impedance.model.offset_coplanar_waveguide
+  rule: "Offset coplanar waveguide：内层单线共面阻抗，参考层为同一层面的GND/VCC及与其邻近的两个GND/VCC层"
+  applies_to: coplanar
+  source_page: 197
+  quote: "适用范围：内层单线共面阻抗,参考层为同一层面的GND/VCC及与 其邻近的两个GND/VCC层"
+
+- id: impedance.model.diff_surface_coplanar_waveguide
+  rule: "Diff surface coplanar waveguide：外层蚀刻后差分共面阻抗，参考层为同一层面的GND/VCC；次外层为线路层非参考层"
+  applies_to: coplanar_differential
+  source_page: 197
+  quote: "适用范围：外层蚀刻后差分共面阻抗，参考层为同一层面的 GND/VCC"
+
+- id: impedance.model.diff_coated_coplanar_waveguide
+  rule: "Diff coated coplanar waveguide：阻焊后差分共面阻抗，参考层与阻抗线在同一层面；次外层为线路层非参考层"
+  applies_to: coplanar_differential
+  source_page: 198
+  quote: "适用范围：阻焊后差分共面阻抗，参考层与阻抗线在同一层面，即阻抗线被周围 GND/VCC包围，周围GND/VCC即为参考层面"
+
+- id: impedance.model.diff_surface_coplanar_waveguide_with_ground
+  rule: "Diff surface coplanar waveguide（with ground）：蚀刻后差分共面阻抗，参考层为同一层面的GND/VCC和次外层GND/VCC层"
+  applies_to: coplanar_differential
+  source_page: 198
+  quote: "适用范围：蚀刻后差分共面阻抗，参考层为同一层面的GND/VCC和次外 层GND/VCC层"
+
+- id: impedance.model.diff_coated_coplanar_waveguide_with_ground
+  rule: "Diff coated coplanar waveguide（with ground）：阻焊后差分共面阻抗，参考层为同一层面的GND/VCC和次外层GND/VCC层"
+  applies_to: coplanar_differential
+  source_page: 199
+  quote: "适用范围：阻焊后差分共面阻抗，参考层为同一层面的GND/VCC和次外层GND/VCC 层"
+
+- id: impedance.model.diff_embedded_coplanar_waveguide
+  rule: "Diff embedded coplanar waveguide：内层差动共面阻抗，参考层为同一层面的GND/VCC；邻近层为线路层"
+  applies_to: coplanar_differential
+  source_page: 199
+  quote: "适用范围：内层差动共面阻抗，参考层为同一层面的GND/VCC（阻 抗线被周围GND/VCC包围，周围GND/VCC即为参考层面）。而与其 邻近层为线路层，非GND/VCC"
+
+- id: impedance.model.diff_embedded_coplanar_waveguide_with_ground
+  rule: "Diff embedded coplanar waveguide with ground：内层差分共面阻抗，参考层为同一层面的GND/VCC及与其邻近GND/VCC层"
+  applies_to: coplanar_differential
+  source_page: 200
+  quote: "适用范围：内层差分共面阻抗,参考层为同一层面的GND/VCC及与其邻近 GND/VCC层"
+
+- id: impedance.model.diff_offset_coplanar_waveguide
+  rule: "Diff offset coplanar waveguide：内层差分共面阻抗，参考层为同一层面的GND/VCC及与其邻近的两个GND/VCC层"
+  applies_to: coplanar_differential
+  source_page: 200
+  quote: "适用范围：内层差分共面阻抗,参考层为同一层面的 GND/VCC及与其邻近的两个GND/VCC层"
+
+# ---------- 阻抗实例 ----------
+- id: impedance.example.single_50ohm
+  rule: "实例：GTL&GBL 单端线宽 4.5mil，参考层 L2&L3，阻值 50 欧姆，成品板厚 1.6MM 4层板"
+  value: 50
+  unit: 欧姆
+  applies_to: single_ended
+  source_page: 201
+  quote: "GTL&GBL 4.5 L2&L3 50 成品板厚"
+  note: "线宽（mil) 4.5；板厚(MM) 成品板厚1.6MM,4层板"
+
+- id: impedance.example.diff_85ohm
+  rule: "实例：GTL&GBL 差分线宽 5.1mil 线距 6mil，参考层 L2&L3，阻值 85 欧姆，成品板厚 1.6MM 4层板"
+  value: 85
+  unit: 欧姆
+  applies_to: differential
+  source_page: 201
+  quote: "GTL&GBL 5.1 6 L2&L3 85 1.6MM,4层"
+  note: "线宽（mil) 5.1；线距(mil) 6"

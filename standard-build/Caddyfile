@@ -1,0 +1,49 @@
+# Caddy:TLS 终止 + 反向代理到 app。SITE_ADDRESS 填域名(自动签 HTTPS 证书);
+# 内网无域名时填 :80(纯 HTTP)或 https://IP(自签)。
+{$SITE_ADDRESS} {
+	encode gzip
+	# ★访问日志。**没有它,出事之后查不到「谁在什么时候请求了什么」** ——
+	# 只能 `docker compose logs app | tail`,而那里只有应用自己打的几行。
+	# 客户现场排障时最常问的三个问题(是不是没打进来 / 打进来被谁挡了 / 慢在哪一跳),
+	# 三个都要这份日志才答得了。
+	#
+	# 落在容器 stdout 而不是文件:docker 那侧已经配了轮转(json-file 50m × 3,
+	# 实测在客户机上是配好的),再自己写文件就要自己管轮转,多一处会写满盘的地方。
+	log {
+		output stdout
+		format console
+	}
+	reverse_proxy app:3005
+}
+
+# ── 无域名入口:只放官网,不放管理端 ─────────────────────────────────────────
+# 场景:管理端已经有域名+证书(SITE_ADDRESS,原样不动),但官网想先用 IP 打开看看。
+# 设 WEBSITE_ALT_ADDRESS=http://<IP>(走已发布的 80)启用;不设则监听容器内的
+# 丢弃端口 = 未启用(Caddy 没有条件块,只能用这种方式表达「关掉」)。
+# 与 WEBSITE_HOST 成对使用,只设一个没有意义。
+#
+# ★两件事缺一不可:
+#   ① Host 改写成 WEBSITE_HOST —— 后端的双前端是**按 Host 分发**的
+#      (core/http/app.ts 的 hostMatches)。不改写的话 Host=IP 匹配不上官网,
+#      落到的是管理端 SPA —— 正好和这个入口的目的相反。
+#   ② 挡掉 /api/* —— Host 分发只管**页面**,`/api` 在那段里是直接 next() 放行的。
+#      不挡的话这个入口等于把整套管理 API 原样暴露在一个没有证书的 IP 上,
+#      而设它的人以为自己只开了官网。官网自己只用 `/api/website`
+#      (website/api.ts 的 BASE 就这一个),放它一条就够。
+{$WEBSITE_ALT_ADDRESS:http://127.0.0.1:9} {
+	encode gzip
+	@nonWebsiteApi {
+		path /api/*
+		not path /api/website/*
+	}
+	# 用 handle(互斥、按书写顺序)而不是裸 respond + reverse_proxy —— 后者的先后
+	# 取决于 Caddy 内置的指令排序表,顺序反了就是「挡了个寂寞」而且看不出来。
+	handle @nonWebsiteApi {
+		respond 404
+	}
+	handle {
+		reverse_proxy app:3005 {
+			header_up Host {$WEBSITE_HOST}
+		}
+	}
+}

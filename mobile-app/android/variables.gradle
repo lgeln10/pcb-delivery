@@ -1,0 +1,25 @@
+ext {
+    // ★发版号在这里改,app/build.gradle 只引用 —— 三家国内商店都按 versionCode 判新旧,
+    //   在别处写死过就会忘,升级包会被当成同一版拒收。
+    appVersionCode = 3
+    appVersionName = '1.0.0'
+
+    // ★minSdk 23(Android 6.0)是刻意保留的下限,不是忘了改:
+    //   WebView 自 Android 5.0 起就是可独立升级的组件,「系统老」不等于「内核老」——
+    //   真正决定页面跑不跑得起来的是 WebView 版本,那条闸在 MainActivity(WEBVIEW_WARN_MAJOR)。
+    //   抬 minSdk 只会平白砍掉一批还能用的机器。
+    minSdkVersion = 23
+    compileSdkVersion = 35
+    targetSdkVersion = 35
+    androidxActivityVersion = '1.9.2'
+    androidxAppCompatVersion = '1.7.0'
+    androidxCoordinatorLayoutVersion = '1.2.0'
+    androidxCoreVersion = '1.15.0'
+    androidxFragmentVersion = '1.8.4'
+    coreSplashScreenVersion = '1.0.1'
+    androidxWebkitVersion = '1.12.1'
+    junitVersion = '4.13.2'
+    androidxJunitVersion = '1.2.1'
+    androidxEspressoCoreVersion = '3.6.1'
+    cordovaAndroidVersion = '10.1.1'
+}

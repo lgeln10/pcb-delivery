@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!--
+	  推送环境。★不要在这里写死 —— 由构建配置决定:
+	    Debug   → APS_ENVIRONMENT = development(api.sandbox.push.apple.com)
+	    Release → APS_ENVIRONMENT = production (api.push.apple.com)
+	  两个值都在 App.xcodeproj 的 buildSettings 里。
+
+	  ★为什么必须分开:TestFlight 与 App Store 的包一律走 production,而日常真机调试
+	    走 development。以前这里写死 development,archive 出来的包会拿到 sandbox token,
+	    表现是「后端说发送成功,手机永远收不到」—— 最难查的一种,因为两端都没有报错。
+	  ★后端的 APNS_ENV 必须与这里同步:token 是按环境签发的,环境对不上就是静默丢弃。
+	-->
+	<key>aps-environment</key>
+	<string>$(APS_ENVIRONMENT)</string>
+</dict>
+</plist>

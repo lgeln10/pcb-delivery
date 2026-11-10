@@ -1,0 +1,73 @@
+# 依赖
+node_modules/
+# ★不带斜杠那条不能省:`node_modules/` 只匹配**目录**,匹配不到同名的**符号链接**。
+#   仓里已经栽过四次(607f36320 / 5533bde78 / 563281fdc,以及 2026-08-27 的 89d82a821)——
+#   一个指向本机绝对路径的软链混进提交,别的环境检出后 node_modules 直接是断链,
+#   npm run typecheck / 跑测试全部失败,而且症状看着像「依赖没装」,很难往版本控制上想。
+node_modules
+
+# 构建产物
+dist/
+
+# UniX 官网素材镜像(OSS 抓取,600MB+,单文件最大 318MB 远超 GitHub 100MB 限):
+# 不入库(曾被自动提交扫进本地 unix 分支致 push 全挂),用根目录 upload-unixai-assets.sh 传服务器
+unixai-site-assets/
+upload-unixai-assets.sh
+
+# 图文视频工具素材包(12MB,不入库)
+vedioGen.zip
+
+# 需求沟通上传附件(本地存储模式的运行时产物;OSS 模式不落本地)
+uploads/
+
+# 数据库自动备份的落地目录(core/backup 的 BACKUP_DIR 默认值)。
+# 里面是整库 dump —— 一次误 `git add -A` 就把全库推上去了,所以这条必须在。
+backups/
+
+# 环境/密钥(本地配置不入库)
+.env
+.env.local
+.env.*.local
+
+# 日志
+*.log
+npm-debug.log*
+standard-build/.playwright-cli/
+
+# 本地 CodeGraph 索引
+.codegraph/
+
+# 系统/编辑器
+.DS_Store
+.vscode/
+.idea/
+
+# 客户资金/交易确认单等敏感数据(误提交过一次,见 2026-07-08 history purge)不得入库
+客户申赎记录/
+*申赎记录*
+*交易确认*.xls
+*交易确认*.xlsx
+
+# 官网整站镜像(unixai.net 抓取,视频/图片同步源 ~606MB)+ 视频工具打包件:本地留存,不入库
+/unixai-site-assets/
+/vedioGen.zip
+
+# Claude Code 本地工具配置(launch.json 含本机绝对路径;plans 为本地方案草稿)不入库
+.claude/launch.json
+.claude/plans/
+# settings.local.json 会把批准过的命令原文记进 permissions.allow,
+# 命令里内联的 token/密码会跟着明文落盘 —— 绝不入库
+.claude/settings.local.json*
+.gstack/
+
+# 凭证模板 Playwright 本地验收截图和日志
+standard-build/output/
+
+# ★APNs 私钥等凭据绝不入库(standard-build/CLAUDE.md 质量红线:「密钥进代码库」)。
+# 本仓会镜像到 Gitee、客户服务器也检出这份代码,且 git 历史永久 —— 提交过就抹不掉。
+# 密钥走 Actions secret(APNS_KEY_P8),由部署步骤投放到服务器 secrets/ 下。
+*.p8
+standard-build/secrets/
+
+# Local Claude launch configuration in subprojects
+**/.claude/launch.json

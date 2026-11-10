@@ -1,0 +1,53 @@
+{
+  "_note": "每类植入缺陷恰好命中 1 次（明细行 warn + 汇总行 error/warn）。C01 固有项也在（NPTH 削铜 0.183、开窗比焊盘大 0、NPTH 开窗小、字符线宽 0.12）。align 的 layer_offset/outside_profile 是板外字符造成的，属预期。",
+  "status": { "intake": "ok", "align": "ok", "drill": "ok", "inner": "needs_review", "outer": "needs_review", "mask": "needs_review", "silk": "needs_review" },
+  "must": [
+    { "stage": "align", "kind": "outside_profile", "severity": "warn", "layer": "Flashpads-F_Silkscreen.gbr" },
+    { "stage": "drill", "kind": "drill_oversize", "severity": "info", "min_count": 10 },
+
+    { "stage": "inner", "kind": "partition_line_width", "severity": "error", "layer": "Flashpads-In1_Cu.gbr" },
+    { "stage": "inner", "kind": "isolation_ring", "severity": "error", "layer": "Flashpads-In1_Cu.gbr" },
+    { "stage": "inner", "kind": "negative_no_clearance", "severity": "warn", "layer": "Flashpads-In1_Cu.gbr", "min_count": 2 },
+    { "stage": "inner", "kind": "copper_to_edge", "severity": "warn", "layer": "Flashpads-In1_Cu.gbr" },
+    { "stage": "inner", "kind": "isolated_pad", "severity": "warn", "layer": "Flashpads-In2_Cu.gbr" },
+    { "stage": "inner", "kind": "hole_to_copper", "severity": "error", "layer": "Flashpads-In2_Cu.gbr" },
+    { "stage": "inner", "kind": "copper_to_edge", "severity": "warn", "layer": "Flashpads-In2_Cu.gbr" },
+    { "stage": "inner", "kind": "line_compensation", "severity": "info", "layer": "Flashpads-In2_Cu.gbr" },
+
+    { "stage": "outer", "kind": "line_width", "severity": "error", "layer": "Flashpads-F_Cu.gbr" },
+    { "stage": "outer", "kind": "spacing", "severity": "error", "layer": "Flashpads-F_Cu.gbr" },
+    { "stage": "outer", "kind": "annular_ring", "severity": "error", "layer": "Flashpads-F_Cu.gbr" },
+    { "stage": "outer", "kind": "annular_ring", "severity": "error", "layer": "Flashpads-B_Cu.gbr" },
+    { "stage": "outer", "kind": "npth_clearance", "severity": "error", "layer": "Flashpads-F_Cu.gbr" },
+    { "stage": "outer", "kind": "smd_pads", "severity": "info", "layer": "Flashpads-F_Cu.gbr" },
+
+    { "stage": "mask", "kind": "opening_smaller_than_pad", "severity": "error", "layer": "Flashpads-F_Mask.gbr" },
+    { "stage": "mask", "kind": "missing_opening", "severity": "error", "layer": "Flashpads-F_Mask.gbr" },
+    { "stage": "mask", "kind": "mask_sliver", "severity": "error", "layer": "Flashpads-F_Mask.gbr" },
+    { "stage": "mask", "kind": "mask_expansion", "severity": "warn", "layer": "Flashpads-F_Mask.gbr" },
+    { "stage": "mask", "kind": "via_mask_summary", "severity": "info" },
+
+    { "stage": "silk", "kind": "silk_on_opening", "severity": "warn", "layer": "Flashpads-F_Silkscreen.gbr", "min_count": 2 },
+    { "stage": "silk", "kind": "silk_line_width", "severity": "warn", "layer": "Flashpads-F_Silkscreen.gbr" },
+    { "stage": "silk", "kind": "silk_outside_profile", "severity": "warn", "layer": "Flashpads-F_Silkscreen.gbr" }
+  ],
+  "must_not": [
+    { "stage": "*", "kind": "layer_parse_error" },
+    { "stage": "intake", "kind": "missing_layer" },
+    { "stage": "intake", "kind": "stackup_odd" },
+    { "stage": "drill", "severity": "error" },
+    { "stage": "inner", "kind": "line_width" },
+    { "stage": "inner", "kind": "spacing" },
+    { "stage": "inner", "kind": "npth_in_pad" },
+    { "stage": "outer", "kind": "npth_in_pad" },
+    { "stage": "outer", "kind": "line_width", "layer": "Flashpads-B_Cu.gbr" },
+    { "stage": "outer", "kind": "spacing", "layer": "Flashpads-B_Cu.gbr" },
+    { "stage": "mask", "kind": "opening_smaller_than_pad", "layer": "Flashpads-B_Mask.gbr" },
+    { "stage": "mask", "kind": "missing_opening", "layer": "Flashpads-B_Mask.gbr" },
+    { "stage": "mask", "kind": "mask_sliver", "layer": "Flashpads-B_Mask.gbr" },
+    { "stage": "mask", "kind": "opening_not_pad" },
+    { "stage": "mask", "kind": "via_plug_too_large" },
+    { "stage": "silk", "kind": "silk_crossing_profile" },
+    { "stage": "silk", "severity": "error" }
+  ]
+}

@@ -1,0 +1,152 @@
+{
+  "_note": "machine-readable twin of findings.md; checked by `make verify CASE=C01_two_layer_clean` KiCad 默认字符线宽 0.12mm < 5mil → silk_line_width warn 属预期。",
+  "status": {
+    "intake": "ok",
+    "align": "ok",
+    "drill": "ok",
+    "inner": "ok",
+    "outer": "needs_review",
+    "mask": "ok",
+    "silk": "ok"
+  },
+  "must": [
+    {
+      "stage": "align",
+      "kind": "layer_empty",
+      "severity": "info",
+      "layer": "Flashpads-B_Silkscreen.gbr"
+    },
+    {
+      "stage": "align",
+      "kind": "profile_line_width",
+      "severity": "info"
+    },
+    {
+      "stage": "drill",
+      "kind": "drill_oversize",
+      "severity": "info",
+      "min_count": 9
+    },
+    {
+      "stage": "drill",
+      "kind": "hole_size",
+      "severity": "info"
+    },
+    {
+      "stage": "drill",
+      "kind": "power_ground_shorts",
+      "severity": "info"
+    },
+    {
+      "stage": "outer",
+      "kind": "npth_clearance",
+      "severity": "error",
+      "min_count": 2
+    },
+    {
+      "stage": "outer",
+      "kind": "smd_pads",
+      "severity": "info"
+    },
+    {
+      "stage": "mask",
+      "kind": "mask_expansion",
+      "severity": "warn"
+    },
+    {
+      "stage": "silk",
+      "kind": "silk_line_width",
+      "severity": "warn"
+    }
+  ],
+  "must_not": [
+    {
+      "stage": "intake",
+      "severity": "error"
+    },
+    {
+      "stage": "align",
+      "severity": "error"
+    },
+    {
+      "stage": "drill",
+      "severity": "error"
+    },
+    {
+      "stage": "inner",
+      "severity": "error"
+    },
+    {
+      "stage": "silk",
+      "severity": "error"
+    },
+    {
+      "stage": "intake",
+      "severity": "warn"
+    },
+    {
+      "stage": "align",
+      "severity": "warn"
+    },
+    {
+      "stage": "drill",
+      "severity": "warn"
+    },
+    {
+      "stage": "inner",
+      "severity": "warn"
+    },
+    {
+      "stage": "intake",
+      "kind": "sr_not_expanded"
+    },
+    {
+      "stage": "intake",
+      "kind": "layer_low_confidence"
+    },
+    {
+      "stage": "align",
+      "kind": "layer_offset"
+    },
+    {
+      "stage": "align",
+      "kind": "outside_profile"
+    },
+    {
+      "stage": "drill",
+      "kind": "extra_holes"
+    },
+    {
+      "stage": "drill",
+      "kind": "hole_separation"
+    },
+    {
+      "stage": "drill",
+      "kind": "missing_holes"
+    },
+    {
+      "stage": "drill",
+      "kind": "npth_to_rout"
+    },
+    {
+      "stage": "outer",
+      "kind": "line_width"
+    },
+    {
+      "stage": "outer",
+      "kind": "spacing"
+    },
+    {
+      "stage": "outer",
+      "kind": "annular_ring"
+    },
+    {
+      "stage": "mask",
+      "severity": "error"
+    },
+    {
+      "stage": "*",
+      "kind": "layer_parse_error"
+    }
+  ]
+}

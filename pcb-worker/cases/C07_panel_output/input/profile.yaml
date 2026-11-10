@@ -1,0 +1,7 @@
+# C07 工厂标准覆盖（只写与默认不同的键）
+panel:
+  working_panels_mm: [[406.4, 508.0]]   # 只用 16×20 in 工作板
+  rail_mm: 10.0                          # 工艺边 10mm（放定位孔/挂孔）
+  gap_mm: 2.0
+output:
+  stem: "C07"                            # 输出文件主名

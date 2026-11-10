@@ -1,0 +1,7 @@
+First release.
+
+- Scan a QR code to fill in the server address
+- Sign-in details are remembered locally, so a server hiccup does not mean retyping everything
+- Clock in/out with work-hours location tracking (only between clock-in and clock-out, with a persistent notification)
+- Voice dictation and photo upload
+- New Personal Settings: avatar, password, and work email in one place

@@ -1,0 +1,61 @@
+{
+  "must": [
+    {
+      "stage": "intake",
+      "kind": "cad_exported"
+    },
+    {
+      "stage": "align",
+      "kind": "profile_set"
+    },
+    {
+      "stage": "drill",
+      "kind": "drill_via_plug"
+    },
+    {
+      "stage": "drill",
+      "kind": "drill_outside_profile"
+    },
+    {
+      "stage": "mask",
+      "kind": "via_plug_cover"
+    },
+    {
+      "stage": "drill",
+      "kind": "drill_via_min"
+    }
+  ],
+  "must_not": [
+    {
+      "stage": "intake",
+      "kind": "source_only_no_gerber"
+    },
+    {
+      "stage": "intake",
+      "kind": "cad_export_failed"
+    },
+    {
+      "stage": "*",
+      "kind": "worker_exception"
+    },
+    {
+      "stage": "*",
+      "kind": "native_failed"
+    },
+    {
+      "stage": "drill",
+      "kind": "extra_holes"
+    },
+    {
+      "stage": "drill",
+      "kind": "native_skipped"
+    }
+  ],
+  "status": {
+    "intake": "ok",
+    "align": "ok",
+    "output": "ok",
+    "drill": "needs_review"
+  },
+  "note": "drill 由 ok 改 needs_review（2026-09-17）：同厂工程师要求塞孔分组 / 过孔预大 / 订单指定钻嘴这几类「人工处理」，profile 走 ask 档 —— 引擎照做，报告项带 fix.confirm 进 EQ 等人点过；钻孔结果本身不变（must/outputs 全同）"
+}

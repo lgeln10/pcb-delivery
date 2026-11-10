@@ -1,0 +1,12 @@
+node_modules
+dist
+dist-server
+.git
+.env
+.env.local
+.env.*.local
+uploads
+*.log
+coverage
+.vitest
+scratchpad

@@ -1,0 +1,202 @@
+# 来源：《CAM工程技能培训》第8章 p140–144；quote 为原文逐字片段
+
+- id: soldermask.premise.align_and_pad
+  rule: "以钻孔及线路为基准校正阻焊PAD；删掉板外物；阻焊开窗一定要是PAD，开窗对应线路也要是PAD，开窗PAD比线路PAD大"
+  source_page: 140
+  quote: "阻焊开窗一定要是PAD，开窗对应的线路也需要是PAD，开窗PAD比线路PAD大"
+
+- id: soldermask.opening_coverage.min
+  rule: "阻焊开窗及盖线位一般要在2mil以上"
+  value: 2
+  unit: mil
+  source_page: 140
+  quote: "阻焊开窗及盖线位一般要在2mil以上"
+
+- id: soldermask.npth.opening_oversize
+  rule: "非金属孔开窗一般比孔单边大0.1MM"
+  value: 0.1
+  unit: mm
+  applies_to: non_plated
+  source_page: 140
+  quote: "非金属孔开窗一般比孔单边大0.1MM"
+
+- id: soldermask.via.cover
+  rule: "过孔盖油"
+  applies_to: via
+  source_page: 140
+  quote: "过孔盖油，大于或等于0.6MM过孔需要加挡点"
+
+- id: soldermask.via.dam_threshold
+  rule: "大于或等于0.6MM过孔需要加挡点"
+  value: 0.6
+  unit: mm
+  applies_to: via
+  source_page: 140
+  quote: "大于或等于0.6MM过孔需要加挡点"
+
+- id: soldermask.via.plug_max
+  rule: "需要塞孔的过孔不能大于0.5MM"
+  value: 0.5
+  unit: mm
+  applies_to: via
+  source_page: 140
+  quote: "需要塞孔的过孔不能大于0.5MM"
+
+- id: soldermask.plug_drill.oversize
+  rule: "铝片塞孔及树脂塞孔需要做塞孔钻带，一般比孔径整体大0.1-0.15MM"
+  value_min: 0.1
+  value_max: 0.15
+  unit: mm
+  applies_to: 铝片塞孔/树脂塞孔
+  source_page: 140
+  quote: "铝片塞孔及树脂塞孔需要做塞孔钻带，一般比孔径整体大0.1-0.15MM"
+
+- id: soldermask.gold_finger.full_open
+  rule: "一般金手指位阻焊要开通窗"
+  applies_to: 金手指
+  source_page: 140
+  quote: "一般金手指位阻焊要开通窗"
+
+- id: soldermask.bridge.follow_customer
+  rule: "客户提供的资料IC位有阻焊桥的要做阻焊桥，不能做的需要提出来"
+  source_page: 140
+  quote: "客户提供的资料IC位有阻焊桥的要做阻焊桥，不能做的需要提出来"
+
+- id: soldermask.bridge.white_black
+  rule: "白油黑油阻焊桥一般做5-6mil"
+  value_min: 5
+  value_max: 6
+  unit: mil
+  applies_to: 白油/黑油
+  source_page: 140
+  quote: "白油黑油一般做5-6mil"
+
+- id: soldermask.bridge.other_colors
+  rule: "其他杂油阻焊桥做4mil以上"
+  value: 4
+  unit: mil
+  applies_to: 其他杂油
+  source_page: 140
+  quote: "其他杂油阻焊桥做4mil以上"
+
+- id: soldermask.bridge.green_min
+  rule: "绿油桥做不到最小可以做3mil"
+  value: 3
+  unit: mil
+  applies_to: 绿油
+  source_page: 140
+  quote: "绿油桥做不到最小可以做3mil"
+
+- id: soldermask.testpoint.open
+  rule: "阻抗及V-CUT测试点需要开窗"
+  source_page: 140
+  quote: "阻抗及V-CUT测试点需要开窗"
+
+- id: soldermask.step.opening_line_must_be_pad
+  rule: "检查开窗对应的线路层是否为ＰＡＤ，不是则转为PAD；如有问题则外层必须返工"
+  source_page: 141
+  quote: "如有问题,则外层必须返工"
+
+- id: soldermask.step.mask_layer_all_pad
+  rule: "检查绿油层上是否全为ＰＡＤ，不是同样转为ＰＡＤ（Features Histogram + Construct Pads by Reference 手动转）"
+  source_page: 141
+  quote: "检查绿油层上是否全为ＰＡＤ，不是同样转为ＰＡＤ"
+
+- id: soldermask.step.opening_larger_than_pad
+  rule: "检查绿油开窗是否比对应的线路ＰＡＤ大，不是则加大；不加大则后面优化不了"
+  source_page: 141
+  quote: "不加大则在后面的步骤中优化不了"
+
+- id: soldermask.step.resize_global
+  rule: "整个层都加大：以要加大的层为工作层，Edit Resize—>Global"
+  source_page: 141
+  quote: "整个层都加大：以要加大的层为工作层，Edit Resize—>Global"
+
+- id: soldermask.optimize.once_only
+  rule: "阻焊优化只进行一次，连续重复优化会把IC引脚的贴片PAD开窗乱形"
+  source_page: 142
+  quote: "优化进行一次为妙，连续重复优化会把IC引脚的贴片PAD开窗乱形"
+
+- id: soldermask.check.drill
+  rule: "Drill：报告在NPTH接触到阻焊掩模的情况下,至PTH或NPTH环的阻焊开窗的最近距离"
+  source_page: 143
+  quote: "报告在NPTH接触到阻焊掩模的情况下,至PTH或NPTH环的阻焊开窗的最近距离"
+
+- id: soldermask.check.pads
+  rule: "Pads：报告至所有焊盘（包括未钻孔的焊盘）的阻焊开窗的最近距离；还报告特殊组别Gasket（阻焊重叠的宽度）"
+  source_page: 143
+  quote: "还报告特殊组别Gasket，其中可发现部件阻焊重叠的宽度"
+
+- id: soldermask.check.coverage
+  rule: "Coverage：报告太靠近开窗的线（即覆盖不足）"
+  source_page: 143
+  quote: "报告太靠近开窗的线（即覆盖不足）"
+
+- id: soldermask.check.spacing
+  rule: "Spacing：报告开窗之间的逼近距离（比如sliver宽）"
+  source_page: 143
+  quote: "报告开窗之间的逼近距离（比如sliver宽）"
+
+- id: soldermask.check.missing
+  rule: "Missing：报告丢失开窗"
+  source_page: 143
+  quote: "报告丢失开窗"
+
+- id: soldermask.check.bridge
+  rule: "Bridge：报告无阻焊桥接的不同网络焊盘"
+  source_page: 143
+  quote: "报告无阻焊桥接的不同网络焊盘"
+
+- id: soldermask.check.sliver
+  rule: "Sliver：报告阻焊开窗之间的sliver"
+  source_page: 143
+  quote: "报告阻焊开窗之间的sliver"
+
+- id: soldermask.check.rout
+  rule: "Rout：报告阻焊和铣削部件之间的最近距离"
+  source_page: 143
+  quote: "报告阻焊和铣削部件之间的最近距离"
+
+- id: soldermask.via.dam_step
+  rule: "非金属孔及不小于0.6MM过孔盖油加挡点"
+  value: 0.6
+  unit: mm
+  source_page: 144
+  quote: "非金属孔及不小于0.6MM过孔盖油加挡点"
+
+- id: soldermask.final.compare_original
+  rule: "做完之后需要对原稿，看是否有改变原稿设计的，这一步很关键"
+  source_page: 144
+  quote: "做完之后，需要对原稿，看是否有改变原稿设计的，这一步很关键"
+
+- id: soldermask.via.gerber_vs_design
+  rule: "过孔无客户要求时：客户提供gerber的按gerber资料设计做，客户提供设计稿的一般按过孔盖油做"
+  applies_to: via
+  source_page: 144
+  quote: "一般客户提供gerber的按gerber资料设计做，客户提供是设计稿的一般按过孔盖油做"
+
+- id: soldermask.bridge.customer_design
+  rule: "客户设计有阻焊桥的一般一定要按客户设计阻焊桥做"
+  source_page: 144
+  quote: "客户设计有阻焊桥的一般一定要按客户设计阻焊桥做"
+
+- id: soldermask.check.paste_testpoint_layers
+  rule: "客户提供有贴片层及测试点层的一定要对，看阻焊是否都有开窗，有不同需要提出来确认"
+  source_page: 144
+  quote: "客户提供有贴片层及测试点层的一定要对，看阻焊是否都有开窗，如果有不同需要提出来确认"
+
+- id: soldermask.fiducial.keep_original
+  rule: "客户设计光标点阻焊开窗很大上大铜皮，一般不要缩小开窗按原稿制作；与铜皮相切或小许上大铜皮可以缩小"
+  source_page: 144
+  quote: "一般不要缩小开窗按原稿制作，如果是与铜皮相切或小许上大铜皮可以缩小保证不上大铜皮"
+
+- id: soldermask.edge_plating_halfhole.open
+  rule: "金属包边及半孔部分阻焊需要开窗，防止油墨入金属边及半孔"
+  applies_to: 金属包边/半孔板
+  source_page: 144
+  quote: "金属包边及半孔部分阻焊需要开窗，防止油墨入金属边及半孔"
+
+- id: soldermask.plug_drill.required
+  rule: "需要铝片塞孔及树脂塞孔的，一般要做塞孔钻带"
+  source_page: 144
+  quote: "需要铝片塞孔及树脂塞孔的，一般要做塞孔钻带"

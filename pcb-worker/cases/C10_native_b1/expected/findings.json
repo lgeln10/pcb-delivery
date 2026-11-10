@@ -1,0 +1,20 @@
+{
+  "_note": "同 C05 的植入缺陷都要先被检出（引擎在检查之后才改图），但 fix.applied 由 native 引擎置真；align 的板外字符在 align 阶段就删了，silk 阶段不再报 silk_outside_profile。",
+  "status": { "intake": "ok", "align": "ok", "drill": "ok" },
+  "must": [
+    { "stage": "align", "kind": "native_applied", "severity": "info" },
+    { "stage": "align", "kind": "outside_profile", "severity": "warn", "layer": "Flashpads-F_Silkscreen.gbr" },
+    { "stage": "inner", "kind": "native_applied", "severity": "info" },
+    { "stage": "inner", "kind": "isolation_ring", "severity": "error", "layer": "Flashpads-In1_Cu.gbr" },
+    { "stage": "outer", "kind": "native_applied", "severity": "info" },
+    { "stage": "outer", "kind": "npth_clearance", "severity": "error", "layer": "Flashpads-F_Cu.gbr" },
+    { "stage": "mask", "kind": "native_applied", "severity": "info" },
+    { "stage": "gatekeeper", "kind": "gate_summary", "severity": "info" }
+  ],
+  "must_not": [
+    { "stage": "*", "kind": "native_failed" },
+    { "stage": "*", "kind": "layer_parse_error" },
+    { "stage": "silk", "kind": "silk_outside_profile" },
+    { "stage": "gatekeeper", "severity": "error" }
+  ]
+}

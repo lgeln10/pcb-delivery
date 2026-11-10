@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- 本 App 只有中文。开发区域写 en 会让 App Store 把「主要语言」标成英文,
+	     中国区商店页因此显示成一个英文 App;权限弹窗里我们自己写的中文说明不受影响。 -->
+	<key>CFBundleDevelopmentRegion</key>
+	<string>zh-Hans</string>
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>zh-Hans</string>
+	</array>
+	<key>CFBundleDisplayName</key>
+        <string>企业AI操作系统</string>
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>$(PRODUCT_NAME)</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>$(MARKETING_VERSION)</string>
+	<key>CFBundleVersion</key>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
+	<key>UIMainStoryboardFile</key>
+	<string>Main</string>
+	<!-- ★Capacitor 模板留下的是 armv7 —— 那是 32 位时代的值,而部署目标已是 iOS 14
+	     (32 位设备最高只到 iOS 10)。写成 arm64 才是这个 App 真实的要求。
+	     这一项是**设备能力**,不是能力清单里越少越好:列错的值会让 App Store 的
+	     兼容机型判断建立在一个不成立的前提上。 -->
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+		<string>arm64</string>
+	</array>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<true/>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>语音输入需要使用麦克风,把你说的话转成文字发给智能助手</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>把你的语音转写成文字,用于与智能助手对话</string>
+	<key>NSCameraUsageDescription</key>
+	<string>在对话中拍照上传给智能助手时需要使用相机</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>在对话中上传图片给智能助手时需要访问相册</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>开启考勤位置追踪后,在你打上班卡到打下班卡期间记录工作轨迹;下班打卡即停止。</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>location</string>
+	</array>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>业务功能(如外勤签到)需要获取你的位置</string>
+	<!-- 每次上传构建,App Store Connect 都会问一遍「是否使用了非豁免加密」。本 App 只用
+	     系统 HTTPS(属于豁免),声明一次就不再每版被拦着问,也避免有人随手勾错触发
+	     出口合规审查。改动加密用法时必须重新评估这一项。 -->
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
+</dict>
+</plist>

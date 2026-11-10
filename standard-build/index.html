@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- 这里原先有一行 <meta http-equiv="Cache-Control" content="no-store">:顶不了用,而且有害。
+         Chrome 完全忽略 meta 缓存指令;WebKit 认,但副作用是把 bfcache/page cache 一起关掉。
+         真正的缓存口径现在由服务端发(core/http/app.ts:staticCacheHeaders)——
+         HTML `no-cache` 必验,内容哈希过的 /assets/* `immutable` 缓存一年。 -->
+    <!-- viewport-fit=cover:App 壳内 iOS 全面屏需要 env(safe-area-inset-*) 生效;浏览器里无副作用 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <link rel="apple-touch-icon" href="/logo.png" />
+    <title>企业AI操作系统</title>
+  </head>
+  <body>
+    <!-- 首屏骨架:首次加载要下 ~490KB(gzip)再解析,手机上是好几秒的白屏。
+         Vue 挂载时会整体替换 #app 内容,所以这段不需要任何 JS 去清理。
+         背景用 tokens 的页底色 hex(此刻 CSS 变量还没加载),深色模式跟随系统。 -->
+    <div id="app">
+      <div id="boot-splash">
+        <div id="boot-splash__spinner"></div>
+      </div>
+    </div>
+    <style>
+      #boot-splash {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f5f7fb;
+      }
+      #boot-splash__spinner {
+        width: 28px;
+        height: 28px;
+        border: 3px solid #e6eaf2;
+        border-top-color: #2f6bed;
+        border-radius: 50%;
+        animation: boot-spin 0.9s linear infinite;
+      }
+      @keyframes boot-spin { to { transform: rotate(360deg); } }
+      @media (prefers-color-scheme: dark) {
+        #boot-splash { background: #0f1218; }
+        #boot-splash__spinner { border-color: #2a3242; border-top-color: #2f6bed; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        #boot-splash__spinner { animation-duration: 2.4s; }
+      }
+    </style>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

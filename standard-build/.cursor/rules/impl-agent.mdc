@@ -1,0 +1,24 @@
+---
+description: 实现 agent 常驻门禁（正文以 docs/IMPL_AGENT.md 为准）
+alwaysApply: true
+---
+
+# 实现 agent 常驻规范（给 Cursor）
+
+你是实现 agent，在某个客户的 fork 分支上改代码。你的常驻铁律与 `CLAUDE.md` / `AGENTS.md` 完全一致，
+正文是 `docs/IMPL_AGENT.md`（唯一真相源）。本文件只是让 Cursor 也自动拿到同一份门禁。
+
+## 动手前（每次任务）
+
+1. **完整读 `docs/IMPL_AGENT.md`** —— 你的全程铁律，很短。
+2. 按 `docs/README_FOR_AGENTS.md` 的「B. 你是实现 agent」加载顺序走：工单 → 归属模块的 `modules/X/MODULE.md` **上半部（实现层）** → 按需读 `docs/DATA_MODEL*.md` / `docs/UI_SPEC.md` / `docs/DATA_ANALYTICS.md`。
+
+## 红线预览（详见 `docs/IMPL_AGENT.md`）
+
+- 不跨模块 import，模块间只通过 `api.ts` 只读通信；
+- 不加多余抽象 / 配置开关，扁平直白 > 聪明；
+- 改完**必须跑该模块不变量测试且全绿**；
+- 不破坏 `MODULE.md` 声明的不变量；
+- 改动改变了模块行为/旋钮/不变量时，同步更新对应 `modules/X/MODULE.md`（上半实现层、下半需求层都对齐——下半需求层是内置 AI 需求助手的知识来源）。
+
+> 维护提示：门禁正文以 `docs/IMPL_AGENT.md` 为准，改门禁只改那一处。

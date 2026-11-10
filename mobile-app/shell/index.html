@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no"
+    />
+    <title>企业AI操作系统</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="previewBanner" class="preview-banner">浏览器预览模式(非原生环境,登录请求受 CORS 限制)</div>
+
+    <!--
+      首次启动的隐私政策同意闸。★这不是「更礼貌一点」,是国内应用商店的强制检测项:
+      同意之前不得采集任何信息、不得申请任何权限。所以它盖在最上层,而 app.js 的
+      boot() 第一件事就是等它 —— 同意前连本机存的服务器地址都不读。
+      不同意就退出应用(拒绝后仍能用 = 这道闸等于没有)。
+    -->
+    <div id="consent" class="consent" role="dialog" aria-modal="true" aria-labelledby="consentTitle">
+      <div class="consent__card">
+        <h1 id="consentTitle" class="consent__title">隐私政策</h1>
+        <p class="consent__lede">
+          在开始使用前,请了解本应用会收集哪些信息。<b>不同意也可以 —— 只是无法使用本应用。</b>
+        </p>
+        <ul class="consent__list">
+          <li><b>手机号与姓名</b> —— 用于登录和在系统里标识你的身份。</li>
+          <li><b>位置</b> —— 仅在你所在企业启用考勤轨迹、且你<b>打了上班卡之后</b>才采集,打下班卡即停止;采集期间通知栏会一直有提示。拒绝不影响打卡与其他功能。</li>
+          <li><b>相机与相册</b> —— 只在你主动拍照或选图时读取你选中的那一张。</li>
+          <li><b>麦克风</b> —— 只在你按住语音按钮时录音,由系统转成文字;<b>音频不经过我们的服务器</b>。</li>
+        </ul>
+        <p class="consent__note">
+          你的数据存放在<b>你所在企业自己的服务器</b>上,我们不汇总、不出售、不用于广告,也不集成任何广告或统计 SDK。
+        </p>
+        <a id="consentFull" class="consent__link" target="_blank" rel="noopener">阅读完整隐私政策</a>
+        <div class="consent__actions">
+          <button id="consentAgree" class="btn" type="button">同意并继续</button>
+          <button id="consentDecline" class="consent__decline" type="button">不同意</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 启动校验:有存储会话时静默验 token 后直接进入 -->
+    <div id="boot" class="boot">
+      <div class="boot__spinner"></div>
+      <div id="bootText" class="boot__text">正在进入…</div>
+      <button id="bootCancel" class="boot__cancel" type="button">取消,重新登录</button>
+    </div>
+
+    <main class="page">
+      <!--
+        品牌区。三件事按 sixam 母仓 brand/README.md(品牌事实来源)来:
+        · **iso 星标**(交锁六弦等距星,graphite 3D)是公司商标,源文件在 deck 仓
+          `assets/logos/`,这里放的是逐字节副本(明/暗两版,brand-mark-*.svg)。
+          ★不要拿星号(asterisk)或别的字符凑一个 —— 官网 DESIGN.md §0 明令禁止。
+        · **mono 眉标**是品牌的标签约定(JetBrains Mono;壳里不装网络字体,退回系统等宽 ——
+          这一串是纯拉丁字母,系统等宽在两端渲染都稳,中文用系统等宽则会掉进宋体,所以只给拉丁)。
+        · 眉标用**强调橙**(#b65000 / 暗面 #FF9D4D),这是 brand §3 唯一的强调色,
+          且规矩是「只用于文字强调、**永不用于按钮**」—— 所以登录按钮仍是产品蓝(登进去之后
+          整个 H5 都是那个蓝,这一页突然改墨色反而断层)。全页**只此一处**用强调色。
+        ★为什么不用品牌正文字体(Hanken Grotesk / Newsreader):壳要离线可用、冷启动路径
+          反复优化过,塞网络字体既下不来也不该下;打包字体文件又要给每个 APK 多背上百 KB。
+          这里如实用系统字体,不假装。
+      -->
+      <div class="brand">
+        <picture class="brand__mark">
+          <source srcset="brand-mark-dark.svg" media="(prefers-color-scheme: dark)" />
+          <img src="brand-mark-light.svg" alt="SixAM Tech" width="60" height="60" />
+        </picture>
+        <div class="brand__eyebrow">SIXAM TECH</div>
+        <h1 class="brand__name">企业AI操作系统</h1>
+        <p class="brand__sub">登录你所在企业的部署环境</p>
+      </div>
+
+      <form id="loginForm" class="card" novalidate>
+        <div id="error" class="error" role="alert"></div>
+
+        <!--
+          扫码登录入口。★与下面服务器地址那颗小「扫码」是**同一个扫码器**,
+          由码的内容自己区分是「入口码(只填地址)」还是「登录码(直接登进去)」——
+          让人先选「我要扫哪种码」是多余的一步,他多半也不知道手上这张是哪种。
+          没有摄像头的环境里由 app.js 整个隐藏,不留死按钮。
+        -->
+        <button id="qrLoginBtn" class="btn-qr" type="button" hidden>
+          <span class="btn-qr__ic" aria-hidden="true"></span>
+          <span class="btn-qr__text">扫码登录</span>
+          <span class="btn-qr__sub">在电脑上打开「个人设置 → 移动端扫码登录」</span>
+        </button>
+        <div id="qrLoginSep" class="or-sep" hidden><span>或用账号密码登录</span></div>
+
+        <!--
+          ★三栏合成一组:边框只画在**外面一圈**,里面用发丝线分隔。
+            原来是三张各自带边框的卡片 + 每张下面一行说明 —— 一屏里 6 条边框 3 段小字,
+            而这一页真正要人做的只有「填三样、点登录」。
+          ★扫码入口只剩上面那一颗。地址栏右边原来还有一颗小「扫码」,两颗打开的是同一个
+            扫码器,留着只是让人多一次「该点哪个」的犹豫(2026-08-26 需求方要求去掉)。
+        -->
+        <div class="fields">
+          <label class="fld">
+            <span class="fld__label">服务器地址</span>
+            <input
+              id="server"
+              name="server"
+              type="text"
+              inputmode="url"
+              autocapitalize="none"
+              autocorrect="off"
+              autocomplete="url"
+              placeholder="your-company.example.com"
+            />
+          </label>
+
+          <label class="fld">
+            <span class="fld__label">手机号</span>
+            <input
+              id="phone"
+              name="phone"
+              type="tel"
+              inputmode="tel"
+              autocomplete="username"
+              placeholder="登录手机号"
+            />
+          </label>
+
+          <label class="fld">
+            <span class="fld__label">密码</span>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              autocomplete="current-password"
+              placeholder="登录密码"
+            />
+          </label>
+        </div>
+
+        <!-- 手机号存在于多个租户(409 AMBIGUOUS_TENANT)时才展开 -->
+        <div id="tenantField" class="field field--tenant">
+          <label for="tenantId">租户 ID</label>
+          <input
+            id="tenantId"
+            name="tenantId"
+            type="text"
+            autocapitalize="none"
+            autocorrect="off"
+            placeholder="管理员提供的租户 ID(UUID)"
+          />
+          <div class="hint">该手机号存在于多个企业,请向管理员索取租户 ID 后重试</div>
+        </div>
+
+        <button id="submitBtn" class="btn btn--primary" type="submit">登 录</button>
+        <button id="enterAnywayBtn" class="btn btn--ghost" type="button">仍然进入(跳过在线校验)</button>
+      </form>
+
+      <div class="foot">
+        数据存储在你所在企业自己的服务器上<br />
+        <span class="foot__by">SixAM Tech</span> 企业AI操作系统
+      </div>
+    </main>
+
+    <!-- 扫码取景层:默认不占位,点「扫码」才 show -->
+    <div id="scanner" class="scanner" role="dialog" aria-modal="true" aria-label="扫码登录或填入服务器地址">
+      <video id="scanVideo" class="scanner__video" playsinline muted autoplay></video>
+      <div class="scanner__mask"><div class="scanner__box"></div></div>
+      <div id="scanHint" class="scanner__hint">把二维码放进取景框</div>
+      <button id="scanCancel" class="scanner__cancel" type="button">取消</button>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,54 @@
+{
+ "note": "放行判定已移到 expected/diff_attribution.json：C 档（带宽 > 0.1 mm 的形体差异）逐簇归属，无主簇必须为 0。原来每层的 max_xor_ratio 是照着自己跑出来的残差加余量设的，只能证明没变差，证明不了和工程师做得一样，2026-09-18 删除。",
+ "layers": [
+  {
+   "output": ".gtl",
+   "golden": "golden/p4f086062a0.gtl",
+   "type": "top_copper"
+  },
+  {
+   "output": ".l2",
+   "golden": "golden/p4f086062a0.l2",
+   "type": "inner_copper"
+  },
+  {
+   "output": ".l3",
+   "golden": "golden/p4f086062a0.l3",
+   "type": "inner_copper"
+  },
+  {
+   "output": ".gbl",
+   "golden": "golden/p4f086062a0.gbl",
+   "type": "bottom_copper"
+  },
+  {
+   "output": ".gts",
+   "golden": "golden/p4f086062a0.gts",
+   "type": "top_mask"
+  },
+  {
+   "output": ".gbs",
+   "golden": "golden/p4f086062a0.gbs",
+   "type": "bottom_mask"
+  },
+  {
+   "output": ".gto",
+   "golden": "golden/p4f086062a0.gto",
+   "type": "top_silk"
+  },
+  {
+   "output": ".gbo",
+   "golden": "golden/p4f086062a0.gbo",
+   "type": "bottom_silk"
+  },
+  {
+   "output": ".gko",
+   "golden": "golden/p4f086062a0.gko",
+   "type": "outline"
+  }
+ ],
+ "drill": {
+  "output": ".drl",
+  "golden": "golden/p4f086062a0.drl"
+ }
+}

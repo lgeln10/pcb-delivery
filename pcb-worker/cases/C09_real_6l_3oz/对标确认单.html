@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>六层内外3oz 板 CAM 规则对标确认单</title>
+<style>
+  @page { size: A4; margin: 14mm 12mm 16mm 12mm; }
+  html { font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; font-size: 10.5pt; color: #111; }
+  body { margin: 0; }
+  h1 { font-size: 19pt; margin: 0 0 2mm; }
+  .sub { color: #555; margin-bottom: 4mm; }
+  h2 { font-size: 13.5pt; margin: 7mm 0 2.5mm; padding-bottom: 1mm; border-bottom: 2px solid #333; page-break-after: avoid; }
+  h3 { font-size: 11pt; margin: 4mm 0 1.5mm; page-break-after: avoid; }
+  p { margin: 1.5mm 0; line-height: 1.5; }
+  .box { border: 1px solid #999; background: #f6f6f6; padding: 2.5mm 3.5mm; margin: 2mm 0 4mm; line-height: 1.55; }
+  table { border-collapse: collapse; width: 100%; margin: 1.5mm 0 3mm; page-break-inside: auto; }
+  tr { page-break-inside: avoid; }
+  th, td { border: 1px solid #888; padding: 1.4mm 1.8mm; vertical-align: top; text-align: left; line-height: 1.4; }
+  th { background: #e8e8e8; font-weight: 600; }
+  td.n, th.n { width: 5mm; text-align: center; color: #555; }
+  td.ok, th.ok { width: 26mm; }
+  .chk { white-space: nowrap; color: #333; }
+  .chk span { display: inline-block; margin-right: 1.5mm; }
+  .src { color: #666; font-size: 9pt; white-space: nowrap; }
+  .num { font-variant-numeric: tabular-nums; }
+  .fig { page-break-inside: avoid; margin: 3mm 0 4mm; }
+  .fig img { width: 100%; border: 1px solid #bbb; }
+  .fig .cap { font-size: 9.5pt; color: #333; margin-top: 1mm; line-height: 1.45; }
+  .legend { font-size: 9pt; color: #555; }
+  .two { display: flex; gap: 4mm; }
+  .two .fig { flex: 1; }
+  .sign { margin-top: 10mm; display: flex; gap: 12mm; }
+  .sign div { flex: 1; border-top: 1px solid #333; padding-top: 1.5mm; color: #444; }
+  .small { font-size: 9.5pt; color: #444; }
+  .pb { page-break-before: always; }
+</style>
+</head>
+<body>
+
+<h1>六层内外 3oz 板（500×425）CAM 规则对标确认单</h1>
+<div class="sub">客户原稿（Altium 导出）→ 自动化输出，与工程师成品逐层对照 &nbsp;|&nbsp; 2026-09-13</div>
+
+<div class="box">
+<b>对标方法</b>：把客户原稿喂进我们的流程，输出的每一层与工程师做完的成品（y6f085471a0.*）叠合，算差异面积占成品面积的比例；钻带按「孔径 × 孔/槽数」对。六个线路层差异已到 0.5–1.1%，钻孔 35 种孔径全部对上。<br>
+<b>本单目的</b>：下面把我们照做的规则分成四类——教材里有的、按成品数值反推的、把差异画成图看出来的、以及还看不出规律的。<b>每一条后面请勾「确认」栏</b>：✓ 是厂规（以后每单都这样）／✗ 本单特例／数值不对请直接改在旁边。第五部分是需要工程师说明的差异。
+</div>
+
+<h2>一、教材里有、成品里做了、我们已复现并对上</h2>
+<p class="small">「教材」= 《CAM 工程技能培训》，页码为该书页码。这些规则的做法和数值都在成品里得到了印证。</p>
+<table>
+<tr><th class="n">#</th><th>规则</th><th>教材</th><th>成品里的做法 / 数值</th><th>我们的复现</th><th class="ok">确认</th></tr>
+<tr><td class="n">1</td><td>层命名 GTL / L2–L5 / GBL / GTS / GBS / GTO / GBO / GKO，钻孔层 DRL</td><td class="src">p110</td><td>y6f085471a0.gtl … .gko / .gko1 / .drl / .2nd</td><td>按厂规命名 30 个成果物</td><td class="chk"><span>□是</span><span>□否</span></td></tr>
+<tr><td class="n">2</td><td>外形线改 0.15 mm，定义 Profile</td><td class="src">p111</td><td>外形层与成品差 0.81%</td><td>已做</td><td class="chk"><span>□是</span><span>□否</span></td></tr>
+<tr><td class="n">3</td><td>删掉板外物；板外字符必删</td><td class="src">p112 / p147</td><td>成品字符层无板外物</td><td>字符层已删</td><td class="chk"><span>□是</span><span>□否</span></td></tr>
+<tr><td class="n">4</td><td>外形层上画的、钻孔层没有的孔复制到钻孔层</td><td class="src">p113</td><td>GM1 上 4 个 ⌀3.5 定位孔 + 4 个 ⌀1.0 标记孔都钻了</td><td>8 孔按 NPTH 进钻带（+0.05）</td><td class="chk"><span>□是</span><span>□否</span></td></tr>
+<tr><td class="n">5</td><td>孔属性 plated / non_plated / via</td><td class="src">p114</td><td>过孔 6702、PTH 672、NPTH 12，与成品钻带分组一致</td><td>自动判定</td><td class="chk"><span>□是</span><span>□否</span></td></tr>
+<tr><td class="n">6</td><td>钻嘴预大：PTH +0.15，NPTH +0.05</td><td class="src">p114</td><td>35 种孔径全部对上</td><td>33 行预大</td><td class="chk"><span>□是</span><span>□否</span></td></tr>
+<tr><td class="n">7</td><td>内层删独立 PAD</td><td class="src">p123</td><td>元件孔的独立盘删掉了</td><td>4 层各删 222 / 252 / 323 / 171 个</td><td class="chk"><span>□是</span><span>□否</span></td></tr>
+<tr><td class="n">8</td><td>线路补偿按铜厚加大</td><td class="src">p122 / p124 / p138</td><td>3oz：线和 PAD 整体 +0.1</td><td>每层 7.4k–9.4k 段</td><td class="chk"><span>□是</span><span>□否</span></td></tr>
+<tr><td class="n">9</td><td>信号层优化 PadUp（焊环不够的盘撑大）</td><td class="src">p124 / p138</td><td>外层 PTH 盘 1.05→1.76、1.15→1.86、1.25→1.96</td><td>每层 6.3k–6.5k 个盘</td><td class="chk"><span>□是</span><span>□否</span></td></tr>
+<tr><td class="n">10</td><td>NPTH 孔削铜，单边 ≥12 mil</td><td class="src">p121 / p127</td><td>盘内的 NPTH 削了铜</td><td>0.305 mm</td><td class="chk"><span>□是</span><span>□否</span></td></tr>
+<tr><td class="n">11</td><td>内层削外围</td><td class="src">p128</td><td>板边留边与成品一致</td><td>4 层</td><td class="chk"><span>□是</span><span>□否</span></td></tr>
+<tr><td class="n">12</td><td>阻焊开窗比焊盘大，露铜 ≥2 mil</td><td class="src">p140 / p141</td><td>焊盘长进开窗的地方一律开到焊盘 +0.05/边</td><td>每面 5.6k 个开窗</td><td class="chk"><span>□是</span><span>□否</span></td></tr>
+<tr><td class="n">13</td><td>NPTH 开窗比孔单边大 0.1</td><td class="src">p140</td><td>✓</td><td>每面 13 处</td><td class="chk"><span>□是</span><span>□否</span></td></tr>
+<tr><td class="n">14</td><td>过孔：客户给 Gerber 就按 Gerber 做</td><td class="src">p144</td><td>6683 个开窗、19 个盖油，原样</td><td>原样保留</td><td class="chk"><span>□是</span><span>□否</span></td></tr>
+<tr><td class="n">15</td><td>塞孔的过孔盖油</td><td class="src">p140</td><td>3339 个过孔开窗删掉</td><td>每面删 3320</td><td class="chk"><span>□是</span><span>□否</span></td></tr>
+<tr><td class="n">16</td><td>光标点大开窗按原稿、不缩小</td><td class="src">p144</td><td>保留</td><td>102 处不缩</td><td class="chk"><span>□是</span><span>□否</span></td></tr>
+<tr><td class="n">17</td><td>字符不上开窗、离开窗 ≥3 mil</td><td class="src">p145 / p146</td><td>✓</td><td>两面切 400 / 250 段</td><td class="chk"><span>□是</span><span>□否</span></td></tr>
+<tr><td class="n">18</td><td>Gerber 274x，绝对坐标</td><td class="src">p158</td><td>英制 2.6（教材截图是 2.4）</td><td>同成品</td><td class="chk"><span>□是</span><span>□否</span></td></tr>
+</table>
+
+<h2>二、教材里没有、按成品数值反推出来的厂规</h2>
+<p class="small">这些是成品里有、教材里没写的做法。数值全部从成品量出来，请确认是厂规还是本单特例，数值不对请改。</p>
+<h3>钻孔</h3>
+<table>
+<tr><th class="n">#</th><th>规则（我们照做的）</th><th>反推依据（成品）</th><th class="ok">确认</th></tr>
+<tr><td class="n">1</td><td><b>绿油塞孔分组</b>：两面阻焊开窗都只是过孔自己那一小块 → 塞孔，钻 0.45；落在露铜大开窗里的 → 不塞，钻 0.65</td><td>3339 / 3362 对上（差 23 个，见第五部分）</td><td class="chk"><span>□是</span><span>□否</span></td></tr>
+<tr><td class="n">2</td><td><b>过孔也预大 +0.15</b>（教材 p114 说过孔不预大）</td><td>⌀0.5 过孔钻 0.65</td><td class="chk"><span>□是</span><span>□否</span></td></tr>
+<tr><td class="n">3</td><td><b>大孔另一档预大</b>：≥6 mm 的 +0.2</td><td>⌀6.55 钻 6.75</td><td class="chk"><span>□是</span><span>□否</span></td></tr>
+<tr><td class="n">4</td><td><b>≥4 mm 的孔先钻 3.175 再扩</b>；订单指定钻嘴的压接孔不预钻</td><td>27 个孔有 3.175 预钻，15 个压接孔（4.15）没有</td><td class="chk"><span>□是</span><span>□否</span></td></tr>
+<tr><td class="n">5</td><td><b>槽两端先钻孔</b>：1.0 槽→0.7、1.6→0.95、2.0→1.95、2.5→2.2；孔心从槽端圆心向内退 (槽钻嘴−端孔)/2</td><td>逐孔对上（哪些槽钻见第三部分 3）</td><td class="chk"><span>□是</span><span>□否</span></td></tr>
+<tr><td class="n">6</td><td><b>矩形孔改锣</b>：钻孔报告标 Rectangle 的 29 个进内锣带 gko1，不进钻带；4 mm 宽的 10 个四角先钻 ⌀0.8，1.2 宽的 19 个不钻</td><td>40 个 ⌀0.8 逐个对上</td><td class="chk"><span>□是</span><span>□否</span></td></tr>
+<tr><td class="n">7</td><td><b>二钻</b>：≤1 mm 的 NPTH 另出 .2nd 钻带（电镀后再钻），11 个 ⌀4.2 NPTH 留在主钻带；.2nd 用 Gerber、标称孔径</td><td>成品 .2nd 只有那个 ⌀0.5</td><td class="chk"><span>□是</span><span>□否</span></td></tr>
+<tr><td class="n">8</td><td><b>与更大孔相交的小孔删掉</b>并出 EQ 告知客户</td><td>压接孔周围 121 个 ⌀1.0 成品全删</td><td class="chk"><span>□是</span><span>□否</span></td></tr>
+<tr><td class="n">9</td><td><b>⌀4.2 孔分两组</b>：5.5 焊盘的 15 个钻 4.15（压接孔），9.0 焊盘的 12 个钻 4.35。现在靠订单手填</td><td>成品钻带</td><td class="chk"><span>□能定规则</span><span>□每单填</span></td></tr>
+</table>
+<h3>线路</h3>
+<table>
+<tr><th class="n">#</th><th>规则（我们照做的）</th><th>反推依据（成品）</th><th class="ok">确认</th></tr>
+<tr><td class="n">10</td><td><b>工艺边铺铜</b>：六个线路层都铺；外层离拼板外缘 0.6、内层 0.75；离 V-cut 线 0.75；定位/标记孔周留 0.5；客户画在工艺边上的铜留 0.9；客户 GM6/GM7 上的留空标记处整条边不铺、缺口比标记每边窄 0.65；块角倒圆</td><td>六层工艺边铜逐块对上</td><td class="chk"><span>□是</span><span>□否</span></td></tr>
+<tr><td class="n">11</td><td><b>面铜（铜皮）每边 +0.05</b>，线和 PAD +0.1（整层 Resize 的语义）；内外层同</td><td>成品铺铜每边正好 +0.05</td><td class="chk"><span>□是</span><span>□否</span></td></tr>
+<tr><td class="n">12</td><td><b>PadUp 在钻嘴上量</b>：外层 PTH 焊环 14 mil、过孔 12 mil；内层量不出来，沿用教材 10 mil</td><td>1.05→1.76、0.45→1.06</td><td class="chk"><span>□是</span><span>□否</span>&nbsp;内层：____</td></tr>
+<tr><td class="n">13</td><td><b>内层独立 PAD</b>：元件孔的删，过孔的全留；≥5 mm 的盘留</td><td>6.75 孔的 9 mm 方盘、压接孔 5.5 盘留着</td><td class="chk"><span>□是</span><span>□否</span></td></tr>
+<tr><td class="n">14</td><td><b>NPTH 落在焊盘内</b>：直接按 NPTH 削铜，不问客户</td><td>✓</td><td class="chk"><span>□是</span><span>□否</span></td></tr>
+</table>
+<h3>阻焊 / 字符 / 外形</h3>
+<table>
+<tr><th class="n">#</th><th>规则（我们照做的）</th><th>反推依据（成品）</th><th class="ok">确认</th></tr>
+<tr><td class="n">15</td><td><b>只把露铜不足 2 mil 的开窗各自加大</b>到焊盘 +0.05/边，其余不动（不整层 Resize）；NPTH 只开窗、<b>不加挡点</b></td><td>✓</td><td class="chk"><span>□是</span><span>□否</span></td></tr>
+<tr><td class="n">16</td><td><b>两面阻焊都画 0.2 mm 的外形线 + V-cut 线</b>（线心在板边上）</td><td>✓</td><td class="chk"><span>□是</span><span>□否</span></td></tr>
+<tr><td class="n">17</td><td><b>画在板边 / V-cut 线上的字符线全删</b>（离边 0.3 以内）</td><td>✓</td><td class="chk"><span>□是</span><span>□否</span></td></tr>
+<tr><td class="n">18</td><td><b>原点</b>放在含工艺边的外形左下角；英制 2.6；gko 上画 V-cut 线；gko1 = 矩形锣孔 + 外形内挖空</td><td>✓</td><td class="chk"><span>□是</span><span>□否</span></td></tr>
+</table>
+
+<h2 class="pb">三、把差异画成图、从人看的角度反推出来的规则</h2>
+<p class="small">第一轮只看数字，有七处对不上、找不到规律。第二轮把每一处裁成局部图，叠上铜、孔、字符和客户机械层（装配轮廓、元件本体、钻孔图）逐张看，其中五处看出了规律并已做进程序，一处看出了原因但不自动做。</p>
+<table style="table-layout:fixed">
+<colgroup><col style="width:5mm"><col style="width:27mm"><col style="width:62mm"><col style="width:38mm"><col style="width:20mm"><col></colgroup>
+<tr><th class="n">#</th><th>成品里的现象</th><th>图上看到的</th><th>反推的规则（已做）</th><th>效果</th><th>确认 / 请说明</th></tr>
+<tr><td class="n">1</td><td>「连接器处开窗每边放大 1.4–1.9 mm」（约 1100 mm²/面）</td><td>不是改阻焊——<b>≥4 mm 宽的锣槽 / 方孔端子（继电器插片、4 mm 槽），焊盘在六个线路层都加大了</b>：14×7 → 17.04×10.04，即 +1.5/边；阻焊只是跟着焊盘 +0.05/边。内层多出来的 17×10 铜块就是证据（图 1）</td><td>≥4 mm 宽的端子焊盘各层总加大 3.0 mm，阻焊随焊盘</td><td>阻焊差异 11.4 / 12.3% → 8.4 / 9.9%</td><td class="chk"><span>□是厂规</span><span>□客户要求</span><br>4×9 方孔加到 12.87×17.98（+1.9/边）为什么不同？按什么定：____</td></tr>
+<tr><td class="n">2</td><td>「10×10 的实心字符块」+「圆环 ⌀9.3 → 10」</td><td>方块其实是 <b>⌀10 的字符圈</b>：12 个 ⌀4.2 螺丝孔（11 NPTH + 1 PTH）外客户画的 ⌀9.3 圈全改成 ⌀10、线 0.25；另外 11 个带 9 mm 盘的 4.2 孔本来就是 ⌀10 圈，没动（图 2）</td><td>螺丝孔外已有的字符圈统一 ⌀10 / 0.25；没画圈的孔不加</td><td>顶层字符 9.05% → 8.37%</td><td class="chk"><span>□是厂规</span><span>□本单</span><br>⌀10 是厂规还是照客户另一种封装统一？</td></tr>
+<tr><td class="n">3</td><td>44 条 2.0 槽里 8 条没预钻</td><td>预钻的 36 条<b>行程都是 2.0</b>，不钻的 8 条行程 7.5；1.2 宽行程 1.9 的 16 条也不钻</td><td><b>短槽才预钻</b>：行程 ≤ 槽宽的槽两端先钻孔，长槽直接锣（教材 p118「短槽各厂不同」）</td><td>钻带差异 3 类 → 2 类</td><td class="chk"><span>□是</span><span>□否</span><br>界是不是「行程 ≤ 槽宽」：____</td></tr>
+<tr><td class="n">4</td><td>矩形锣孔的轮廓和四角孔对不上</td><td>成品把 4×11 的矩形轮廓画成 4.1×11.1（+0.1）；四角 ⌀0.8 贴放大后轮廓的四角内切（图 3）。我们原来把孔放在离端头 2 mm 处，是把槽的路径端点当成了矩形端</td><td>锣带轮廓 = 名义 +0.1；四角孔按矩形角放</td><td>内锣带差异 76.7% → 42%</td><td class="chk"><span>□是</span><span>□否</span><br>+0.1 是锣槽 PTH 的补偿量？</td></tr>
+<tr><td class="n">5</td><td>15 个压接孔（⌀4.2、5.5 盘、钻 4.15）</td><td>成品把<b>外层焊盘 5.5 → 6.05</b>（底面本来就是 6.5），并在 gko1 上各画一个 <b>⌀5 的圆</b>——画的是带 8 个小缺口的花形（图 4）</td><td>由订单那一行一起带出：外层焊盘 6.05、gko1 画 ⌀5 整圆</td><td>同上</td><td class="chk">⌀5 圆的用途：□电镀后锣成非金属孔 □其它：____<br>8 个缺口是什么？____</td></tr>
+<tr><td class="n">6</td><td>一块文字（型号 / 日期 / T SIDE + 虚线框）整体下移 10 mm</td><td>它原来<b>压在一个 ⌀25 电解电容的本体下面</b>（客户 GM7 层），挪开后装配了还看得见（图 5）</td><td>看出了原因，但往哪挪、挪多远是人判断——程序只报「字符被元件本体压住」，不自动挪</td><td>—</td><td class="chk"><span>□只报就行</span><span>□希望自动挪：____</span></td></tr>
+</table>
+
+<div class="fig">
+<img src="{{IMG:a2_mask_rect.png}}">
+<div class="cap"><b>图 1</b>　继电器插片处的两个 4 mm 方孔（顶层）。蓝色 = 客户原稿的阻焊开窗（9.2×14.2），绿线 = 成品的开窗（12.87×17.98），白点 = 孔，青线 = 内锣带矩形，黄字 = 字符（K7 / K18）。成品的开窗形状是跟着加大后的焊盘走的。</div>
+</div>
+<div class="two">
+<div class="fig">
+<img src="{{IMG:c2_edge_squares.png}}">
+<div class="cap"><b>图 2</b>　左板边的 ⌀4.2 螺丝孔（H2）。黄色 = 成品字符，青线 = 客户原稿字符：内圈由 ⌀9.3 改成 ⌀10，外面 ⌀16 的圈和粗白框没动；白色圆弧 = 客户 GM7 上 ⌀40 的支撑柱轮廓。</div>
+</div>
+<div class="fig">
+<img src="{{IMG:e_drl_corner.png}}">
+<div class="cap"><b>图 3</b>　一个 4×11 矩形锣孔。青线 = 成品的锣带轮廓（4.25×11.25 外沿），黄线 = 我们原来的轮廓；白色 ⌀0.8 = 成品的四角预钻，红圈 = 我们原来放的位置（偏了 2 mm，已改）。</div>
+</div>
+</div>
+<div class="two">
+<div class="fig">
+<img src="{{IMG:b3_circle_l2.png}}">
+<div class="cap"><b>图 4</b>　一个压接孔（⌀4.15）在 L2 上。绿色 = 成品 L2 焊盘，红线 = 我们的，蓝线 = 原稿；青色花形 = 成品 gko1 上画的 ⌀5 圆（带 8 个缺口）；橙线 = 成品顶层焊盘 ⌀6.05。</div>
+</div>
+<div class="fig">
+<img src="{{IMG:c_silk_block.png}}">
+<div class="cap"><b>图 5</b>　左上角的文字块。青色 = 客户原稿位置，黄色 = 成品位置（下移 10 mm）；上方棕色是顶层大铜面，紫色圆弧 = GM7 上 ⌀25 电容本体的边缘——原稿的文字块顶到了电容底下。</div>
+</div>
+</div>
+
+<h2 class="pb">四、教材里有、但这家厂 / 这单没做（请确认是不是厂规）</h2>
+<table>
+<tr><th class="n">#</th><th>教材规则</th><th>成品里的情况</th><th class="ok">确认</th></tr>
+<tr><td class="n">1</td><td>过孔不预大（p114）</td><td>这家厂过孔 +0.15</td><td class="chk"><span>□厂规</span><span>□本单</span></td></tr>
+<tr><td class="n">2</td><td>NPTH 及 ≥0.6 mm 过孔盖油加挡点（p144）</td><td>NPTH 只开窗，不加挡点</td><td class="chk"><span>□厂规</span><span>□本单</span></td></tr>
+<tr><td class="n">3</td><td>塞孔钻带比孔径大 0.1–0.15（p140，铝片 / 树脂塞孔）</td><td>绿油塞孔，钻带反而缩 0.05（0.45）</td><td class="chk"><span>□厂规</span><span>□本单</span></td></tr>
+<tr><td class="n">4</td><td>内层加泪滴「一般要加」（p126）</td><td>没加</td><td class="chk"><span>□厂规</span><span>□本单</span></td></tr>
+<tr><td class="n">5</td><td>V-CUT 防 V-CUT 测试点（p135）</td><td>没加</td><td class="chk"><span>□厂规</span><span>□本单</span></td></tr>
+<tr><td class="n">6</td><td>生产拼板、板边阻流块 / AOI 孔 / 铆钉孔（p152–155）</td><td>这单不拼板，工艺边是客户自己画在 GM1 上的</td><td class="chk"><span>□厂规</span><span>□本单</span></td></tr>
+<tr><td class="n">7</td><td>Excellon 钻带（p158）</td><td>成品交的是 Gerber 格式的钻孔层 .drl / .2nd；我们两种都出</td><td class="chk"><span>□只要 Gerber</span><span>□都要</span></td></tr>
+</table>
+
+<h2>五、还看不出规律的差异（请工程师说明）</h2>
+<table>
+<tr><th class="n">#</th><th>差异</th><th>数量 / 位置</th><th>我们现在的处理</th><th class="ok">请说明</th></tr>
+<tr><td class="n">1</td><td>焊盘开窗边上的 23 个过孔，成品也塞了孔并把开窗修掉一块</td><td>钻带 0.45 / 0.65 各差 23 个</td><td>按规则 1 不塞（落在露铜开窗里）</td><td>塞不塞的判定边界：</td></tr>
+<tr><td class="n">2</td><td>6 个 4×9 方孔端子的焊盘成品加到 12.87×17.98（+1.9/边），比 4×11 方孔和 4 mm 槽的 +1.5 多；1 个 4×11 方孔（板上坐标 429,390 处）成品反而缩了</td><td>阻焊剩余差异的主体</td><td>统一 +1.5/边</td><td>端子焊盘按什么定（孔宽？元件？）：</td></tr>
+<tr><td class="n">3</td><td>几个 ⌀1.45 孔的 ⌀3.15 内层独立盘成品留着，同类孔别的删了</td><td>内层 &lt;1% 差异里</td><td>删</td><td></td></tr>
+<tr><td class="n">4</td><td>压接孔 gko1 上 ⌀5 圆的 8 个小缺口</td><td>15 处</td><td>画整圆</td><td>缺口的作用：</td></tr>
+<tr><td class="n">5</td><td>文字块下移的方向和距离</td><td>1 处</td><td>只报不挪</td><td></td></tr>
+<tr><td class="n">6</td><td>内层焊环目标值（成品内层盘并进铜皮量不出来）</td><td>—</td><td>沿用教材 10 mil</td><td>内层 PTH / 过孔焊环：____ / ____ mil</td></tr>
+<tr><td class="n">7</td><td>工艺边上 4 个 ⌀3.5 定位孔，成品两面阻焊各开了 ⌀3.76 的窗</td><td>4 处</td><td>未做（NPTH +0.1/边那条规则还没覆盖画在外形层上的孔，可补）</td><td class="chk"><span>□要开</span><span>□不用</span></td></tr>
+<tr><td class="n">8</td><td>钻孔报告里带公差的孔（0.9 +0.1/−0、1.2 槽 +0.2/−0 等 7 种）</td><td>7 种工具</td><td>按普通预大，没按公差改钻嘴</td><td>公差是否影响钻嘴：</td></tr>
+</table>
+
+<h2>六、对标结果（差异面积 / 成品面积，供参考）</h2>
+<table class="num">
+<tr><th>层</th><th>原程序</th><th>第一轮（数值反推后）</th><th>第二轮（看图反推后）</th><th>剩余差异来源</th></tr>
+<tr><td>顶 / 底层线路 gtl / gbl</td><td>11.6% / 12.4%</td><td>0.66% / 1.12%</td><td><b>0.56% / 1.09%</b></td><td>23 个过孔塞孔判定、几个独立盘</td></tr>
+<tr><td>内层 l2 / l3 / l4 / l5</td><td>9.9–10.7%</td><td>0.54–0.90%</td><td><b>0.51–0.88%</b></td><td>同上</td></tr>
+<tr><td>阻焊 gts / gbs</td><td>18.3% / 17.5%</td><td>11.4% / 12.3%</td><td><b>8.4% / 9.9%</b></td><td>4×9 方孔端子焊盘 +1.9 vs +1.5、一个缩了的 4×11</td></tr>
+<tr><td>字符 gto / gbo</td><td>10.7% / 11.1%</td><td>9.05% / 9.37%</td><td><b>8.37% / 9.37%</b></td><td>文字块下移（手工）、线端处理的碎差</td></tr>
+<tr><td>外形 gko</td><td>32.1%</td><td>0.81%</td><td><b>0.81%</b></td><td>—</td></tr>
+<tr><td>内锣带 gko1</td><td>76.7%</td><td>76.7%</td><td><b>42%</b></td><td>⌀5 圆的花形缺口</td></tr>
+<tr><td>钻孔（35 种孔径 × 孔数）</td><td>没出</td><td>全对，3 类差异</td><td><b>全对，2 类差异</b></td><td>23 个过孔 0.45 / 0.65</td></tr>
+</table>
+
+<div class="sign">
+<div>工程师确认：</div>
+<div>日期：</div>
+<div>备注：</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,77 @@
+{
+  "_note": "board.zip 同 C01(全部 %TF 属性路径 0.98);两个附件 制作要求.xlsx / 制作要求.pdf 按扩展名判为辅助文件(aux),进 unmapped 但 needs_llm=false,不占层确认表的行。",
+  "copper_layers": 2,
+  "files": [
+    {
+      "file": "Flashpads-F_Cu.gbr",
+      "type": "top_copper",
+      "index": 1,
+      "min_confidence": 0.9
+    },
+    {
+      "file": "Flashpads-B_Cu.gbr",
+      "type": "bottom_copper",
+      "index": 2,
+      "min_confidence": 0.9
+    },
+    {
+      "file": "Flashpads-F_Mask.gbr",
+      "type": "top_mask",
+      "index": null,
+      "min_confidence": 0.9
+    },
+    {
+      "file": "Flashpads-B_Mask.gbr",
+      "type": "bottom_mask",
+      "index": null,
+      "min_confidence": 0.9
+    },
+    {
+      "file": "Flashpads-F_Paste.gbr",
+      "type": "top_paste",
+      "index": null,
+      "min_confidence": 0.9
+    },
+    {
+      "file": "Flashpads-B_Paste.gbr",
+      "type": "bottom_paste",
+      "index": null,
+      "min_confidence": 0.9
+    },
+    {
+      "file": "Flashpads-F_Silkscreen.gbr",
+      "type": "top_silk",
+      "index": null,
+      "min_confidence": 0.9
+    },
+    {
+      "file": "Flashpads-B_Silkscreen.gbr",
+      "type": "bottom_silk",
+      "index": null,
+      "min_confidence": 0.9
+    },
+    {
+      "file": "Flashpads-Edge_Cuts.gbr",
+      "type": "outline",
+      "index": null,
+      "min_confidence": 0.9
+    },
+    {
+      "file": "Flashpads-PTH.drl",
+      "type": "drill_pth",
+      "index": null,
+      "min_confidence": 0.9
+    },
+    {
+      "file": "Flashpads-NPTH.drl",
+      "type": "drill_npth",
+      "index": null,
+      "min_confidence": 0.9
+    }
+  ],
+  "unmapped": [
+    "制作要求.pdf",
+    "制作要求.xlsx"
+  ],
+  "needs_llm": []
+}

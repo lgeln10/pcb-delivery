@@ -1,0 +1,16 @@
+/node_modules
+/oh_modules
+/local.properties
+/.idea
+**/build
+/.hvigor
+/.cxx
+/.clangd
+/.clang-format
+/.clang-tidy
+**/.test
+# ★签名产物绝不进仓:.p12/.cer/.p7b 是账号级机密,泄露等于把发版权交出去
+*.p12
+*.cer
+*.p7b
+*.csr

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>method</key>
+	<string>app-store-connect</string>
+	<key>teamID</key>
+	<string>QF97MLSRQA</string>
+	<key>signingStyle</key>
+	<string>automatic</string>
+	<!-- 上传 dSYM:崩溃日志没有它就是一堆十六进制地址,线上问题基本查不了 -->
+	<key>uploadSymbols</key>
+	<true/>
+	<!--
+	  ★必须 false。true 时 Xcode 会**自己**改版本号和 build 号(它去 App Store Connect
+	  查一下再 +1),于是仓里 variables.gradle / pbxproj 记的号和实际传上去的号对不上,
+	  下次 bump-version.sh 算出来的又是旧的 —— 两套号从此各走各的。
+	  版本号的唯一来源是 scripts/bump-version.sh。
+	-->
+	<key>manageAppVersionAndBuildNumber</key>
+	<false/>
+	<key>destination</key>
+	<string>export</string>
+</dict>
+</plist>

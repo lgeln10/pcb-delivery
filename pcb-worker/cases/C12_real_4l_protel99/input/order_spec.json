@@ -1,0 +1,34 @@
+{
+  "order_no": "p4f086062a0",
+  "board_name": "CPU191 V1.3 (Protel 99 SE 源文件)",
+  "layer_count": 4,
+  "board_thickness_mm": null,
+  "copper_outer_um": null,
+  "copper_inner_um": null,
+  "board_size_mm": "166.0x193.2",
+  "material": "FR-4 94V-0",
+  "surface_finish": "无铅喷锡",
+  "solder_mask_color": null,
+  "silkscreen_color": null,
+  "via_plugging": "所有过孔按文件覆盖阻焊油",
+  "panelization": "客户已在源文件内 2×2 拼好（含工艺边/中间开槽），尺寸 166.0×193.2",
+  "marks": {
+    "ul_logo": "加（LOGO+UL+年周，单板加）",
+    "94v0": "在 PCB 空白处印 94V-0"
+  },
+  "keepout_holes_npth": true,
+  "inner_dielectric_min_mm": 0.4,
+  "test": "开短路测试",
+  "source": "PCB加工工艺要求说明书.xls（表格多数下拉项未填）",
+  "customer_notes": [
+    "板材 FR-4, 防火等级 94V-0, 并在 PCB 板的空白处印上 94V-0 字样",
+    "所有过孔按文件覆盖阻焊油",
+    "KEEPOUT 层上的孔及开槽为非金属孔",
+    "四层板时中间层绝缘层介质厚度每层不低于 0.4mm",
+    "set_size_mm = 客户给的拼板尺寸（含工艺边）；外形层里的单元不够这个尺寸时，两边等分补工艺边"
+  ],
+  "set_size_mm": [
+    166.0,
+    193.2
+  ]
+}

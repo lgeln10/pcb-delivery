@@ -1,0 +1,10 @@
+{
+  "_note": "每层每类只出 1 条决策（aggregate）：inner 5（In1 分区线宽/隔离环/无隔离PAD，In2 孔到铜/铜到板边）、outer 6（F 线宽/间距/环宽/NPTH削铜，B 环宽/NPTH削铜）、mask 3（开窗小于焊盘/缺开窗/阻焊桥）、silk 1（字符压开窗）。C01 固有的 NPTH 削铜 0.183mm 在这里也算 2 条。",
+  "count": 15,
+  "kinds": [
+    "annular_ring", "copper_to_edge", "hole_to_copper", "isolation_ring", "line_width",
+    "mask_sliver", "missing_opening", "negative_no_clearance", "npth_clearance",
+    "opening_smaller_than_pad", "partition_line_width", "silk_on_opening", "spacing"
+  ],
+  "by_stage": { "intake": 0, "align": 0, "drill": 0, "inner": 5, "outer": 6, "mask": 3, "silk": 1 }
+}

@@ -1,0 +1,26 @@
+{
+  "stage": "intake",
+  "status": "failed",
+  "summary": "no input files",
+  "items": [
+    {
+      "id": "extract_1",
+      "kind": "extract_error",
+      "severity": "error",
+      "layer": null,
+      "location": null,
+      "measured": null,
+      "threshold": null,
+      "message": "cannot extract board.rar: rar tool missing (Cannot find working tool); install `unrar`",
+      "fix": null,
+      "eq_question": null
+    },
+    {
+      "id": "no_files",
+      "kind": "no_input",
+      "severity": "error",
+      "message": "no usable input files"
+    }
+  ],
+  "artifacts": []
+}

@@ -1,0 +1,65 @@
+{
+  "must": [
+    {
+      "stage": "intake",
+      "kind": "cad_exported"
+    },
+    {
+      "stage": "align",
+      "kind": "profile_set"
+    },
+    {
+      "stage": "drill",
+      "kind": "drill_via_plug"
+    },
+    {
+      "stage": "align",
+      "kind": "outline_edge_notch"
+    },
+    {
+      "stage": "align",
+      "kind": "outline_slot_drawn"
+    },
+    {
+      "stage": "drill",
+      "kind": "drill_profile_predrill"
+    },
+    {
+      "stage": "mask",
+      "kind": "via_plug_cover"
+    }
+  ],
+  "must_not": [
+    {
+      "stage": "intake",
+      "kind": "source_only_no_gerber"
+    },
+    {
+      "stage": "intake",
+      "kind": "cad_export_failed"
+    },
+    {
+      "stage": "*",
+      "kind": "worker_exception"
+    },
+    {
+      "stage": "*",
+      "kind": "native_failed"
+    },
+    {
+      "stage": "align",
+      "kind": "outline_stray_segment"
+    },
+    {
+      "stage": "net_compare",
+      "kind": "net_open_after_reduce"
+    }
+  ],
+  "status": {
+    "intake": "ok",
+    "align": "ok",
+    "output": "ok",
+    "net_compare": "ok"
+  },
+  "note": "align 曾是 needs_review：Keep-Out 层上客户画的 12 个开口圆弧（打穿板边的 ⌀3.5 孔）→ outline_edge_notch（整圆画进 gko/阻焊轮廓，不钻）；24 段 1 mm 宽的线是非金属化锣槽（客户说明写明）→ outline_slot_drawn（轮廓进 gko/阻焊，两端 ⌀0.8 预钻）；矩形挖空四角 ⌀0.8 预钻"
+}

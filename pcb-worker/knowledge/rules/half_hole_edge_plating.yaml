@@ -1,0 +1,158 @@
+# 来源：《CAM工程技能培训》第14章 p176–184；quote 为原文逐字片段
+
+- id: half_hole.definition
+  rule: "金属半孔（槽）是一钻孔经孔化后再进行二钻、外形工艺，最终保留金属化孔（槽）一半"
+  source_page: 176
+  quote: "金属半孔（槽）是指一钻孔经孔化后再进行二钻、外形工艺，最终保留金属化孔（槽）一半，即板边金属化孔切一半"
+
+- id: half_hole.rout.outline_layer_name
+  rule: "半孔锣边工艺建立外形层，一般命名为GKO1，只做半孔部分"
+  applies_to: 半孔锣边工艺
+  source_page: 177
+  quote: "建立外形层（一般命名为GKO1)只做半孔部分"
+
+- id: half_hole.rout.slot_width
+  rule: "锣槽宽度一般做1.6MM"
+  value: 1.6
+  unit: mm
+  applies_to: 半孔锣边工艺
+  source_page: 177
+  quote: "锣槽宽度一般做1.6MM"
+
+- id: half_hole.rout.copper_cut_per_side
+  rule: "线路层半孔部分掏单边0.1MM"
+  value: 0.1
+  unit: mm
+  applies_to: 线路层
+  source_page: 178
+  quote: "线路层半孔部分掏单边0.1MM之后，用钻孔加挡点比孔整体小0.1MM"
+
+- id: half_hole.rout.circuit_dam_smaller_than_hole
+  rule: "线路层用钻孔加挡点比孔整体小0.1MM"
+  value: 0.1
+  unit: mm
+  applies_to: 线路层
+  source_page: 178
+  quote: "用钻孔加挡点比孔整体小0.1MM"
+
+- id: half_hole.rout.solder_mask_dam_larger_than_slot
+  rule: "阻焊GKO1层需要加挡点防止油墨入半孔，一般比槽单边大0.1MM"
+  value: 0.1
+  unit: mm
+  applies_to: 阻焊
+  source_page: 179
+  quote: "阻焊GKO1层需要加挡点防止油墨如半孔，一般比槽单边大0.1MM"
+
+- id: half_hole.rout.process_sequence
+  rule: "半孔锣边工艺流程：外层线路设计 基本图形电铜 基本图形电锡 半孔处理（锣半孔） 褪膜 蚀刻"
+  applies_to: 半孔锣边工艺
+  source_page: 180
+  quote: "外层线路设计 基本图形电铜 基本图形电锡 半孔处理（锣半孔） 褪膜 蚀刻"
+
+- id: half_hole.second_drill.end_holes
+  rule: "半孔二钻工艺在半孔两端加孔，先钻掉一点铜皮，防止成型时孔壁铜刺翘起、残留"
+  applies_to: 半孔二钻工艺
+  source_page: 180
+  quote: "在半孔两端加孔，先钻掉一点铜皮，防止在成型时孔壁铜刺翘起、残留"
+
+- id: half_hole.second_drill.solder_mask_dam
+  rule: "阻焊需要加比孔单边大0.1MM挡点，防止油墨入孔"
+  value: 0.1
+  unit: mm
+  applies_to: 半孔二钻工艺
+  source_page: 180
+  quote: "阻焊需要加比孔单边大0.1MM 挡点，防止油墨入孔"
+
+- id: half_hole.second_drill.process_sequence
+  rule: "半孔二钻工艺流程：外层线路设计 基本图形镀铜 基本图形镀锡 半孔处理（二钻） 褪膜 蚀刻"
+  applies_to: 半孔二钻工艺
+  source_page: 181
+  quote: "外层线路设计 基本图形镀铜 基本图形镀锡 半孔处理（二钻） 褪膜 蚀刻"
+
+- id: half_hole.min_diameter
+  rule: "最小半孔为0.5MM"
+  value: 0.5
+  unit: mm
+  source_page: 181
+  quote: "最小半孔为0.5MM 孔与孔之间间距最小0.4MM"
+
+- id: half_hole.min_spacing
+  rule: "半孔孔与孔之间间距最小0.4MM"
+  value: 0.4
+  unit: mm
+  source_page: 181
+  quote: "孔与孔之间间距最小0.4MM"
+
+- id: edge_plating.definition
+  rule: "金属包边实际就是板边金属化"
+  source_page: 182
+  quote: "实际就是板边金属化"
+
+- id: edge_plating.info_source
+  rule: "包边信息来源是gerber文件和gerber之外的PDF、TXT、DWG等里面的信息说明"
+  source_page: 182
+  quote: "包边信息的来源是gerber文件和gerber之外的PDF、TXT、DWG等里面的信息说明"
+
+- id: edge_plating.layer_name
+  rule: "将需要包边的外形拷贝到一层（命名为GKO2），做成封闭的长槽"
+  source_page: 183
+  quote: "将需要包边的外形拷贝到一层（命名为GKO2)，做成封闭的长槽"
+
+- id: edge_plating.slot_compensation
+  rule: "包边处需要镀铜，制作时包边槽一定要补偿"
+  source_page: 183
+  quote: "注意由于包边处需要镀铜，铜厚是有一定厚度的，制作时包边槽一定要补偿"
+
+- id: edge_plating.annular_ring.min
+  rule: "包边的电路板为了防止碎膜，需保证焊环单边大10mil以上"
+  value: 10
+  unit: mil
+  source_page: 183
+  quote: "包边的电路板为了防止碎膜，需保证焊环单边大10mil以上"
+
+- id: edge_plating.to_pad.min
+  rule: "包边距附近的焊盘至少要8mil以上，没有则更改反馈给客户确认"
+  value: 8
+  unit: mil
+  source_page: 183
+  quote: "包边距附近的焊盘至少要8mil以上，如果没有需要更改反馈给客户确认"
+
+- id: edge_plating.check_layer_connection
+  rule: "包边后一定要检查内外层连接情况，确认层间连结方式，避免包边后引起短路"
+  source_page: 183
+  quote: "包边后一定要内外层连接情况，确认层间连结方式，避免包边后引起短路"
+
+- id: edge_plating.pth_slot_treatment
+  rule: "如存在镀孔菲林，包边制作必须按PTH槽一样处理，要有盘"
+  source_page: 183
+  quote: "如存在镀孔菲林，包边制作必须按PTH槽一样处理，要有盘"
+
+- id: edge_plating.irregular_slot.enlarge
+  rule: "异形槽的包边也应与孔一样，需要做填实并放大4mil"
+  value: 4
+  unit: mil
+  applies_to: 异形槽
+  source_page: 183
+  quote: "特别留意异形槽的包边也应该与孔一样，需要做填实并放大4mil"
+
+- id: edge_plating.solder_mask.full_opening
+  rule: "金属包边槽阻焊一定要完整开窗"
+  source_page: 183
+  quote: "金属包边槽阻焊一定要完整开窗"
+
+- id: edge_plating.rout_tool_size
+  rule: "金属包边槽刀一般采用1.6MM或2.0MM"
+  unit: mm
+  source_page: 183
+  quote: "金属包边槽刀 一般采用1.6MM或2.0MM"
+  note: "可选值 1.6 / 2.0"
+
+- id: edge_plating.process_sequence.with_half_hole
+  rule: "金属包边+半孔工艺：钻孔 锣金属包边 沉铜 线路图形 图形电镀 锣半孔 褪膜 蚀刻"
+  source_page: 183
+  quote: "钻孔 锣金属包边 沉铜 线路图形 图形电镀 锣半孔 褪膜 蚀刻"
+
+- id: edge_plating.process_sequence.with_second_drill
+  rule: "金属包边+二钻工艺：钻孔 锣金属包边 沉铜 线路图形 图形电镀 二钻 褪膜 蚀刻"
+  source_page: 183
+  quote: "钻孔 锣金属包边 沉铜 线路图形 图形电镀 二钻 褪膜 蚀刻"

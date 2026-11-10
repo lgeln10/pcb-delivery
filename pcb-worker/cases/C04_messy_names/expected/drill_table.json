@@ -1,0 +1,15 @@
+{
+  "_note": "same holes as C01 under the new file names (drill.txt confirmed as drill_pth -> plated +0.15)",
+  "total_holes": 80,
+  "tools": [
+    { "file": "npth.txt", "dia_mm": 0.65, "slot": false, "attribute": "non_plated", "count": 3, "drill_dia_mm": 0.7 },
+    { "file": "npth.txt", "dia_mm": 0.95, "slot": false, "attribute": "non_plated", "count": 1, "drill_dia_mm": 1.0 },
+    { "file": "drill.txt", "dia_mm": 0.7, "slot": false, "attribute": "plated", "count": 14, "drill_dia_mm": 0.85 },
+    { "file": "drill.txt", "dia_mm": 0.85, "slot": false, "attribute": "plated", "count": 2, "drill_dia_mm": 1.0 },
+    { "file": "drill.txt", "dia_mm": 1.0, "slot": false, "attribute": "plated", "count": 40, "drill_dia_mm": 1.15 },
+    { "file": "drill.txt", "dia_mm": 1.1, "slot": false, "attribute": "plated", "count": 4, "drill_dia_mm": 1.25 },
+    { "file": "drill.txt", "dia_mm": 0.6, "slot": true, "attribute": "plated", "count": 10, "drill_dia_mm": 0.75 },
+    { "file": "drill.txt", "dia_mm": 0.65, "slot": true, "attribute": "plated", "count": 2, "drill_dia_mm": 0.8 },
+    { "file": "drill.txt", "dia_mm": 0.7, "slot": true, "attribute": "plated", "count": 4, "drill_dia_mm": 0.85 }
+  ]
+}

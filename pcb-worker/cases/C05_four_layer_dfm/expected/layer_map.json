@@ -1,0 +1,21 @@
+{
+  "_note": "C01 的 KiCad 文件 + 程序合成的 In1_Cu（%TF FilePolarity Negative → polarity=negative）/ In2_Cu；全部带 %TF.FileFunction，走属性路径 0.98。铜层 4 层：F=1, In1=2, In2=3, B=4。",
+  "copper_layers": 4,
+  "files": [
+    { "file": "Flashpads-F_Cu.gbr", "type": "top_copper", "index": 1, "min_confidence": 0.9 },
+    { "file": "Flashpads-In1_Cu.gbr", "type": "inner_copper", "index": 2, "min_confidence": 0.9 },
+    { "file": "Flashpads-In2_Cu.gbr", "type": "inner_copper", "index": 3, "min_confidence": 0.9 },
+    { "file": "Flashpads-B_Cu.gbr", "type": "bottom_copper", "index": 4, "min_confidence": 0.9 },
+    { "file": "Flashpads-F_Mask.gbr", "type": "top_mask", "index": null, "min_confidence": 0.9 },
+    { "file": "Flashpads-B_Mask.gbr", "type": "bottom_mask", "index": null, "min_confidence": 0.9 },
+    { "file": "Flashpads-F_Paste.gbr", "type": "top_paste", "index": null, "min_confidence": 0.9 },
+    { "file": "Flashpads-B_Paste.gbr", "type": "bottom_paste", "index": null, "min_confidence": 0.9 },
+    { "file": "Flashpads-F_Silkscreen.gbr", "type": "top_silk", "index": null, "min_confidence": 0.9 },
+    { "file": "Flashpads-B_Silkscreen.gbr", "type": "bottom_silk", "index": null, "min_confidence": 0.9 },
+    { "file": "Flashpads-Edge_Cuts.gbr", "type": "outline", "index": null, "min_confidence": 0.9 },
+    { "file": "Flashpads-PTH.drl", "type": "drill_pth", "index": null, "min_confidence": 0.9 },
+    { "file": "Flashpads-NPTH.drl", "type": "drill_npth", "index": null, "min_confidence": 0.9 }
+  ],
+  "unmapped": [],
+  "needs_llm": []
+}

@@ -1,0 +1,206 @@
+{
+  "_note": "六层盲埋孔：唯一植入 = L1 上一个名叫 BUR 的焊盘，而 BUR 的埋孔只连 L2–L5 → net_open ×1（若 span 被忽略当成 1–6，这条不会出现）。TH 通孔六层同名、BV 盲孔 L1–L2 同名都不应报。",
+  "status": {
+    "intake": "ok",
+    "align": "ok",
+    "drill": "ok",
+    "inner": "ok",
+    "outer": "needs_review",
+    "mask": "ok",
+    "silk": "ok",
+    "net_compare": "needs_review",
+    "panel": "ok",
+    "output": "ok",
+    "gatekeeper": "ok"
+  },
+  "must": [
+    {
+      "stage": "align",
+      "kind": "layer_empty",
+      "severity": "info",
+      "layer": "Flashpads-B_Silkscreen.gbr"
+    },
+    {
+      "stage": "align",
+      "kind": "profile_line_width",
+      "severity": "info"
+    },
+    {
+      "stage": "drill",
+      "kind": "hole_size",
+      "severity": "info"
+    },
+    {
+      "stage": "drill",
+      "kind": "power_ground_shorts",
+      "severity": "info"
+    },
+    {
+      "stage": "outer",
+      "kind": "npth_clearance",
+      "severity": "error",
+      "min_count": 2
+    },
+    {
+      "stage": "outer",
+      "kind": "smd_pads",
+      "severity": "info"
+    },
+    {
+      "stage": "mask",
+      "kind": "mask_expansion",
+      "severity": "warn"
+    },
+    {
+      "stage": "silk",
+      "kind": "silk_line_width",
+      "severity": "warn"
+    },
+    {
+      "stage": "drill",
+      "kind": "drill_oversize",
+      "severity": "info",
+      "min_count": 12
+    },
+    {
+      "stage": "net_compare",
+      "kind": "net_open",
+      "severity": "error"
+    },
+    {
+      "stage": "net_compare",
+      "kind": "net_open",
+      "severity": "warn",
+      "layer": "Flashpads-F_Cu.gbr"
+    },
+    {
+      "stage": "net_compare",
+      "kind": "net_summary",
+      "severity": "info"
+    },
+    {
+      "stage": "output",
+      "kind": "drill_output",
+      "severity": "info"
+    },
+    {
+      "stage": "gatekeeper",
+      "kind": "gate_summary",
+      "severity": "info"
+    }
+  ],
+  "must_not": [
+    {
+      "stage": "intake",
+      "severity": "error"
+    },
+    {
+      "stage": "align",
+      "severity": "error"
+    },
+    {
+      "stage": "drill",
+      "severity": "error"
+    },
+    {
+      "stage": "inner",
+      "severity": "error"
+    },
+    {
+      "stage": "silk",
+      "severity": "error"
+    },
+    {
+      "stage": "intake",
+      "severity": "warn"
+    },
+    {
+      "stage": "align",
+      "severity": "warn"
+    },
+    {
+      "stage": "drill",
+      "severity": "warn"
+    },
+    {
+      "stage": "inner",
+      "severity": "warn"
+    },
+    {
+      "stage": "intake",
+      "kind": "sr_not_expanded"
+    },
+    {
+      "stage": "intake",
+      "kind": "layer_low_confidence"
+    },
+    {
+      "stage": "align",
+      "kind": "layer_offset"
+    },
+    {
+      "stage": "align",
+      "kind": "outside_profile"
+    },
+    {
+      "stage": "drill",
+      "kind": "extra_holes"
+    },
+    {
+      "stage": "drill",
+      "kind": "hole_separation"
+    },
+    {
+      "stage": "drill",
+      "kind": "missing_holes"
+    },
+    {
+      "stage": "drill",
+      "kind": "npth_to_rout"
+    },
+    {
+      "stage": "outer",
+      "kind": "line_width"
+    },
+    {
+      "stage": "outer",
+      "kind": "spacing"
+    },
+    {
+      "stage": "outer",
+      "kind": "annular_ring"
+    },
+    {
+      "stage": "mask",
+      "severity": "error"
+    },
+    {
+      "stage": "*",
+      "kind": "layer_parse_error"
+    },
+    {
+      "stage": "net_compare",
+      "kind": "net_short"
+    },
+    {
+      "stage": "net_compare",
+      "kind": "no_reference_netlist"
+    },
+    {
+      "stage": "inner",
+      "severity": "error"
+    },
+    {
+      "stage": "inner",
+      "severity": "warn"
+    },
+    {
+      "stage": "gatekeeper",
+      "severity": "error"
+    },
+    {
+      "stage": "output",
+      "kind": "roundtrip_diff"
+    }
+  ]
+}

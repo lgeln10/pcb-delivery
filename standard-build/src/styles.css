@@ -1,0 +1,2839 @@
+/* src/styles.css — 应用壳层、共享布局类、排版角色类。
+   设计规则见 docs/UI_SPEC.md;颜色/间距/字号一律引用 core/ui-kit/tokens.css 变量。
+   写页面时:排版用 .t-* 角色类,布局用本文件的 .panel/.grid-* 等,不另写裸样式。
+
+   ★★★ 覆盖 Element Plus 时必读(2026-08-16 踩过):**EP 的 CSS 排在本文件后面,平手 EP 赢。**
+   e3b4409c 把 EP 改成按需引入之前,main.ts 里是
+       import 'element-plus/dist/index.css'   ← EP
+       import './styles.css'                  ← 我们(在后,同特指度我们赢)
+   之后 EP 的组件 CSS 由 unplugin 注入到各 .vue,而**页面是懒加载的、运行时才到**,
+   于是顺序永久反转。调 import 顺序救不回来(懒加载路由永远更晚);
+   `@layer` 也不用 —— 老 WebView 不认 @layer 时会**整块丢弃**,那是把小错位换成整站掉样式。
+
+   所以规则是:**凡与 EP 声明了同一个属性的覆盖,一律显式 `!important`。**
+   不同属性不算竞争(例:我们写 min-height、EP 写 height,不用 !important)。
+   `src/ep-cascade-guard.test.ts` 会扫出所有「会被 EP 压掉」的声明并变红 ——
+   加覆盖前后跑它,别再让这类失效变成「看着写了、其实没生效」。 */
+
+/* ════════ Element Plus 变量映射(唯一映射点,页面里不要再覆盖 --el-*)════════ */
+:root {
+  --el-color-primary: var(--sb-color-primary);
+  --el-color-success: var(--sb-color-success);
+  --el-color-warning: var(--sb-color-warning);
+  --el-color-danger: var(--sb-color-danger);
+  --el-color-info: var(--sb-color-info);
+  /* EP 用 primary-light-9 作「选中/当前行」的浅底(树 is-current、表 current-row 等),
+     默认写死浅蓝 #ecf5ff——暗色下浅底+浅字会让文字看不见。映射到主题感知的
+     --sb-color-primary-soft(浅色≈原值,暗色=半透明蓝叠深底),两种主题文字都可读。
+     light-8 同理(部分组件的选中悬浮底)。这是唯一映射点,页面别再各自覆盖。 */
+  --el-color-primary-light-9: var(--sb-color-primary-soft);
+  --el-color-primary-light-8: var(--sb-color-primary-soft);
+  /* ★同一个道理,另外四种语义色一直漏着没映射:el-tag / el-alert 的浅底用的是
+     `--el-color-{type}-light-9`,EP 默认写死浅色(info 是 #f4f4f5)。暗色主题下
+     「未打卡」这类 info 标签因此是一块刺眼的白底配灰字(实测对比度约 3.3:1)。
+     四种一并映射到主题感知的 -soft,免得只有 primary 一种是对的。 */
+  --el-color-success-light-9: var(--sb-color-success-soft);
+  --el-color-success-light-8: var(--sb-color-success-soft);
+  --el-color-warning-light-9: var(--sb-color-warning-soft);
+  --el-color-warning-light-8: var(--sb-color-warning-soft);
+  --el-color-danger-light-9: var(--sb-color-danger-soft);
+  --el-color-danger-light-8: var(--sb-color-danger-soft);
+  --el-color-error-light-9: var(--sb-color-danger-soft);
+  --el-color-error-light-8: var(--sb-color-danger-soft);
+  --el-color-info-light-9: var(--sb-color-info-soft);
+  --el-color-info-light-8: var(--sb-color-info-soft);
+  --el-border-radius-base: var(--sb-radius-sm);
+  --el-border-radius-small: var(--sb-radius-sm);
+  --el-font-size-base: var(--sb-font-md);
+  --el-text-color-primary: var(--sb-text-primary);
+  --el-text-color-regular: var(--sb-text-primary);
+  --el-text-color-secondary: var(--sb-text-secondary);
+  --el-text-color-placeholder: var(--sb-text-placeholder);
+  --el-border-color: var(--sb-border);
+  --el-border-color-light: var(--sb-border);
+  --el-border-color-lighter: var(--sb-border);
+  --el-border-color-extra-light: var(--sb-gray-100);
+  --el-fill-color-light: var(--sb-bg-subtle);
+  --el-fill-color-lighter: var(--sb-bg-subtle);
+  --el-fill-color-blank: var(--sb-bg-card);
+  --el-table-header-bg-color: var(--sb-bg-subtle);
+  --el-table-header-text-color: var(--sb-text-secondary);
+  --el-table-row-hover-bg-color: var(--sb-color-primary-soft);
+  --el-table-border-color: var(--sb-border);
+  /* 表面/填充:跟随语义 token(暗色主题靠 tokens.css 覆盖 sb-* 自动生效),
+     覆盖弹层/抽屉/下拉/输入填充等默认写死浅色的 EP 变量 */
+  --el-bg-color: var(--sb-bg-card);
+  --el-bg-color-page: var(--sb-bg-page);
+  --el-bg-color-overlay: var(--sb-bg-card);
+  --el-fill-color: var(--sb-bg-subtle);
+  --el-fill-color-dark: var(--sb-bg-hover);
+  --el-fill-color-darker: var(--sb-bg-hover);
+  --el-component-size: 34px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  /* 整体应用壳层不该有页级横向滚动(内部超宽内容各自处理:表格/侧栏自身滚动);
+     兜底防止窄屏个别页面偶发内容超宽时拖出全页横向滚动条。 */
+  overflow-x: hidden;
+  color: var(--sb-text-primary);
+  background: var(--sb-bg-page);
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei",
+    sans-serif;
+  font-size: var(--sb-font-md);
+  line-height: var(--sb-leading-normal);
+  letter-spacing: 0;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  letter-spacing: 0;
+}
+
+/* ════════ 排版角色(agent 选角色,不选 px)════════ */
+.t-page-title {
+  margin: 0;
+  font-size: var(--sb-font-xl);
+  font-weight: 600;
+  line-height: var(--sb-leading-tight);
+  letter-spacing: var(--sb-tracking-tight);
+  color: var(--sb-text-primary);
+}
+.t-section-title {
+  margin: 0;
+  font-size: var(--sb-font-lg);
+  font-weight: 600;
+  line-height: var(--sb-leading-tight);
+  color: var(--sb-text-primary);
+}
+.t-card-title {
+  margin: 0;
+  font-size: var(--sb-font-md);
+  font-weight: 600;
+  color: var(--sb-text-primary);
+}
+.t-label {
+  font-size: var(--sb-font-sm);
+  font-weight: 500;
+  color: var(--sb-text-secondary);
+}
+.t-data {
+  font-variant-numeric: tabular-nums;
+  color: var(--sb-text-primary);
+}
+.t-data-lg {
+  font-size: var(--sb-font-2xl);
+  font-weight: 600;
+  line-height: var(--sb-leading-tight);
+  letter-spacing: var(--sb-tracking-tight);
+  font-variant-numeric: tabular-nums;
+  color: var(--sb-text-primary);
+}
+.t-caption {
+  font-size: var(--sb-font-xs);
+  color: var(--sb-text-tertiary);
+}
+.t-kicker {
+  font-size: var(--sb-font-xs);
+  font-weight: 600;
+  letter-spacing: var(--sb-tracking-caps);
+  text-transform: uppercase;
+  color: var(--sb-text-secondary);
+}
+.muted {
+  color: var(--sb-text-secondary);
+}
+/* 页面/区块顶部说明文字统一收紧上下边距:<p class="t-caption"> 默认吃 1em(≈16px)
+   纵向留白过多。收敛到项目既有约定(上 space-1 / 下 space-2),不再各页 inline margin 漂移。
+   带 inline style 的 <p> 仍以自身为准(优先级更高),此处只兜住大量「裸」说明段。 */
+p.t-caption {
+  margin: var(--sb-space-1) 0 var(--sb-space-2);
+}
+
+/* ════════ 全局 Element Plus 微调 ════════ */
+.el-table {
+  font-variant-numeric: tabular-nums;
+  --el-table-header-font-weight: 600;
+}
+.el-table th.el-table__cell {
+  font-weight: 600;
+  font-size: var(--sb-font-xs);
+  letter-spacing: var(--sb-tracking-wide);
+}
+/* !important 的理由见文件头:EP 有 `.el-table .cell{line-height:23px}`,同特指度且排在后面。
+   实测被压回 23px —— 全站每张表的每一行都比设计稿高 2px。 */
+.el-table .cell {
+  line-height: 1.5 !important;
+}
+/* 列表行「操作」列:多个动作按钮统一间距。Element Plus 相邻 el-button 默认 margin-left:12px,
+   与图标/文字按钮混排时显得不均;收敛为 space-2(8px)。只命中含相邻按钮的操作单元格,
+   纯文本/数字单元格无按钮不受影响(不改 .cell 本身的布局,避免破坏文本省略号)。 */
+.el-table .cell > .el-button + .el-button {
+  margin-left: var(--sb-space-2);
+}
+/* 行操作按钮统一为「描边小按钮」:各页历史上 text(无边框)与 default(有边框)混用,
+   这里把表格操作列里的 text 按钮统一渲染成描边样式,全站列表行操作风格一致。
+   只命中表格单元格内的文字按钮,不影响对话框/正文里的文字按钮。主题色随亮/暗/金自适应。 */
+.el-table .cell .el-button.is-text {
+  border: 1px solid var(--sb-border);
+  background: var(--sb-bg-card);
+  border-radius: var(--sb-radius-sm);
+  padding: 5px 11px;
+}
+.el-table .cell .el-button.is-text:hover,
+.el-table .cell .el-button.is-text:focus-visible {
+  background: var(--sb-bg-hover);
+  border-color: var(--el-color-primary);
+}
+/* 行可点开详情 → 指针提示(可发现性)。UI_SPEC §6 约定:可点行加 .clickable-rows。 */
+.clickable-rows .el-table__row {
+  cursor: pointer;
+}
+.el-dialog {
+  border-radius: var(--sb-radius-lg);
+  --el-dialog-padding-primary: var(--sb-space-6);
+}
+.el-dialog__title {
+  font-weight: 600;
+}
+.el-drawer__header {
+  margin-bottom: 0;
+  padding-bottom: var(--sb-space-4);
+  border-bottom: 1px solid var(--sb-border);
+  color: var(--sb-text-primary);
+  font-weight: 600;
+}
+.el-tabs--border-card {
+  border-radius: var(--sb-radius-lg);
+  border-color: var(--sb-border);
+  overflow: hidden;
+  box-shadow: var(--sb-shadow-card);
+}
+.el-tabs--border-card > .el-tabs__header {
+  background: var(--sb-bg-subtle);
+  border-bottom-color: var(--sb-border);
+}
+.el-button {
+  font-weight: 500;
+}
+.el-tag {
+  font-weight: 500;
+  border-radius: var(--sb-radius-sm);
+}
+
+/* ════════ 登录页 · 暖核(科技的骨架,晨光的皮肤)════════
+   左侧品牌面板三主题恒定深色,装饰性裸色值仅限本段;右侧表单区全走 --sb-* token。
+   动效纪律:① 入场逐层浮现,一次性,总时长 <1s,不挡输入(表单 260ms 起可见);
+   ② 常驻仅 3 条且全是「呼吸级」——AI 心跳 5.2s、轨道弧 72s 一圈(每秒 5°)、晨光 24s 明暗,
+   幅度均小于余光阈值,员工每天看不晃眼;③ prefers-reduced-motion 下全部静止在终态。 */
+.login-page {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: var(--sb-space-8);
+  background:
+    radial-gradient(1100px 520px at 12% -10%, rgba(47, 107, 237, 0.12), transparent 60%),
+    radial-gradient(900px 480px at 92% 112%, rgba(255, 158, 94, 0.12), transparent 55%),
+    var(--sb-bg-page);
+}
+/* 深色系主题下页面光晕降档,避免暖斑把深底衬脏 */
+:root[data-theme='dark'] .login-page,
+:root[data-theme='gold'] .login-page {
+  background:
+    radial-gradient(1100px 520px at 12% -10%, rgba(47, 107, 237, 0.07), transparent 60%),
+    radial-gradient(900px 480px at 92% 112%, rgba(255, 158, 94, 0.06), transparent 55%),
+    var(--sb-bg-page);
+}
+/* 页面背景点阵:向边缘消隐,浅色=深点、深色系=亮点 */
+.login-page::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(17, 24, 39, 0.05) 1px, transparent 1px);
+  background-size: 26px 26px;
+  -webkit-mask-image: radial-gradient(90% 85% at 50% 40%, #000, transparent 78%);
+  mask-image: radial-gradient(90% 85% at 50% 40%, #000, transparent 78%);
+}
+:root[data-theme='dark'] .login-page::before,
+:root[data-theme='gold'] .login-page::before {
+  background-image: radial-gradient(rgba(230, 234, 242, 0.05) 1px, transparent 1px);
+}
+/* 页面级大轨道环:从面板后方探出的弧线,呼应面板内的「AI 心跳」轨道(静态,无动画) */
+.login-page::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle 340px at 84% 16%, transparent 336px, rgba(47, 107, 237, 0.16) 338px, transparent 341px),
+    radial-gradient(circle 260px at 84% 16%, transparent 256px, rgba(47, 107, 237, 0.1) 258px, transparent 261px),
+    radial-gradient(circle 280px at 9% 90%, transparent 276px, rgba(232, 118, 60, 0.18) 278px, transparent 281px);
+}
+:root[data-theme='dark'] .login-page::after,
+:root[data-theme='gold'] .login-page::after {
+  background:
+    radial-gradient(circle 340px at 84% 16%, transparent 336px, rgba(122, 155, 255, 0.12) 338px, transparent 341px),
+    radial-gradient(circle 260px at 84% 16%, transparent 256px, rgba(122, 155, 255, 0.07) 258px, transparent 261px),
+    radial-gradient(circle 280px at 9% 90%, transparent 276px, rgba(255, 145, 85, 0.14) 278px, transparent 281px);
+}
+.login-panel {
+  /* 提层:让页面级点阵/轨道环从卡片后方穿过,不压到卡片上 */
+  position: relative;
+  z-index: 1;
+  width: min(1020px, 100%);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 408px;
+  overflow: hidden;
+  border: 1px solid var(--sb-border);
+  border-radius: var(--sb-radius-lg);
+  background: var(--sb-bg-card);
+  box-shadow: var(--sb-shadow-pop);
+  animation: login-rise 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes login-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+.login-copy {
+  position: relative;
+  overflow: hidden;
+  padding: var(--sb-space-10) var(--sb-space-8);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--sb-space-8);
+  background: linear-gradient(160deg, #101826 0%, #0b101b 100%);
+  color: var(--sb-text-inverse);
+}
+/* 骨架:精密细线网格,mask 向边缘消隐——只在「光照到的地方」隐约可见,不满铺 */
+.login-copy::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(157, 184, 255, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(157, 184, 255, 0.055) 1px, transparent 1px);
+  background-size: 44px 44px;
+  -webkit-mask-image: radial-gradient(120% 100% at 30% 20%, #000 30%, transparent 78%);
+  mask-image: radial-gradient(120% 100% at 30% 20%, #000 30%, transparent 78%);
+}
+/* 皮肤:左下升起的珊瑚晨光(情绪主导)+ 右上产品蓝(呼应主色)
+   常驻动效②:24s 极慢明暗呼吸,幅度仅 12% 透明度——像天光的自然浮动,余光察觉不到 */
+.login-copy::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(95% 70% at 12% 108%, rgba(255, 145, 85, 0.26), transparent 62%),
+    radial-gradient(80% 90% at 96% -8%, rgba(47, 107, 237, 0.22), transparent 58%);
+  animation: login-daylight 24s ease-in-out infinite;
+}
+@keyframes login-daylight {
+  0%,
+  100% {
+    opacity: 0.88;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+/* gold:晨光偏金、蓝光减半,与暖黑表单区同频 */
+:root[data-theme='gold'] .login-copy::after {
+  background:
+    radial-gradient(95% 70% at 12% 108%, rgba(216, 178, 64, 0.24), transparent 62%),
+    radial-gradient(80% 90% at 96% -8%, rgba(47, 107, 237, 0.12), transparent 58%);
+}
+/* 文字层须压在 ::after 晨光之上,否则会被光罩淡 */
+.login-copy__top,
+.login-copy__list {
+  position: relative;
+  z-index: 1;
+}
+.login-copy__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sb-space-2);
+  margin: 0 0 var(--sb-space-4);
+  color: rgba(255, 255, 255, 0.55);
+  font-size: var(--sb-font-sm);
+  letter-spacing: var(--sb-tracking-caps);
+  text-transform: uppercase;
+  animation: login-item 420ms 80ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.login-copy__top h1 {
+  margin: 0;
+  font-size: clamp(30px, 3.6vw, 40px);
+  font-weight: 800;
+  line-height: var(--sb-leading-tight);
+  letter-spacing: var(--sb-tracking-tight);
+  animation: login-item 460ms 150ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+/* 渐变字:暖色相家族尾端收一笔浅蓝(暖主导、蓝署名);color 兜底防裁切不支持时文字消失 */
+.login-copy__grad {
+  background: linear-gradient(92deg, #ffe3b8 0%, #ffab7e 46%, #9db8ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #ffab7e;
+}
+.login-copy__lede {
+  margin: var(--sb-space-3) 0 0;
+  max-width: 36ch;
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.74);
+  line-height: var(--sb-leading-relaxed);
+  animation: login-item 420ms 230ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.login-copy__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.login-copy__list li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sb-space-3);
+  padding: var(--sb-space-3) 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  animation: login-item 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.login-copy__list li:nth-child(1) {
+  animation-delay: 300ms;
+}
+.login-copy__list li:nth-child(2) {
+  animation-delay: 370ms;
+}
+.login-copy__list li:nth-child(3) {
+  animation-delay: 440ms;
+}
+@keyframes login-item {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+.login-copy__ico {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--sb-radius-md);
+  background: rgba(255, 178, 125, 0.06);
+  border: 1px solid rgba(255, 178, 125, 0.26);
+  color: #ffc796;
+}
+.login-copy__list strong {
+  display: block;
+  font-size: var(--sb-font-md);
+  font-weight: 600;
+}
+.login-copy__list em {
+  display: block;
+  margin-top: 2px;
+  font-style: normal;
+  font-size: var(--sb-font-sm);
+  color: rgba(255, 255, 255, 0.62);
+  line-height: var(--sb-leading-normal);
+}
+/* 「AI 心跳」轨道环:常驻动效①心跳呼吸 + ③轨道弧慢旋 */
+.login-orbit {
+  position: absolute;
+  right: -46px;
+  bottom: -46px;
+  width: 200px;
+  height: 200px;
+  pointer-events: none;
+  animation: login-fade 900ms 420ms ease-out both;
+}
+.login-orbit__dot,
+.login-orbit__halo {
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: login-breathe 5.2s ease-in-out infinite;
+}
+@keyframes login-breathe {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(0.94);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+}
+/* 常驻动效③:暖色弧沿轨道运行一圈 72s(每秒 5°)——「系统在运转」的唯一位移线索。
+   transform-box: view-box 让 transform-origin 取 viewBox 坐标,绕圆心 (100,100) 转。 */
+.login-orbit__arc {
+  transform-box: view-box;
+  transform-origin: 100px 100px;
+  animation: login-orbit-spin 72s linear infinite;
+}
+@keyframes login-orbit-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes login-fade {
+  from {
+    opacity: 0;
+  }
+}
+.login-form {
+  position: relative;
+  display: grid;
+  gap: var(--sb-gap-control);
+  padding: var(--sb-space-10) var(--sb-space-8);
+  align-content: center;
+  /* 登录页专属:控件加高到 40px,第一触点要「好按」(不动全站默认 34px 映射) */
+  --el-component-size: 40px;
+  background: radial-gradient(600px 300px at 100% 0%, var(--sb-color-primary-soft), transparent 70%);
+}
+/* 顶部 accent 条:起点走主色 token(gold 自动换金),中段各主题单独定调。
+   入场:从左向右「绘制」出来,像系统正在接通 */
+.login-form::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--sb-color-primary), #7a9bff 55%, #ffb27d);
+  transform-origin: left;
+  animation: login-draw 700ms 180ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes login-draw {
+  from {
+    transform: scaleX(0);
+  }
+}
+:root[data-theme='gold'] .login-form::before {
+  background: linear-gradient(90deg, var(--sb-color-primary), #d8b240 55%, #ffb27d);
+}
+/* 表单区逐层浮现:头部→手机号→密码→按钮。260ms 起首字段即可见,不挡输入。
+   ★按钮单独用纯 opacity 的 login-fade:带 transform 的动画 fill-mode 会锁死终态 transform,
+   把 hover 的 translateY(-1px) 覆盖掉(hover 会失效)。 */
+.login-form > *:nth-child(1) {
+  animation: login-item 420ms 260ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.login-form > *:nth-child(2) {
+  animation: login-item 420ms 330ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.login-form > *:nth-child(3) {
+  animation: login-item 420ms 400ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.login-form__kicker {
+  margin: 0 0 var(--sb-space-1);
+  font-size: var(--sb-font-xs);
+  font-weight: 600;
+  letter-spacing: var(--sb-tracking-caps);
+  text-transform: uppercase;
+  color: var(--sb-text-tertiary);
+}
+.login-form__head {
+  margin-bottom: var(--sb-space-2);
+}
+.login-form__head h2 {
+  margin: 0;
+  font-size: var(--sb-font-xl);
+  font-weight: 700;
+  color: var(--sb-text-primary);
+}
+.login-form__head p {
+  margin: var(--sb-space-1) 0 0;
+  font-size: var(--sb-font-sm);
+  color: var(--sb-text-tertiary);
+}
+.login-form .el-input__wrapper {
+  transition: box-shadow 160ms ease;
+}
+/* 悬停微亮:鼠标划过即有回应,是「这个界面活着」最便宜的信号 */
+.login-form .el-input__wrapper:hover:not(.is-focus) {
+  box-shadow: 0 0 0 1px var(--sb-border-strong) inset;
+}
+/* 三类选择器特异性压过 EP 的两类,不用 !important;保留 inset 1px 环维持 EP 焦点边框语义 */
+.login-form .el-input__wrapper.is-focus {
+  box-shadow: 0 0 0 1px var(--sb-color-primary) inset, var(--sb-focus-ring);
+}
+.login-form .el-button--primary {
+  height: 44px;
+  margin-top: var(--sb-space-2);
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--sb-radius-md);
+  /* color-mix 前必须保留静态兜底:老内核丢弃整条声明时仍是纯主色按钮 */
+  background: var(--sb-color-primary);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--sb-color-primary) 90%, #fff), var(--sb-color-primary));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 1px 2px rgba(16, 24, 40, 0.2);
+  transition: transform 160ms ease, box-shadow 160ms ease;
+  animation: login-fade 400ms 470ms ease-out both;
+}
+.login-form .el-button--primary:hover,
+.login-form .el-button--primary:focus-visible {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px -6px rgba(47, 107, 237, 0.45);
+  box-shadow: 0 6px 16px -6px color-mix(in srgb, var(--sb-color-primary) 55%, transparent);
+}
+.login-form .el-button--primary:active {
+  transform: translateY(0);
+}
+
+/* 登录页 ≤980px:品牌面板收成横幅(列塌单列在下方全局 980 断点统一处理) */
+@media (max-width: 980px) {
+  .login-page {
+    padding: var(--sb-space-4);
+  }
+  .login-panel {
+    width: min(440px, 100%);
+  }
+  .login-copy {
+    padding: var(--sb-space-8) var(--sb-space-6);
+    gap: var(--sb-space-4);
+  }
+  .login-copy__list,
+  .login-orbit {
+    display: none;
+  }
+  .login-copy__top h1 {
+    font-size: clamp(24px, 6vw, 30px);
+  }
+  .login-form {
+    padding: var(--sb-space-8) var(--sb-space-6);
+  }
+}
+
+/* 动效降级:一次性入场直出终态,常驻呼吸/慢旋静止在终态(装饰静态时同样成立) */
+@media (prefers-reduced-motion: reduce) {
+  .login-panel,
+  .login-copy::after,
+  .login-copy__brand,
+  .login-copy__top h1,
+  .login-copy__lede,
+  .login-copy__list li,
+  .login-orbit,
+  .login-orbit__arc,
+  .login-orbit__dot,
+  .login-orbit__halo,
+  .login-form::before,
+  .login-form > *:nth-child(1),
+  .login-form > *:nth-child(2),
+  .login-form > *:nth-child(3),
+  .login-form .el-button--primary {
+    animation: none;
+  }
+  .login-form .el-button--primary:hover,
+  .login-form .el-button--primary:focus-visible {
+    transform: none;
+  }
+}
+
+/* ════════ 应用壳层 ════════ */
+.app-shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: var(--sb-sidebar-w) minmax(0, 1fr);
+  transition: grid-template-columns 0.18s ease;
+}
+.app-shell--collapsed {
+  grid-template-columns: var(--sb-sidebar-w-collapsed) minmax(0, 1fr);
+}
+/* 折叠态:侧栏收窄内边距,品牌 logo 与菜单图标统一居中(否则 logo 偏左、图标偏右,看着不齐)*/
+.app-shell--collapsed .app-sidebar {
+  padding-left: var(--sb-space-2);
+  padding-right: var(--sb-space-2);
+  align-items: center;
+}
+.app-shell--collapsed .app-brand {
+  justify-content: center;
+  padding-left: 0;
+  padding-right: 0;
+}
+.app-shell--collapsed .app-menu {
+  width: 100%;
+}
+.app-sidebar {
+  display: flex;
+  flex-direction: column;
+  background: var(--sb-sidebar-bg);
+  border-right: 1px solid var(--sb-sidebar-border);
+  padding: var(--sb-space-4) var(--sb-space-3);
+  position: sticky;
+  top: 0;
+  align-self: start;
+  height: 100vh;
+  overflow: hidden;
+}
+.app-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--sb-space-2);
+  padding: var(--sb-space-1) var(--sb-space-3) var(--sb-space-4);
+  margin-bottom: var(--sb-space-3);
+  border-bottom: 1px solid var(--sb-sidebar-border);
+  font-weight: 700;
+  white-space: nowrap;
+  color: var(--sb-text-primary);
+}
+.app-brand svg {
+  flex: none;
+  color: var(--sb-sidebar-accent);
+}
+/* 自定义企业 logo:限定尺寸,等比内缩,与默认图标占位一致 */
+.app-brand__logo {
+  flex: none;
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  border-radius: var(--sb-radius-sm);
+}
+
+/* el-menu 主题映射(浅色侧栏 + 主色选中)*/
+.app-menu {
+  flex: 1;
+  /* min-height:0 让 flex 子项可收缩到内容高度以下，从而触发自身滚动；
+     overflow-y:auto 使分组多时菜单区内部滚动（品牌区固定在顶部，不随滚动） */
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border-right: 0;
+  background: transparent;
+  --el-menu-bg-color: transparent;
+  --el-menu-hover-bg-color: var(--sb-sidebar-hover);
+  --el-menu-text-color: var(--sb-sidebar-text);
+  --el-menu-active-color: var(--sb-sidebar-text-active);
+  --el-menu-item-height: 42px;
+  /* ★与上面同值(2026-08-16 从 40px 改回 42px)。这个变量以前**从来没生效过** ——
+     下面 `.app-menu .el-menu-item{height:42px}` 一直压着 EP 那条 `.el-sub-menu .el-menu-item
+     {height:var(--el-menu-sub-item-height)}`,所以全产品生命周期里一二级菜单项都是 42px。
+     e3b4409c(EP 按需引入)把层叠顺序反转后 EP 那条反过来赢了,二级项**悄悄变成 40px**。
+     两处不一致时以「线上一直长这样」为准,这里对齐成 42px,顺便让变量与规则不再互相矛盾。 */
+  --el-menu-sub-item-height: 42px;
+  --el-menu-item-font-size: var(--sb-font-md);
+}
+.app-menu:not(.el-menu--collapse) {
+  width: 100%;
+}
+/* 菜单滚动条：细、半透明，hover 时才明显，避免抢视觉 */
+.app-menu {
+  scrollbar-width: thin;
+  scrollbar-color: var(--sb-sidebar-border) transparent;
+}
+.app-menu::-webkit-scrollbar {
+  width: 6px;
+}
+.app-menu::-webkit-scrollbar-thumb {
+  background: var(--sb-sidebar-border);
+  border-radius: var(--sb-radius-sm);
+}
+.app-menu::-webkit-scrollbar-thumb:hover {
+  background: var(--sb-sidebar-text);
+}
+.app-menu::-webkit-scrollbar-track {
+  background: transparent;
+}
+/* 菜单待办角标(审批中心待我审批数) */
+.app-menu__badge {
+  display: inline-block;
+  margin-left: var(--sb-space-2);
+  min-width: 16px;
+  height: 16px;
+  padding: 0 5px;
+  border-radius: 99px;
+  background: var(--sb-color-danger);
+  color: var(--sb-text-inverse);
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 16px;
+  text-align: center;
+  vertical-align: middle;
+}
+.app-menu .el-sub-menu__title {
+  height: 34px;
+  line-height: 34px;
+  border-radius: var(--sb-radius-md);
+}
+.app-menu .app-menu__group {
+  font-size: var(--sb-font-xs);
+  font-weight: 600;
+  letter-spacing: var(--sb-tracking-caps);
+  text-transform: uppercase;
+  color: var(--sb-sidebar-group);
+}
+/* 分组图标:展开时排在分组名前;收起时它是 el-sub-menu 标题里唯一可见元素,撑起折叠侧栏的可点入口 */
+.app-menu .app-menu__group-icon {
+  flex: none;
+  margin-right: var(--sb-space-2);
+  color: var(--sb-sidebar-group);
+}
+.app-menu .el-sub-menu__title:hover .app-menu__group-icon {
+  color: var(--sb-sidebar-text);
+}
+/* 收起态:图标整体居中——分组标题与叶子菜单项都去掉左右不对称 padding 并居中对齐
+   (标题文字已被 el-menu 隐藏,只剩图标)*/
+.app-menu.el-menu--collapse .app-menu__group-icon {
+  margin-right: 0;
+}
+.app-menu.el-menu--collapse .el-menu-item,
+.app-menu.el-menu--collapse .el-sub-menu__title {
+  justify-content: center;
+  padding: 0 !important;
+}
+/* 折叠态:图标之间多留些竖向间距,不要挤在一起 */
+.app-menu.el-menu--collapse .el-sub-menu {
+  margin: var(--sb-space-2) 0;
+}
+.app-menu.el-menu--collapse .el-sub-menu__title {
+  height: 44px;
+  border-radius: var(--sb-radius-md);
+}
+/* ★二级文件夹的标题:它和分组标题共用 .el-sub-menu__title 这个类,但两者角色完全不同 ——
+   分组是「小号大写的分区标签」,文件夹是「一条可展开的菜单行」。不覆写的话文件夹会继承
+   分组那套 34px + 小号字,和上下的菜单项对不齐,看着像渲染坏了。这里让它长得跟叶子菜单一样,
+   只多一个展开箭头。 */
+.app-menu .el-menu--inline .el-sub-menu__title {
+  height: 42px;
+  line-height: 42px;
+  margin: 2px 0;
+  gap: var(--sb-space-3);
+  font-size: var(--sb-font-md); /* 与叶子菜单同字号:分组标题那套 13px 小字在这层会显得矮一截 */
+  font-weight: 400;
+  letter-spacing: normal;
+  text-transform: none;
+  color: var(--sb-sidebar-text);
+}
+.app-menu .el-menu--inline .el-sub-menu__title svg {
+  flex: none;
+  color: currentColor;
+}
+.app-menu .el-menu--inline .el-sub-menu__title:hover {
+  background: var(--sb-sidebar-hover);
+  color: var(--sb-text-primary);
+}
+/* 文件夹里有当前页时,标题给一点高亮 —— 否则收起文件夹后完全看不出选中项在哪 */
+.app-menu .el-menu--inline .el-sub-menu.is-active > .el-sub-menu__title {
+  color: var(--sb-sidebar-text-active);
+  font-weight: 600;
+}
+/* 文件夹里的子菜单再缩进一档,层级一眼可见。
+   ★必须 !important:el-menu 把每层缩进算成行内 style 写在元素上,普通选择器压不过。
+   40px 是一级菜单的既有缩进(el-menu 自己算的),再加一档 space-4。 */
+.app-menu .el-menu--inline .el-menu--inline .el-menu-item {
+  padding-left: calc(40px + var(--sb-space-4)) !important;
+}
+/* 选择器故意写两遍 `.app-menu`(特指度 0,3,0):EP 的 `.el-sub-menu .el-menu-item` 是 0,2,0
+   且排在我们后面,平手会赢我们(理由见文件头)。这里不用 !important,是因为手机端那条
+   `.app-sidebar .app-menu .el-menu-item{height:48px}` 同为 0,3,0 且在本文件更靠后 ——
+   用 !important 会把它一起压掉,抬特指度才能保住「手机 48 / 桌面 42」的分层。 */
+.app-menu.app-menu .el-menu-item {
+  height: 42px;
+  line-height: 42px;
+  margin: 2px 0;
+  border-radius: var(--sb-radius-md);
+  gap: var(--sb-space-3);
+  color: var(--sb-sidebar-text);
+}
+.app-menu .el-menu-item svg {
+  flex: none;
+  color: currentColor;
+}
+.app-menu .el-menu-item:hover {
+  background: var(--sb-sidebar-hover);
+  color: var(--sb-text-primary);
+}
+.app-menu .el-menu-item.is-active {
+  background: var(--sb-sidebar-active);
+  color: var(--sb-sidebar-text-active);
+  font-weight: 600;
+}
+/* 侧栏收起时的悬浮分组弹层(teleport 到 body,在 .app-menu 之外)→ 单独套用侧栏主题,
+   否则暗色下沿用 EP 默认浅色,高亮项白字白底看不见(见反馈#3)。 */
+.el-menu--popup {
+  background: var(--sb-sidebar-bg);
+  --el-menu-bg-color: var(--sb-sidebar-bg);
+  --el-menu-hover-bg-color: var(--sb-sidebar-hover);
+  --el-menu-text-color: var(--sb-sidebar-text);
+  --el-menu-active-color: var(--sb-sidebar-text-active);
+}
+.el-menu--popup .el-menu-item {
+  color: var(--sb-sidebar-text);
+  display: flex;
+  align-items: center;
+  gap: var(--sb-space-3);
+}
+/* 弹层子菜单:图标与文字留出间距(popup 被 teleport 到 body,吃不到 .app-menu 的 gap)*/
+.el-menu--popup .el-menu-item svg {
+  flex: none;
+}
+.el-menu--popup .el-menu-item:hover {
+  background: var(--sb-sidebar-hover);
+  color: var(--sb-text-primary);
+}
+.el-menu--popup .el-menu-item.is-active {
+  background: var(--sb-sidebar-active);
+  color: var(--sb-sidebar-text-active);
+  font-weight: 600;
+}
+.app-main {
+  min-width: 0;
+  /* 顶部 padding 交给 sticky 标题栏自己留白,避免滚动时标题栏上方露出内容。
+     ★水平内边距只认 --sb-main-pad-x(tokens.css):顶栏/全幅页的负边距与它同源,
+     断点收窄时只改变量,不再各处各写一份数。 */
+  padding: 0 var(--sb-main-pad-x) var(--sb-main-pad-b);
+  /* 独立滚动区(对齐 .app-sidebar 的 height:100vh 做法),使列表页能以 .module-surface--fill
+     感知到「可用高度」从而铺满到浏览器底部;非列表页内容超高时仍在本区域内正常滚动。
+     ★--sb-kb-vh 由 src/keyboard-inset.ts 只在「触屏正在打字且软键盘盖住了」时挂上,平时不存在、
+     回落 100vh。写在基线上(而不是只写在 ≤900 触屏块里)是为了 901–1100 的 iPad/折叠屏——
+     那一段同样弹软键盘,以前变量算了没人消费,贴底输入区整个落到键盘底下。 */
+  height: var(--sb-kb-vh, 100vh);
+  overflow-y: auto;
+  /* ★不把滚动传给外层。.app-main 是整个应用的滚动区,body 本身不滚 —— 滚到头继续拖时,
+     滚动链就传到文档上,iOS/WKWebView 表现为**整页跟着橡皮筋弹一下**。那一下正是「这是个网页」
+     的最明显破绽(原生 App 的列表滚到头只有自己回弹)。contain 把链断在这里。
+     注意用 -y 而不是全轴:横向仍要能把手势交给系统,否则会把安卓的边缘返回手势一起吃掉。 */
+  overscroll-behavior-y: contain;
+  display: flex;
+  flex-direction: column;
+}
+/* 列表页整页填满可用高度(见 UI_SPEC §列表页布局),其余页面保持自然高度不受影响 */
+.app-main > .module-surface--fill {
+  flex: 1;
+  min-height: 0;
+}
+/* 标题栏:sticky 常驻——长列表滚动时页面标题/刷新/退出始终可见;
+   背景=页底色,内容从其下方滑过被遮住(见 UI_SPEC §2.5 标题栏)。 */
+.app-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sb-space-4);
+  /* ★左右用负边距顶满 .app-main 的内边距,再用自己的 padding 把内容缩回来。
+     否则:顶栏被内边距缩在里面,而「全幅页」(.de-shell / Ask AI 那种用负边距铺满的)
+     会从它**旁边**露出来 —— 表现为左上角缺一块颜色不同的。改这里一次修掉所有页。 */
+  margin: 0 calc(-1 * var(--sb-main-pad-x)) var(--sb-space-4);
+  padding: var(--sb-space-3) var(--sb-main-pad-x);
+  border-bottom: 1px solid var(--sb-border);
+  background: var(--sb-bg-page);
+}
+.app-topbar__left {
+  display: flex;
+  align-items: center;
+  gap: var(--sb-space-3);
+}
+.app-topbar h1 {
+  margin: 0;
+  font-size: var(--sb-font-xl);
+  font-weight: 600;
+  line-height: var(--sb-leading-tight);
+  letter-spacing: var(--sb-tracking-tight);
+  color: var(--sb-text-primary);
+}
+/* 兼容旧类名(等同 .t-kicker),App.vue / LoginPage 仍在用 */
+/* 眉题:层次上让位主标题——弱化为三级文本、贴紧标题,做安静的上方说明 */
+.app-kicker {
+  margin: 0 0 2px;
+  font-size: var(--sb-font-xs);
+  font-weight: 600;
+  letter-spacing: var(--sb-tracking-caps);
+  text-transform: uppercase;
+  color: var(--sb-text-tertiary);
+}
+.app-user {
+  display: flex;
+  align-items: center;
+  gap: var(--sb-space-3);
+  color: var(--sb-text-secondary);
+}
+/* 用户名下拉触发器:悬停展开「修改密码 / 退出」。整块可点,含姓名 + 折角箭头 */
+.app-user__menu {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: var(--sb-radius-md);
+  cursor: pointer;
+  color: var(--sb-text-secondary);
+  outline: none;
+  transition: background 0.15s ease;
+}
+.app-user__menu:hover,
+.app-user__menu:focus-visible {
+  background: var(--sb-bg-subtle);
+  color: var(--sb-text-primary);
+}
+/* 修改密码表单(与下面的企业邮箱共用这套 field;两者都在「个人设置」页里,2026-08-16 起不再是弹窗) */
+.pwd-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sb-space-4);
+}
+.pwd-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sb-space-1, 4px);
+}
+.pwd-field__label {
+  font-size: var(--sb-font-sm, 13px);
+  color: var(--sb-text-secondary);
+}
+.pwd-field__err {
+  font-size: 12px;
+  color: var(--sb-danger, #f56c6c);
+}
+.pwd-field--row {
+  flex-direction: row;
+  align-items: center;
+  gap: var(--sb-space-2, 8px);
+}
+/* 企业邮箱表单(现在长在「个人设置」页里,不再是弹窗;类名沿用,改名不值当) */
+.mailbox-hint {
+  margin-bottom: var(--sb-space-3, 12px);
+}
+.mailbox-adv-toggle {
+  font-size: var(--sb-font-sm, 13px);
+  align-self: flex-start;
+}
+.mailbox-server-row {
+  display: flex;
+  align-items: center;
+  gap: var(--sb-space-2, 8px);
+}
+.mailbox-server-row .el-input {
+  flex: 1;
+}
+
+/* ════════ 线索/商机的邮件往来面板(modules/lead-intake-email/ui/MailThreadPanel.vue)════════
+   一行一封的**邮箱会话视图**,替掉原来的跟进时间线。两个详情页共用同一个组件,所以样式也只有这一份。 */
+.mail-body {
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin: 0;
+  font-size: var(--sb-font-sm, 13px);
+  line-height: var(--sb-leading-relaxed, 1.7);
+  color: var(--sb-text-primary);
+}
+.mailbox {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--sb-border);
+  border-radius: var(--sb-radius-md);
+  overflow: hidden auto;
+  max-height: 420px;
+}
+.mailbox__item + .mailbox__item {
+  border-top: 1px solid var(--sb-border);
+}
+/* 列表行:发件人 · 主题 · 摘要 · 时间。摘要占满剩余宽度并省略,时间永远靠右 —— 邮箱的通用形状。 */
+.mailbox__row {
+  display: flex;
+  align-items: center;
+  gap: var(--sb-space-2, 8px);
+  padding: var(--sb-space-2, 8px) var(--sb-space-3, 12px);
+  cursor: pointer;
+  font-size: var(--sb-font-sm, 13px);
+  min-width: 0;
+}
+.mailbox__row:hover {
+  background: var(--sb-bg-hover);
+}
+.mailbox__item.is-open > .mailbox__row {
+  background: var(--sb-bg-subtle);
+}
+/* 未读圆点:只有未读才占位置(已读时留同样宽度,免得整列文字左右跳) */
+.mailbox__dot {
+  flex: 0 0 6px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: transparent;
+}
+.mailbox__item.is-unread .mailbox__dot {
+  background: var(--sb-color-primary);
+}
+.mailbox__who {
+  flex: 0 0 auto;
+  max-width: 34%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--sb-text-primary);
+}
+.mailbox__subject {
+  flex: 0 1 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--sb-text-primary);
+}
+.mailbox__preview {
+  flex: 1 1 0;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--sb-text-tertiary);
+}
+.mailbox__time {
+  flex: 0 0 auto;
+  margin-left: auto;
+  color: var(--sb-text-tertiary);
+  font-size: var(--sb-font-xs, 12px);
+  font-variant-numeric: tabular-nums;
+}
+.mailbox__item.is-unread .mailbox__who,
+.mailbox__item.is-unread .mailbox__subject {
+  font-weight: 600;
+}
+.mailbox__item.is-failed .mailbox__who {
+  color: var(--sb-color-danger);
+}
+.mailbox__open {
+  padding: var(--sb-space-2, 8px) var(--sb-space-3, 12px) var(--sb-space-3, 12px);
+  border-top: 1px dashed var(--sb-border);
+}
+/* 完整信头:两列小字,给「这封到底发给谁了」一个不用出系统就能查的地方 */
+.mailbox__head {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2px var(--sb-space-3, 12px);
+  margin: 0 0 var(--sb-space-2, 8px);
+  font-size: var(--sb-font-xs, 12px);
+  color: var(--sb-text-secondary);
+}
+.mailbox__head > div {
+  display: flex;
+  gap: var(--sb-space-1, 4px);
+  min-width: 0;
+}
+.mailbox__head dt {
+  flex: 0 0 auto;
+  color: var(--sb-text-tertiary);
+}
+.mailbox__head dd {
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* 引用历史:折在按钮后面,展开后压暗并压窄行距 —— 它不是这封信的内容 */
+.mailbox__quote-toggle {
+  margin-top: var(--sb-space-1, 4px);
+}
+.mailbox__quoted {
+  margin-top: var(--sb-space-1, 4px);
+  padding-left: var(--sb-space-2, 8px);
+  border-left: 2px solid var(--sb-border-strong);
+  color: var(--sb-text-tertiary);
+  font-size: var(--sb-font-xs, 12px);
+}
+.mailbox__actions {
+  display: flex;
+  gap: var(--sb-space-2, 8px);
+  margin-top: var(--sb-space-2, 8px);
+}
+/* 「正在回复某封」的横幅:不写清楚的话,点了回复和写新邮件在界面上没有任何区别 */
+.mailbox__replying {
+  display: flex;
+  align-items: center;
+  gap: var(--sb-space-2, 8px);
+  padding: var(--sb-space-1, 4px) var(--sb-space-2, 8px);
+  border-radius: var(--sb-radius-sm);
+  background: var(--sb-color-primary-soft);
+  color: var(--sb-text-secondary);
+  font-size: var(--sb-font-xs, 12px);
+}
+.mailbox__replying > span {
+  flex: 1 1 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.mailbox-unread-badge {
+  margin-left: var(--sb-space-2, 8px);
+}
+.mail-composer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sb-space-2, 8px);
+  margin-top: var(--sb-space-3, 12px);
+}
+.mail-composer__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--sb-space-2, 8px);
+}
+
+/* 标题栏账套切换器(多组织财务) */
+.app-entity-switch {
+  display: flex;
+  align-items: center;
+  gap: var(--sb-space-1);
+  color: var(--sb-text-secondary);
+}
+
+/* ════════ 模块通用布局 ════════ */
+.module-surface {
+  display: grid;
+  /* ★必须显式写 minmax(0, 1fr):不写的话隐式列按 auto(≈max-content)定宽,页面里只要有一个
+     天然很宽的子元素(el-table 的列宽之和、el-tabs 的标签条),整列就被撑到它那么宽,而外层
+     不横向滚动 —— 超出视口的部分直接被裁掉且够不着(手机上薪酬页的页签、组织页的员工表都栽在这)。
+     minmax(0, …) 允许列收缩到 0,超宽内容交给自己(表格内部横向滚动/省略号)处理。 */
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--sb-gap-block);
+}
+/* ★给右下角的「提需求」浮标留位:它是 position:fixed + z-index:2000,页面内容伸到底部右侧
+   就会被它盖住 —— 实测智能体管理页最后一行的「配置」链接点不到,点到的是浮标。
+   在页面壳上一处留白,而不是逐页躲(FeedbackWidget 顶部注释里那句「各页让位是在打地鼠」说的就是这个)。
+   浮标在 ≤960px 已隐藏,所以这条只对桌面端生效,手机上不白占一屏高度。 */
+@media (min-width: 961px) {
+  .module-surface { padding-bottom: 56px; }
+}
+/* ════════ 列表页布局:表格铺满剩余高度,分页贴底(UI_SPEC §列表页布局) ════════
+   用法:页面根 <section class="module-surface module-surface--fill">;
+   把 <AsyncState>…</AsyncState>(装表格的那块)包一层 <div class="list-fill">;
+   el-table 的 height="600" 改成 height="100%"。工具栏/筛选栏/分页保持自然高度,
+   只有中间表格区域伸展——分页控件因此始终贴着可视区底部,不留空白也不需要整页滚动。 */
+.module-surface--fill {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sb-gap-block);
+  min-height: 0;
+}
+.list-fill {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+/* AsyncState 五态之一(loading/error/forbidden/empty/成功)渲染为单一根节点,伸展占满 */
+.list-fill > * {
+  flex: 1;
+  min-height: 0;
+}
+.list-fill .panel--flush {
+  display: flex;
+  flex-direction: column;
+}
+.list-fill .panel--flush .el-table {
+  flex: 1;
+  min-height: 0;
+}
+/* 列表页若用 el-tabs 分页签(如花名册),标签栏自然高度、内容区伸展到底 */
+.module-surface--fill > .el-tabs {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+.module-surface--fill .el-tabs__header {
+  flex: none;
+}
+.module-surface--fill .el-tabs__content {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+.module-surface--fill .el-tab-pane {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sb-gap-block);
+  /* ★页签内容比可视区高时必须自己能滚:填满布局把整页的滚动条收走了(.app-main 不再溢出),
+     而 .el-tabs__content 是 overflow:hidden —— 不给这一层滚动,长内容就被**裁掉且够不着**。
+     实测财务账表「报表」页签:内容 3613px、可视 550px,3063px 打不开(2026-08-04 改造时引入,当场发现)。
+     列表类页签不受影响:它们的 .list-fill 吸掉剩余高度、表格自己内部滚动,内容恰好放得下,不出滚动条。 */
+  overflow-y: auto;
+}
+/* 页签里再套一层卡片(.panel)时,高度要能继续往下传,否则 .list-fill 拿不到剩余高度、
+   表格 height:100% 塌成 0(财务账表就是这个结构:tab-pane > section.panel > .list-fill)。
+   只对**直接包着 .list-fill 的那层卡片**生效,页签里其它并列卡片不受影响。 */
+.module-surface--fill .el-tab-pane > .panel:has(> .list-fill) {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sb-gap-block);
+}
+/* 分页控件统一样式:作为列表页底部工具条——上方一道分隔线 + 顶内边距把它与表格拉开,
+   右对齐且右侧留白让开右下角「提需求」浮窗;min-height 与浮窗等高,使分页内容的垂直中线
+   与「提需求」按钮对齐,滚到底时两者像同一条底栏(见 UI_SPEC §列表页布局)。
+   ★.list-pager 是 .module-surface--fill 的最后一个子项,其底边落在 .app-main 内容盒的
+   底边——而 .app-main 自身还留了一段 padding-bottom(--sb-space-10)才到视口真正底部,
+   「提需求」浮窗却只是 fixed bottom:--sb-space-6。两者参照系不同,浮窗中心线比分页内容
+   中心线低了 (space-10 − space-6) ≈ 16px。用等量负 margin-bottom 把分页整体下移,吃掉
+   这段多出来的留白(不影响其下方任何内容,原本就是空白区),使两者中心线重新对齐。 */
+.list-pager {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: var(--sb-space-2);
+  min-height: 40px;
+  margin-top: var(--sb-space-2);
+  margin-bottom: calc(var(--sb-space-6) - var(--sb-space-10));
+  padding-top: var(--sb-space-3);
+  padding-right: var(--sb-fab-clearance);
+  border-top: 1px solid var(--sb-border);
+}
+.module-toolbar,
+.panel-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sb-gap-control);
+  flex-wrap: wrap;
+}
+/* 工具栏右侧动作区(按钮组):统一横向排列 + 换行时右对齐,按钮间距用 gap 统一。
+   兼容两种写法——显式 .module-toolbar__actions,或 .module-toolbar 里最后一个 <div>(多数页面的旧写法)。
+   清掉 Element Plus 相邻 el-button 默认的 margin-left,避免与 gap 叠加成不均匀间距。 */
+.module-toolbar__actions,
+.module-toolbar > div:last-child {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--sb-space-2);
+}
+.module-toolbar__actions > .el-button + .el-button,
+.module-toolbar > div:last-child > .el-button + .el-button {
+  margin-left: 0;
+}
+.panel {
+  border: 1px solid var(--sb-border);
+  border-radius: var(--sb-radius-lg);
+  background: var(--sb-bg-card);
+  padding: var(--sb-pad-card);
+  box-shadow: var(--sb-shadow-card);
+}
+.panel--flush {
+  padding: 0;
+  overflow: hidden;
+}
+.panel-toolbar {
+  margin-bottom: var(--sb-gap-block);
+}
+.panel-title {
+  margin: 0;
+  font-size: var(--sb-font-lg);
+  font-weight: 600;
+}
+/* CRM 活动/跟进时间线:客户/线索/商机三处统一(间距、标签行、正文、下次、时间戳)。
+   历史上三处各写一套 scoped 样式并渐渐漂移(时间戳还直出原始 ISO),这里收敛成一套。 */
+.crm-timeline {
+  margin-top: var(--sb-space-3);
+  padding-left: 2px;
+}
+.crm-timeline .el-timeline-item {
+  padding-bottom: var(--sb-space-4);
+}
+.crm-timeline .el-timeline-item:last-child {
+  padding-bottom: 2px;
+}
+.crm-timeline .el-timeline-item__timestamp {
+  font-size: 12px;
+  color: var(--sb-text-tertiary);
+  padding-top: 4px;
+}
+/* 一条记录:标签行 + 正文 + 下次,竖排小间距,左对齐整齐 */
+.crm-activity {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.crm-activity__tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+.crm-activity__text {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--sb-text-primary);
+  word-break: break-word;
+}
+.crm-activity__next {
+  margin: 0;
+  font-size: 12px;
+  color: var(--sb-text-secondary);
+}
+/* 跟进很多时:限高滚动,避免抽屉被拉得过长 */
+.crm-timeline--scroll {
+  max-height: 340px;
+  overflow-y: auto;
+  padding-right: var(--sb-space-2);
+}
+
+/* ════════ 详情字段网格(.dl)—— 取代抽屉里的 el-descriptions ════════
+   ★为什么换掉 el-descriptions:它渲染成带边框的 <table>,一个字段一整行、label 单元格
+     还固定吃掉约三成宽度。客户详情实测 18 个字段占 521px,而其中 8 个是空的 ——
+     一屏里超过一半的高度在画格子和「-」。表格该用来横向对比多条记录,而**一条记录的属性
+     不需要对齐成表**。
+   ★.dl 是 label 在上、值在下的两行小块,按容器宽度自动排 2~4 列(auto-fill + minmax),
+     同样 18 个字段在标准列表抽屉里落到 5 行左右。手机上容器一窄自动变单列,
+     顺带修掉 el-descriptions 在窄屏内部横滚的老毛病(UI_SPEC §详情抽屉里提过那条)。
+   用法:.dl > .dl__i > (.dl__k + .dl__v);长文本(地址/备注)给 .dl__i--wide 独占整行。
+   空值仍写 `-`(与表格约定同一个字符);页面自己决定要不要把空字段收起来。 */
+.dl {
+  display: grid;
+  /* 180px 是「两个中文标签 + 一个手机号」的下限;再窄就该换行了,不如少一列 */
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: var(--sb-space-3) var(--sb-space-5);
+  margin: 0;
+}
+.dl__i {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.dl__i--wide {
+  grid-column: 1 / -1;
+}
+.dl__k {
+  font-size: var(--sb-font-xs);
+  color: var(--sb-text-tertiary);
+  line-height: 1.3;
+}
+.dl__v {
+  margin: 0;
+  font-size: var(--sb-font-sm);
+  color: var(--sb-text-primary);
+  line-height: 1.45;
+  /* 长税号/长网址不许把整列撑宽(抽屉里被撑宽的那一列会带着所有兄弟区块一起变宽) */
+  word-break: break-word;
+}
+.dl-group + .dl-group {
+  margin-top: var(--sb-space-4);
+}
+/* 手机(容器已经窄到只剩一列):label 在上、值在下就太散了 —— 一个字段吃掉 48px,
+   十来个字段又是一屏。压成「左标签 · 右值」的一行,和系统「设置」类详情页一个读法。
+   ★长文本(--wide:地址 / 备注 / 注册地址)仍然竖排:挤到右半边会折成锯齿。
+   断点用 520 而不是 768:判据是「这个网格还排不排得下两列」(180×2 + gap ≈ 380 加上抽屉内边距),
+   与页面级的手机断点不是一回事。 */
+@media (max-width: 520px) {
+  .dl {
+    gap: var(--sb-space-2);
+  }
+  .dl__i:not(.dl__i--wide) {
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--sb-space-3);
+  }
+  .dl__i:not(.dl__i--wide) .dl__k {
+    flex: none;
+  }
+  .dl__i:not(.dl__i--wide) .dl__v {
+    min-width: 0;
+    text-align: right;
+  }
+}
+/* 「显示 N 个未填字段」:文字键,别做成实心按钮抢走这一屏的视觉重量。
+   ★display/text-align 都要显式写:全站有一条把 button 压成 block 的重置,
+     而 <button> 自己又默认 text-align:center —— 两条叠起来这行字会跑到抽屉正中间去,
+     读起来像一个居中的主操作,而它只是个「展开更多」。 */
+.dl-toggle {
+  display: inline-block;
+  margin-top: var(--sb-space-4);
+  padding: 6px 0;
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-size: var(--sb-font-xs);
+  text-align: left;
+  color: var(--sb-color-primary);
+  cursor: pointer;
+}
+.dl-toggle:hover {
+  text-decoration: underline;
+}
+
+/* 详情抽屉里的页签条:内容分流用,不是一张新的页。
+   ★min-width:0 是必须的 —— el-tabs 的标签条是 max-content,抽屉里的 grid 容器
+     (.drawer-stack)会被它撑宽,连带所有兄弟区块一起变宽(UI_SPEC §详情抽屉那条)。 */
+.detail-tabs {
+  min-width: 0;
+}
+.detail-tabs > .el-tabs__content {
+  overflow: visible; /* 里面的下拉/日期面板不该被裁 */
+}
+/* ★页签里的 .panel 退化成「一段带标题的区块」:抽屉本身已经是一张卡,里面再套一圈
+   边框 + 投影就是卡中卡,而页签条已经把内容分好组了,边框不再承担分组的活。
+   刻意做成覆盖而不是让各页改 class —— 这几页的正文是从原来的竖排结构原样搬进页签的,
+   动 class 的 diff 会把「只是换了个容器」淹掉。 */
+.detail-tabs .panel {
+  border: none;
+  box-shadow: none;
+  background: none;
+  padding: 0;
+}
+.detail-tabs .panel + .panel {
+  margin-top: var(--sb-space-5);
+}
+.grid-two {
+  display: grid;
+  grid-template-columns: minmax(260px, 320px) minmax(0, 1fr);
+  gap: var(--sb-gap-section);
+  align-items: start;
+}
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 var(--sb-gap-section);
+}
+.form-grid .full {
+  grid-column: 1 / -1;
+}
+.table-actions {
+  display: flex;
+  align-items: center;
+  /* 操作按钮间距收紧(4px)防误点;图标按钮 + 紧凑间距确保整列按钮都放得下、不被挤掉 */
+  gap: var(--sb-space-1);
+  flex-wrap: nowrap;
+}
+/* 操作列里的确认按钮(删除/作废等)统一为紧凑文字样式,与兄弟 el-button text 对齐:
+   等高、无边框、透明底、单行不换行 → 间距一致且不挤占列宽。多两个类提升优先级稳压组件 scoped 样式。 */
+.table-actions .sb-confirm .sb-confirm__trigger {
+  height: var(--el-component-size);
+  padding: 0 var(--sb-space-2);
+  border-color: transparent;
+  background: transparent;
+}
+.table-actions .sb-confirm .sb-confirm__trigger:hover:not(:disabled) {
+  border-color: transparent;
+  background: var(--sb-color-danger-soft);
+  color: var(--sb-color-danger-hover);
+}
+.icon-button {
+  width: 34px;
+  height: 34px;
+  display: inline-grid;
+  place-items: center;
+  border: 1px solid var(--sb-border);
+  border-radius: var(--sb-radius-sm);
+  background: var(--sb-bg-card);
+  color: var(--sb-text-secondary);
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+.icon-button:hover {
+  color: var(--sb-color-primary);
+  border-color: var(--sb-color-primary);
+  background: var(--sb-color-primary-soft);
+}
+
+/* 主题切换:顶栏单按钮点击循环(亮→暗→暗金),复用 .icon-button 样式,图标随当前主题变。 */
+
+/* 暗金:金色主按钮用深色字(金底配白字对比不足,改深字更清晰且更显质感)。
+   只限实心 primary 按钮——text/link/plain 变体是透明底,深字会叠在近黑底上看不清
+   (操作列普遍用 <el-button text type="primary">,曾因此整列不可读)。 */
+:root[data-theme='gold'] .el-button--primary:not(.is-text):not(.is-link):not(.is-plain) {
+  --el-button-text-color: #1a1610;
+  --el-button-hover-text-color: #1a1610;
+  --el-button-active-text-color: #1a1610;
+}
+
+/* ════════ 指标卡 ════════ */
+.metric-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--sb-gap-block);
+}
+.metric-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sb-space-2);
+  border: 1px solid var(--sb-border);
+  border-radius: var(--sb-radius-lg);
+  padding: var(--sb-space-4) var(--sb-space-4) var(--sb-space-4) calc(var(--sb-space-4) + 5px);
+  background: var(--sb-bg-card);
+  box-shadow: var(--sb-shadow-card);
+  overflow: hidden;
+}
+.metric-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  background: var(--sb-metric-accent, var(--sb-color-primary));
+}
+.metric-card--success {
+  --sb-metric-accent: var(--sb-color-success);
+}
+.metric-card--warning {
+  --sb-metric-accent: var(--sb-color-warning);
+}
+.metric-card--neutral {
+  --sb-metric-accent: var(--sb-gray-300);
+}
+/* ★info 而不是「再来一个装饰色」:工作台那张「数字员工在岗」原来用的是 --sb-avatar-3 的紫
+   (rgba(138,92,240,.14) + #8a5cf0)。头像色板按 tokens.css 的注释**只许用于头像/交付物图标**,
+   它是「按 id 稳定取色」的身份色,不是功能语义 —— 拿它当统计卡的强调色,就等于在语义色之外
+   又开了一个没人管的第七种颜色。 */
+.metric-card--info {
+  --sb-metric-accent: var(--sb-color-info);
+}
+/* 标签与数值。裸 <span>/<strong> 是财务线一直以来的写法,后加的 __label/__value 是给
+   「数值不是卡片直接子元素」的形态用的(见 --ico:标签和数值被包进 __body 里)。 */
+/* ★`:not([class*="__"])` 不是洁癖,是必须的:__body / __ico / __sub / __progress 也都是
+   <span>、也都是直接子级,而 `.metric-card > span` 的特异性(0,1,1)会压过它们各自的
+   `.metric-card__xxx`(0,1,0) —— 图标底座会被改成次级文字色、进度条会被塞上字距。
+   老写法(标签是个不带 class 的裸 <span>)因此保持有效,新加的带 __ 的结构元素一律不受影响。
+   Hub 原来自己那份 `.stat div span` 的注释记的就是同一个坑,收敛时一起带过来。 */
+.metric-card > span:not([class*="__"]),
+.metric-card__label {
+  font-size: var(--sb-font-xs);
+  font-weight: 600;
+  letter-spacing: var(--sb-tracking-wide);
+  color: var(--sb-text-secondary);
+}
+/* ★权重 750 而不是原来的 600:首页 / 工作台 / CRM 驾驶舱三页各自造统计卡时**都**选了 750,
+   三选三说明标准值该跟上现实,而不是让三页各写各的(2026-08-27 收敛时议定)。 */
+.metric-card > strong,
+.metric-card__value {
+  font-size: var(--sb-font-2xl);
+  font-weight: 750;
+  line-height: var(--sb-leading-tight);
+  letter-spacing: var(--sb-tracking-tight);
+  font-variant-numeric: tabular-nums;
+}
+.metric-card__sub {
+  font-size: var(--sb-font-xs);
+  color: var(--sb-text-tertiary);
+}
+
+/* ── 修饰符:整卡可点(仪表盘的统计卡多半是个 <button>,点了钻进对应列表)── */
+.metric-card--interactive {
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.metric-card--interactive:hover {
+  border-color: var(--sb-color-primary);
+  box-shadow: var(--sb-shadow-raised);
+}
+
+/* ── 修饰符:右上角图标底座(工作台形态)。
+      标签和数值要包进 .metric-card__body,卡片本身改成横排两栏。 ── */
+.metric-card--ico {
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.metric-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sb-space-1);
+  min-width: 0;
+}
+.metric-card__ico {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--sb-radius-md);
+  display: grid;
+  place-items: center;
+  flex: none;
+  /* 底座颜色跟着卡片左侧那道语义色条走 —— 一张卡只有一个语义,不让它俩各说各的。
+     ★静态兜底必须写在 color-mix 前面(src/legacy-engine-contract.test.ts):老内核不认
+     color-mix 时会把整条声明丢掉,底座就没有底了。这里的强调色是变量、给不出精确的 rgba,
+     退而求其次用中性的 subtle 底 —— 图标本身仍是语义色,读得出来。 */
+  background: var(--sb-bg-subtle);
+  background: color-mix(in srgb, var(--sb-metric-accent, var(--sb-color-primary)) 14%, transparent);
+  color: var(--sb-metric-accent, var(--sb-color-primary));
+}
+
+/* ── 修饰符:目标达成进度条(CRM 驾驶舱形态)── */
+.metric-card__progress {
+  display: grid;
+  gap: 2px;
+}
+.metric-card__progress-bar {
+  /* 显式 block:这两层现在是 <span>(它们在 <button> 里,块级元素在 button 的内容模型里不合法),
+     裸 <span> 是 inline,height 根本不生效 —— 进度条会变成一条看不见的线。 */
+  display: block;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--sb-bg-sunken);
+  overflow: hidden;
+}
+.metric-card__progress-fill {
+  display: block;
+  height: 100%;
+  border-radius: 2px;
+  background: var(--sb-color-primary);
+  transition: width 0.3s ease;
+}
+.metric-card__progress-fill--done {
+  background: var(--sb-color-success);
+}
+.metric-card__progress-text {
+  color: var(--sb-text-secondary);
+  font-size: var(--sb-font-xs);
+}
+
+/* ════════ Skeleton 加载骨架 ════════ */
+.sb-skeleton {
+  display: grid;
+  gap: var(--sb-space-3);
+}
+.sb-skeleton__row {
+  height: 14px;
+  border-radius: var(--sb-radius-sm);
+  /* 用语义 token(暗色由 tokens.css 覆盖)→ 暗色下骨架条是灰色而非白色 */
+  background: linear-gradient(90deg, var(--sb-bg-hover) 25%, var(--sb-border) 37%, var(--sb-bg-hover) 63%);
+  background-size: 400% 100%;
+  animation: sb-shimmer 1.4s ease infinite;
+}
+@keyframes sb-shimmer {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sb-skeleton__row {
+    animation: none;
+  }
+}
+
+/* ════════ 空状态(带主操作)════════ */
+.sb-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sb-space-3);
+  padding: var(--sb-space-10) var(--sb-space-4);
+  text-align: center;
+}
+.sb-empty__icon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--sb-radius-pill);
+  background: var(--sb-bg-subtle);
+  color: var(--sb-text-tertiary);
+}
+.sb-empty__title {
+  font-weight: 600;
+  color: var(--sb-text-primary);
+}
+.sb-empty__hint {
+  font-size: var(--sb-font-sm);
+  color: var(--sb-text-secondary);
+}
+
+/* ════════ 筛选区(混合触发:简单下拉即时,输入/多条件用「查询」)════════ */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--sb-space-3) var(--sb-space-4);
+  padding: var(--sb-space-3) var(--sb-pad-card);
+  border: 1px solid var(--sb-border);
+  border-radius: var(--sb-radius-lg);
+  background: var(--sb-bg-card);
+  box-shadow: var(--sb-shadow-card);
+}
+.filter-bar__field {
+  display: grid;
+  gap: var(--sb-space-1);
+  min-width: 160px;
+}
+.filter-bar__field > .t-label {
+  font-size: var(--sb-font-xs);
+}
+.filter-bar__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--sb-space-2);
+  margin-left: auto;
+}
+/* 收起态:仅首行可见,其余 .filter-bar__field 隐藏 */
+.filter-bar--collapsed .filter-bar__field.is-extra {
+  display: none;
+}
+/* 桌面端筛选栏默认收起:限高到「一行字段」,超出的行裁掉;悬停或聚焦其内任一控件时展开全部。
+   下拉菜单挂在 body 的 popper 上,不受本容器 overflow:hidden 影响,故收起态仍可正常操作首行。 */
+.filter-bar--collapsible {
+  /* 收起高度优先用 FilterBar 组件按首行实测写入的 --fb-collapsed-h(日期区间等高字段的首行
+     比普通首行高,定值会裁切);兜底值 = 上下内边距 + 一行(标签+控件) + 亚像素余量,
+     余量 < 行间距,故多行时仍只露首行不漏第二行内容。 */
+  max-height: var(--fb-collapsed-h, calc(var(--sb-space-3) * 2 + 56px + var(--sb-space-2)));
+  overflow: hidden;
+  transition: max-height 0.25s ease;
+}
+.filter-bar--collapsible:hover,
+.filter-bar--collapsible:focus-within {
+  max-height: 60vh;
+  overflow: visible;
+}
+
+/* ════════ 抽屉:详情/编辑统一右侧抽屉,sticky 底部操作区 ════════ */
+/* !important 的理由见文件头:EP 有 `.el-drawer__body{padding:var(--el-drawer-padding-primary)}`(20px),
+   同特指度且排在后面 —— 抽屉是详情/编辑的主界面,内边距被压回 20px 而设计是 24px。 */
+.el-drawer__body {
+  padding: var(--sb-pad-card) !important;
+  /* ★抽屉正文声明为容器:抽屉内的分栏布局按**抽屉自己的宽度**折行,不再看视口。
+     视口查询在这里天然失真 —— iPad 竖屏 834px 视口落在平板档(>768,不触发手机折行),
+     抽屉却按 96vw ≈ 800px 再减内边距渲染;外接大屏上 61.8vw 的抽屉反过来比视口窄一大截。
+     55 个 el-drawer 逐个写 isMobile 分支不现实,容器查询一处生效。
+     ★老内核不认 container-type / @container 时这两段被整体忽略 —— 回到现状(跟视口),
+     不会更糟(legacy-engine-contract 的「新取值要有静态兜底”管的是声明值,这里是整条规则,
+     降级路径天然存在)。 */
+  container-type: inline-size;
+  container-name: drawer;
+}
+/* 抽屉窄于两列布局的下限时,双列表单/主从分栏折成单列。
+   560 = 两列 260px 下限 + 列距,与 ≤768 视口那档的折行判据同源。 */
+@container drawer (max-width: 560px) {
+  .form-grid,
+  .grid-two {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+.drawer-stack {
+  display: grid;
+  /* ★同 .app-shell / .module-surface 那两条:必须显式 minmax(0, 1fr)。不写的话隐式列按 auto
+     (≈max-content)定宽——抽屉里只要有一个天然很宽的子孙(明细表的列宽之和、不换行的长编号、
+     el-tabs 的标签条),整列就被撑到它那么宽,而且**所有兄弟区块跟着一起变宽**,抽屉内容
+     整体比抽屉还宽、可以左右拖(手机上尤其明显:抽屉全屏 375px,内容却 856px)。
+     minmax(0, …) 允许列收缩到 0,超宽内容交给自己(表格内部横向滚动/省略号)处理。 */
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--sb-gap-section);
+}
+/* 轨道能收窄还不够:grid 子项的 min-width 默认是 auto(=min-content),照样能顶破轨道。
+   两条一起才真正封死(报销单抽屉早就在自己的 scoped 里这么写了,这里提到全局)。 */
+.drawer-stack > * {
+  min-width: 0;
+}
+/* 抽屉里的 el-descriptions 渲染成 <table>,天生带 min-content 宽度(列数 × 单元格内容),
+   窄屏放不下时会把整个抽屉顶宽、整屏左右可拖。让它自己横向滚,别把溢出甩给抽屉——
+   同 .el-table「超宽内容自己处理」的既定做法。
+   ★2026-08-27:抽屉里已经一处 el-descriptions 都不剩了(全部换成 .dl 字段网格),
+     这条只作为**兜底**留着 —— 真正拦住回潮的是 src/ui-structure-contract.test.ts
+     那条「抽屉里不许再用 el-descriptions」。 */
+.el-drawer__body .el-descriptions {
+  overflow-x: auto;
+}
+.drawer-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: var(--sb-space-2);
+  padding: var(--sb-space-3) var(--sb-pad-card);
+  border-top: 1px solid var(--sb-border);
+  background: var(--sb-bg-card);
+}
+/* 相邻按钮清掉 Element Plus 默认 margin-left,避免与 gap 叠加成不均匀间距 */
+.drawer-footer > .el-button + .el-button {
+  margin-left: 0;
+}
+/* 破坏性操作靠左成一组,主操作靠右;换行时行间距与列间距一致。
+   ★**不能给每个 danger 各写一个 `margin-right: auto`** —— flex 里多个 auto 外边距会把剩余空间
+     **均分**,于是「删除」停在最左、「作废」被推到正中间孤零零一个,中间两大片空白
+     (2026-08-26 用户报的就是这个;删除/作废同时出现的有合同、线索、报销单三处)。
+   ★正确做法是只在**左组与右组的交界处断开一次**:紧跟在 danger 之后的第一个非 danger 兄弟
+     拿 `margin-left: auto`。danger 自己不再撑开,所以它们之间只有正常的 gap。
+   ★前提是 danger 必须**连着排在最前面**。这条前提由 drawer-footer-layout 护栏钉住 ——
+     中间夹一个非 danger 会让交界出现两次,空白又会被均分回来。 */
+/* ★必须带 `.drawer-footer >`:上面那条 `.drawer-footer > .el-button + .el-button { margin-left: 0 }`
+     是三个类(0,3,0),不加祖先选择器这条只有两个(`:not()` 按里面那个类算),**会被它压掉** ——
+     实测现象是所有按钮又挤成一坨靠右,而源码看起来完全正确(2026-08-26 起服务实际看了一眼才发现)。
+     同为 (0,3,0) 时靠「写在后面」取胜,所以这条必须留在那条之后。 */
+.drawer-footer > .drawer-footer__danger + :not(.drawer-footer__danger) {
+  margin-left: auto;
+}
+/* 右边一个兄弟都没有(其余按钮被 v-if 收掉了)时,danger 自己得撑住,否则会跟着
+   justify-content: flex-end 跳到右边 —— 位置随别的按钮显不显示而变,比一直靠右更糟。 */
+.drawer-footer > .drawer-footer__danger:last-child {
+  margin-right: auto;
+}
+
+/* ───────── 移动端列表卡片(CRM 等列表页在窄屏用卡片替代表格)───────── */
+.crm-card-list {
+  display: grid;
+  gap: var(--sb-space-3);
+  padding: var(--sb-space-1);
+}
+.crm-card {
+  border: 1px solid var(--sb-border);
+  border-radius: var(--sb-radius-lg);
+  background: var(--sb-bg-card);
+  padding: var(--sb-space-4);
+  box-shadow: var(--sb-shadow-card);
+  display: grid;
+  gap: var(--sb-space-2);
+}
+.crm-card--tap {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.crm-card--tap:active {
+  background: var(--sb-bg-hover);
+}
+.crm-card__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--sb-space-2);
+}
+.crm-card__title {
+  font-weight: 600;
+  color: var(--sb-text-primary);
+  line-height: var(--sb-leading-tight);
+}
+.crm-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sb-space-1) var(--sb-space-3);
+  color: var(--sb-text-secondary);
+  font-size: var(--sb-font-sm);
+}
+.crm-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sb-space-2);
+  margin-top: var(--sb-space-1);
+}
+/* 动作区里每个按钮都各自 v-if,可能一个都不成立(需求反馈页「已完成」的卡片就是),
+   此时留下一个 0 高的空盒子,但外层 grid 的 gap 和这里的 margin-top 照吃 —— 每张这样的卡
+   白多出 12px。`:empty` 在 v-if 全假时**能**命中:剩下的是 `<!--v-if-->` 注释节点,
+   按规范注释不影响 :empty(有真实文本或元素才不算空)。 */
+.crm-card__actions:empty {
+  display: none;
+}
+
+/* ───────── 移动端卡片列表:分页贴在卡片之后(而非半空中)───────── */
+/* 列表页填满布局(.module-surface--fill)靠「表格 height:100% 内部滚动」把 .list-pager 顶到视口底部。
+   但窄屏改成卡片列表(.crm-card-list)后,卡片网格会撑破被 flex 压扁(min-height:0)的 .list-fill 盒子,
+   而 .list-pager 是 .list-fill 的兄弟节点 → 分页锚定在那个被压扁的盒子底部,即卡片中间的半空位置。
+   卡片场景下改回自然文档流:.list-fill 用内容高度、整块随 .app-main 一起滚,分页自然跟在末张卡片之后。
+   仅用 :has() 命中「含卡片列表」的页,表格类列表页不受影响(仍保留内部滚动的贴底分页)。 */
+@media (max-width: 768px) {
+  .app-main > .module-surface--fill:has(.crm-card-list) {
+    flex: none;
+    min-height: 0;
+  }
+  .list-fill:has(.crm-card-list) {
+    flex: none;
+    min-height: 0;
+    display: block;
+  }
+  .list-fill:has(.crm-card-list) > * {
+    flex: none;
+    min-height: 0;
+  }
+  /* 抽屉在手机上一律全屏。桌面/平板宽度走 --sb-drawer-* 三档语义 token,但这些 token 到手机上
+     仍然会留下过窄的侧抽屉;这里把手机口径统一补成全屏。
+     ★size 是 Element Plus 写在元素上的行内 width,只能用 !important 压过(同下方 .el-dialog 那条)。
+     ttb/btt 方向吃的是 height,不在此列。 */
+  .el-drawer.rtl,
+  .el-drawer.ltr {
+    width: 100% !important;
+  }
+
+  /* ───── 筛选抽屉(bottom sheet)─────
+     FilterBar 在手机上把筛选字段搬进这里,而不是就地展开 —— 就地展开时线索页那 8 个字段
+     会把筛选栏撑到 738px、首张卡片顶到 967px,列表整个被推出视口(2026-08-27 实测)。
+     ★用 btt 而不是全屏:筛选是列表的旁支,不是「离开了列表」。留一截列表在上面露着,
+       改完关掉就看见结果。上面那条全屏规则只管 rtl/ltr,吃 height 的 btt 不在其列。
+     ★高度按内容长(组件传 size="auto",EP 落成行内 height:auto),这里只补上限和滚动:
+       字段少的页面不该弹出一块半空的板子。dvh 那行给支持的内核用(手机地址栏收放时 vh 会虚高)。 */
+  .sb-filter-sheet {
+    max-height: 80vh;
+    max-height: 80dvh;
+    border-radius: var(--sb-radius-lg) var(--sb-radius-lg) 0 0;
+  }
+  /* EP 给抽屉标题留了 32px 下边距(那是给「标题 + 一段正文」的版式准备的),
+     这里标题下面紧接着就是字段,32px 空band 在只有几百像素高的 sheet 里很扎眼。 */
+  .sb-filter-sheet .el-drawer__header {
+    margin-bottom: var(--sb-space-3);
+  }
+  .sb-filter-sheet .el-drawer__body {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .sb-filter-sheet .el-drawer__footer {
+    /* 底栏贴着屏幕下沿 —— 手势条/刘海走 --sb-safe-bottom(安卓壳注入真值,不能直接写 env(),见 safe-area-contract) */
+    padding-bottom: calc(var(--sb-space-4) + var(--sb-safe-bottom));
+  }
+  /* ★字段现在被 teleport 到 body 上了,**够不着下面那条 `.filter-bar .el-select`** ——
+     少了这几条,抽屉里的下拉会缩回内容宽度,一排长短不一。这是「搬家就断了祖先选择器」
+     的典型形态,不是新需求。 */
+  .sb-filter-sheet .el-select,
+  .sb-filter-sheet .el-input,
+  .sb-filter-sheet .el-radio-group {
+    width: 100%;
+  }
+  /* ★日期选择器要多写一层 `.el-input`:EP 有一条 `.el-date-editor.el-input{width:var(--el-date-editor-width)}`
+     (0,2,0),与 `.sb-filter-sheet .el-date-editor` 打平而它排在后面 —— 平手就是它赢,
+     表现是抽屉里的日期框缩成 220px、和上下的下拉不齐。多一层选到 0,3,0 才是真赢。
+     (ep-cascade-guard 报出来的;上面三条它也报了,但那三条撞的是 .el-pagination 里的规则,
+      分页器不会长在筛选抽屉里 —— 已在护栏的 ACKNOWLEDGED 里逐对记明。) */
+  .sb-filter-sheet .el-date-editor.el-input {
+    width: 100%;
+  }
+  .sb-filter-sheet .el-radio-button {
+    flex: 1;
+  }
+  .sb-filter-sheet .el-radio-button__inner {
+    width: 100%;
+  }
+
+  /* 筛选条在手机上纵向铺满,便于触控。
+     ★这几条必须与 FilterBar.vue 的 JS 断点(useIsMobile 默认 768)同一个数,
+       2026-08-02 前它们挂在 ≤960 —— 于是 769–960 这一段里,组件渲染的是**桌面**收起态
+       (.filter-bar--collapsible:flex-wrap:wrap + max-height 限高一行),CSS 却把方向改成
+       column:**列方向 + 换行 + 限高 = 往右边换列**,五个字段横着排出去 3215px,
+       再被 body{overflow-x:hidden} 裁掉 —— 筛选项不是"要滑一下",是**根本够不着**。
+       展开的折叠屏(≈820–900px)与小平板正好落在这一段。
+     ★≤768 时 FilterBar 渲染的是 .filter-bar--mobile 折叠面板,它自己的 scoped 样式
+       已经是 column/stretch;这里留着的是字段与控件的铺满宽度(面板里需要)。 */
+  .filter-bar__field {
+    width: 100%;
+  }
+  .filter-bar .el-select,
+  .filter-bar .el-radio-group {
+    width: 100%;
+  }
+  .filter-bar .el-radio-button {
+    flex: 1;
+  }
+  .filter-bar .el-radio-button :deep(.el-radio-button__inner),
+  .filter-bar .el-radio-button__inner {
+    width: 100%;
+  }
+}
+
+@media (max-width: 980px) {
+  /* ★同 .app-shell 那条:必须 minmax(0, 1fr) 而不是裸 1fr。裸 1fr 的最小宽度是内容的
+     min-content —— 单栏里放一张 el-table 时,min-content = 各列 min-width 之和(组织页
+     的员工表 ≈1330px),会把这一列直接撑到一千多像素;外层不横向滚动,超出部分被裁掉
+     且够不着。minmax(0, …) 显式允许列收缩到 0,超宽内容由自己(表格内部横向滚动/
+     省略号)处理。 */
+  .login-panel,
+  .grid-two,
+  .form-grid,
+  .metric-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ───────── 手机(≤768px):off-canvas 抽屉式侧栏 + 全宽主区 ─────────
+   ★这一段 2026-08-02 前挂在 ≤960。收到 768 的理由:769–960 是**展开的折叠屏与小平板**
+   (华为 Mate X 系列展开约 890px、Galaxy Z Fold 约 820px),那个宽度完全放得下一条常驻侧栏,
+   却被当成手机 —— 导航塞进抽屉、底部还多占 64px 的 tab 栏,白白浪费一整条侧栏的宽度。
+   现在 769–1100 走「图标条侧栏」(App.vue 的 railMode 给上 .app-shell--collapsed)。
+   断点数字必须与 App.vue 的 useIsMobile 参数一致,两边分歧过一次,代价见 .filter-bar 那条注释。 */
+@media (max-width: 768px) {
+  /* ★grid 列宽须是 minmax(0, 1fr)而非裸 1fr——裸 1fr 的默认最小宽度是内容的
+     min-content(顶栏按钮组一行排开的自然宽度),一旦超过视口就把整个 grid 列撑宽,
+     导致页面出现横向滚动条。minmax(0, ...) 显式允许列收缩到 0,子内容超宽时靠自身
+     省略号/换行处理,不会撑大外层容器。 */
+  .app-shell,
+  .app-shell--collapsed {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .app-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 1100;
+    width: min(82vw, 300px);
+    height: 100vh;
+    overflow-y: auto;
+    transform: translateX(-100%);
+    transition: transform 0.22s ease;
+    box-shadow: var(--sb-shadow-lg, 0 12px 40px rgba(0, 0, 0, 0.18));
+  }
+  .app-shell--nav-open .app-sidebar {
+    transform: translateX(0);
+  }
+  .app-nav-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1090;
+    background: rgba(15, 23, 42, 0.45);
+  }
+
+  /* ───── 抽屉菜单的手机形态 ─────
+     这是「找不常用页面」的地方(高频入口在底部 tab 上),所以两件事最要紧:
+     ① 点得中 —— 实测菜单项只有 42px、分组标题 34px,都在触控下限之下,而且是连着点的列表,
+        差几像素就会点到相邻行。给 48px(比 44 的下限再宽裕一点,列表连点更稳)。
+     ② 找得到 —— 顶部搜索,见下面 .app-menu-search。 */
+  /* ★变量和显式高度都写。只抬变量实测不生效(和按钮那次一样:EP 的实际高度未必读那个变量,
+     而且嵌套的 .el-menu--inline 会自己再声明一遍);只写 .el-sub-menu__title 又会漏掉
+     文件夹那一层(「资料与配置」实测仍是 42px)。两条一起才把三级都盖住。 */
+  .app-sidebar .app-menu,
+  .app-sidebar .app-menu .el-menu {
+    --el-menu-item-height: 48px;
+    --el-menu-sub-item-height: 48px;
+  }
+  .app-sidebar .app-menu .el-menu-item,
+  .app-sidebar .app-menu .el-sub-menu__title {
+    height: 48px;
+    line-height: 48px;
+  }
+  .app-menu-search {
+    padding: var(--sb-space-2) var(--sb-space-3) 0;
+  }
+  .app-menu-hits {
+    display: flex;
+    flex-direction: column;
+    padding: var(--sb-space-2) var(--sb-space-2) var(--sb-space-4);
+  }
+  .app-menu-hits__empty {
+    margin: 0;
+    padding: var(--sb-space-3);
+    color: var(--sb-text-secondary);
+    font-size: var(--sb-font-sm);
+  }
+  .app-menu-hits__item {
+    display: flex;
+    align-items: center;
+    gap: var(--sb-space-2);
+    width: 100%;
+    min-height: 48px;
+    padding: 0 var(--sb-space-3);
+    border: none;
+    border-radius: var(--sb-radius-sm);
+    background: transparent;
+    color: var(--sb-sidebar-text, var(--sb-text-primary));
+    font-size: var(--sb-font-md);
+    text-align: left;
+    cursor: pointer;
+  }
+  .app-menu-hits__item.is-active {
+    background: var(--sb-sidebar-active);
+    color: var(--sb-sidebar-text-active);
+  }
+  .app-menu-hits__label {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  /* 分组名必须显示:同一个词在不同分组里出现过(「客户管理」在 CRM、「供应商管理」在业务),
+     只给标签会让人选错分组下的同名页 */
+  .app-menu-hits__group {
+    flex: none;
+    color: var(--sb-text-tertiary);
+    font-size: var(--sb-font-xs);
+  }
+}
+
+/* ───────── 平板 / 展开的折叠屏(769–1100):侧栏常驻但收成图标条 ─────────
+   侧栏宽度与折叠态由 .app-shell--collapsed 那套现成规则负责(App.vue 在这一档强制加上它),
+   这里只补这一档特有的:汉堡键改成「展开/收起」语义已在 JS 侧,视觉上给主区留出呼吸。
+   ★折叠屏会在运行时改变宽度(展开/合上),useIsMobile 走 matchMedia 监听,能跟着翻;
+     安卓侧 AndroidManifest 的 configChanges 已含 screenSize|smallestScreenSize|screenLayout,
+     折叠不会重建 Activity,webview 状态不丢。 */
+@media (min-width: 769px) and (max-width: 1100px) {
+  /* ★只改变量:顶栏与全幅页(.ap / .de-shell)的负边距都引用 --sb-main-pad-x,
+     跟着一起收 —— 以前这里直接写 padding,961–1100 段负边距(-32px)对不上 20px
+     的 padding,每边溢出 12px、.app-main 出横向滚动条。 */
+  :root {
+    --sb-main-pad-x: var(--sb-space-5);
+    --sb-main-pad-b: var(--sb-space-8);
+  }
+}
+
+/* ───────── 窄屏通用(≤960px):顶栏/主区收紧,表格转卡片等仍按各页自己的断点 ───────── */
+@media (max-width: 960px) {
+  /* ★负边距跟着内边距一起收 —— 全部经 --sb-main-pad-x 同源,这里只改变量。
+     否则标题栏比屏幕宽、整页能左右拖(iOS 上 body 的 overflow-x:hidden 拦不住手势平移)。 */
+  :root {
+    --sb-main-pad-x: var(--sb-space-4);
+    --sb-main-pad-b: var(--sb-space-8);
+  }
+  .app-topbar {
+    padding-top: var(--sb-space-4);
+  }
+  .app-topbar h1 {
+    font-size: var(--sb-font-lg);
+  }
+  /* 顶栏防塌陷:左侧标题区可收缩(min-width:0),标题单行省略号,不再被右侧控件挤成逐字竖排 */
+  .app-topbar__left {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  .app-topbar__title {
+    min-width: 0;
+  }
+  .app-topbar__title h1 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .app-user {
+    flex: 0 1 auto;
+    min-width: 0;
+  }
+  /* 页签条超过屏宽时可横滑:Element Plus 只在它自己算出溢出时才挂左右箭头,而箭头的判定
+     发生在挂载那一刻,窄屏下常常不出现,于是后面的页签既看不见也点不到(薪酬/考勤页栽过)。
+     直接让页签容器自己可横向滚动,不依赖 EP 的箭头逻辑。 */
+  .el-tabs__nav-wrap,
+  .el-tabs__nav-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* 滚动条不占视觉,靠手势滑 */
+  }
+  .el-tabs__nav-wrap::-webkit-scrollbar,
+  .el-tabs__nav-scroll::-webkit-scrollbar {
+    display: none;
+  }
+  .drawer-footer {
+    flex-wrap: wrap;
+  }
+  .drawer-footer .el-button {
+    flex: 1 1 auto;
+  }
+  /* 窄屏工具栏:说明文字与动作区各占整行,动作区按钮左对齐平铺(横向排列/间距见基础 .module-toolbar__actions 规则) */
+  .module-toolbar {
+    align-items: stretch;
+  }
+  .module-toolbar__actions,
+  .module-toolbar > div:last-child {
+    justify-content: flex-start;
+  }
+}
+
+/* ───────── 手机竖屏(≤640px):精简顶栏,腾出标题空间 ───────── */
+@media (max-width: 640px) {
+  .app-topbar {
+    gap: var(--sb-space-2);
+  }
+  /* 眉题「企业管理底座」窄屏隐藏:既省一行高度,也不再逐字竖排挤压主标题 */
+  .app-topbar .app-kicker {
+    display: none;
+  }
+  .app-user {
+    gap: var(--sb-space-2);
+  }
+  /* 用户名文字窄屏隐藏(退出确认弹层已含账号语境),让出宽度给铃铛/退出 */
+  .app-user__name {
+    display: none;
+  }
+  /* 账套切换器瘦身:去掉前置图标,下拉收窄,避免独占顶栏半幅 */
+  .app-entity-switch svg {
+    display: none;
+  }
+  .app-entity-switch .el-select {
+    width: 118px !important;
+  }
+  /* 弹窗窄屏兜底:很多 el-dialog 用固定 px 宽(420/520px),在手机上会横向溢出。
+     统一收进视口内(左右各留 16px),避免出现横向滚动条。 */
+  .el-dialog {
+    width: calc(100vw - var(--sb-space-8)) !important;
+    max-width: 460px;
+  }
+  /* 窄屏分页:与桌面端同一策略——右对齐 + 让出「提需求」浮窗宽度,分页与浮窗保持同一水平行;
+     窄屏留白按移动端浮窗实际占位收窄(而非桌面的 160px)。窄屏隐藏「每页 N 行」选择器
+     (桌面端保留,见下方 .el-pagination__sizes 规则),分页本身变窄后更易单行放下。
+     margin-bottom 同桌面端道理,按 .app-main 窄屏 padding-bottom(--sb-space-8)重新计算差值。
+     允许换行(flex-wrap)兜底超窄屏/多页码场景,但默认单行贴底、不再居中堆叠到浮窗上方。 */
+  .list-pager {
+    /* 手机上「提需求」浮标已隐藏(入口挪进用户菜单),不必再给它让位 —— 窄屏每一点横向空间都金贵 */
+    padding-right: 0;
+    margin-bottom: calc(var(--sb-space-6) - var(--sb-space-8));
+  }
+  .list-pager .el-pagination__sizes {
+    display: none;
+  }
+  .list-pager .el-pagination {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    row-gap: var(--sb-space-2);
+  }
+}
+
+
+/* ════════ 窄屏:三个 EP 组件的默认行为在手机上是坏的 ════════
+   放全局层是因为它们跨了几十个页面 —— 一页页去改既漏又不一致,而三条规则一次修完。 */
+@media (max-width: 768px) {
+  /* ① 多列描述列表:`:column="2"` 遍地,薪资批次那张是 `:column="4"` —— 375px 屏减掉抽屉
+     内边距只剩三百出头,四列每列约 85px,标签和值都只能逐字竖排,整张表读不了。
+     窄屏一律拆成单列(表格语义改成块级流)。★不改 :column 属性:那是每页各写各的,
+     而且桌面端那个列数是对的,只在窄屏改布局。 */
+  .el-descriptions__table,
+  .el-descriptions__table tbody,
+  .el-descriptions__table tr {
+    display: block;
+    width: 100%;
+  }
+  /* width 是 EP 按 :span 算出来写在元素上的,只能 !important 压过 */
+  .el-descriptions__cell {
+    display: block;
+    width: auto !important;
+  }
+
+  /* ② 表格的粘性列:操作列常写 width="270" 并 fixed="right"。343px 可用宽下它自己就占掉
+     270px,剩 73px 给全部业务列 —— 那不叫"操作列常驻",叫"表格只剩操作列"。
+     窄屏取消粘性,让它跟着横滚:要点操作滑到最右边即可,业务内容至少看得见了。
+     ★选择器必须带上 `.el-table` 前缀:EP 自己写的是 `.el-table-fixed-column--right
+     { position: sticky !important }` —— 两边都是 !important 时比的是特异性,
+     (0,1,0) 对 (0,2,0),少写一个类这条就静默失效。 */
+  .el-table .el-table-fixed-column--left,
+  .el-table .el-table-fixed-column--right {
+    position: static !important;
+  }
+
+  /* ③ 日期选择器一律满宽。EP 的宽度是定值不是百分比:基准
+     `--el-date-editor-width: 220px` 管单选,区间型再覆盖成 350px(daterange)/
+     400px(datetimerange)—— 全都比 343px 的可用宽紧,套进抽屉再减一层内边距(实测只剩
+     ~287px)后连单选那个 220px 都要和同排控件挤到溢出。
+     ★盯 `.el-date-editor.el-input` 这个组合选择器,别只写区间型的修饰类:EP 自己的规则
+     就是 `.el-date-editor.el-input { width: var(--el-date-editor-width) }`,特异性 (0,2,0);
+     只写 `.el-date-editor--daterange`(0,1,0)压不过它,得靠 !important —— 而那样又只治了
+     区间型,单选的 220px 原封不动。一条通吃。 */
+  .el-date-editor.el-input,
+  .el-date-editor.el-input__wrapper {
+    width: 100% !important;
+  }
+  .el-picker-panel.el-date-range-picker {
+    max-width: calc(100vw - var(--sb-space-4));
+    overflow-x: auto;
+  }
+}
+
+/* ════════ 触屏设备:表单控件字号 ≥16px —— 聚焦自动缩放的唯一根因 ════════
+   iOS Safari / WKWebView 聚焦一个**字号 < 16px** 的表单控件时会自动放大整页。放大后
+   页面比视口宽,于是能左右拖、内容跑出显示区 —— 就是「点进输入框后页面缩放、超出显示
+   区域」的全部成因。它只看这一个条件。
+
+   ★别指望 viewport 里的 `maximum-scale=1, user-scalable=no`:Safari 从 iOS 10 起就
+     忽略它(那是当年一堆站点用它把页面钉死、连正常双指放大都做不到之后的补救),写了
+     也不生效;而在认这条的 WKWebView 里它又会顺手废掉双指缩放这项无障碍能力。治本
+     只有把字号抬到 16px 这一条路。
+
+   ★必须 !important。全站字号来自 --sb-font-md(14px)/--sb-font-sm(13px),而各页
+     scoped 样式编译出来是 `.chatbox__in[data-v-x]` 这种 (0,2,0) 的选择器,裸标签选择器
+     (0,0,1) 压不过 —— 漏掉一个,那个输入框上缩放就照旧。这是平台约束不是设计偏好,
+     没有哪个页面该有权覆盖它。
+
+   ★用指针能力而不是宽度断点:iPad 横屏 1024px 一样会缩放,宽度断点管不到它。
+   ★而且必须是 any-pointer 不是 pointer:iPad 接上妙控键盘/触控板后**主**指针会变成
+     fine,但手指照样能戳屏幕、照样触发缩放 —— 用 (pointer: coarse) 那台 iPad 就漏了。
+     any-pointer 问的是「有没有任一个粗指针」,触屏在就为真。代价是带触摸屏的 Windows
+     笔记本也会命中,那边只是输入框字大一号,不会坏 —— 拿这个换 iPad 不复现,值。 */
+@media (any-pointer: coarse) {
+  input,
+  textarea,
+  select,
+  .el-input__inner,
+  .el-textarea__inner,
+  /* EP 2.14 的 select 是「wrapper + 隐藏 input + 展示文本」三件套:真正被聚焦的是
+     .el-select__input,但只抬它会让展示文本比输入文本小一号,所以四个一起抬。 */
+  .el-select__wrapper,
+  .el-select__input,
+  .el-select__placeholder,
+  .el-select__selected-item {
+    font-size: 16px !important;
+  }
+
+  /* ★上面那条抬字号会**顺带把裸 <input> 撑宽**,这条是它的必备配套,别拆开。
+     裸 <input> 的固有宽由 `size` 属性(默认 20 个字符)乘字号算出来:13px 时约 160px,
+     抬到 16px 就涨到约 198px。而 flex/grid 子项的 `min-width` 默认是 `auto` = 固有宽,
+     于是 `flex: 1` 再怎么 shrink 也压不过这个下限 —— 表现为搜索框整条横穿并越出卡片右边框
+     (知识库那个 375px 实测越出 27px),而桌面端 13px 时正好放得下,所以这是**移动端独有**的溢出,
+     且只在抬了字号之后才出现。解开下限即可;非 flex/grid 上下文里 min-width:auto 本就等于 0,
+     写了也是恒等变换。
+     ★作用域必须跟着 any-pointer 走,不能降级成 max-width:768px —— 病根是字号规则,
+     而字号规则在 iPad 横屏 1024px 上照样生效,按宽度关一道就漏掉那台。 */
+  input,
+  textarea,
+  select,
+  .el-input,
+  .el-select {
+    min-width: 0;
+  }
+}
+
+/* ════════ 触屏 + 窄布局:控件高度到可触控尺寸 ════════
+   桌面 34px 的控件在手机上既难点也放不下 16px 的字(见上)。控件高度全站走
+   --el-component-size,抬这一个变量即可,EP 的输入/选择/按钮与 ConfirmButton 一起跟随。
+
+   ★这里比上面多一道 max-width:上面那条为了不漏 iPad 用了 any-pointer,连带命中带触屏的
+     桌面机;字号大一号无所谓,但把 1920px 桌面上所有控件撑到 40px 就是实打实的桌面端改动了。
+     手指点得准不准只在窄布局下才是问题,所以按宽度再关一道。 */
+@media (any-pointer: coarse) and (max-width: 900px) {
+  :root {
+    /* 44px = iOS HIG 的 44pt / 安卓 48dp 的下限档。原来是 40/32,实测下来 40 那档其实没生效多少:
+       CRM 六个页面里有 195 处写死 `size="small"`,它们走的是 -small 那个变量,于是手机上到处是
+       32px 的按钮(2026-08-15 在 375px 下逐元素量过:线索页 30 个控件不达标)。
+       ★所以这里把 **-small 也抬到 44** —— 手机上没有「小控件」这回事。
+       与其去逐个删那 195 个 size="small"(改不完、还会有人再写),不如让「小」这个档在窄触屏下失效。
+       桌面端一个字不动:这条媒体查询同时要 coarse 指针 + ≤900px。 */
+    --el-component-size: 44px;
+    --el-component-size-small: 44px;
+    --el-component-size-large: 48px;
+  }
+  /* el-tabs 的标签高度是 `height: var(--el-tabs-header-height)`(header 与 item 共用),
+     40px 的标签是手机上最常点错的一类。
+     ★这个变量**必须写在 `.el-tabs` 上,不能写在 `:root`** —— EP 自己有一条
+       `.el-tabs{--el-tabs-header-height:40px}`,那是比 :root 更近的作用域,写在 :root 会被它遮住
+       (实测::root 里设成 44px,标签照样 40px)。同选择器同特指度、EP 在后,所以还得加 !important。
+     ★顺带订正上面那句「能走变量就不用管层叠」:**变量本身也参与层叠**。
+       只有当厂商没在组件根上重定义它时,改 :root 才够用。 */
+  .el-tabs {
+    --el-tabs-header-height: 44px !important;
+  }
+  /* ★★★ 这一整块的前提:**Element Plus 的 CSS 现在排在 styles.css 后面**,同特指度平手时 EP 赢。
+     e3b4409c 改成按需引入之前,main.ts 里是 `import 'element-plus/dist/index.css'` 排在
+     `import './styles.css'` 之前 —— 那时同名单类覆盖是我们赢,这个文件里几十条覆盖都建立在那个前提上。
+     按需引入之后,组件 CSS 由 unplugin 注入到各 .vue 里,**页面是懒加载的,运行时才到**,
+     所以 EP 永远在后。靠调 import 顺序救不回来(懒加载路由永远更晚)。
+     → 凡是与 EP 同名同属性的覆盖,一律显式 `!important`,并由 `src/ep-cascade-guard.test.ts` 兜底:
+       新写的覆盖只要会被 EP 压掉,那个测试就变红,不会再像这次一样静默失效。 */
+  /* ★★ EP 的按钮**不吃 --el-component-size**:`.el-button` 把高度**写死成 `height: 32px`**
+     (不是变量),所以上面那个变量这些年只抬起了输入框,**按钮一直是 32px**。
+     (2026-08-16 订正:这里原先写的「.el-button 压根没有 height 声明,32px 是 padding 撑出来的」
+      是错的 —— 结论碰巧对,理由是错的,别照着它推断别的控件。)
+     这条之所以不用 `!important` 也能赢:我们写的是 **min-height**,EP 写的是 **height**,
+     属性不同、不构成层叠竞争,而 min-height 本来就会把 height 顶上去。
+     用 min-height 不用 height 还有一个好处:标签换行的按钮(窄屏上有)能自然长高。 */
+  .el-button {
+    min-height: var(--el-component-size);
+  }
+  .el-button--small {
+    min-height: var(--el-component-size-small);
+  }
+  .el-button--large {
+    min-height: var(--el-component-size-large);
+  }
+  /* 文字按钮(is-link)EP 显式写了 height:auto + padding:2px —— 命中区只有一行字那么高。
+     它常被用作行内动作(「稍后提醒」这类),手机上同样要够得着。 */
+  .el-button.is-link {
+    min-height: var(--el-component-size);
+  }
+  /* 输入/下拉:EP 把 min-height **写死在 .el-select__wrapper 上**(32px),`--small` 那档还有一条
+     `.el-select--small .el-select__wrapper{min-height:24px}`(特指度 0,2,0)。
+     ★2026-08-16:原先靠「把复合选择器一并写出来」去压它 —— **那个办法失效了**。
+       复合选择器只是把特指度拉到和 EP 一样(都是 0,2,0),而按需引入之后 EP 排在我们后面,
+       **平手就是 EP 赢**。实测手机上:输入框 44px、紧挨着的下拉框 24px —— 这就是「相邻控件上下错位」。
+       特指度是打不赢的(EP 随时能再加一层复合选择器),所以这里直接用 !important 把话说死:
+       **窄触屏上没有任何控件可以低于 44px**,这是绝对规则,`!important` 正是它该有的写法。
+       用了 !important 之后一条单类名就够,不必再枚举 --small/--large。
+     ★ textarea 不在此列:它本来就该按行数长高,给它塞 min-height 只会让一行的输入框变胖。 */
+  .el-select__wrapper,
+  .el-input__wrapper {
+    min-height: var(--el-component-size) !important;
+  }
+  /* 单选按钮组(今日/本周/本月、列表/看板、全部可见/公海/我的私海…)在页面上就是「切换 tab」,
+     点错一次就要再点一次,比普通按钮更该够大。它自己是 padding 撑出来的 30px。
+     ★★ display 必须 !important:EP 声明了 `.el-radio-button__inner{display:inline-block}`,
+        同为单类名而它排在后面 —— 2026-08-16 之前这条 inline-flex **一直是失效的**,
+        表现为「盒子被 min-height 撑到 44px、字却顶在上边」:inline-block 下多出来的高度
+        全部落在内容**下方**,看着就是「按钮高度和内容高度不匹配」。
+        min-height 反而生效,因为 EP 在这个选择器上没声明它 —— 一半生效一半不生效,
+        比整条失效更难看出来。 */
+  .el-radio-button__inner {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    min-height: var(--el-component-size);
+  }
+  /* 分段控件只补高度:EP 自己已经把 .el-segmented__item 做成 flex 居中,不用再抢 display。 */
+  .el-segmented__item {
+    min-height: var(--el-component-size);
+  }
+  /* 同一组里的按钮是**拼在一起**的(共用边框),高度必须一致 —— 默认 align-items:center
+     会让文字长短不同、换行与否不同的相邻按钮各自居中,拼缝就错开了。stretch 让它们等高。 */
+  .el-radio-group {
+    align-items: stretch !important; /* EP 同选择器写了 center 且排在后面 —— 见文件头 */
+  }
+  /* .icon-button 原来写死 34px,不跟变量走 → 抬高后会比同排按钮矮一截、基线对不齐 */
+  .icon-button {
+    width: var(--el-component-size);
+    height: var(--el-component-size);
+  }
+  /* 动作区独占一行:否则它会和左边那句 .t-caption 挤在同一行(实测只剩 214px),
+     里面按钮的 flex:1 1 100% 就只能撑到 214,主动作看着像个半截按钮。 */
+  .module-toolbar__actions,
+  .module-toolbar > div:last-child {
+    flex: 1 1 100%;
+  }
+  /* 顶栏账号菜单实测只有 30×22 —— 全站最小的可点目标,而它管着「退出登录」 */
+  .app-user__menu {
+    min-width: var(--el-component-size);
+    min-height: var(--el-component-size);
+  }
+  /* 筛选折叠开关实测 29px 高,却是手机上最常点的控件之一(筛选默认折叠,进页面就得点它) */
+  .filter-bar__toggle {
+    min-height: var(--el-component-size);
+  }
+  /* ★复选框:EP 的方框本体是 14px,那是**视觉**尺寸,不该硬撑大(撑大就不像复选框了);
+     要扩的是**命中区**。给整个 .el-checkbox 铺满一行高度,点标签也算点中。 */
+  .el-checkbox,
+  .el-radio {
+    min-height: var(--el-component-size);
+  }
+  /* ★同一个道理再用一次:**卡片操作行缩的是墨迹,不是命中区。**
+     窄屏列表卡片(.crm-card)的内容本体只有 82px 高(单号 + 状态 + 日期金额,2026-08-27
+     在费用报销页 375px 下实测),而底下挂一个 44px 的整行按钮要多吃 56px —— 一张卡凭空长了 68%,
+     且那个按钮往往是「删除」这类低频动作,却拿到了整张卡里最大的视觉块。
+     做法:墨迹压到 32px(和桌面端一样的观感),命中区靠 ::after 补回 44px。
+     ★row-gap 必须跟着算:按钮换行时(需求反馈页最多 7 个动作),两行的命中区各自向外扩了
+       --sb-tap-grow,gap 小于 2×grow 就会**上下重叠** —— 表现为「点下面那个按钮,触发的是上面那个」,
+       而且看不出来。gap = 44 - 32 正好让两行命中区首尾相接、不重叠。
+     ★只作用于按钮:同一个容器里还有 el-tag(HR 异动/花名册拿它当状态位,不可点)和
+       el-select(商机分级,那是**输入控件**,必须留满 44px),都不该被压。 */
+  .crm-card__actions {
+    --sb-tap-ink: 32px; /* 看得见的高度 */
+    --sb-tap-grow: calc((var(--el-component-size) - var(--sb-tap-ink)) / 2); /* 每边往外补多少 */
+    row-gap: calc(var(--el-component-size) - var(--sb-tap-ink));
+  }
+  /* ConfirmButton 的触发器要多写一层 .sb-confirm 才压得住 —— 它的 height 写在 scoped 样式里
+     (`.sb-confirm__trigger[data-v-x]`,特指度 0,2,0),而 scoped 样式由 unplugin 随组件注入、
+     排在 styles.css 后面,打平就是它赢(同 EP 那个层叠倒置的坑)。加一层选到 0,3,0 才是真赢。 */
+  .crm-card__actions .el-button,
+  .crm-card__actions .sb-confirm .sb-confirm__trigger {
+    position: relative;
+    /* ★height 要 !important:EP 有一条 `.el-button.is-link{height:auto}`,特指度和
+       `.crm-card__actions .el-button` 打平(都是 0,2,0),而 EP 排在后面 —— 平手就是它赢。
+       需求反馈页的「拒绝」、付款凭证页的「详情」都是这类按钮,不加就只有它们不生效。
+       (这一条不是我推出来的,是 ep-cascade-guard 报出来的。) */
+    height: var(--sb-tap-ink) !important;
+    min-height: 0; /* 压掉上面 .el-button 那条 44px;它是本文件自己的规则,特指度够,不用 !important */
+  }
+  .crm-card__actions .el-button::after,
+  .crm-card__actions .sb-confirm .sb-confirm__trigger::after {
+    content: '';
+    position: absolute;
+    inset: calc(-1 * var(--sb-tap-grow)) 0; /* 只补纵向:横向本来就够宽(最短的两字按钮也有 50+px) */
+  }
+  /* 分页按钮实测 32×32。翻页是列表页的主动作之一,点不中就只能反复戳。 */
+  .el-pagination {
+    --el-pagination-button-height: var(--el-component-size);
+    --el-pagination-button-width: var(--el-component-size);
+  }
+  .el-pagination button,
+  .el-pagination li.number,
+  .el-pagination li.more {
+    min-width: var(--el-component-size);
+    height: var(--el-component-size);
+    line-height: var(--el-component-size);
+  }
+  /* 软键盘高度让位(--sb-kb-vh)已提到 .app-main 基线 —— 901–1100 的触屏设备也要吃到。 */
+}
+
+/* ⌘K 抽屉打开时把内容区让出来 —— **主内容不被遮住**是这个面存在的全部理由:
+   「帮我把这条线索转成客户」说完要看着列表变。遮住了就跟全屏页没区别了。
+   窄屏放弃让位(挤不下),此时抽屉盖住内容,可接受。 */
+.app-shell--drawer .app-main {
+  padding-right: 560px;
+  transition: padding-right 0.24s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+@media (max-width: 1200px) {
+  .app-shell--drawer .app-main { padding-right: var(--sb-space-8); }
+}
+
+/* ════════ 安全区四变量:全站唯一来源 ════════
+   全站要避的「屏幕上被系统占住的边」统一读这四个变量,**不要再直接写 env(safe-area-inset-*)**
+   (src/safe-area-contract.test.ts 会拦下新写的)。原因是两个平台的来源根本不同:
+
+   · iOS / 浏览器 / 加到主屏幕的 PWA —— env() 就是对的,下面的默认值直接回退到它。
+   · **安卓 —— env() 靠不住**。安卓 WebView 只把**刘海(display cutout)**算进 safe-area,
+     状态栏高度和底部手势条/导航键高度它一概不报:没刘海的机器 top 恒为 0,bottom 永远为 0。
+     而壳的 targetSdk = 35,Android 15 起强制 edge-to-edge(内容一律铺到系统栏底下,
+     且 @capacitor/status-bar 的 setOverlaysWebView(false) 用的老 API 已被废成空操作)。
+     两件事凑一起 = 顶栏被状态栏盖住、底部 tab 栏被手势条盖住,而 CSS 这边毫无察觉。
+     所以安卓壳改由原生取真实 inset,注入成同名行内变量覆盖这里的默认值
+     —— 见 mobile-app/android/.../MainActivity.java(行内样式权重高于 :root,天然覆盖)。
+
+   鸿蒙壳(harmony-app)走同一份契约,注入点在 WebHost.ets。 */
+:root {
+  --sb-safe-top: env(safe-area-inset-top, 0px);
+  --sb-safe-bottom: env(safe-area-inset-bottom, 0px);
+  --sb-safe-left: env(safe-area-inset-left, 0px);
+  --sb-safe-right: env(safe-area-inset-right, 0px);
+}
+
+/* ════════ App 壳内安全区(html.in-native-app 由 src/native-app.ts 挂上)════════
+   webview 全屏铺到状态栏/Home 条(手势条)下面:顶部给 sticky 顶栏和 off-canvas 侧栏垫出
+   状态栏高度,底部给贴底的输入区/浮标垫出 Home 条高度。四个变量在普通浏览器里取 0,
+   这些规则对非壳环境是恒等变换。 */
+html.in-native-app .app-topbar {
+  padding-top: calc(var(--sb-space-3) + var(--sb-safe-top));
+}
+html.in-native-app .app-sidebar {
+  padding-top: calc(var(--sb-space-4) + var(--sb-safe-top));
+}
+html.in-native-app .app-main {
+  padding-bottom: calc(var(--sb-space-8) + var(--sb-safe-bottom));
+}
+/* 横屏时刘海在屏幕一侧(安卓壳设了 LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES,窗口会铺过去)。
+   ★让位放在 .app-shell 这一层而不是 .app-main:.app-topbar 是用负边距顶满 .app-main 内边距的,
+     动 .app-main 的左右内边距会让顶栏和全幅页错开一条。 */
+html.in-native-app .app-shell {
+  padding-left: var(--sb-safe-left);
+  padding-right: var(--sb-safe-right);
+}
+/* Ask AI 独立页/抽屉的输入区与数字员工工位是全幅布局,绕开 .app-main 的内边距,单独垫 */
+html.in-native-app .ac__foot {
+  padding-bottom: calc(var(--sb-space-5) + var(--sb-safe-bottom));
+}
+html.in-native-app .de-shell {
+  padding-bottom: var(--sb-safe-bottom);
+}
+html.in-native-app .fb-widget {
+  bottom: calc(var(--sb-space-6) + var(--sb-safe-bottom));
+}
+/* 抽屉/对话框的头部压在状态栏下面(真机实测:「使用手册」标题与关闭按钮和时间、信号图标叠在一起)。
+   左右方向的抽屉是通高的,顶到屏幕最上沿;上下方向(ttb/btt)不需要,故按方向类名限定。 */
+html.in-native-app .el-drawer.rtl .el-drawer__header,
+html.in-native-app .el-drawer.ltr .el-drawer__header {
+  padding-top: calc(var(--sb-space-4) + var(--sb-safe-top));
+}
+html.in-native-app .el-drawer.rtl .el-drawer__body,
+html.in-native-app .el-drawer.ltr .el-drawer__body,
+html.in-native-app .el-drawer.btt .el-drawer__body {
+  padding-bottom: calc(var(--sb-space-4) + var(--sb-safe-bottom));
+}
+@media (max-width: 768px) {
+  html.in-native-app .app-topbar {
+    padding-top: calc(var(--sb-space-4) + var(--sb-safe-top));
+  }
+  /* 100vh 在 iOS webview 里含安全区,改 100dvh 让抽屉侧栏贴实际可视高度 */
+  html.in-native-app .app-sidebar {
+    /* dvh 是 Chromium 108 才有的,老内核丢弃后高度会塌成 auto —— 兜底给 100vh(差的是安全区那一截,不是全没) */
+    height: 100vh;
+    height: 100dvh;
+  }
+}
+
+/* ════════ 全局提示条(ElMessage / ElNotification)避开刘海与灵动岛 ════════
+   Element Plus 的提示条是 `position: fixed; top: 20px` 顶部居中 —— 而灵动岛正好在顶部居中,
+   iPhone 14 Pro 及以后机型上「保存成功 / XX 失败」整条被岛盖住,用户等于没收到反馈。
+   全仓 925 处 ElMessage 调用**没有一处自定义 offset**,所以在这里统一垫一次就够,不用逐处改。
+
+   ★用 margin-top 而不是改 top 或 transform,两个理由:
+     ① `top` 是 EP 按「第几条消息」算出来写在**行内样式**上的 —— 覆写它会把同时弹出的多条
+        全压在同一个位置(要 !important 才压得过,压过之后堆叠就没了);
+     ② `transform` 被进出场动画占着(`.el-message-fade-enter-from.is-center` 等),
+        覆写它消息就不再滑入滑出,而是硬闪。
+     margin-top 谁都不碰,只是把每一条整体下移,堆叠与动画原样保留。
+
+   ★刻意**不**限定 `html.in-native-app`:安全区变量在普通浏览器里取 0,这条规则是恒等变换;
+   而「加到主屏幕」的独立模式(standalone PWA)拿不到 in-native-app 标记却照样有灵动岛,
+   限定了反而漏掉那一类。 */
+.el-message,
+.el-notification.right,
+.el-notification.left {
+  margin-top: var(--sb-safe-top);
+}
+/* 贴底那一档(EP 的 is-bottom)对称处理,避开 Home 条 */
+.el-message.is-bottom {
+  margin-top: 0;
+  margin-bottom: var(--sb-safe-bottom);
+}
+
+
+/* ════════ 移动端底部 tab 栏(.app-tabbar,由 App.vue 在窄屏且有可见入口时渲染)════════
+   组件本体样式在 src/ui/MobileTabBar.vue;这里只管**它对布局的影响**。
+
+   ★做法是「压缩 .app-main 的高度」,不是「给 .app-main 加 padding-bottom」。
+     .app-main 是 `height:100vh; overflow-y:auto` 的独立滚动区,里面还有几个**贴底**的全幅布局
+     (Ask AI 的 .ac__foot、数字员工工位的 .de-shell)。加内边距对滚动内容有效,对贴底元素无效
+     —— 它们照样贴在 100vh 的最底下,正好被这条栏盖住(发送键点不到)。把可用高度直接减掉,
+     贴底的东西自然停在栏上沿,一条规则同时管住滚动内容和贴底布局,不用逐页开小灶。
+
+   ★--sb-tabbar-h 把「栏吃掉多少高度」收成一个变量(含安全区)。栏不显示时它压根不存在,
+     下面的 calc 回落到 100vh,与改动前逐字节一致。 */
+.app-shell--tabbar {
+  /* 栏本身的行高(MobileTabBar 的 .app-tabbar__item 用同一个变量当 height —— 两处同源,
+     免得「样式里改了高度、内容区还按旧数字让位」,那种偏差只有几像素,肉眼要盯着才看得出)。 */
+  --sb-tabbar-row: 56px;
+  /* 内容区要让出的总高 = 行高 + 底部安全区(iPhone 的 Home 条 / 安卓的手势条或三键导航栏;
+     浏览器里取 0)。★安卓那份不是 env() 而是原生注入的,见文件里「安全区四变量」一节。
+     ★栏上没有 border-top(用 inset 阴影代替),所以这里不用再加 1px —— 见 MobileTabBar 的注释。 */
+  --sb-tabbar-h: calc(var(--sb-tabbar-row) + var(--sb-safe-bottom));
+  /* 贴底的全幅页(聊天工位等)拿它决定「自己还要不要留一段底部呼吸位」:
+     有 tab 栏时**不留** —— 栏本身就是页面的底,且安全区已经算在它头上,再垫一段就是
+     输入框与栏之间一条没有含义的空白。栏不在时这个变量压根不存在,用它的地方各自
+     fallback 回原来的值,行为逐字节不变。
+     ★html.kb-open(软键盘弹起、本栏临时隐藏)时它仍是 0,这是对的:那会儿页面底就是键盘上沿,
+       输入框正该贴着键盘,和微信/iMessage 一个样。别看到「栏没了还留着 0」就去补一段。 */
+  --sb-page-foot-pad: 0px;
+}
+.app-shell--tabbar .app-main {
+  /* var(--sb-kb-vh, 100vh) 保持与 `(any-pointer: coarse)` 那条一致:键盘弹起时按实际可视高度收。
+     ★这里必须重写一遍而不是只加 padding —— 那条规则的选择器权重比不上 `.app-shell--tabbar .app-main`,
+     不带上 --sb-kb-vh 的话会把软键盘适配覆盖掉(表现:打字时输入框又落到键盘底下)。 */
+  height: calc(var(--sb-kb-vh, 100vh) - var(--sb-tabbar-h));
+}
+/* App 壳内 .app-main 本来垫了一次 Home 条;安全区现在归 tab 栏管,别垫两次(内容底部会空出一大截) */
+html.in-native-app .app-shell--tabbar .app-main {
+  padding-bottom: var(--sb-space-8);
+}
+/* 进聊天这类沉浸页时 tab 栏已经收起,输入行就是这一屏的底。页面内部不用再额外留
+   space-3 的呼吸位,否则底部导航不在了,发送条下面还会空一段,看起来像按钮悬空。 */
+.app-shell--immersive {
+  --sb-page-foot-pad: 0px;
+}
+/* 沉浸视图(手机聊天窗,tab 栏已收起 —— 见 src/mobile-immersive.ts):
+   这一屏的底就是输入行,底下再垫一段就是没有含义的死白 —— 只留 Home 条(手势条)的高度。
+   ★但 space-8 那一段必须原样留着:全幅页(.de-shell / .msgr--m)靠 `-space-8` 的负边距把它
+     抵掉,而那个数值是**写死的**;这里若只留安全区,负边距就会把 Home 条的让位一起吃掉,
+     表现是输入行压在手势条底下。加法写在这里、减法在各页,两边对得上就不会错位。 */
+html.in-native-app .app-shell--immersive .app-main {
+  padding-bottom: calc(var(--sb-space-8) + var(--sb-safe-bottom));
+}
+
+/* ★沉浸视图还要把 App 全局顶栏一起收起。
+   聊天窗自己已经有一条顶栏(返回 + 会话名 + 设置),两条叠起来在 375×667 上要吃掉约 110px
+   ——顶栏 48 + 下边距 16 + 页面那条 44——占掉整屏的六分之一,而它们说的是同一件事
+   (「消息」/ 会话名)。微信、飞书、iMessage 进会话都只留一条。收起之后页面那条就是这一屏的头;
+   要去别的页面先按返回退回列表,汉堡菜单在那儿。
+   ★安全前提:只有**自带返回键**的视图才允许声明沉浸(判据写在各页调用处,见
+     src/mobile-immersive.ts;数字员工页的 soloAssistant 因此被排除),所以不会出现
+     「顶栏没了、页面也没有返回」的死角。 */
+.app-shell--immersive .app-topbar {
+  display: none;
+}
+/* ★顶栏收起后必须把它的 margin-bottom(space-4)补回 .app-main 的 padding-top。
+   全幅页会**往上**顶进这一段:.de-shell 用 margin-top:-space-4 贴住顶栏下沿,
+   .bac-mbar / .cv-mbar 用 margin-top:-space-3 抵掉各自容器的内边距。顶栏一没、这段空间
+   也跟着没了,那些负边距就把页面自己的顶栏拉到视口**外面** —— 表现是返回键和会话名被切掉半行
+   (2026-08-24 实测:.de-shell top = -16px)。补回来之后各页负边距原样成立,谁都不用改。 */
+.app-shell--immersive .app-main {
+  padding-top: var(--sb-space-4);
+}
+/* 顶栏原来还替 .app-main 顶着状态栏(html.in-native-app 那条 padding-top),一并接过来 ——
+   否则 App 壳里聊天窗的返回键会和系统时间/信号叠在一起。 */
+html.in-native-app .app-shell--immersive .app-main {
+  padding-top: calc(var(--sb-space-4) + var(--sb-safe-top));
+}
+/* 软键盘弹起时整条收起:iOS 上 fixed 定位的它会被键盘盖住(等于凭空少一截可视高度),
+   安卓上则会浮在键盘正上方压住输入框。两种都不对,直接不显示,并把它占的高度还给内容区。
+   html.kb-open 由 src/keyboard-inset.ts 挂,与 --sb-kb-vh 同一个判定(在打字 + 键盘确实盖住了)。 */
+html.kb-open .app-tabbar {
+  display: none;
+}
+html.kb-open .app-shell--tabbar {
+  --sb-tabbar-h: 0px;
+}
+
+/* ════════ 全屏使用手册(App.vue 顶栏那个书本图标)════════
+   ★这组 class 之前在模板里用着、样式却一条都不存在 —— 于是浮层以普通块级元素渲染:
+     position:static、宽度被侧栏那列挤成 236px、整个落在视口下方约 6000px 处。
+     现象是「点帮助没反应」:DOM 里其实有,只是永远看不见,控制台也不报错
+     (2026-08-04 用户反馈,实测 boundingBox x=0 y=720 w=236)。
+   层级:压住侧栏(移动端 1100)与遮罩(1090),但留在 ElMessage(2000+)之下,
+   这样手册里触发的提示条仍然可见。 */
+.guide-full {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  display: flex;
+  flex-direction: column;
+  background: var(--sb-bg-page);
+}
+.guide-full__bar {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sb-space-4);
+  padding: var(--sb-space-3) var(--sb-space-6);
+  border-bottom: 1px solid var(--sb-border-subtle);
+  background: var(--sb-bg-card);
+}
+.guide-full__title {
+  display: flex;
+  align-items: center;
+  gap: var(--sb-space-2);
+  color: var(--sb-text-primary);
+  font-size: var(--sb-font-md);
+  font-weight: 600;
+}
+.guide-full__body {
+  flex: 1;
+  min-height: 0;      /* 不给 0 的话 flex 子项按内容撑高,整页滚动条跑到 body 上 */
+  overflow: auto;
+  padding: var(--sb-space-6);
+}
+/* App 壳内:顶栏垫状态栏、正文垫 Home 条(同 .app-topbar / .app-main 的既有处理) */
+html.in-native-app .guide-full__bar {
+  padding-top: calc(var(--sb-space-3) + var(--sb-safe-top));
+}
+html.in-native-app .guide-full__body {
+  padding-bottom: calc(var(--sb-space-6) + var(--sb-safe-bottom));
+}
+@media (max-width: 768px) {
+  .guide-full__bar {
+    padding: var(--sb-space-3) var(--sb-space-4);
+  }
+  .guide-full__body {
+    padding: var(--sb-space-4);
+  }
+}
+
+/* ════════ 列表页分页贴底(统一 22 处 .list-pager)════════
+   ★问题:.module-surface 在桌面留了 56px 底部横带来躲右下角「提需求」浮标,而列表页
+     (--fill)的最后一项恰好就是右对齐的 .list-pager —— 于是为了躲一个 102×41 的浮标,
+     整页底部让出一整条横带,分页被顶到离视口底 80px,底下白白空掉(2026-08-04 用户反馈,
+     实测 pager 底边 640 / 视口 720)。原先那句「-16px 负边距对齐浮标」的公式只减了
+     .app-main 的 40px 与浮标 24px 之差,**漏算了 .module-surface 自己这 56px**,所以从来没对齐过。
+   ★改法:横带换成「只在分页自己的右侧让位」—— 两者同处右下角,冲突只发生在水平方向。
+     纵向让分页贴到底,与浮标共用 --sb-space-6 这条基线,两者并排在同一行。
+   ★只作用于**确实有分页**的填满页(:has(.list-pager),含分页嵌在 tab 面板里的页):
+     没有分页的填满页,内容会一直铺到右下角,仍需要那条横带挡住浮标(智能体管理页最后一行
+     的「配置」链接曾被浮标吃掉点击,见上面 .module-surface 那条注释)。 */
+@media (min-width: 961px) {
+  /* 浮标水平占位:自身宽约 102px + 距右 --sb-space-6,再留一个 --sb-space-6 的间隙。
+     与 --sb-tabbar-row 同范式:量出来的布局常量,取名放一处,别散在各页魔数里。 */
+  :root {
+    --sb-fb-clear: 150px;
+  }
+  /* ★不能写成 `.app-main:has(> .module-surface--fill:has(.list-pager))`:
+     **`:has()` 里再套 `:has()` 是非法选择器**,整条规则会被静默丢弃
+     (浏览器实测 querySelector 直接抛 SyntaxError)。用后代组合子表达同一个意思。 */
+  .app-main:has(> .module-surface--fill .list-pager) {
+    padding-bottom: var(--sb-space-6);
+  }
+  .app-main > .module-surface--fill:has(.list-pager) {
+    padding-bottom: 0;
+  }
+  .app-main > .module-surface--fill:has(.list-pager) .list-pager {
+    margin-bottom: 0; /* 原 -16px 是按算漏一项的公式凑的,现在参照系统一了,不需要了 */
+    padding-right: var(--sb-fb-clear);
+  }
+}

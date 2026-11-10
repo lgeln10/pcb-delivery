@@ -1,0 +1,359 @@
+{
+ "fingerprint": "job-kicad-x2ap-b46a46.GBL:1789796431954426211|job-kicad-x2ap-b46a46.GBL:1789796435890579606|job-kicad-x2ap-b46a46.GBS:1789796431997205001|job-kicad-x2ap-b46a46.GBS:1789796435890809816|job-kicad-x2ap-b46a46.GBP:1789796432016841282|job-kicad-x2ap-b46a46.GBP:1789796435890967609|job-kicad-x2ap-b46a46.GBO:1789796432018660626|job-kicad-x2ap-b46a46.GBO:1789796435891086901|job-kicad-x2ap-b46a46.GKO:1789796432021716227|job-kicad-x2ap-b46a46.GKO:1789796435891214735|job-kicad-x2ap-b46a46.GTL:1789796432108598482|job-kicad-x2ap-b46a46.GTL:1789796435891356111|job-kicad-x2ap-b46a46.GTS:1789796432168898374|job-kicad-x2ap-b46a46.GTS:1789796435891488445|job-kicad-x2ap-b46a46.GTP:1789796432280653816|job-kicad-x2ap-b46a46.GTP:1789796435891621946|job-kicad-x2ap-b46a46.GTO:1789796432582661324|job-kicad-x2ap-b46a46.GTO:1789796435891752988|job-kicad-x2ap-b46a46.TXT:1789796432584928712|job-kicad-x2ap-b46a46.TXT:1789796435892000656",
+ "has_golden": true,
+ "has_output": true,
+ "golden_files": [
+  "job-kicad-x2ap-b46a46-NPTH.TXT",
+  "job-kicad-x2ap-b46a46.GBL",
+  "job-kicad-x2ap-b46a46.GBO",
+  "job-kicad-x2ap-b46a46.GBP",
+  "job-kicad-x2ap-b46a46.GBS",
+  "job-kicad-x2ap-b46a46.GKO",
+  "job-kicad-x2ap-b46a46.GTL",
+  "job-kicad-x2ap-b46a46.GTO",
+  "job-kicad-x2ap-b46a46.GTP",
+  "job-kicad-x2ap-b46a46.GTS",
+  "job-kicad-x2ap-b46a46.IPC",
+  "job-kicad-x2ap-b46a46.TXT",
+  "job-kicad-x2ap-b46a46_panel-NPTH.TXT",
+  "job-kicad-x2ap-b46a46_panel.GBL",
+  "job-kicad-x2ap-b46a46_panel.GBO",
+  "job-kicad-x2ap-b46a46_panel.GBS",
+  "job-kicad-x2ap-b46a46_panel.GTL",
+  "job-kicad-x2ap-b46a46_panel.GTO",
+  "job-kicad-x2ap-b46a46_panel.GTS",
+  "job-kicad-x2ap-b46a46_panel.TXT"
+ ],
+ "unmatched_output": [],
+ "unmatched_golden": [
+  "job-kicad-x2ap-b46a46-NPTH.TXT",
+  "job-kicad-x2ap-b46a46.IPC",
+  "job-kicad-x2ap-b46a46_panel-NPTH.TXT",
+  "job-kicad-x2ap-b46a46_panel.GBL",
+  "job-kicad-x2ap-b46a46_panel.GBO",
+  "job-kicad-x2ap-b46a46_panel.GBS",
+  "job-kicad-x2ap-b46a46_panel.GTL",
+  "job-kicad-x2ap-b46a46_panel.GTO",
+  "job-kicad-x2ap-b46a46_panel.GTS",
+  "job-kicad-x2ap-b46a46_panel.TXT"
+ ],
+ "layers": [
+  {
+   "suffix": ".gbl",
+   "output": "job-kicad-x2ap-b46a46.GBL",
+   "golden": "job-kicad-x2ap-b46a46.GBL",
+   "type": "bottom_copper",
+   "gold_area_mm2": 173.49,
+   "ours_area_mm2": 173.49,
+   "xor_pct": 0.0,
+   "shape_pct": 0.0,
+   "bands": {
+    "missing": {
+     "noise": 0.0,
+     "size": 0.0,
+     "shape": 0.0
+    },
+    "extra": {
+     "noise": 0.0,
+     "size": 0.0,
+     "shape": 0.0
+    }
+   },
+   "n_clusters": 0,
+   "n_missing": 0,
+   "n_extra": 0,
+   "n_changed": 0,
+   "clusters": [],
+   "note": null
+  },
+  {
+   "suffix": ".gbs",
+   "output": "job-kicad-x2ap-b46a46.GBS",
+   "golden": "job-kicad-x2ap-b46a46.GBS",
+   "type": "bottom_mask",
+   "gold_area_mm2": 213.62,
+   "ours_area_mm2": 213.62,
+   "xor_pct": 0.0,
+   "shape_pct": 0.0,
+   "bands": {
+    "missing": {
+     "noise": 0.0,
+     "size": 0.0,
+     "shape": 0.0
+    },
+    "extra": {
+     "noise": 0.0,
+     "size": 0.0,
+     "shape": 0.0
+    }
+   },
+   "n_clusters": 0,
+   "n_missing": 0,
+   "n_extra": 0,
+   "n_changed": 0,
+   "clusters": [],
+   "note": null
+  },
+  {
+   "suffix": ".gbp",
+   "output": "job-kicad-x2ap-b46a46.GBP",
+   "golden": "job-kicad-x2ap-b46a46.GBP",
+   "type": "bottom_paste",
+   "gold_area_mm2": 131.87,
+   "ours_area_mm2": 131.87,
+   "xor_pct": 0.0,
+   "shape_pct": 0.0,
+   "bands": {
+    "missing": {
+     "noise": 0.0,
+     "size": 0.0,
+     "shape": 0.0
+    },
+    "extra": {
+     "noise": 0.0,
+     "size": 0.0,
+     "shape": 0.0
+    }
+   },
+   "n_clusters": 0,
+   "n_missing": 0,
+   "n_extra": 0,
+   "n_changed": 0,
+   "clusters": [],
+   "note": null
+  },
+  {
+   "suffix": ".gbo",
+   "output": "job-kicad-x2ap-b46a46.GBO",
+   "golden": "job-kicad-x2ap-b46a46.GBO",
+   "type": "bottom_silk",
+   "gold_area_mm2": 0.0,
+   "ours_area_mm2": 0.0,
+   "xor_pct": 0.0,
+   "shape_pct": 0.0,
+   "bands": {
+    "missing": {
+     "noise": 0.0,
+     "size": 0.0,
+     "shape": 0.0
+    },
+    "extra": {
+     "noise": 0.0,
+     "size": 0.0,
+     "shape": 0.0
+    }
+   },
+   "n_clusters": 0,
+   "n_missing": 0,
+   "n_extra": 0,
+   "n_changed": 0,
+   "clusters": [],
+   "note": "字符层字体不同，几何差异不代表内容差异"
+  },
+  {
+   "suffix": ".gko",
+   "output": "job-kicad-x2ap-b46a46.GKO",
+   "golden": "job-kicad-x2ap-b46a46.GKO",
+   "type": "outline",
+   "gold_area_mm2": 39.0,
+   "ours_area_mm2": 39.0,
+   "xor_pct": 0.0,
+   "shape_pct": 0.0,
+   "bands": {
+    "missing": {
+     "noise": 0.0,
+     "size": 0.0,
+     "shape": 0.0
+    },
+    "extra": {
+     "noise": 0.0,
+     "size": 0.0,
+     "shape": 0.0
+    }
+   },
+   "n_clusters": 0,
+   "n_missing": 0,
+   "n_extra": 0,
+   "n_changed": 0,
+   "clusters": [],
+   "note": null
+  },
+  {
+   "suffix": ".gtl",
+   "output": "job-kicad-x2ap-b46a46.GTL",
+   "golden": "job-kicad-x2ap-b46a46.GTL",
+   "type": "top_copper",
+   "gold_area_mm2": 403.09,
+   "ours_area_mm2": 403.09,
+   "xor_pct": 0.0,
+   "shape_pct": 0.0,
+   "bands": {
+    "missing": {
+     "noise": 0.0,
+     "size": 0.0,
+     "shape": 0.0
+    },
+    "extra": {
+     "noise": 0.0,
+     "size": 0.0,
+     "shape": 0.0
+    }
+   },
+   "n_clusters": 0,
+   "n_missing": 0,
+   "n_extra": 0,
+   "n_changed": 0,
+   "clusters": [],
+   "note": null
+  },
+  {
+   "suffix": ".gts",
+   "output": "job-kicad-x2ap-b46a46.GTS",
+   "golden": "job-kicad-x2ap-b46a46.GTS",
+   "type": "top_mask",
+   "gold_area_mm2": 410.56,
+   "ours_area_mm2": 410.56,
+   "xor_pct": 0.0,
+   "shape_pct": 0.0,
+   "bands": {
+    "missing": {
+     "noise": 0.0,
+     "size": 0.0,
+     "shape": 0.0
+    },
+    "extra": {
+     "noise": 0.0,
+     "size": 0.0,
+     "shape": 0.0
+    }
+   },
+   "n_clusters": 0,
+   "n_missing": 0,
+   "n_extra": 0,
+   "n_changed": 0,
+   "clusters": [],
+   "note": null
+  },
+  {
+   "suffix": ".gtp",
+   "output": "job-kicad-x2ap-b46a46.GTP",
+   "golden": "job-kicad-x2ap-b46a46.GTP",
+   "type": "top_paste",
+   "gold_area_mm2": 254.09,
+   "ours_area_mm2": 254.09,
+   "xor_pct": 0.0,
+   "shape_pct": 0.0,
+   "bands": {
+    "missing": {
+     "noise": 0.0,
+     "size": 0.0,
+     "shape": 0.0
+    },
+    "extra": {
+     "noise": 0.0,
+     "size": 0.0,
+     "shape": 0.0
+    }
+   },
+   "n_clusters": 0,
+   "n_missing": 0,
+   "n_extra": 0,
+   "n_changed": 0,
+   "clusters": [],
+   "note": null
+  },
+  {
+   "suffix": ".gto",
+   "output": "job-kicad-x2ap-b46a46.GTO",
+   "golden": "job-kicad-x2ap-b46a46.GTO",
+   "type": "top_silk",
+   "gold_area_mm2": 94.77,
+   "ours_area_mm2": 94.77,
+   "xor_pct": 0.0,
+   "shape_pct": 0.0,
+   "bands": {
+    "missing": {
+     "noise": 0.0,
+     "size": 0.0,
+     "shape": 0.0
+    },
+    "extra": {
+     "noise": 0.0,
+     "size": 0.0,
+     "shape": 0.0
+    }
+   },
+   "n_clusters": 0,
+   "n_missing": 0,
+   "n_extra": 0,
+   "n_changed": 0,
+   "clusters": [],
+   "note": "字符层字体不同，几何差异不代表内容差异"
+  }
+ ],
+ "drill": {
+  "output": "job-kicad-x2ap-b46a46.TXT",
+  "golden": "job-kicad-x2ap-b46a46.TXT",
+  "n_sizes_ours": 7,
+  "n_sizes_golden": 7,
+  "holes_ours": 76,
+  "holes_golden": 76,
+  "n_mismatch": 0,
+  "rows": [
+   {
+    "dia_mm": 0.75,
+    "kind": "slot",
+    "ours": 10,
+    "golden": 10,
+    "same": true
+   },
+   {
+    "dia_mm": 0.8,
+    "kind": "slot",
+    "ours": 2,
+    "golden": 2,
+    "same": true
+   },
+   {
+    "dia_mm": 0.85,
+    "kind": "hole",
+    "ours": 14,
+    "golden": 14,
+    "same": true
+   },
+   {
+    "dia_mm": 0.85,
+    "kind": "slot",
+    "ours": 4,
+    "golden": 4,
+    "same": true
+   },
+   {
+    "dia_mm": 1.0,
+    "kind": "hole",
+    "ours": 2,
+    "golden": 2,
+    "same": true
+   },
+   {
+    "dia_mm": 1.15,
+    "kind": "hole",
+    "ours": 40,
+    "golden": 40,
+    "same": true
+   },
+   {
+    "dia_mm": 1.25,
+    "kind": "hole",
+    "ours": 4,
+    "golden": 4,
+    "same": true
+   }
+  ]
+ },
+ "summary": {
+  "n_layers": 9,
+  "n_clusters": 0,
+  "worst": ".gbl"
+ }
+}

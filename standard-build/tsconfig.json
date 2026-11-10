@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": false,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "types": ["node", "vite/client"]
+  },
+  "include": [
+    "core/**/*.ts",
+    "core/**/*.vue",
+    "modules/**/*.ts",
+    "modules/**/*.vue",
+    "seed/**/*.ts",
+    "src/**/*.ts",
+    "src/**/*.vue",
+    "server.ts",
+    "drizzle.config.ts",
+    "vite.config.ts",
+    "vitest.config.ts"
+  ]
+}

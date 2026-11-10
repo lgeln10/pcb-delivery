@@ -1,0 +1,156 @@
+# 同一家厂（y6f/y4f 单号）的四层 1oz 板：C09 反推的厂规去掉 3oz/六层专属项后的起点（docs/ROADMAP §M6i）
+layer:
+  rail_vcut_notch_mm: [3.7, 1.5, 0.75]   # set/work：V-cut 线穿出工艺边处的让刀缺口（对标 golden gko）
+release:
+  mode: certified   # 有黄金样本逐层对标（四层 1oz 3×3：线路 ≤3.9%、钻孔对上、gko 16.5% 为字体/标记差），
+                    # 放行门禁不再拦本地 B 线候选终稿（yibing 2026-09-16 决定）
+                    # 2026-09-18 M6k 复核：上面这些百分比是自设门槛下的成绩，换成「C 档未归属簇数 = 0」后 C11 层门禁 2/9 过（gts 133 簇全无主），钻孔过但 36 个 V-cut 端孔没打。
+                    # certified 是 yibing 09-16 的决定，未动；要不要因为对标结果收回，等他定。
+drill:
+  oversize_mm:
+    via: 0.15
+  oversize_by_finish:    # 回复一-6：喷锡 PTH +0.15 / 非喷锡 PTH +0.10，NPTH 两档都 +0.05
+    hasl: {plated: 0.15}
+    other: {plated: 0.10}
+  via_min_mm: 0.3          # set/：45 个 ⌀0.2 过孔全钻 0.35（当 0.3 塞孔 +0.05）
+  plug:
+    oversize_mm: 0.05      # set/：塞孔过孔 0.3 → 0.35（1oz 板 +0.05；3oz 的 C09 是 -0.05）；开窗里的过孔不塞 → +0.15（351 个 0.45）
+    opening_ratio_max: 1.6
+    method: drawn            # set/：过孔中心落在客户画的开窗（Top Solder 上的 1 mm 线/弧）里就不塞：342/351 开、1611/1611 塞（opening_ratio 把密集过孔阵当露铜 1267/696；ring 1819/108）；差的 9 个骑在线边 0.01 mm 上，是工程师手点的（DECISIONS #18-17）
+    open_sides: top          # set/：只看顶面画的窗——底面散热大窗里的 567 个照塞
+    mode: ask                # 同厂（洲旭）回复 C09 二-1：塞孔分组「要人工处理」→ 照做但进 EQ
+  via_oversize_mode: ask     # 同厂回复二-2
+  override_mode: ask         # 同厂回复二-9 / 五-8
+  overlap_confirm: true      # 同厂回复二-8
+  predrill:
+    min_dia_mm: 4.0
+    bit_mm: 3.175
+  oversize_large:
+    min_dia_mm: 6.0
+    add_mm: 0.2
+  overlap: delete_smaller
+  slot_end_predrill:
+    - {width_mm: 1.0, bit_mm: 0.7}
+    - {width_mm: 1.6, bit_mm: 0.95}
+    - {width_mm: 2.0, bit_mm: 1.95}
+    - {width_mm: 2.5, bit_mm: 2.2}
+  short_slot_max_travel_ratio: 1.0
+  second_drill: npth_small
+  second_drill_max_mm: 1.0
+  rect_to_rout: true
+  rect_rout_oversize_mm: 0.1
+  rect_corner_predrill: {bit_mm: 0.8, min_width_mm: 1.75}   # 回复三-3：原稿槽宽 1.7 以内的矩形槽不加角孔
+  drawn_holes_to_drill: true
+  vcut_end_holes:              # 让刀口（2026-09-20 复核分类：这些是**相对单元外框**的参数，不是抄的绝对坐标 → 属 B 类，恢复）。
+    # 规则：行间 V-cut 线进入每只单元处，在单元外框内侧排三个递减的 NPTH（V-cut 刀出材料时不啃单元），
+    # 挖口角处再一组。三块板只有这一块有这东西，下面 6 个偏移是单样本量的，换板要复核 → 问单 C30。
+    enabled: true              # gts/gbs 各开 孔 +4mil 的窗；铜皮不为它们让位（终稿铺铜边在孔上直接过）
+    side: low
+    holes:
+      - {dia_mm: 1.201, from_edge_mm: 1.112}
+      - {dia_mm: 0.901, from_edge_mm: 1.427}
+      - {dia_mm: 0.6, from_edge_mm: 1.785}
+    exit_holes:                # 每只单元右上 11.7 mm 挖口的角上（V-cut 从这里出材料）再一组，斜排 −20°：终稿 (35.420,34.059)/(35.002,34.225)/(34.541,34.367)，挖口角在 (35.85,34.6)
+      - {dia_mm: 1.201, along_mm: -0.43, into_mm: 0.541}
+      - {dia_mm: 0.901, along_mm: -0.848, into_mm: 0.375}
+      - {dia_mm: 0.6, along_mm: -1.309, into_mm: 0.233}
+  tooling_holes:               # set/：工艺边 4 个 ⌀1.5 NPTH（钻 1.55），上右角 20 其余 8/10 防呆
+    - {corner: ll, dx_mm: 8.0, dy_mm: 1.5, dia_mm: 1.5}
+    - {corner: lr, dx_mm: 10.0, dy_mm: 1.5, dia_mm: 1.5}
+    - {corner: ul, dx_mm: 8.0, dy_mm: 1.5, dia_mm: 1.5}
+    - {corner: ur, dx_mm: 20.0, dy_mm: 1.5, dia_mm: 1.5}
+copper:
+  compensation_by_oz:
+    - {oz: 1, add_mm: 0.03}     # set/work：1oz 线/PAD 总加大 0.03（0.914 方盘 → 0.944，过孔 0.8 → 0.83）
+    - {oz: 2, add_mm: 0.05}
+    - {oz: 3, add_mm: 0.1}
+  compensation_scope: all
+  npth_in_pad: clear
+  rail_fill:
+    enabled: true
+    inset_mm: 0.674              # 2026-09-20 M6o 读终稿多边形：铜带 y 0.674..2.399（第 2 轮探针量的 0.68/2.40 是圆整）
+    inner_inset_mm: 0.674
+    vcut_gap_mm: 0.602           # 3.001 − 2.399
+    hole_clearance_mm: 0.6       # 终稿：⌀1.55 定位孔两侧铜带止于 6.628 / 9.373 → 孔边 0.60
+    copper_clearance_mm: 0.9
+    corner_radius_mm: 0.3        # 终稿铜带每个端头都是 R0.3 圆角（含孔周凹弧的两角）
+    corner_radius_after_cuts: true
+    outline_clearance_mm: 0.45   # 终稿：铜带离客户画在工艺边里的短线（U 口、连接筋、单元 R 角）0.45–0.46
+    outline_segment_max_mm: 10
+    channel_gap_max_mm: 7        # 列与列之间 6 mm 的锣通道：终稿铜带在通道两侧各止于 0.45 之外
+  vcut_clearance_mm: 0.4       # set/：V-cut 线两侧铜皮退 0.36–0.40（客户原稿只有 0.13）
+  vcut_coupon:                   # 2026-09-20 M6o 量终稿：上下工艺边各一组防 V-cut 测试点（gts/gbs 各 4 个 ⌀1.3 窗）
+    enabled: true
+    pad_mm: 1.05
+    pitch_mm: 1.779
+    from_line_mm: 1.415
+    trace_mm: 0.35
+    opening_mm: 1.30
+    band_clearance_mm: 0.6       # 终稿量的：沿工艺边方向铜带止于盘边 0.600（两条边都是），最近点 0.72（带头有圆角）；和本板 hole_clearance_mm 0.6 一样 → 问单 C35。原来吃默认 0.38，是从 C12 量的
+    at: auto                     # 按规则定位：工艺边上最长空档的正中（终稿 72.33，规则算 72.302，差 0.03）
+  inner:
+    npth_clearance_mm: 0.21      # 终稿量的：NPTH 清孔圈 = 钻孔 + 2×0.21（画在外形层的 ⌀2.5 孔钻 2.55 → 清 2.97 ×27；定位孔 1.55 → 1.97 ×9），四个铜层一样；
+                                 # 不是教材 p122 的 12 mil，和本板孔到线的 8 mil 是一个量级（0.21 = 8.3 mil）。让刀口三个小孔终稿也画了圈，但那里本来没铜
+    min_annular_ring_mm: 0.203   # 1oz 板：PTH 焊盘不再加大到 14mil（那是 C09 3oz 的做法），环 ≥ 8mil，只加补偿
+    via_annular_ring_mm: 0.152   # set/：塞孔过孔焊盘 = 钻嘴 + 2×6mil（0.35 → 0.656）
+    via_open_annular_ring_mm: 0.203   # set/：留在开窗里的过孔 = 钻嘴 + 2×8mil（0.45 → 0.858）
+    pad_enlarge_limit_mm: 0.5
+    pad_up_base: drill
+    nfp_keep_vias: true          # set/：内层过孔 PAD 全留，元件孔独立 PAD 删（J1/J2）
+    nfp_removal: ask             # 同厂回复 C09 一-7 / 二-13：内层独立 PAD 删除「应设置为可选项」→ 删了但进 EQ
+    nfp_keep_pad_min_mm: 5.0
+    edge_clearance_mm: 0.40      # 2026-09-20 M6o 读终稿：内层铺铜离拼板外缘 0.401（客户原稿 0.253）、离真 V-cut 线 0.36–0.40；
+                                 # 但椭圆挖空边只退到 0.152、右上 L 形切口的竖边不退（35.585 vs 原稿 35.598）—— 一个值做不到全对，
+                                 # 0.15 / 0 试过：面积差从 0.84% 涨到 2.05%（外缘整条多出 0.25）。按外缘取 0.40；切口边的差留给 C8
+  outer:
+    npth_clearance_mm: 0.21      # 终稿量的：NPTH 清孔圈 = 钻孔 + 2×0.21（画在外形层的 ⌀2.5 孔钻 2.55 → 清 2.97 ×27；定位孔 1.55 → 1.97 ×9），四个铜层一样；
+                                 # 不是教材 p122 的 12 mil，和本板孔到线的 8 mil 是一个量级（0.21 = 8.3 mil）。让刀口三个小孔终稿也画了圈，但那里本来没铜
+    min_annular_ring_mm: 0.203   # 1oz 板：1.6 焊盘 → 1.63（只有补偿），环 ≥ 8mil
+    via_annular_ring_mm: 0.152
+    via_open_annular_ring_mm: 0.203
+    pad_enlarge_limit_mm: 0.8
+    pad_up_base: drill
+    edge_clearance_mm: 0         # 终稿外层：拼板外缘 0.257 vs 原稿 0.253、椭圆挖空 79.943 vs 79.94 —— 完全不削
+mask:
+  npth_dams: false
+  via_opening_delete: ask      # 同厂回复 C09 一-15：「不能直接删除过孔开窗…设置一个选项」→ 删了但进 EQ
+  npth_open_covered: true      # set/work：NPTH（含外形层画的孔）两面开窗 孔 +0.1/边
+  regenerate_openings: true    # set/work：开窗 = 最终焊盘 + 2mil/边（客户 Altium 导的 4 mil 缩成 2 mil）
+  # M6m（2026-09-19，比对器修好方光圈线的渲染后逐盘重量 work/）：所有贴片盘开窗 = 焊盘 +2mil/边（0.98→1.082、0.43→0.532、1.33→1.432、方盘 0.944→1.046），
+  # 贴在大铜面里的 = 焊盘 +1mil/边（0.98→1.031 ×63、1.53→1.581、2.03×3.23→2.08×3.28）—— 正是工程师回复 C09 五-2 的那条。
+  # 之前的「跑道 ×√2+0.18」「散热窗 ×1.4」是渲染错误造出来的，已删。
+  coverage_on_pour: {coverage_mm: 0.0254, ring_mm: 0.2, pour_coverage_min: 0.9}
+  resize_mode: per_opening
+silk:
+  clearance_to_opening_mm: 0.1016   # 回复一-17：字符离开窗按 4mil（教材 p145 是 3mil）
+  edge_delete_mm: 0.3
+output:
+  outline_source: profile      # 2026-09-20 M6o 试过 customer：客户 GKO/GM1 上都没有终稿那套 1.59 条 + 连接筋（gko 27%），
+                               # 终稿的工艺边是工程师按「客户拼版要求.png」自己构的 —— 问单 C8；这里仍按 Profile 画
+  stem: "{order}"
+  origin: profile_ll
+  outline_from_profile: true
+  drill_as_gerber: true
+  outline_on_mask_mm: 0.15     # 终稿两面阻焊：只有拼板外缘描边 0.15；V-cut 线 / 单元边界 / 锣槽轮廓 0.2（C09 是全 0.2）
+  rout_on_mask_mm: 0.2
+  gerber:
+    number_format: [2, 6]
+  naming:
+    top_copper: "{stem}.gtl"
+    inner_copper: "{stem}.l{n}"
+    bottom_copper: "{stem}.gbl"
+    top_mask: "{stem}.gts"
+    bottom_mask: "{stem}.gbs"
+    top_silk: "{stem}.gto"
+    bottom_silk: "{stem}.gbo"
+    top_paste: "{stem}.gtp"
+    bottom_paste: "{stem}.gbp"
+    outline: "{stem}.gko"
+    inner_rout: "{stem}.gko1"
+    drill_pth: "{stem}.TXT"
+    drill_npth: "{stem}-NPTH.TXT"
+    drill_gerber: "{stem}.drl"
+    drill_second: "{stem}.2nd"
+    ipc356: "{stem}.ipc"
+    rout: "{stem}-ROUT.TXT"
+# ---- 看 set/ 反推（M6i）----

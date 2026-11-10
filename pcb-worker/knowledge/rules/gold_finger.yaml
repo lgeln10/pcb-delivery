@@ -1,0 +1,168 @@
+# 来源：《CAM工程技能培训》第12章 p159–169；quote 为原文逐字片段
+
+- id: gold_finger.surface.electroplated_nickel_gold.thickness
+  rule: "电镀镍金厚度可达3-50u\""
+  value_min: 3
+  value_max: 50
+  unit: u"
+  applies_to: 电镀镍金
+  source_page: 160
+  quote: "电镀镍金：厚度可达3-50u”，因其优越的导电性、抗氧化性以及耐磨性，被广泛应用于需要经常插拔的金手指PCB"
+
+- id: gold_finger.surface.electroplated_nickel_gold.local_only
+  rule: "镀金成本极高，只应用于金手指等局部镀金处理"
+  applies_to: 电镀镍金
+  source_page: 160
+  quote: "但因为镀金的成本极高所以只应用于金手指等局部镀金处理"
+
+- id: gold_finger.surface.immersion_gold.thickness
+  rule: "沉金厚度常规1u\"，最高可达3u\""
+  value: 1
+  value_max: 3
+  unit: u"
+  applies_to: 沉金
+  source_page: 160
+  quote: "沉金：厚度常规1u”，最高可达3u”因其优越导电性、平整度以及可焊性"
+
+- id: gold_finger.surface.immersion_gold.whole_board_option
+  rule: "耐磨性能要求不高的金手指PCB可选整板沉金，成本较电金低很多"
+  applies_to: 沉金
+  source_page: 160
+  quote: "对于耐磨性能要求不高的金手指PCB，也可以选择整板沉金工艺，沉金工艺成本较电金工艺成本低很多"
+
+- id: gold_finger.hard_gold
+  rule: "金手指通常需要电镀硬金以增加耐磨性"
+  source_page: 160
+  quote: "为了增加金手指的耐磨性，金手指通常需要电镀硬金"
+
+- id: gold_finger.bevel.angle
+  rule: "金手指需要倒角，通常是45°，其他角度如20°、30°等"
+  value: 45
+  unit: 度
+  source_page: 160
+  quote: "金手指需要倒角，通常是45°，其他角度如20°、30°等"
+
+- id: gold_finger.bevel.required
+  rule: "设计中没有倒角则有问题"
+  source_page: 160
+  quote: "如果设计中没有倒角，则有问题"
+
+- id: gold_finger.solder_mask.full_opening
+  rule: "金手指需要做整块阻焊开窗处理，PIN 不需要开钢网"
+  source_page: 160
+  quote: "金手指需要做整块阻焊开窗处理，PIN 不需要开钢网"
+
+- id: gold_finger.pad_to_finger_top.min
+  rule: "沉锡、沉银焊盘距离手指顶端最小距离14mil"
+  value: 14
+  unit: mil
+  applies_to: 沉锡、沉银焊盘
+  source_page: 160
+  quote: "沉锡、沉银焊盘需要距离手指顶端最小距离14mil"
+
+- id: gold_finger.pad_to_finger.recommended
+  rule: "建议设计时焊盘距离手指位1mm 以上，包括过孔焊盘"
+  value: 1
+  unit: mm
+  source_page: 160
+  quote: "建议设计时焊盘距离手指位1mm 以上，包括过孔焊盘"
+
+- id: gold_finger.outer_layer.no_copper_pour
+  rule: "金手指的表层不要铺铜"
+  source_page: 160
+  quote: "金手指的表层不要铺铜"
+
+- id: gold_finger.inner_layer.copper_cut_width
+  rule: "金手指内层所有层面需要做削铜处理，通常削铜宽度大3mm"
+  value: 3
+  unit: mm
+  applies_to: 内层
+  source_page: 160
+  quote: "金手指内层所有层面需要做削铜处理，通常削铜宽度大3mm；可以做半手指削铜和整个手指削铜"
+
+- id: gold_finger.type.regular
+  rule: "常规金手指（齐平手指）：板边整齐排列相同长度、宽度的长方形焊盘"
+  source_page: 161
+  quote: "常规金手指（齐平手指）"
+
+- id: gold_finger.type.uneven
+  rule: "长短金手指（即不平整金手指）：板边长度不一的长方形焊盘"
+  source_page: 161
+  quote: "长短金手指（即不平整金手指）"
+
+- id: gold_finger.type.segmented
+  rule: "分段金手指（间断金手指）：板边长度不一的长方形焊盘，并前段断开"
+  source_page: 161
+  quote: "分段金手指（间断金手指）"
+
+- id: gold_finger.plating.process_sequence
+  rule: "镀金手指工艺流程：入板 微蚀 水洗 磨板 水洗 活化 水洗 镀镍 水洗 活化 水洗 镀金 金回收 水洗 烘干 出板"
+  source_page: 161
+  quote: "入板 微蚀 水洗 磨板 水洗 活化 水洗 镀镍 水洗 活化 水洗 镀金 金回收 水洗 烘干 出板"
+
+- id: gold_finger.enig.process_sequence
+  rule: "金手指沉镍金工艺流程：除油 水洗*2 微蚀 水洗*2 微蚀后浸 水洗*2 预浸 钯活化 后浸 水洗*2 无电镍 水洗*2 无电金 回收水洗 后处理水洗 干板"
+  source_page: 165
+  quote: "除油 水洗*2 微蚀 水洗*2 微蚀后浸 水洗*2 预浸 钯活化 后浸 水洗*2 无电镍 水洗*2 无电金 回收水洗 后处理水洗 干板"
+
+- id: gold_finger.enig.nickel.ph_range
+  rule: "无电镍PH值控制范围在4.8-5.3"
+  value_min: 4.8
+  value_max: 5.3
+  unit: pH
+  applies_to: 无电镍
+  source_page: 166
+  quote: "PH值的影响：控制范围在4.8-5.3，PH太高会有混浊现象及分解发生"
+
+- id: gold_finger.enig.nickel.temperature_range
+  rule: "无电镍温度一般控制在80~90℃（低于70℃反应慢，高于95℃无法控制）"
+  value_min: 80
+  value_max: 90
+  unit: ℃
+  applies_to: 无电镍
+  source_page: 166
+  quote: "低于70℃反应慢，高于95℃速率快而且无法控制，一般控制在80~90℃"
+
+- id: gold_finger.enig.nickel.hypophosphite_decompose
+  rule: "次磷酸二氢钠超过35g/I后槽液有分解现象"
+  value: 35
+  unit: g/I
+  applies_to: 无电镍
+  source_page: 166
+  quote: "但超过35g/I后槽液有分解现象，因此其浓度不可过高，过高反而有害"
+
+- id: gold_finger.enig.nickel.hypophosphite_control
+  rule: "次磷酸二氢钠浓度一般控制在30g/I左右"
+  value: 30
+  unit: g/I
+  applies_to: 无电镍
+  source_page: 166
+  quote: "因此一般浓度控制在30g/I左右较合适"
+
+- id: gold_finger.enig.nickel.phosphorus_max
+  rule: "三乙醇氨系统磷含量甚至可高到15.5%上下"
+  value: 15.5
+  unit: "%"
+  applies_to: 无电镍
+  source_page: 166
+  quote: "三乙醇氨系统磷含量甚至可高到15.5%上下"
+
+- id: gold_finger.enig.gold.operating_temperature
+  rule: "无电金操作温度多为85℃左右"
+  value: 85
+  unit: ℃
+  applies_to: 无电金
+  source_page: 168
+  quote: "操作温度多为85℃左右，对材料安定性是一大考验"
+
+- id: gold_finger.solder_mask.open_window
+  rule: "金手指阻焊一般要开通窗"
+  source_page: 169
+  quote: "注意金手指阻焊一般要开通窗"
+
+- id: gold_finger.bevel.angle_options
+  rule: "金手指斜边要求一般角度为30；45；60度三种"
+  unit: 度
+  source_page: 169
+  quote: "金手指斜边要求一般角度为30；45；60度三种"
+  note: "可选值 30 / 45 / 60"

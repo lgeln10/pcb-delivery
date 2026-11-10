@@ -1,0 +1,66 @@
+{
+  "stage": "drill",
+  "status": "needs_review",
+  "summary": "2 drill files, 8 tools, 92 holes; 1 error, 1 warn, 9 info; 1 need decision",
+  "items": [
+    {
+      "id": "oversize_Flashpads-PTH.drl_T01",
+      "kind": "drill_oversize",
+      "severity": "info",
+      "layer": "Flashpads-PTH.drl",
+      "location": null,
+      "measured": 0.6,
+      "threshold": 0.75,
+      "message": "T01 plated ⌀0.6 → 钻嘴 ⌀0.75 mm (+0.15) ×30",
+      "fix": {"type": "resize", "params": {"from": 0.6, "to": 0.75, "tool": "T01"}, "auto_fixable": true, "applied": true},
+      "eq_question": null
+    },
+    {
+      "id": "extra_0",
+      "kind": "extra_holes",
+      "severity": "error",
+      "layer": "Flashpads-PTH.drl",
+      "location": {"x": 34.669, "y": -61.894, "bbox": [34.369, -62.744, 34.969, -61.044]},
+      "measured": 0.6,
+      "threshold": null,
+      "message": "孔 T01 ⌀0.6 mm @(34.669,-61.894) 不落在任何外层焊盘内",
+      "fix": null,
+      "eq_question": "发现不属于任何 Pad 的多余孔，请客户确认是删除还是补焊盘"
+    },
+    {
+      "id": "npth_rout_0",
+      "kind": "npth_to_rout",
+      "severity": "warn",
+      "layer": "Flashpads-NPTH.drl",
+      "location": {"x": 21.0, "y": -21.0},
+      "measured": 0.2,
+      "threshold": 0.3,
+      "message": "NPTH T01 ⌀3.0 mm 距板边 0.200 mm（< 0.3 mm）",
+      "fix": null,
+      "eq_question": null
+    },
+    {
+      "id": "profile_line_width",
+      "kind": "profile_line_width",
+      "severity": "info",
+      "layer": "Flashpads-Edge_Cuts.gbr",
+      "location": null,
+      "measured": "0.254",
+      "threshold": 0.15,
+      "message": "外形线宽 [0.254] mm ≠ 0.15 mm",
+      "fix": {
+        "type": "set_profile_line_width",
+        "params": {"from": [0.254], "to": 0.15},
+        "auto_fixable": false,
+        "applied": false,
+        "genesis_script": "COM sel_change_sym,symbol=r5.906"
+      },
+      "eq_question": null
+    }
+  ],
+  "artifacts": [
+    {"kind": "drill", "path": "pcb-cam/t1/job-1/output/drill/Flashpads-PTH_oversized.drl", "filename": "Flashpads-PTH_oversized.drl", "size": 1500, "content_type": "text/plain"},
+    {"kind": "dfm_report", "path": "pcb-cam/t1/job-1/output/drill/drill_table.json"}
+  ],
+  "duration_ms": 2310
+}

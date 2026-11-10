@@ -1,0 +1,80 @@
+# 来源：《CAM工程技能培训》第10章 p148–155；quote 为原文逐字片段
+
+- id: panel.set.same_step.command
+  rule: "在同一step里面拼板：EDIT copy Step&Repeat"
+  source_page: 148
+  quote: "EDIT   copy   Step&Repeat"
+
+- id: panel.set.same_step.spacing_calc
+  rule: "拼间距时：如x方向拼2MM间距，就是x方向的尺寸再加2MM"
+  value: 2
+  unit: mm
+  source_page: 148
+  quote: "如果需要拼间距，如x方向拼2MM间距那么就是x方向的尺寸再加2MM"
+
+- id: panel.set.diff_step.origin_profile
+  rule: "建立Step (set) 时，单只零点及profile一定要对，不要搞错了"
+  source_page: 149
+  quote: "单只零点及profile一定要对，不要搞错了"
+
+- id: panel.set.diff_step.command
+  rule: "Step panelizcation step repeat table 输入单只STEP"
+  source_page: 149
+  quote: "Step   panelizcation   step repeat   table"
+
+- id: panel.set.diff_step.mirror_no
+  rule: "镜像一般选择NO"
+  source_page: 149
+  quote: "镜像“yes”表示镜像“No”表示不镜像，一般选择NO"
+
+- id: panel.set.diff_step.after_add_edge
+  rule: "拼好之后需要加工艺边，再定好Profie及零点"
+  source_page: 149
+  quote: "拼好之后需要加工艺边，再定好Profie及零点"
+
+- id: panel.set.sr_edit
+  rule: "Step panelizcation S&R EDIT"
+  source_page: 150
+  quote: "Step   panelizcation   S&R EDIT"
+
+- id: panel.set.edge.fiducial_and_hole
+  rule: "成品自行拼板，工艺边要加定位孔和mark点；客户提供的，板内没有定位孔及mark点也需要加，板内有可以不加"
+  source_page: 151
+  quote: "成品如果是自行拼板，一般工艺边要加定位孔和mark点，客户提供的，板内没有定位孔及mark点也需要加，如板内有可以不加"
+
+- id: panel.set.edge.follow_reference
+  rule: "客户资料中说明工艺边参考前版本或其他板的，工艺边上的东西要与参考版一致"
+  source_page: 151
+  quote: "如果客户资料中有说明工艺边参考前版本或其他板，工艺边上的东西要与参考版一致"
+
+- id: panel.set.edge.copper_avoid
+  rule: "工艺边上要求铺铜时，需要避开工艺边上的孔及mark点"
+  source_page: 151
+  quote: "如果工艺边上要求铺铜，需要避开工艺边上的孔及mark点"
+
+- id: panel.production.create.params
+  rule: "建立panel：拼板对象、拼板示意图、模式、拼板对象个数、拼板尺寸、到板边距离、板与板之间距离、拼板方向，选好参数后点击OK"
+  source_page: 152
+  quote: "选好参数后点击OK即可"
+
+- id: panel.production.edge_fill
+  rule: "生产panel板边填充：内层外层线路板边加阻流pad及铜皮，Step Panelization Pattern Fill"
+  source_page: 153
+  quote: "生产panel板边填充：内层外层线路板边加阻流pad及铜皮"
+
+- id: panel.production.edge_fill.parameters
+  rule: "阻流块填：单击 Fill parameters… 设置好，再回到上图去填充"
+  source_page: 154
+  quote: "阻流块填，单击上图中的Fill parameters…按下图设置好，再回到上图去填充"
+
+- id: panel.production.edge_holes
+  rule: "生产板边加定位孔（方向孔），挂孔，AOI孔及铆钉孔（AOI和铆钉孔不用钻）及其它标志"
+  source_page: 155
+  quote: "生产板边加定位孔（方向孔），挂孔，AOI孔及铆钉孔（AOI和铆钉孔不用钻）及其它标志"
+  factory_specific: true
+  note: "注意每个工厂设计有可能是不一样的，具体看工厂制成能力"
+
+- id: panel.production.edge_holes.script
+  rule: "板边一般不需要自己去加，一般都是脚本自动加"
+  source_page: 155
+  quote: "板边一般不需要自己去加，一般都是脚本自动加"

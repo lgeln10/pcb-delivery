@@ -1,0 +1,19 @@
+{
+  "must": [
+    {"stage": "align", "kind": "profile_candidates"},
+    {"stage": "drill", "kind": "drill_via_plug"},
+    {"stage": "drill", "kind": "drill_second"},
+    {"stage": "drill", "kind": "drill_rect_to_rout"},
+    {"stage": "drill", "kind": "drill_drawn_holes"},
+    {"stage": "drill", "kind": "drill_overlap_deleted"},
+    {"stage": "drill", "kind": "drill_predrill"},
+    {"stage": "drill", "kind": "drill_override"},
+    {"stage": "output", "kind": "rout_inner_output"}
+  ],
+  "must_not": [
+    {"stage": "gatekeeper", "kind": "gate_area_mismatch"},
+    {"stage": "*", "kind": "worker_exception"},
+    {"stage": "*", "kind": "native_failed"}
+  ],
+  "status": {"intake": "ok", "align": "ok", "output": "ok", "gatekeeper": "ok"}
+}

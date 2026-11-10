@@ -1,0 +1,11 @@
+{
+  "_note": "C01 的 2 条（外层 NPTH 削铜）+ 网络比较 1 条（BUR 开路）= 3",
+  "count": 3,
+  "kinds": [
+    "net_open",
+    "npth_clearance"
+  ],
+  "by_stage": {
+    "net_compare": 1
+  }
+}

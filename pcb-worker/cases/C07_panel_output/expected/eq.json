@@ -1,0 +1,11 @@
+{
+  "_note": "C01 的 2 条（外层 NPTH 削铜）+ 拼板 1 条（客户拼板要求需核对）= 3",
+  "count": 3,
+  "kinds": [
+    "npth_clearance",
+    "panel_customer_spec"
+  ],
+  "by_stage": {
+    "panel": 1
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "name": "aios-mobile-shell",
+  "private": true,
+  "version": "0.1.0",
+  "description": "AIOS unified mobile shell (iOS/Android): one Capacitor app for all tenants — native login by server domain, then the tenant's own H5 in a webview with native capabilities (speech-to-text, geolocation).",
+  "type": "module",
+  "scripts": {
+    "sync": "cap sync",
+    "add:ios": "cap add ios",
+    "add:android": "cap add android",
+    "open:ios": "cap open ios",
+    "open:android": "cap open android",
+    "preview": "python3 -m http.server 4380 --directory shell"
+  },
+  "dependencies": {
+    "@capacitor-community/speech-recognition": "^7.0.1",
+    "@capacitor/app": "^7.1.0",
+    "@capacitor/core": "^7.4.0",
+    "@capacitor/geolocation": "^7.1.0",
+    "@capacitor/preferences": "^7.0.0",
+    "@capacitor/push-notifications": "^7.0.7",
+    "@capacitor/status-bar": "^7.0.0"
+  },
+  "devDependencies": {
+    "@capacitor/android": "^7.4.0",
+    "@capacitor/cli": "^7.4.0",
+    "@capacitor/ios": "^7.4.0",
+    "typescript": "~5.8.3"
+  }
+}

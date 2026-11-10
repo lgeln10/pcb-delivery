@@ -1,0 +1,305 @@
+# 来源：《CAM工程技能培训》第6章 p122–134；quote 为原文逐字片段
+
+# ---- 前提条件 (p122) ----
+- id: inner.pos.precondition
+  rule: "对齐层；删除了外围线和外围线外的物件；校正了孔偏(对Pad)"
+  source_page: 122
+  quote: "对齐层；删除了外围线和外围线外的物件；校正了孔偏(对Pad)"
+
+# ---- 制作要求 (p122) ----
+- id: inner.pos.line_compensation
+  rule: "线路补偿根据铜厚加大，阻抗线依照设计值加大；一般要求 <15mil 的加大 1mil"
+  value: 1
+  unit: mil
+  applies_to: line_width_lt_15mil
+  source_page: 122
+  quote: "线路补偿 根据铜厚加大，阻抗线依照设计值加大。 (一般要求:<15mil的加大1mil)"
+
+- id: inner.pos.isolated_pad_deleted
+  rule: "检查独立PAD是否完全删除"
+  source_page: 122
+  quote: "检查独立PAD是否完全删除。"
+
+- id: inner.pos.drill_isolation
+  rule: "钻孔隔离要 10MIL 以上"
+  value_min: 10
+  unit: mil
+  source_page: 122
+  quote: "注意钻孔隔离是否够（要10MIL以上）"
+
+- id: inner.pos.hole_to_line
+  rule: "孔到线的距离 8mil"
+  value_min: 8
+  unit: mil
+  source_page: 122
+  quote: "孔到线的距离是否够(8mil)"
+
+- id: inner.pos.npth.ring
+  rule: "NPTH孔削铜 单边≥12mil(0.305mm)"
+  value_min: 12
+  unit: mil
+  applies_to: npth
+  source_page: 122
+  quote: "NPTH孔是否削铜              [单边≥12mil(0。305mm)]"
+
+- id: inner.pos.spacing
+  rule: "线距一般≥4mil(0.1mm)，特殊可做到3.2mil(0.08mm)"
+  value_min: 4
+  unit: mil
+  source_page: 122
+  quote: "线距是否足够大      [一般≥4mil(0.1mm)，特殊可做到3.2mil(0.08mm)]"
+  note: "特殊可做到 3.2mil(0.08mm)"
+
+- id: inner.pos.outer_trim
+  rule: "削外围：板薄少削，内层尽量多削，比如单边15mil"
+  value: 15
+  unit: mil
+  applies_to: outer_trim
+  source_page: 122
+  quote: "削外围是否做够    根据情况而言，板薄少削，内层尽量多削，比如单边15mil"
+
+- id: inner.pos.ring
+  rule: "RING环一般8mil（0.2mm），特殊可做到5mil(0.127mm)"
+  value_min: 8
+  unit: mil
+  source_page: 122
+  quote: "RING环是否够   一般8mil（0.2mm），特殊可做到5mil(0.127mm)"
+  note: "特殊可做到 5mil(0.127mm)"
+
+- id: inner.pos.teardrop_required
+  rule: "是否加泪滴（内存条）一般要加"
+  source_page: 122
+  quote: "是否加泪滴（内存条）                     一般要加"
+
+# ---- 1 删独立PAD (p123, p134) ----
+- id: inner.pos.nfp_removal.menu
+  rule: "删掉独立PAD：DFM → Redundancy Clearup → NFP Removal"
+  source_page: 123
+  quote: "DFM       Redundancy Clearup   NFP Removal"
+
+- id: inner.pos.nfp_removal.params
+  rule: "NFP Removal 参数：ERF Isolated Pads；Delete 勾 Isolated；Work on 勾 Features；Drills 都勾选；再下面的参数不用改动"
+  source_page: 123
+  quote: "Drills:        选择用于删除焊盘的孔的类型，这里我们都勾选 再下面的参数我们不用改动"
+
+- id: inner.pos.nfp_removal.inner_only
+  rule: "删独立PAD是内层正片设计时独有的操作，不要用到外层设计上"
+  source_page: 134
+  quote: "删独立PAD是内层正片设计时独有的操作，不要用到外层设计上去了，因为在内层上的独立PAD才是多余的，到了外层不存在无用的独立PAD"
+
+# ---- 2 转Surface (p123) ----
+- id: inner.pos.contourize
+  rule: "转Surface：如果没有大铜皮则此步可省；Edit Reshape Contourize 参数不用设置直接点OK"
+  source_page: 123
+  quote: "转Surface       如果没有大铜皮则此步可省 选中要转的大铜皮EditReshapeContourize…           参数不用设置直接点OK即可"
+
+# ---- 3 线路补偿 (p124) ----
+- id: inner.pos.line_compensation.resize_global
+  rule: "线路补偿：选中要补偿的线路 Edit Resize Global，Size 填 1（一般只要求补偿1mil，在原来的基础上整体加大）"
+  value: 1
+  unit: mil
+  source_page: 124
+  quote: "在参数Size后填1点OK即可，因为一般只要求补偿1mil(在原来的基础上整体加大)"
+
+- id: inner.pos.line_compensation.threshold_xinqiang
+  rule: "欣强要求小于15mil的线路就要补偿"
+  value_max: 15
+  unit: mil
+  source_page: 124
+  quote: "比如欣强要求小于15mil的线路就要补偿"
+  factory_specific: true
+
+# ---- 4 优化 Signal Layer Optimization (p124) ----
+- id: inner.pos.slo.erf
+  rule: "Signal Layer Optimization：ERF Inner Layers，Signal Layer .affected"
+  source_page: 124
+  quote: "ERF: Inner Layers       Signal Layer: .affected"
+
+- id: inner.pos.slo.pth_ar
+  rule: "PTH AR Min 7 Opt 8（PTH孔令环的最小值和最佳值）"
+  value_min: 7
+  value_max: 8
+  unit: mil
+  applies_to: pth
+  source_page: 124
+  quote: "PTH AR Min: 7 Opt: 8     设置PTH孔令环的最小值和最佳值"
+
+- id: inner.pos.slo.via_ar
+  rule: "VIA AR Min 3 Opt 6（导通孔令环的最小值和最佳值）"
+  value_min: 3
+  value_max: 6
+  unit: mil
+  applies_to: via
+  source_page: 124
+  quote: "VIA AR Min: 3 Opt: 6     设置导通孔令环的最小值和最佳值"
+
+- id: inner.pos.slo.spacing
+  rule: "Spacing Min 4 Opt 4（欲维持的最小间距和最佳间距）"
+  value_min: 4
+  value_max: 4
+  unit: mil
+  source_page: 124
+  quote: "Spacing Min: 4 Opt: 4     欲维持的最小间距和最佳间距"
+
+- id: inner.pos.slo.drill_to_cu
+  rule: "Drill to Cu 10（钻孔边到铜箔间的距离）"
+  value: 10
+  unit: mil
+  source_page: 124
+  quote: "Drill to Cu: 10         钻孔边到铜箔间的距离"
+
+- id: inner.pos.slo.modification
+  rule: "Modification 只选 PadUp 和 Shave（加大Pad和削Pad）两种"
+  source_page: 124
+  quote: "Modification: PadUp     Shave 选择修正错误的方式:我们只选加大Pad和削Pad两种就够"
+
+- id: inner.pos.slo.two_pass
+  rule: "其他参数不调整；最好先把最小间距设为0.1去优化(让Pad尽量加大)，再设回4去优化"
+  source_page: 124
+  quote: "其他参数一般都不调整，最好是先把最小间距设为0.1后去优化(让Pad尽量加大)再设回4去优化。"
+
+# ---- 5 加泪滴 (p126) ----
+- id: inner.pos.teardrop.menu
+  rule: "加泪滴：DFM → Yield Improvement → Advanced Teardrops Creation"
+  source_page: 126
+  quote: "设置好影响层DFM               Yield ImprovementAdvanced Teardrops Creation…"
+
+- id: inner.pos.teardrop.erf_type
+  rule: "泪滴参数：ERF Long Teardrop，Type Straight / Triangular"
+  source_page: 126
+  quote: "ERF: Long Teardrop              Layer: 。affected Type: Straight  Triangular     泪滴补偿类型"
+
+- id: inner.pos.teardrop.ann_ring_min
+  rule: "Ann. Ring Min = 优化时的AR最佳值+1（AR小于该值的Pad加泪滴）"
+  source_page: 126
+  quote: "Ann。 Ring Min: (优化时的AR最佳值+1 ) AR小于?Mil的Pad加泪滴"
+
+- id: inner.pos.teardrop.drill_spacing
+  rule: "Drill Spacing = 优化时的Drill to Cu的值"
+  source_page: 126
+  quote: "Drill Spacing: (优化时的Drill to Cu的值) 与孔边要维持的间距"
+
+- id: inner.pos.teardrop.cu_spacing
+  rule: "Cu. Spacing = 优化时的Spacing Opt值"
+  source_page: 126
+  quote: "Cu。 Spacing: (优化时的Spacing Opt值)           欲保持的最小间距"
+
+- id: inner.pos.teardrop.delete_old
+  rule: "Delete Old Teardrops: Yes（删除原有泪滴）"
+  source_page: 126
+  quote: "Delete Old TeatdropS: Yes         删除原有泪滴"
+
+- id: inner.pos.teardrop.problematic_must_check
+  rule: "Probllematic Teardrops 报告项必看"
+  source_page: 126
+  quote: "Probllematic Teardrops        因复杂的Pad形状添加的存在疑问的地方 必看"
+
+- id: inner.pos.teardrop.manual_fix
+  rule: "泪滴手动修改：按 .Teat_drop 属性选出泪滴移出为另一层，先删除大于加大后线粗一半的过大泪滴线，再两层比较删除不必要的，最后移回"
+  source_page: 134
+  quote: "利用物件过滤器（点Attribute选.Teat_drop）选出泪滴移出为另一层,先通过物件过滤器把过大的泪滴线删除（大于加大后线粗的一半），再打开两层（以移出来的泪滴层为工作层）进行比较。把不必要的删除即可，最后移回即可。"
+
+# ---- 6 NPTH 削铜 (p127) ----
+- id: inner.pos.npth.copy_invert_yes
+  rule: "正片 NPTH孔削铜：Edit Copy Other Layer 选Affected，Invert 选 Yes，Resize 填在原基础上加大的数值"
+  applies_to: npth
+  source_page: 127
+  quote: "NPTH孔Edit    CopyOther Layer选Affected Invert选YesResize：填要在原基础上加大的数值其他不改点OK即可"
+
+# ---- 7 填小间隙 (p127) ----
+- id: inner.pos.sliver.menu
+  rule: "填小间隙：DFM → Sliver → Sliver & Acute Angel，修补指定大小的细丝和锐角"
+  source_page: 127
+  quote: "填小间隙           DFM     SliverSliver &Acute Angel 本操作用来修补指定大小的细丝和锐角，以防造成蚀刻等方面的缺陷"
+
+- id: inner.pos.sliver.mode
+  rule: "Mode：Analyze 只分析不修补，Repair 分析并修补"
+  source_page: 127
+  quote: "Mode : Analyze 只分析不修补       Repair 分析并修补"
+
+# ---- 8 削外围 (p128) ----
+- id: inner.pos.outer_trim.change_symbol_r30
+  rule: "削外围：选中外围线复制一层 EDIT Reshape Change Symbol 输入 r30，把外围加大到30mil（加大到多少视具体情况而言）"
+  value: 30
+  unit: mil
+  applies_to: outer_trim
+  source_page: 128
+  quote: "输入r30点OK，就把外围加大到30mil(Resize 操作是在原来基础上加大，而这里是加大到多少)加大到多少视具体情况而言"
+
+- id: inner.pos.outer_trim.compare_before_cut
+  rule: "把加大的外围线跟要削的层比较，看是否会削掉有用的东西，如会则酌情处理"
+  applies_to: outer_trim
+  source_page: 128
+  quote: "把加大的外围线跟要削的层比较，看是否会削掉有用的东西，如会则酌情处理"
+
+- id: inner.pos.outer_trim.invert_yes
+  rule: "削内层正片必须把外围转成负的去削，Invert 选 Yes；削负片用正的去削选 No"
+  applies_to: outer_trim
+  source_page: 128
+  quote: "Invert:转换极性用，象现在削内层正片，就必须把外围转成负的去削，所以选Yes 如果削负片的外围是用正的去削，选No"
+
+# ---- 9 检测 Signal Layer Checks (p128–129) ----
+- id: inner.pos.slc.no_auto_fix
+  rule: "Analysis → Signal Layer Checks 只检查并生成统计报告，不会去自动修改"
+  source_page: 128
+  quote: "本操作是用来检查信号层和混合层潜在的工艺性缺陷，并生成统计报告。所以本操作不会去自动修改"
+
+- id: inner.pos.slc.params_larger_than_opt
+  rule: "检测参数稍微比优化时的数值大点，以便让系统全部检测到，然后根据结果手动修改"
+  source_page: 129
+  quote: "参数设置(稍微比优化时的数值大点，以便让系统全部检测到，然后根据结果对报告有问题的地方去做手动修改)"
+
+- id: inner.pos.slc.erf
+  rule: "Signal Layer Checks：ERF STD 6，Layer .Affected"
+  source_page: 129
+  quote: "ERF: STD 6              Layer: 。Affected"
+
+# ---- 三 网络分析 (p130) ----
+- id: inner.netlist.mandatory
+  rule: "内层资料做完之后一定要做网络分析，对原稿"
+  source_page: 130
+  quote: "注意;内层资料做完之后一定要对原稿及网络分析。"
+
+- id: inner.netlist.twice_reduce_copper
+  rule: "网络比较做两次：第一次正常比较；第二次减铜，缩小铜皮0.15MM左右再比较，检查是否小于0.15MM连铜线导致开路"
+  value: 0.15
+  unit: mm
+  source_page: 130
+  quote: "可以做两次网络比较，第一次按正常做网络比较，第二次减铜，缩小铜皮0.15MM左右进行网络比较，是否小于0.15MM连铜线导致开路。"
+
+# ---- 四 线路掏铜 (p131–134) ----
+- id: inner.cutout.when
+  rule: "大铜皮边缘到某种物件距离做不到位就要掏铜皮；掏铜一般在优化之前、转Surface和补偿线路、SMD PAD之后进行"
+  source_page: 131
+  quote: "掏拥皮一般都是在优化之前、转Surface和补偿线路、SMD PAD之后进行"
+
+- id: inner.cutout.select_drawn_manual
+  rule: "转Surface前选铜皮，有时只有手动取消少部分不属于铜皮的物件"
+  source_page: 131
+  quote: "转Surface前选铜皮有时比较头疼,选铜皮方法列在下面，关键是活用，但有时只有手动取消少部分不属于铜皮的物件。"
+
+- id: inner.cutout.crosshatch_not_contourize
+  rule: "Crosshatch数据不能被轮廓化，会导致料号大小和性能受损"
+  source_page: 131
+  quote: "Crosshatch数据不能被轮廓化，会导致料号大小和性能受损"
+
+- id: inner.cutout.optimize_spacing_0_01
+  rule: "掏铜时调用优化菜单尽量加大PAD，间距和孔到铜的距离越小越好如0.01，其他参数不改"
+  value: 0.01
+  source_page: 132
+  quote: "调用优化菜单尽量加大PAD，内层即按内层要求加大； 外层即按外层要求加大,间距和孔到铜的距离越小越好如０.01， 其他参数不改即可"
+
+- id: inner.cutout.reference_selection_disjoint
+  rule: "以优化后移出的线路层为工作层，Reference Selection Use 选 Filter，Mode Disjoint，Reference Layers 设为移入铜皮层（如cusurface），选出不与铜皮接触的pad和线，复制出来加大用负性叠加到铜皮层，再去掉铜皮中的负性"
+  source_page: 133
+  quote: "选Filter Mode:Disjoint Reference Layers:设置为上面新建的移入铜皮所在层， 如cusurface 点OK即可选中不与铜皮接触的pad和线，然后复制出来建立 另外一层加大用负性形式叠加到铜皮层，再去掉铜皮中的负性"
+
+- id: inner.cutout.move_back_order
+  rule: "把铜皮层移回到线路层，注意层次及顺序不能搞错"
+  source_page: 134
+  quote: "把铜皮层移回到线路层，注意层次及顺序不能搞错。"
+
+- id: inner.cutout.check_then_optimize
+  rule: "对原稿检查是否有错及误操作；检查完没有问题之后再优化间距"
+  source_page: 134
+  quote: "五）、对原稿，检查是否有错及误操作。 六）、检查完没有问题之后，优化间距。"

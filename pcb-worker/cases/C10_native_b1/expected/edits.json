@@ -1,0 +1,18 @@
+{
+  "_note": "B1 反向构造：C05 的植入缺陷板在 PCB_CAM_ENGINE=native 下跑一遍，10 个参数型 op 全部应由本地几何引擎执行并写到 steps/edit/；Genesis 脚本里这些块变成注释。第二遍检查见 tests/test_native_c05.py（缺陷消失）。",
+  "applied_ops": [
+    "SetProfile",
+    "DeleteOutsideProfile",
+    "NegativePadReshape",
+    "LineCompensation",
+    "BorderClearance",
+    "NpthClearance",
+    "SetSmdAttribute",
+    "MaskResize",
+    "SilkTransform"
+  ],
+  "unchanged": [
+    "Flashpads-PTH.drl",
+    "Flashpads-NPTH.drl"
+  ]
+}

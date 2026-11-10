@@ -1,0 +1,14 @@
+{
+  "_note": "both drill_table_mismatch items carry eq_question「钻孔表与 Excellon 不一致…」: (1) 钻孔表孔径 1.2 mm 在钻孔文件中不存在 (2) 钻孔文件多出 1.0 mm ×40 2026-09-05 起 verify 跑到 silk：KiCad 板 NPTH 安装孔到铜 0.183mm < 12mil（p122）→ outer 每面 1 条 npth_clearance 决策（共 2）；mask 的 mask_expansion（KiCad 开窗=焊盘）/ npth_opening_small 只是 warn。",
+  "count": 4,
+  "kinds": [
+    "drill_table_mismatch",
+    "npth_clearance"
+  ],
+  "by_stage": {
+    "intake": 0,
+    "align": 0,
+    "drill": 2,
+    "outer": 2
+  }
+}

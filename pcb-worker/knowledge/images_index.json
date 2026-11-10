@@ -1,0 +1,1754 @@
+[
+ {
+  "path": "02_genesis2000菜单工具栏/027_1.png",
+  "page": 27,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Windows 资源管理器中解压后的 Genesis9.7 文件夹（install、literature、products、tools、x_manger、xvision7 等），蓝框标注\"1 双击 install.bat\""
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/027_2.png",
+  "page": 27,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Frontline Pro Installer 安装窗口（Genesis Application Installation Plug-in，Destination d:/genesis），红框标出 2 Name、3 Version、4 O.S. 三项和 5 Unload Installation Plug-in 按钮"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/027_3.png",
+  "page": 27,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis 安装 Popup Message：\"Is this a Server or a Client installation?\"，黄色箭头指向 Server 按钮"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/028_1.png",
+  "page": 28,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis 安装 license 信息 Popup Message，底部 Accept / Decline 按钮"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/028_2.png",
+  "page": 28,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis 安装 Popup Message：\"The installation you are about to perform requires approximately 181906 Kbytes. Do you wish to continue?\"，YES / NO 按钮"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/028_3.png",
+  "page": 28,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis 安装 Popup Message：\"No such directory Name=C:/genesis Create?\"，YES / NO 按钮"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/029_1.png",
+  "page": 29,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Dallas Semiconductor Device Driver Install 窗口，提示 Failed to install Windows NT Device Driver，勾选 32 bit，有 Install Driver / Remove Driver / Exit 按钮"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/029_2.png",
+  "page": 29,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis 安装 Popup Message：\"Install license server?\"，YES / NO 按钮"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/029_3.png",
+  "page": 29,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis 安装红色错误 Popup Message：dongle_info.exe produced the following errors，内容为 Dongle driver not installed 等，底部 OK 按钮"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/030_1.png",
+  "page": 30,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Frontline Pro Installer 中 Users/Groups Entry Window，User Name、Password、Group Name 均填 1，右侧安装步骤列表（Copy product files Done … Update license Error，Set users/groups Working）"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/030_2.png",
+  "page": 30,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis 安装 Popup Message：\"Do you wish to add logical databases to the sys/dblist file?\"，YES / NO 按钮"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/030_3.png",
+  "page": 30,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Logical Databases Entry Window，NAME genesis、PATH C:/genesis/fw，底部 Add / Apply / Cancel 按钮"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/031_1.png",
+  "page": 31,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "回到 Genesis9.7 安装文件夹，红字标注\"回到安装文件夹，打开 Xmanager 文件夹\"，箭头指向 x_manger 文件夹"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/031_2.png",
+  "page": 31,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "x_manger 文件夹内的 xmgr139e 应用程序，红字标注\"双击它，开始安装 Xmanager\""
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/031_3.png",
+  "page": 31,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Xmanager 1.3.9 的 InstallShield Wizard 欢迎窗口，红字标注\"其实这个很好装，基本都是点击 next 下一步，只到 finish 完成即可\""
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/032_1.png",
+  "page": 32,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Xmanager 安装 License Agreement 窗口，红色标注指向 Yes 按钮（点击 yes）"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/032_2.png",
+  "page": 32,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Xmanager 安装 Customer Information 窗口（User Name / Company Name / Serial Number），红字标注\"此处输 1 即可\"，红色标注指向 Next 按钮"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/033_1.png",
+  "page": 33,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Xmanager 安装 Select folder 窗口（Destination Folder C:\\Program Files\\Xmanager1.3.9），Next 按钮"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/033_2.png",
+  "page": 33,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Xmanager 安装 Setup Type 窗口（Typical / Compact / Custom），Next 按钮"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/033_3.png",
+  "page": 33,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Xmanager 安装 Select Program Folder 窗口，Next 按钮"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/033_4.png",
+  "page": 33,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Xmanager 安装 InstallShield Wizard Complete 窗口，Finish 按钮"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/034_1.png",
+  "page": 34,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Frontline GENESIS Engineering Toolkit Login Screen，Login Name 标注\"填入用户名\"、Password 标注\"填入密码\"，Version 09.07b2 for Windows 标注\"版本信息\"，QUIT 标注\"退出\""
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/034_2.png",
+  "page": 34,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 Engineering Toolkit 系统界面（Database Jobs），顶部 File/Actions/Options/Windows 菜单标注文件/行动/选项/窗口，Entity Filter 标注\"料号筛选功能\"，料号图标标注系统料号 genesislib 和工作料号 check、p09465bs-264 等"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/035_1.png",
+  "page": 35,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 系统界面 File 菜单，每项配中文注释：Create 创建料号、Copy 拷贝、Duplicate 当前拷贝、Move Job 移动料号、Rename 改料号名、Delete 删除、Strip Job 刷新料号、Export Job 输出料号、Import Job 读入料号、Archive 归档、Save 保存、Close Job 退出料号、Script 运行脚本、Locks 锁、Version 版本信息、Quit 退出软件"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/035_2.png",
+  "page": 35,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 系统界面 Actions 菜单，每项配中文注释：Select 选择功能、Open 打开、Update window 更新、Entity attributes 实体属性、Input 读入(资料)、Netlist Analyzer 网络对比、Electrical Testing 电测管理、Output 输出(资料)、Message 讯、View Log 查看标志、Auto Drill Manager 钻孔管理、Auto Rout Manager 锣带管理、Info 读入其它料号中的资料、Orbotech DI、AOI 扫描器、Panelization Wizard 拼板精灵、Panelization Setup 拼板设计、Sharelist 分享、ODB++ Messenger 数据、Quote Summary 引用数据、ERF Editor 内核数据编辑、Step Compare 料号对比、InLink"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/035_3.png",
+  "page": 35,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 系统界面 Options 菜单，配中文注释：Users 用户、Groups 群、Configuration 组、Databases 数据库、Licenses 权限、Clean unused symbols 清除垃圾、Check resized symbols 检查元素、Compare job/library symbols 对比"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/035_4.png",
+  "page": 35,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 系统界面 Windows 菜单，配中文注释：Main Clipboard 废、Input 读入资料、Output 输出资料、genesislib 分类库"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/036_1.png",
+  "page": 36,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 工作料号（Job: check）内的图标行，配中文注释：退出 JOB(Go Up)、matrix 层列表模板、steps 工作料、symbols 元素库、stackups 叠层属性、wheels 本料号 D 码库、forms 结构、flows 流程图、attributes 特性、input 读入资料(GBR)、output 输出资料(GBR)、user 用户、extension 扩展；箭头指向 input"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/036_2.png",
+  "page": 36,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 Input Package（读入资料）窗口，红字注释：Path 选择读入资料的路径、Job 工作料号名、Step 工作单元名、Exclude 资料过滤器(一般情况不要改)、Matrix 层属性列表、Editor 图形编辑器、Configuration 筛选器列表库；文件列表列注释为文件路径、文件格试、文件参数(可调)、名称(可改)、状态，行注释图形文件(.pho Gerber274x)、图形的 D 码大小文件(.rep Wheel)、钻孔坐标文件(.drl Excellon2)、钻孔刀具大小文件；底部按钮 Identify 识别功能、Extract 提取、Translate 转换(导入)、Copy 拷贝、Move 移动、Report 报告、Close 退出本菜单"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/037_1.png",
+  "page": 37,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 Input 窗口中右击文件（dcodes.apr）弹出的右键菜单，红字注释：View Graphic 查看图象、View Ascii 查看原始代码、View Binary 查看二进制代码、Text editor 文本编辑器、Parameters 参数、Report 报告、User action 程式、Select All 全选、Clear 全不选、Filter 筛选、Wheel hint (Create Wheel) 自定 D 码、Open wheel template D 码学习器"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/038_1.png",
+  "page": 38,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 读文件时的 Parameters Popup（dcodes.apr）窗口，红字注释：Format 文件格式、Data type 编码格式、Units 坐标单位、Coordinates 坐标种类、Decimal numbers 是否存在小数点、Zeroes omitted 补零方式、Number format 整数小数位数、Separator char 分行字符、Wheel 指定 D 码文件、Files Filter 同步变更(文件名,格式,目录)；左侧为 cnc.ex2 文件的右键菜单"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/039_1.png",
+  "page": 39,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 Wheel Template Editor（D 码学习器）窗口：左上为图形指定列表（Rectangle、Round、Square、Round Thermal 等，注释\"基本图形有:圆,矩形,圆环,椭圆,正方形\"），中部为栏位分析（Dcode、Fixed_Str \"RECT\"、A Fixed_Int2、B Fixed_Int2，注释\"对应右边一行(D 码识别规则)\"），左下 Width/Height/Rotation 注释\"尺寸与角度\"，右侧为 dcodes.apr 的 DCODE/SHAPE/SIZE 列表和已识别的 D 码 Symbol"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/040_1.png",
+  "page": 40,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 D 码学习器的 File 菜单（Create 创建、Open 打开、Save 保存、Save As 另存为、Wheel 读取其它料号 D 码、Close 退出）和 Edit 菜单（Add Record 增加 D 码常用、Delete Record 删除 D 码常用、Duplicate Record 拷贝、Position Record 定位、Delete All Records 删除全部 D 码(常用)、Default Columns 放弃、Add/Insert/Delete Column 增加/插入/删除(不用)），顶部标注 文件/编辑/格试调整/刷新格式"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/040_2.png",
+  "page": 40,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 D 码学习器 Params 菜单（Global 格试调节器、Conditional Units、Headlines、Table title、Table terminator）及 Global Parameters Popup 窗口，红字注释：Wheel type 格式类型(GBR 或钻孔表)、Units 单位(英制或公制)、Units X 单位(一般不动)、Dcode numbering 以下所有选项全部不要动"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/040_3.png",
+  "page": 40,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 D 码学习器 Actions 菜单：Translate Wheel（注释\"应用\"，Ctrl+t）、Template File、Wheel Editor"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/041_1.png",
+  "page": 41,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 Job Matrix Popup（层次特性 matrix）窗口（Job: p11001dh），红字注释：File/Edit/Actions/Options/Windows 为文件/编辑/行动/选择/窗口，Layer 栏\"更改名称位置\"，board \"定义为板\"、signal \"定义层属性\"、positive \"定义正负片\"；四个 step 列注释为 orig 原始档、edit 编辑档、set 拼 SET 档、pnl 拼 PNL 档；左侧层列表 gto/gts/gtl/l2/l3/gbl/gbs/gbo/drl/gko"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/042_1.png",
+  "page": 42,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 matrix 的 EDIT 编辑菜单，配中文注释：Delete 删除、Move 移动、Copy 复制、Insert 插入、Duplicate 自我复制、Add 增加（子菜单 Row 行、Column 列）"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/042_2.png",
+  "page": 42,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 matrix 的 Action 菜单（标题\"Action: 激活、动作\"），配中文注释：Refresh 更新窗口、Re-arrange rows 重新排列层别、Edit 开启图形编辑窗口、Flip step 翻转 Step、Rotate step 旋转 Step、Entity attributes 实体属性、Input 开启输入窗口、Output 开启输出窗口"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/043_1.png",
+  "page": 43,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 Graphic Editor 图形编辑界面全图，红字注释：顶部 File/Edit/Actions/Options/Analysis/DFM/Step/Rout/Windows 菜单为文件/编辑/行动/选择/分析/自动功能/拼板/锣带/视窗，左侧 Job 工作料号、Step 工作单元、Job Matrix 料号层属性，层列表分为\"编辑操作层\"和\"原稿备份层\"；中间 Control Popup 窗口各项注释（单位切换英制/公制、宽度显示、显示多於四层、显示排版物件、显示负资料、显示 Profile、显示成型的路径等）；右侧工具栏注释图形显示控制区、图形查看方式、测量工具、增加元素功能、删除/移动/拷贝、移线/拉线/转角/反转、阴阳转换、拉线/绕线功能、单选/框选/多选/网络；底部注释绝对坐标、相对坐标、可输入坐标增加物件、归原点、界面公英制(可调)"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/044_1.png",
+  "page": 44,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 图形编辑界面 File 菜单，配中文注释：Save 保存、Script 脚本、Locks 锁、Print 打印、Close 退出；右侧 Script 子菜单 Run 运行、Record 录制、History 记录、Binding 绑定、Debug、Continue"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/044_2.png",
+  "page": 44,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 图形编辑界面 EDIT 菜单，配中文注释：Undo 后退、Delete 删除、Move 移动、Copy 拷贝、Resize 更改大小、Transform 改变、Connections 连接、Buffer 暂存区、Reshape 修改形状、Polarity 极性(正负)、Create 创建工作区、Change 改变、Attributes 定属性；Move 子菜单 Same layer 同层移动、Other layer 移到另外一层、Stretch parallel lines、Orthogonal stretch、Move triplets、Move S&R to panel、Move & Stretch；Copy 子菜单 Same layer 同层拷贝、Other layer 拷贝到其它层、Step & Repeat 阵列"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/044_3.png",
+  "page": 44,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 Transformation Popup 窗口（ALT+T 镜相/旋转/缩放比列功能），红字注释：Rotate 旋转、Scale 缩放、Mirror-X X 镜相、Mirror-Y Y 镜相、Duplicate 拷贝、Anchor 抓坐标、Center 目标中心、Angle 角度、X Scale / Y Scale 比列"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/045_1.png",
+  "page": 45,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 EDIT 菜单之 Reshape 子菜单，配中文注释：Change Symbol 更改符号、Break 打散、Break To Islands/Holes 打散成岛/空洞、Replace Surface(s) 还原成表面对象、Arc To Lines 弧转成线、Line To Pad 线转成 Pad、Contour To Pad 表面对象转成 Pad、Pad To Line Pad 转成线、Contourize 表面化、Drawn to Surface 线涂的资料转成表面对象、Clean Holes 清除空洞、Clean Surfaces 清理表面对象、Fill 填满、Design to Rout 设计转为成型、Substitute 替代、Cutting Data 封闭区域、Change Arc Direction 改变弧的方向"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/045_2.png",
+  "page": 45,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 图形编辑界面 Actions 菜单，配中文注释：Checklists 检查清单、ERF Editor ERF 编辑器、Re-read ERFs 重读 ERF、Netlist Analyzer 网络分析、Netlist Optimization 网络优化、Output 导出 CAM 文件、Clear Select & Highlight 取消选择、Reverse Selection 反向选择、Script Action 运行脚本、Reference Selection 参考选择、Select Drawn 选铜皮、Convert Netlist to Layers 网络转层、Extract Embedded CAD Netlist、Notes 电子标注、ODB++ Message 数据信息、Graphic Snapshot 输出图片、Contour Operations 轮廓转换、JTAG Operations 作业分析、Step Compare 工作对比、Multi Layer Copy 焊接层拷贝、Quote Summary 引用数据"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/046_1.png",
+  "page": 46,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 Netlist Analyzer（网络分析）窗口，Option: Compare，红字注释：上方 Job y25731bs 原稿料号、Step yg 原稿 STEP，下方 Job y25731bs OK 料号、Step edit 做好的 STEP，Recalc 生成网络、Type Current 选择网络、Editor 编辑图形；底部 Compare 网络对比、Shorted 短路、Broken 开路、Missing (29)、Extra (29)、Close 退出；左侧为网络点图形"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/047_1.png",
+  "page": 47,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 图形编辑界面 Options 菜单，配中文注释：Selection 选择控制、Attributes 定属性功能、Graphic control 显示、Snap 抓取方式、Measure 测量(长度)、Fill parameters 填充控制、Line parameters 方向、Colors 编辑界面色彩控制、Components 部件(无用)"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/047_2.png",
+  "page": 47,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 Analysis 分析菜单，配中文注释：Surface Analyzer 表面对象分析器、Drill Checks 钻孔检查、Board-Drill Checks 钻孔成型检查、Signal Layer Checks 讯号层检查、Power/Ground Checks 电源层检查、Solder Mask Checks 防焊层检查、Silk Screen Checks 文字层检查、Profile Checks 轮廓检查、Drill summary 钻孔汇总、SMD Summary SMD 汇总、Orbotech AOI Checks、Microvia Checks 雷射钻孔检查、Pads for Drills Pads 对钻孔汇总"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/047_3.png",
+  "page": 47,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 DFM 菜单（注释\"完美功能\"），配中文注释：Cleanup 线转 PAD、Redundancy Cleanup 删独立 PAD、Repair PAD 对准、Sliver 填充小间隙、Optimization 最佳化、Yield Improvement 生产改进、Advanced 高级、Custom 钻铜优化、Legacy 做间距、DFT SMD 检测"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/047_4.png",
+  "page": 47,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 DFM→Cleanup（线转 PAD）子菜单：Legend Detection、Construct Pads (Auto.) 注释\"自动转 PAD\"、Construct Pads (Auto., All Angles)、Construct Pads (Ref.) 注释\"手动转 PAD\"、Set SMD Attribute、Line Unification"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/048_1.png",
+  "page": 48,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 DFM→Redundancy Cleanup 子菜单，配注释：Redundant Line Removal 去除多馀的线(针对资料型态为 LINE 来清除)、NFP Removal 去除多馀的 PAD(针对资料型态为 PAD 来清除)、Drawn to Outline 将实心的图形转换成只有外框线(空心)的图"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/048_2.png",
+  "page": 48,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 DFM→Repair 子菜单：Pad Snapping 注释\"PAD 对 PAD\"、Pinhole Elimination 注释\"填圆孔\"、Neck Down Repair 注释\"修线\""
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/048_3.png",
+  "page": 48,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 DFM→Optimization（注释\"优化\"）子菜单：Signal Layer Opt 外层、Line Width Opt 线宽、Power/Ground Opt 负片、Solder Mask Repair 阻焊、Silk Screen Opt 文字、Solder Paste Opt、Positive Plane Opt"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/048_4.png",
+  "page": 48,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 Signal Layer Opt（优化外层线路）Action Screen 窗口，红字注释：PTH AR 元件孔、VIA AR 过孔、MVIA AR 移动孔、Spacing 间隔、Pad to Pad Spacing PAD 到 PAD 间隙，各项 Min 最小值 / Opt 最佳值（PTH AR 180/200、VIA AR 130/150、Spacing 120/150、Pad to Pad 130/150、Drill to Cu 254）；Modification 区 PadUp 涨 PAD、Shave 削 PAD，注释\"下面这六个选项一般只选涨和削 PAD 后面的全不选\""
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/049_1.png",
+  "page": 49,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 Solder Mask Opt（优化阻焊）Action Screen 窗口，红字注释：Clearance Min 75 最小开窗 / Opt 100 最佳开窗、Coverage Min 80 最小间隙 / Opt 100 最佳间隙、Bridge size 100 阻焊桥，Use Existing Mask / Use Shaves 选 Yes，底部运行按钮和 Close 退出"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/049_2.png",
+  "page": 49,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 Step 菜单（拼板功能），配中文注释：Attributes 特性(套板边)、Profile 轮廓、Datum Point 定基点、Sub-Panel Optimization、Panelization 拼 PANEL（子菜单 Panel size 拼板大小、Active area、Step & Repeat 拼板（Automatic 自动拼板 / Table 手动）、S&R Edit 拼板编辑器、Coupons frame、Drill/Rout verification、Pattern fill、Tools frame）、Film Optimization、Pcb Numbering"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/050_1.png",
+  "page": 50,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 S&R Edit Popup（拼板编辑器）工具栏，红色箭头把各图标对应到注释：Add step 新增 step、Modify step 修改 step、Reduce S&R nesting 简化槽状排版、Align to grid 选定(至少两个以上)的 pcb 自动依照 grid 点对位并改成排版指令显示排版内容、Copy steps 拷贝 step、Move steps 移动 step、Replace steps 取代 step、Delete steps 删除 step；底部 Margins / Table / Select single step / Close"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/050_2.png",
+  "page": 50,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 Step & Repeat Table Popup（Table 手动拼板）窗口，红字注释：Step 档案（edit 选择 OK 档、New step 新建调入一个）、Anchor Point 坐标(点坐标可直接移动 STEP)、Nx/Ny XY 输入拼板数、Dx/Dy (mm) X 拼板间距/Y 拼板间距、Angle 可转角度、Mirror 可镜相、Adjust 校正(一般不用)、Close 完成退出"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/051_1.png",
+  "page": 51,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 Automatic Step & Repeat Popup（自动拼板 PNL）窗口，红字注释：Step name edit 选择要拼的 SET、Mode 选择单 PNL 拼、Panel width PNL 宽度 150、Panel height PNL 高度 214、Panel X/Y min 不填、Panel margin Top/Bottom/Left/Right 不填、Step X/Y margin X 间隙/Y 间隙 2、S&R orientation PCS 拼板方向、右侧\"拼 PNL 预览\"（150.0x214.0，Steps 4(2x2)，Util 80%）、Ok 确定完成、Close 退出"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/051_2.png",
+  "page": 51,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 图形编辑界面 Actions（行动）菜单，Output 项注释\"在 PNL 中直接点输出方便\""
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/052_1.png",
+  "page": 52,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 Output Package（文件输出）窗口及 Output Parameters Popup，红字注释：Job 输出料号、Step 输出档案 pnl、Format Group 类型 Gerber Based、Format Gerber274x 格式、Dir path 输出路径及目录、Files prefix 输出文件名(注意后面要加个点)、Layer 层(gto 要输出的请在前面打钩)、Angle 角度、Mirror 镜相、X/Y Scale 比例(比例处可拉内层)；参数弹窗 Units 单位(公制或英制)、Zeroes omitted Leading 省零方式、Number format 3:5 格式，红字注意\"输出 GERBER 为 3:5 英制 Leading，输出钻孔为 3:3 公制(MM) Trailing，注意输出钻孔时上下各有一个公制要选\"；底部 Apply 应用、Close 退出"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/053_1.png",
+  "page": 53,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Frontline GENESIS Engineering Toolkit Login Screen（Version 10.00 for Windows），Login Name 和 Password 输入框，CLEAR / QUIT 按钮"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/054_1.png",
+  "page": 54,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 系统界面（Database Jobs）中的 Create Entity Popup 窗口，Entity name 填 check、Database 填 genesis，红色箭头指向 Entity name 输入框和建好的工作料号 check 图标"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/054_2.png",
+  "page": 54,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 进入工作料号 check 后的界面（Job: check），显示 Go Up、matrix、steps、symbols、stackups、wheels、forms、flows、attributes、input、output、user、extension 图标"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/055_1.png",
+  "page": 55,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 Input Package 窗口（Job check、Step orig），红框标出上方 Path/Job/Step/Exclude 区域（资料来源及目的地），黄框标出 Wheels/Name/Extract/Gerber template 等控制开关区域和下方文件列表（BL/BO/BS/KO/TL/TO/TS.gbr）及底部 Identify/Extract/Translate/Copy/Move/Report/Close 功能键"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/056_1.png",
+  "page": 56,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 Input 窗口控制开关区局部放大，红字注释：Wheels 指定 Wheel、Gerber template 指定 Wheel 规则、Headlines 以文件头选 Wheel 规则、Extract gerber/drill D 码提取、Gerber units/Drill units 单位指定、Merge numbering formats 单位合并"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/056_2.png",
+  "page": 56,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 Input Package 窗口上方区域注释：Path 資料來源路徑可指到目錄或檔案（O:/C_D/training）、Job 料號目錄名稱（job1）、Step 實體資料名稱(轉 image 檔時不需要)（org）、Exclude 不輸入之檔案名稱（*tar;*zip）"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/057_1.png",
+  "page": 57,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 Input 文件列表（Pathname/Format/Parameters/Name/Stat），显示 cnc.ex2 Excellon2、dcodes.apr Wheel、drg_z.ger/lay_1.ger/lay_2.ger Gerber 各行及其参数（Ascii,None,2.4,Inch,Wheel=dcodes.apr）和状态 Ok"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/057_2.png",
+  "page": 57,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 Input 窗口中右击 dcodes.apr 文件弹出的右键菜单，红字注释：View Graphic 查看图象、View Ascii 查看原始代码、View Binary 查看二进制代码、Text editor 文本编辑器、Parameters 参数、Report 报告、User action 程式、Select All 全选、Clear 全不选、Filter 筛选、Wheel hint (Create Wheel) 自定 D 码、Open wheel template D 码学习器"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/059_1.png",
+  "page": 59,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 Parameters Popup（dcodes.apr）参数窗口，红字注释：Format 文件格式、Data type 编码格式、Units 坐标单位、Coordinates 坐标种类、Decimal numbers 是否存在小数点、Zeroes omitted 补零方式、Number format 整数小数位数、Separator char 分行字符、Wheel 指定 D 码文件、Files Filter 同步变更(文件名,格式,目录)；左侧为 cnc.ex2 的右键菜单"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/060_1.png",
+  "page": 60,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "可转为 Wheel 文件的 ASCII 代码格式示例：LINE 40 D119、LINE 45 D123、LINE 50 D114、LINE 60 D120、CIRCLE 25 D79、CIRCLE 30 D77 … CIRCLE 60 D54（形状、尺寸、D 码三列）"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/061_1.png",
+  "page": 61,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 Wheel Template Editor（D 码学习器）窗口：左上 Template: trn 图形列表（Rectangle、Round、Square、Round Thermal 等），中部 Basic/Ref1/Ref2/Ref3 栏位分析（Dcode、<B>、Fixed_Str \"RECT\"、A Fixed_Int2、B Fixed_Int2），左下 Width/Height/Rotation 尺寸及角度，右侧 dcodes.apr 的 DCODE/SHAPE/SIZE 列表及对应 D#/Symbol（D10 rect24x90、D11 r50 …）"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/062_1.png",
+  "page": 62,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 D 码学习器 Global Parameters Popup 窗口：Wheel type Gerber、Units Mil、Units X 1.000、Dcode numbering Explicit、Max records per line 1、Global separator、Substitute characters，Ok/Apply/Close 按钮"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/062_2.png",
+  "page": 62,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 D 码学习器 Headline Definition Popup（Wheel Template Headlines）窗口，上方 Photo-Plotter Apertures Report 的表头行 \"Position Width Hgt/ID Shape Qty\" 以红框选中，列表中已添加两行表头，底部 Add / Change / Remove / Close 按钮"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/063_1.png",
+  "page": 63,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 D 码学习器中 7. Round Thermal 的识别规则栏位（Dcode、A Float、Float、Fixed_Str \"THER\"）及参数区：Outer diameter A、Inner diameter A-16、Start angle 45、Num spokes 4、Spokes gap 10、Corner style、Rotation 0"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/064_1.png",
+  "page": 64,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 Graphic Viewer Popup 显示 DRL00.DRL (Format = Excellon2) 的图形，不同大小的钻孔挨到一起，明显错误"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/064_2.png",
+  "page": 64,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 Input 文件列表中右击 DRL00.DRL 弹出的右键菜单（View Graphic / View Ascii）"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/064_3.png",
+  "page": 64,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "DRL00.DRL 的原始数据代码（T1F0S0、X00024Y00552、X00023Y00636、X00169Y00636 …），可看出是前补零、数值最少是五位数"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/064_4.png",
+  "page": 64,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 Input 文件列表中右击 DRL00.DRL 弹出的右键菜单，Parameters 项高亮"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/065_1.png",
+  "page": 65,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 Parameters Popup（DRL00.DRL）参数设置窗口：Format Excellon2、Data type Ascii、Units Inch、Coordinates Absolute、Decimal numbers No、Zeroes omitted Leading、Number format 2 3、Separator char cr、Tool units Inch、Wheel drl00.rep，底部 Ok/Apply/Close"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/065_2.png",
+  "page": 65,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 Graphic Viewer Popup 显示修正补零方式后 DRL00.DRL 的钻孔图形，一切正常"
+ },
+ {
+  "path": "02_genesis2000菜单工具栏/066_1.png",
+  "page": 66,
+  "chapter": "02_genesis2000菜单工具栏",
+  "description": "Genesis2000 Input Package 窗口（Job check、Step orig）点击 Translate 后的界面，红色箭头指向 Editor 按钮和底部 Translate 按钮，文件列表 bl/bo/bs/drl/ko/tl/to/ts.gbr（Gerber274x）右侧 Stat 列全部显示 Ok，以红框标出"
+ },
+ {
+  "path": "03_转gerber软件/067_1.png",
+  "page": 67,
+  "chapter": "03_转gerber软件",
+  "description": "PADS Layout 打开 .pcb 文件后的界面，「文件」菜单展开，黄色箭头指向「打开」菜单项"
+ },
+ {
+  "path": "03_转gerber软件/068_1.png",
+  "page": 68,
+  "chapter": "03_转gerber软件",
+  "description": "PADS Layout「设置」菜单展开，黄色箭头指向「设置原点」菜单项，另一黄色箭头指向板子右下角的零点位置"
+ },
+ {
+  "path": "03_转gerber软件/069_1.png",
+  "page": 69,
+  "chapter": "03_转gerber软件",
+  "description": "PADS Layout「工具」菜单展开，黄色箭头指向「覆铜管理器」菜单项；弹出的覆铜管理器窗口有「灌注」「填充」「平面链接」三个页签，层列表为 GND、VCC"
+ },
+ {
+  "path": "03_转gerber软件/070_1.png",
+  "page": 70,
+  "chapter": "03_转gerber软件",
+  "description": "PADS Layout「文件」菜单展开，黄色箭头指向「CAM...」菜单项"
+ },
+ {
+  "path": "03_转gerber软件/071_1.png",
+  "page": 71,
+  "chapter": "03_转gerber软件",
+  "description": "PADS Layout「定义 CAM 文档」窗口和「添加文档」窗口，文档类型下拉列表展开（自定义、CAM 平面、布线/分割平面、丝印、助焊层、阻焊层、装配、钻孔图、数控钻孔、验证照片），黄色箭头指向 CAM 文档列表和「添加」按钮"
+ },
+ {
+  "path": "03_转gerber软件/072_1.png",
+  "page": 72,
+  "chapter": "03_转gerber软件",
+  "description": "PADS Layout 线路正片设置：添加文档窗口文档名称 art001.pho、文档类型「布线/分割平面」、制造层 Top，红色箭头指向文档类型、输出文件、「层」按钮及选择项目窗口中的 2D 线勾选项（2D 线不勾）；已选定层 Top"
+ },
+ {
+  "path": "03_转gerber软件/073_1.png",
+  "page": 73,
+  "chapter": "03_转gerber软件",
+  "description": "PADS Layout「添加文档」与「选择项目」窗口：文档类型选「CAM 平面」（内层负片），已选定层为 GND1，右侧勾选焊盘、2D 线、过孔、铜箔、文本"
+ },
+ {
+  "path": "03_转gerber软件/074_1.png",
+  "page": 74,
+  "chapter": "03_转gerber软件",
+  "description": "PADS Layout 字符层设置：添加文档窗口文档类型「丝印」、制造层 Silkscreen Top；选择项目窗口的已选定列表中有 Top，红色箭头指向 Top"
+ },
+ {
+  "path": "03_转gerber软件/074_2.png",
+  "page": 74,
+  "chapter": "03_转gerber软件",
+  "description": "PADS Layout 选择项目窗口（sst001026.pho），红色箭头指向已选定列表中的 Silkscreen Top；右侧勾起的项目为板框、顶面贴装、2D 线、参考编号、文本、边框"
+ },
+ {
+  "path": "03_转gerber软件/075_1.png",
+  "page": 75,
+  "chapter": "03_转gerber软件",
+  "description": "PADS Layout 助焊层（贴片层）设置：添加文档窗口文档名称 smd001023.pho、文档类型「助焊层」、制造层 Paste Mask Top；红色箭头分别指向文档名称、文档类型、制造层、「层」按钮、「预览选择」按钮，以及选择项目窗口中已选定的 Top / Paste Mask Top 和板框勾选项"
+ },
+ {
+  "path": "03_转gerber软件/076_1.png",
+  "page": 76,
+  "chapter": "03_转gerber软件",
+  "description": "PADS Layout 阻焊层设置：添加文档窗口文档名称 sm001021.pho、文档类型「阻焊层」、制造层 Solder Mask Top；红色箭头指向文档名称、文档类型、制造层、「层」按钮、「预览选择」按钮，以及选择项目窗口中已选定的 Top / Solder Mask Top、焊盘、测试点、板框"
+ },
+ {
+  "path": "03_转gerber软件/077_1.png",
+  "page": 77,
+  "chapter": "03_转gerber软件",
+  "description": "PADS Layout 分孔图设置：添加文档窗口文档名称 dd001024.pho、文档类型「钻孔图」；选择项目窗口已选定 Top / Drill Drawing，勾选板框、2D 线、过孔、文本"
+ },
+ {
+  "path": "03_转gerber软件/078_1.png",
+  "page": 78,
+  "chapter": "03_转gerber软件",
+  "description": "PADS Layout 钻孔层设置：添加文档窗口文档名称 drl001.drl、文档类型「数控钻孔」，输出设备选「钻孔」，摘要为电镀管脚、非电镀管脚、通孔"
+ },
+ {
+  "path": "03_转gerber软件/079_1.png",
+  "page": 79,
+  "chapter": "03_转gerber软件",
+  "description": "PADS Layout「定义 CAM 文档」窗口，CAM 文档列表中全部文件（sst/ssb/smd/sm/dd 等 .pho）被选中；红色箭头指向「运行」按钮和「CAM 目录」路径"
+ },
+ {
+  "path": "03_转gerber软件/080_1.png",
+  "page": 80,
+  "chapter": "03_转gerber软件",
+  "description": "PADS Layout「文件」菜单展开，红色箭头指向「导入」菜单项"
+ },
+ {
+  "path": "03_转gerber软件/080_2.png",
+  "page": 80,
+  "chapter": "03_转gerber软件",
+  "description": "PADS Layout「文件导入」窗口，文件类型 ASCII 文件(*.asc)，红色箭头指向 VTP000AC-V21.asc 文件和「打开」按钮"
+ },
+ {
+  "path": "03_转gerber软件/082_1.png",
+  "page": 82,
+  "chapter": "03_转gerber软件",
+  "description": "Altium Designer 10 的 String 属性窗口，Text 设为 .Legend、Layer 设为 Drill Drawing，红色箭头指向这两项和 OK 按钮"
+ },
+ {
+  "path": "03_转gerber软件/083_1.png",
+  "page": 83,
+  "chapter": "03_转gerber软件",
+  "description": "Altium Designer Gerber Setup 窗口 Layers 页，红色箭头指向 Layers 标签和层列表的 Plot 勾选列，底部有 Plot Layers 下拉按钮"
+ },
+ {
+  "path": "03_转gerber软件/084_1.png",
+  "page": 84,
+  "chapter": "03_转gerber软件",
+  "description": "Altium Designer Gerber Setup 窗口 Drill Drawing 页，红色箭头指向 Drill Drawing Plots 和 Drill Guide Plots 两处的 Plot all used layer pairs 勾选框"
+ },
+ {
+  "path": "03_转gerber软件/085_1.png",
+  "page": 85,
+  "chapter": "03_转gerber软件",
+  "description": "Altium Designer NC Drill Setup 窗口（Units Inches、Format 2:5、Suppress trailing zeroes），红色箭头指向 OK 按钮"
+ },
+ {
+  "path": "03_转gerber软件/086_1.png",
+  "page": 86,
+  "chapter": "03_转gerber软件",
+  "description": "Altium Designer ODB++ Setup 窗口，Layers to Plot 列表中各层 Plot 全部勾选，底部有 Plot Layers 下拉按钮"
+ },
+ {
+  "path": "03_转gerber软件/087_1.png",
+  "page": 87,
+  "chapter": "03_转gerber软件",
+  "description": "Genesis2000 Engineering Toolkit 的 File 菜单展开，红色箭头指向 Import Job... 菜单项"
+ },
+ {
+  "path": "03_转gerber软件/087_2.png",
+  "page": 87,
+  "chapter": "03_转gerber软件",
+  "description": "Genesis2000 Import Job Popup 窗口（Database、Input Path、Job Name、Analyze Surfaces、Verify tgz format 及 Ok/Apply/Close 按钮），Input Path 和 Job Name 输入框以红框标出"
+ },
+ {
+  "path": "03_转gerber软件/087_3.png",
+  "page": 87,
+  "chapter": "03_转gerber软件",
+  "description": "Genesis2000 Import Job Popup 窗口，Input Path 已填 ODB++ 所在目录、Job Name 填 odb，两项以红框标出"
+ },
+ {
+  "path": "03_转gerber软件/087_4.png",
+  "page": 87,
+  "chapter": "03_转gerber软件",
+  "description": "Genesis2000 Database Jobs 界面，导入后名为 odb 的料号图标以红框标出"
+ },
+ {
+  "path": "03_转gerber软件/088_1.png",
+  "page": 88,
+  "chapter": "03_转gerber软件",
+  "description": "Altium Designer 打开 PCB 后生成的 1.PcbDoc.htm（File in Newer Format），表格列出 Release 10 update 15 至 Release 16.0 各版本的 CAUTION 信息；红色箭头指向 .htm 标签页，底部 \"This file was generated by a later version of the software\" 中的 later 用红圈标出"
+ },
+ {
+  "path": "03_转gerber软件/088_2.png",
+  "page": 88,
+  "chapter": "03_转gerber软件",
+  "description": "WEB 文件显示 File in Previous Format，\"This file was generated by an earlier version of the software\" 中的 earlier 用红圈和红色箭头标出"
+ },
+ {
+  "path": "03_转gerber软件/089_1.png",
+  "page": 89,
+  "chapter": "03_转gerber软件",
+  "description": "Windows 资源管理器中 PCB 文件所在目录，红色箭头指向与 PcbDoc 同名的 HTM 文件"
+ },
+ {
+  "path": "03_转gerber软件/090_1.png",
+  "page": 90,
+  "chapter": "03_转gerber软件",
+  "description": "Altium Designer 的 View Configurations 窗口（按 L 键弹出），Board Layers And Colors 页显示 Signal/Mask/Silkscreen/Other/Mechanical 各层及 All On / All Off 按钮"
+ },
+ {
+  "path": "03_转gerber软件/090_2.png",
+  "page": 90,
+  "chapter": "03_转gerber软件",
+  "description": "Altium Designer 只打开 Keep-Out Layer 后的界面，显示粉色外形线及板内多个内槽"
+ },
+ {
+  "path": "03_转gerber软件/091_1.png",
+  "page": 91,
+  "chapter": "03_转gerber软件",
+  "description": "Altium Designer 中选中外形线后弹出的右键菜单，粉色箭头指向 Build Query... 菜单项"
+ },
+ {
+  "path": "03_转gerber软件/091_2.png",
+  "page": 91,
+  "chapter": "03_转gerber软件",
+  "description": "Altium Designer 的 Building Query from Track 窗口，Add first condition 下拉列表展开，粉色箭头指向 Exists on Layer"
+ },
+ {
+  "path": "03_转gerber软件/091_3.png",
+  "page": 91,
+  "chapter": "03_转gerber软件",
+  "description": "Building Query from Track 窗口，Exists on Layer 的 Condition Value 选为 Keep-Out Layer（Query Preview 显示 OnLayer('Keep-Out Layer')），粉色箭头指向该值和 Apply 按钮"
+ },
+ {
+  "path": "03_转gerber软件/092_1.png",
+  "page": 92,
+  "chapter": "03_转gerber软件",
+  "description": "Altium Designer 的 PCB Inspector 面板，Object Specific 中 Keepout 项处于勾选状态，粉色箭头指向该勾选框"
+ },
+ {
+  "path": "03_转gerber软件/092_2.png",
+  "page": 92,
+  "chapter": "03_转gerber软件",
+  "description": "PCB Inspector 面板，Keepout 勾去掉后显示 False，粉色箭头指向该项"
+ },
+ {
+  "path": "03_转gerber软件/092_3.png",
+  "page": 92,
+  "chapter": "03_转gerber软件",
+  "description": "PCB Inspector 面板，粉色箭头指向右上角的关闭按钮 X"
+ },
+ {
+  "path": "03_转gerber软件/092_4.png",
+  "page": 92,
+  "chapter": "03_转gerber软件",
+  "description": "Building Query from Track 窗口（Exists on Layer = Keep-Out Layer），粉色箭头指向 OK 按钮"
+ },
+ {
+  "path": "03_转gerber软件/093_1.png",
+  "page": 93,
+  "chapter": "03_转gerber软件",
+  "description": "Altium Designer 只显示 GKO 层的 PCB 界面，粉色外形线、内槽和板内孔"
+ },
+ {
+  "path": "03_转gerber软件/093_2.png",
+  "page": 93,
+  "chapter": "03_转gerber软件",
+  "description": "Altium Designer 中选中直线（线上有白色选中点）后的右键菜单，黄色箭头指向 Find Similar Objects... 菜单项"
+ },
+ {
+  "path": "03_转gerber软件/094_1.png",
+  "page": 94,
+  "chapter": "03_转gerber软件",
+  "description": "Altium Designer 的 Find Similar Objects 窗口，Layer（KeepOutLayer）和 Keepout 两行右侧的 Any 用红色箭头标注\"改为 same\""
+ },
+ {
+  "path": "03_转gerber软件/095_1.png",
+  "page": 95,
+  "chapter": "03_转gerber软件",
+  "description": "PCB Inspector 面板，Keepout 勾选显示 True，红色箭头指向该项"
+ },
+ {
+  "path": "03_转gerber软件/095_2.png",
+  "page": 95,
+  "chapter": "03_转gerber软件",
+  "description": "PCB Inspector 面板，Keepout 勾去掉后显示 False，用红圈标出"
+ },
+ {
+  "path": "03_转gerber软件/095_3.png",
+  "page": 95,
+  "chapter": "03_转gerber软件",
+  "description": "Altium Designer 中选中外形圆弧（粉色）后的右键菜单，Find Similar Objects... 高亮"
+ },
+ {
+  "path": "03_转gerber软件/096_1.png",
+  "page": 96,
+  "chapter": "03_转gerber软件",
+  "description": "Protel 99 SE（Design Explorer）的 Open Design Database 窗口，红色箭头指向 Backup of llcc68.PCB 文件和打开后的 PCB 标签页"
+ },
+ {
+  "path": "03_转gerber软件/097_1.png",
+  "page": 97,
+  "chapter": "03_转gerber软件",
+  "description": "Protel 99 SE 的 String Properties 窗口，Text 为 String、Layer 为 TopLayer，红色箭头指向这两项"
+ },
+ {
+  "path": "03_转gerber软件/097_2.png",
+  "page": 97,
+  "chapter": "03_转gerber软件",
+  "description": "Protel 99 SE 的 String Properties 窗口，Text 已改为 .Legend、Layer 已改为 DrillDrawing"
+ },
+ {
+  "path": "03_转gerber软件/098_1.png",
+  "page": 98,
+  "chapter": "03_转gerber软件",
+  "description": "Protel 99 SE CAM Manager 的 Output Wizard 起始页，红色箭头指向 Next 按钮"
+ },
+ {
+  "path": "03_转gerber软件/098_2.png",
+  "page": 98,
+  "chapter": "03_转gerber软件",
+  "description": "Output Wizard 选择输出类型页，Gerber (Generates Gerber files) 一项用红框标出"
+ },
+ {
+  "path": "03_转gerber软件/098_3.png",
+  "page": 98,
+  "chapter": "03_转gerber软件",
+  "description": "Output Wizard 输入 gerber 输出名称页（Gerber Output 1）"
+ },
+ {
+  "path": "03_转gerber软件/098_4.png",
+  "page": 98,
+  "chapter": "03_转gerber软件",
+  "description": "Output Wizard \"How apertures are handled\" 说明页（embedded apertures RS274X）"
+ },
+ {
+  "path": "03_转gerber软件/099_1.png",
+  "page": 99,
+  "chapter": "03_转gerber软件",
+  "description": "Output Wizard 设置 Units（Inches/Millimeters）和 Format（2:3/2:4/2:5）页"
+ },
+ {
+  "path": "03_转gerber软件/099_2.png",
+  "page": 99,
+  "chapter": "03_转gerber软件",
+  "description": "Output Wizard 指定 Gerber plot layers 页，层列表 Plot 列已勾选（在 Plot 上点右键出现 Plotlayer 选择 Used on）"
+ },
+ {
+  "path": "03_转gerber软件/099_3.png",
+  "page": 99,
+  "chapter": "03_转gerber软件",
+  "description": "Output Wizard 是否生成 drill drawing / drill guide plots 页，两项均勾选"
+ },
+ {
+  "path": "03_转gerber软件/099_4.png",
+  "page": 99,
+  "chapter": "03_转gerber软件",
+  "description": "Output Wizard 的 Plot used drill drawing layer pairs 页（TopLayer-BottomLayer），Graphic symbols、Symbol 50mil"
+ },
+ {
+  "path": "03_转gerber软件/100_1.png",
+  "page": 100,
+  "chapter": "03_转gerber软件",
+  "description": "Output Wizard 的 Plot used drill guide layer pairs 页（TopLayer-BottomLayer）"
+ },
+ {
+  "path": "03_转gerber软件/100_2.png",
+  "page": 100,
+  "chapter": "03_转gerber软件",
+  "description": "Output Wizard 是否添加 mechanical 层内容页（Mechanical1 未勾选）"
+ },
+ {
+  "path": "03_转gerber软件/100_3.png",
+  "page": 100,
+  "chapter": "03_转gerber软件",
+  "description": "Output Wizard 完成页（棋盘旗图标），点击 Finish 完成"
+ },
+ {
+  "path": "03_转gerber软件/100_4.png",
+  "page": 100,
+  "chapter": "03_转gerber软件",
+  "description": "Protel 99 SE 的 CAM Outputs for Backup of llcc68.cam 标签页，列表中显示 Gerber Output 1（Type: Gerber）"
+ },
+ {
+  "path": "03_转gerber软件/101_1.png",
+  "page": 101,
+  "chapter": "03_转gerber软件",
+  "description": "Protel 99 SE 在 Gerber Output 1 上点右键弹出的菜单，Insert NC Drill... 高亮（菜单中还有 Generate CAM Files F9）"
+ },
+ {
+  "path": "03_转gerber软件/101_2.png",
+  "page": 101,
+  "chapter": "03_转gerber软件",
+  "description": "Protel 99 SE 的 CAM Outputs 列表，显示 Gerber Output 1 和 NC Drill Output 1"
+ },
+ {
+  "path": "03_转gerber软件/101_3.png",
+  "page": 101,
+  "chapter": "03_转gerber软件",
+  "description": "Protel 99 SE 的 NC Drill Setup 窗口（Options 页，Name: NC Drill Output 1，Units Inches，Format 2:3），底部 OK 按钮"
+ },
+ {
+  "path": "03_转gerber软件/102_1.png",
+  "page": 102,
+  "chapter": "03_转gerber软件",
+  "description": "Protel 99 SE Design Explorer，按 F9 生成后左侧目录树出现 CAM for Backup of Backup of llcc68 文件夹，红色箭头指向该文件夹（在此点右键选 Export 导出）"
+ },
+ {
+  "path": "03_转gerber软件/103_1.png",
+  "page": 103,
+  "chapter": "03_转gerber软件",
+  "description": "Protel 99 SE 的 Track 属性窗口（Layer 为 KeepOutLayer），底部 Keepout 选项用绿色圆圈标出"
+ },
+ {
+  "path": "03_转gerber软件/104_1.png",
+  "page": 104,
+  "chapter": "03_转gerber软件",
+  "description": "Protel 99 SE 的 Pad 属性窗口，Attributes 区（Designator、Hole Size 0.508mm、Layer BottomLayer）用紫色圆圈标出，右侧注释：底层线路上有一个 35MIL 的盘定义为单面焊盘钻孔为 20MIL，单面焊盘定义钻孔时 LAYER 仅为其中一层（图5.1）"
+ },
+ {
+  "path": "03_转gerber软件/105_1.png",
+  "page": 105,
+  "chapter": "03_转gerber软件",
+  "description": "Protel 99 SE 的 Gerber Setup 窗口 Advanced 页，含 Film Size（X 80000mil、Y 76000mil、Border size 8000mil）和 Position on Film（Reference to relative）等选项"
+ },
+ {
+  "path": "03_转gerber软件/106_1.png",
+  "page": 106,
+  "chapter": "03_转gerber软件",
+  "description": "Protel 99 SE Design Explorer 弹出错误提示 GERBER - Failed to Match All Shapes for PLL.pcb（图1）"
+ },
+ {
+  "path": "03_转gerber软件/106_2.png",
+  "page": 106,
+  "chapter": "03_转gerber软件",
+  "description": "Protel 99 SE 的 Gerber Setup 窗口 Apertures 页，Embedded apertures 未勾选，D 码列表下方有 Create List From PCB 按钮（图2）"
+ },
+ {
+  "path": "03_转gerber软件/107_1.png",
+  "page": 107,
+  "chapter": "03_转gerber软件",
+  "description": "CAM350 V9.5.1 的 File 菜单展开，红色箭头指向 Open... 菜单项"
+ },
+ {
+  "path": "03_转gerber软件/107_2.png",
+  "page": 107,
+  "chapter": "03_转gerber软件",
+  "description": "CAM350 打开 set.cam 后的图形界面，左侧层列表为 -220V.GKO/GTL/GTO/TXT 四层，显示 2×3 拼板图形"
+ },
+ {
+  "path": "03_转gerber软件/107_3.png",
+  "page": 107,
+  "chapter": "03_转gerber软件",
+  "description": "用写字板打开的 set.cam 文件内容，红框标出文件头 *STATUSB … VERSION 9.5.1 … *END_STATUS 一段"
+ },
+ {
+  "path": "03_转gerber软件/108_1.png",
+  "page": 108,
+  "chapter": "03_转gerber软件",
+  "description": "CAM350 的 File→Import 子菜单，蓝色箭头分别指向 AutoImport...、Gerber Data...、Drill Data...、Mill Data...、DXF..."
+ },
+ {
+  "path": "03_转gerber软件/109_1.png",
+  "page": 109,
+  "chapter": "03_转gerber软件",
+  "description": "CAM350 的 File→Export 子菜单，红色箭头指向 Gerber Data...、Drill Data...、Mill Data..."
+ },
+ {
+  "path": "03_转gerber软件/109_2.png",
+  "page": 109,
+  "chapter": "03_转gerber软件",
+  "description": "CAM350 的 Export Gerber: Layers 窗口，红色箭头指向 Data Format（RS274-X: 2.6 Leading Abs Inch）和 Export Path，层列表 Exp 列全部勾选，底部 OK 按钮"
+ },
+ {
+  "path": "04_文件初步整理/111_1.png",
+  "page": 111,
+  "chapter": "04_文件初步整理",
+  "description": "Genesis 主界面，Job 2101p、Step orig：层列表上方红框为 gto/gts/gtl/gbl/gbs/gbo/drl/gko 板属性层，下方红框为复制出来的 gto+1…gdd+1 等 \"+1\" 层，右侧红框为外形线（Profile）及定位孔"
+ },
+ {
+  "path": "04_文件初步整理/111_2.png",
+  "page": 111,
+  "chapter": "04_文件初步整理",
+  "description": "Step net 的界面（蓝色箭头指向 Step: net），显示 gtl 层线路及外形，用于删掉 Profile 以外的东西后做网络比较"
+ },
+ {
+  "path": "04_文件初步整理/112_1.png",
+  "page": 112,
+  "chapter": "04_文件初步整理",
+  "description": "Step edit 的界面（由 Orig 复制 step 改成 Edit），显示 gtl 层线路及 gko 外形，已删掉板外物"
+ },
+ {
+  "path": "05_钻孔制作/113_1.png",
+  "page": 113,
+  "chapter": "05_钻孔制作",
+  "description": "左侧为 drill.out 层的 Features Histogram（Pads List，r21…r140 各孔径数量，Total 232），右侧为客户分孔图 Drill Table（Hole Dia(inch)/Symbol/Quantity/Plated），用于核对孔径大小及孔数"
+ },
+ {
+  "path": "05_钻孔制作/114_1.png",
+  "page": 114,
+  "chapter": "05_钻孔制作",
+  "description": "Edit Attributes：Change Attributes Popup 点击 Attributes 弹出 Attributes Popup，Filter *drill*，选中 .drill，Parameters 绿框内为 plated / non_plated / via 三种孔属性"
+ },
+ {
+  "path": "05_钻孔制作/114_2.png",
+  "page": 114,
+  "chapter": "05_钻孔制作",
+  "description": "定义 via 孔示例：选中钻孔后在 Attributes Popup 选 via 点 Add，Values 显示 (F).drill = via（红色），再点 Ok"
+ },
+ {
+  "path": "05_钻孔制作/115_1.png",
+  "page": 115,
+  "chapter": "05_钻孔制作",
+  "description": "在 drl 层上右键弹出的层菜单，红框标出 Drill tools manager 项"
+ },
+ {
+  "path": "05_钻孔制作/115_2.png",
+  "page": 115,
+  "chapter": "05_钻孔制作",
+  "description": "Drill Tool Manager 窗口（预大前）：Tool T01–T15，Type Via/Plated/NPlated，Finish Size(my) 与 Drill Size(my) 相同"
+ },
+ {
+  "path": "05_钻孔制作/115_3.png",
+  "page": 115,
+  "chapter": "05_钻孔制作",
+  "description": "Drill Tool Manager 窗口（预大后）：红框住的 Drill Size(my) 列已填入预大后的实际钻嘴（如 Plated 889→1050，NPlated 3505.2→3550，Via 254→250）"
+ },
+ {
+  "path": "05_钻孔制作/116_1.png",
+  "page": 116,
+  "chapter": "05_钻孔制作",
+  "description": "Analysis Drill Checks 的 Action Screen：ERF STD，Layer .affected，Rout Distance 400.0 ml（钻孔到Rout的最大距离），Test list 勾选 Hole Size/Extra Holes/Hole Separation/Power/Ground Shorts/Missing Holes/NPTH to Rout（需要检测项），Hole Types To Check for Extra 勾 Pth/Npth/Via（检查多孔钻孔类型）"
+ },
+ {
+  "path": "05_钻孔制作/116_2.png",
+  "page": 116,
+  "chapter": "05_钻孔制作",
+  "description": "Touching holes 示意图：两个彼此接触的孔，说明 drills touch each other, whose centers are further apart than duph_tolerance"
+ },
+ {
+  "path": "05_钻孔制作/117_1.png",
+  "page": 117,
+  "chapter": "05_钻孔制作",
+  "description": "Close holes 示意图：一排孔中两孔边缘距离小于 close_hole_dist 但不接触（太靠近的孔）"
+ },
+ {
+  "path": "05_钻孔制作/117_2.png",
+  "page": 117,
+  "chapter": "05_钻孔制作",
+  "description": "NPTH to Rout 示意图：红色非金属孔靠近绿色成型线（板边），标出孔到板边的距离"
+ },
+ {
+  "path": "05_钻孔制作/118_1.png",
+  "page": 118,
+  "chapter": "05_钻孔制作",
+  "description": "Auto Drill Manager 窗口：Job demojob、Step array、Layer drill、NCset p1，右侧流程 Layer→Machine→Params→Table→Register→Order，左侧为拼好的 panel 钻孔图"
+ },
+ {
+  "path": "06_内层制作/120_1.png",
+  "page": 120,
+  "chapter": "06_内层制作",
+  "description": "Change Feature Symbols Popup，Symbol 填 thr2150x1650x45x4x250，下方为圆形散热PAD示意（红色孔、绿色外圆环、四个开口）"
+ },
+ {
+  "path": "06_内层制作/120_2.png",
+  "page": 120,
+  "chapter": "06_内层制作",
+  "description": "Change Feature Symbols Popup，Symbol 填 ths2150x1650x45x4x250，下方为方形散热PAD示意（红色孔、绿色方环、四个开口）"
+ },
+ {
+  "path": "06_内层制作/122_1.png",
+  "page": 122,
+  "chapter": "06_内层制作",
+  "description": "内层正片制作流程图：删独立Pad→转Surface(无大铜皮则省)→线路补偿→优化并根据优化结果修改→加泪滴→NPTH孔削铜→填小间隙(可省)→削外围→检测并根据检测结果报告修正错误"
+ },
+ {
+  "path": "06_内层制作/123_1.png",
+  "page": 123,
+  "chapter": "06_内层制作",
+  "description": "NFP Removal 的 Action Screen：ERF Isolated P…，Delete 勾 Isolated，Work on 选 Features，Drills 勾 PTH/NPTH/Via，Remove Undrilled Pads Yes，Apply to All，Remove \\ Mark NFP 选 Remove"
+ },
+ {
+  "path": "06_内层制作/123_2.png",
+  "page": 123,
+  "chapter": "06_内层制作",
+  "description": "Contourize Popup（转Surface）：Accuracy 0.25 ml，Separate to islands Yes，Clean Holes Max Size 3 ml，Mode X and Y，参数不用设置直接点OK"
+ },
+ {
+  "path": "06_内层制作/124_1.png",
+  "page": 124,
+  "chapter": "06_内层制作",
+  "description": "Resize Features Popup（线路补偿）：Size 填 1 ml，Corner Control No"
+ },
+ {
+  "path": "06_内层制作/124_2.png",
+  "page": 124,
+  "chapter": "06_内层制作",
+  "description": "Signal Layer Opt 的 Action Screen：ERF Inner Layers，Signal Layer .affected，PTH AR Min 7.0 Opt 8.0，VIA AR Min 3.0 Opt 6.0，Spacing Min 4.0 Opt 4.0，Drill to Cu 10.0，Modification 勾 PadUp 和 Shave"
+ },
+ {
+  "path": "06_内层制作/125_1.png",
+  "page": 125,
+  "chapter": "06_内层制作",
+  "description": "Modification 几种修改方式示意图：ReRout 绕线、Shave 削PAD、LineDn 线宽缩小、ReShape 将直角处转成圆角(针对方形PAD)"
+ },
+ {
+  "path": "06_内层制作/126_1.png",
+  "page": 126,
+  "chapter": "06_内层制作",
+  "description": "Advanced Teardrops Creation 的 Action Screen：ERF Teardrop (Mils)，Layer .affected，Type Straight，Operate On 勾 Drilled Pads/Undrilled Pads，Ann. Ring Min 9.0，Drill Size Min 0.0 Max 80.0，Cu. Spacing 4.0，Drill Spacing 10.0，Delete Old Teardrops Yes"
+ },
+ {
+  "path": "06_内层制作/126_2.png",
+  "page": 126,
+  "chapter": "06_内层制作",
+  "description": "Advanced Teardrops Creation 的 Results viewer：Categories 列出 Full Teardrops(17)、One Sided Teardrops(2)、Shortened Teardrops(13)、Missing Teardrops(0)、Problematic Teardrops(0)、Non-tangent Teardrops(0)"
+ },
+ {
+  "path": "06_内层制作/127_1.png",
+  "page": 127,
+  "chapter": "06_内层制作",
+  "description": "Sliver & Acute Angles 的 Action Screen：ERF STD，Layer .affected，Max Sliver 3.0 ml，Angle(Deg) 30，Max Pg Space 2.0 ml，Overlap 1.0 ml，Fix Clearances Yes，Fix Acute Yes，Mode Analyze，Work On Copper"
+ },
+ {
+  "path": "06_内层制作/127_2.png",
+  "page": 127,
+  "chapter": "06_内层制作",
+  "description": "NPTH孔削铜：选中 drl 层 NPTH 孔后的 Copy To Other Layer Popup，Destination Affected Layers，Invert Yes，Resize by 400 my，背景为内层正片线路"
+ },
+ {
+  "path": "06_内层制作/129_1.png",
+  "page": 129,
+  "chapter": "06_内层制作",
+  "description": "Signal Layer Checks 的 Action Screen：ERF STD 6，Layer .affected，Spacing 4.0，Rout to Cu 15.0，Drill to Cu 10.0，Sliver min 4.0 ml，Test list 勾 Spacing/Size/Drill/Sliver/SMD/Rout，Check Missing Pads for Drills Yes，Use Compensated Rout No，Sort Spacing by Solder Mask No"
+ },
+ {
+  "path": "06_内层制作/130_1.png",
+  "page": 130,
+  "chapter": "06_内层制作",
+  "description": "Actions 下拉菜单，红框标出 Netlist Analyzer 项"
+ },
+ {
+  "path": "06_内层制作/130_2.png",
+  "page": 130,
+  "chapter": "06_内层制作",
+  "description": "Net Analyzer 窗口（Option Compare）：上方 Step orig 与下方 Step edit 各有 Recalc 按钮（1.点击分析当前原稿网络，2.点击分析当前生产网络），左下 Compare 按钮（3.点击比较），旁有 Shorted/Broken/Missing/Extra"
+ },
+ {
+  "path": "06_内层制作/131_1.png",
+  "page": 131,
+  "chapter": "06_内层制作",
+  "description": "Select Drawn 的 Drawn Data Selection Popup：Type of drawn data 下拉 Mixed / Cross Hatch / Power Ground，Analyze thermal pads No"
+ },
+ {
+  "path": "06_内层制作/132_1.png",
+  "page": 132,
+  "chapter": "06_内层制作",
+  "description": "掏铜时的 Signal Layer Opt 的 Action Screen：ERF InnerLayersPadUp，PTH AR 200/200 my，VIA AR 150/150 my，Spacing Min/Opt 2.54 my，Drill to Cu 2.54 my（间距和孔到铜的距离设得很小），Work on 勾 Pads/SMDs/Drills，Modification 只勾 PadUp"
+ },
+ {
+  "path": "06_内层制作/133_1.png",
+  "page": 133,
+  "chapter": "06_内层制作",
+  "description": "Edit → Move → Other layer 菜单及 Move To Other Layer Popup（Target layer、Invert No、X/Y offset 0、Resize by 0），用于把选中的 surface 移出为铜皮层"
+ },
+ {
+  "path": "06_内层制作/133_2.png",
+  "page": 133,
+  "chapter": "06_内层制作",
+  "description": "Reference Selection Popup：Use Filter，Pads as Shape，Mode Disjoint，Reference Layers 填 l1（移入铜皮所在层），用于选中不与铜皮接触的 pad 和线"
+ },
+ {
+  "path": "07_外层资料制作/135_1.png",
+  "page": 135,
+  "chapter": "07_外层资料制作",
+  "description": "外层一般流程图：转绿油Pad→转线路PAD→设置SMD属性→转Surface(无大铜皮则省)→加大线路和SMD PAD→掏铜皮→优化并根据优化结果修改→NPTH孔削铜→削外围→检测并根据检测结果报告修正错误"
+ },
+ {
+  "path": "07_外层资料制作/136_1.png",
+  "page": 136,
+  "chapter": "07_外层资料制作",
+  "description": "转绿油Pad：Construct Pads (Ref.) Action Screen 窗口，ERF 为 STD，Layer 填 .affected，Apply to All，Tolerance 2.0 ml，Rotations One，Break To Connected Groups Yes，Work on Features"
+ },
+ {
+  "path": "07_外层资料制作/136_2.png",
+  "page": 136,
+  "chapter": "07_外层资料制作",
+  "description": "转线路PAD：Construct Pads (Auto.) Action Screen 窗口，Layer 填 l1，Minimum 15.0 ml，Maximum 500.0 ml，Tolerance 2.0 ml，Reference SM 填 sm1，Work on Features，Create constructs Yes"
+ },
+ {
+  "path": "07_外层资料制作/137_1.png",
+  "page": 137,
+  "chapter": "07_外层资料制作",
+  "description": "设置SMD属性：Set SMD Attribute Action Screen 窗口，Layer 填 .affected，Set Drilled Pads 选 No，Set Rotated Pads 选 No，Types 勾选 Square/Rect/Oval，Delete Previous Setting 选 No"
+ },
+ {
+  "path": "07_外层资料制作/137_2.png",
+  "page": 137,
+  "chapter": "07_外层资料制作",
+  "description": "选大铜皮 Select Drawn 弹出的 Drawn Data Selection Popup 窗口，Type of drawn data 选 Mixed，Analyze thermal pads 选 No"
+ },
+ {
+  "path": "07_外层资料制作/138_1.png",
+  "page": 138,
+  "chapter": "07_外层资料制作",
+  "description": "优化间距：Signal Layer Opt Action Screen 窗口，ERF 为 InnerLayersPadUp，Signal Layer 填 .affected，PTH AR/VIA AR/Spacing/Pad to Pad Spacing 的 Min 和 Opt 均为 100 my，LRE Range 101.6 到 254 my，% reduction 10，Abs.Min 127 my，Drill to Cu 200 my，Work on 勾选 Pads/SMDs/Drills，Modification 勾选 Shave"
+ },
+ {
+  "path": "08_阻焊资料制作/140_1.png",
+  "page": 140,
+  "chapter": "08_阻焊资料制作",
+  "description": "阻焊制作流程图：开窗对应线路应为PAD→绿油层须全为PAD→开窗须比线路PAD大→优化并根据结果修改→NPTH孔开窗是否合格→检测并根据报告修正"
+ },
+ {
+  "path": "08_阻焊资料制作/141_1.png",
+  "page": 141,
+  "chapter": "08_阻焊资料制作",
+  "description": "整个层都加大：Edit Resize Global 弹出的 Resize Features Popup 窗口，Size 填 2 ml，Corner Control 选 No"
+ },
+ {
+  "path": "08_阻焊资料制作/142_1.png",
+  "page": 142,
+  "chapter": "08_阻焊资料制作",
+  "description": "Solder Mask Optimization 的 Solder Mask Opt Action Screen 窗口，ERF 为 Diff Net (Mils)，Layer 填 .type=signal|mixed&side=top，Clearance Min 1 Opt 2 ml（阻焊开窗最小值与最佳值），Coverage Min 2 Opt 2 ml（盖线位），Bridge size 4 ml（阻焊桥），Use Existing Mask Yes（使用愿意存在的阻焊），Use Shaves Yes（盖线位及阻焊桥不够是否需要削阻焊开窗）"
+ },
+ {
+  "path": "08_阻焊资料制作/143_1.png",
+  "page": 143,
+  "chapter": "08_阻焊资料制作",
+  "description": "检测分析的 Solder Mask Checks Action Screen 窗口，ERF 为 LPI (Mils)，Layer 填 .type=solder_mask&context=bo，SM A.R. 355.6 my（阻焊开窗），SM coverage 203.2 my（盖线位），SM to rout 406.4 my，Sliver min 203.2 my，Spacing min 228.6 my（阻焊开窗与开窗之间间距），Bridge 355.6 my（阻焊桥），Minimum Clearance overlap 127 my，Test list 勾选 Drill/Pads/Coverage/Rout/Bridge/Sliver/Missing/Spacing，Use Compensated Rout 选 No"
+ },
+ {
+  "path": "09_文字制作/145_1.png",
+  "page": 145,
+  "chapter": "09_文字制作",
+  "description": "字符制作流程图：检查文字线宽→是否超过外围→是否在绿油开窗上→用防焊削文字→检测并根据报告结果修正错误"
+ },
+ {
+  "path": "09_文字制作/146_1.png",
+  "page": 146,
+  "chapter": "09_文字制作",
+  "description": "放大字高用的 Edit Transform 弹出的 Transformation Popup 窗口，Mode 选 Anchor，Operation 勾选 Scale，Duplicate 选 No，Anchor X=0 Y=0（田字格按钮抓取基准点），X Scale 1，Y Scale 1.2，X offset 0，Y offset 0"
+ },
+ {
+  "path": "09_文字制作/147_1.png",
+  "page": 147,
+  "chapter": "09_文字制作",
+  "description": "分析检查用的 Silk Screen Checks Action Screen 窗口，ERF 为 (Mils)，Layer 填 pe=silk_screen&context=board，Spacing 4.0 ml，Test list 勾选 SM clearance/Hole clearance/SMD clearance/Pad clearance/Line width，Rout clearance 未勾选，Use Compensated Rout 选 No"
+ },
+ {
+  "path": "10_SET及panel拼板/148_1.png",
+  "page": 148,
+  "chapter": "10_SET及panel拼板",
+  "description": "EDIT copy Step&Repeat 弹出的 Step & Repeat Selected Features 窗口（默认值），Nx 1，Ny 1（X，Y方向拼板个数），Dx 0 mm，Dy 0 mm（X，Y拼板距离）"
+ },
+ {
+  "path": "10_SET及panel拼板/148_2.png",
+  "page": 148,
+  "chapter": "10_SET及panel拼板",
+  "description": "Step & Repeat Selected Features 窗口填好参数的例子：Nx 3，Ny 2，Dx 98.999 mm，Dy 71.999 mm"
+ },
+ {
+  "path": "10_SET及panel拼板/148_3.png",
+  "page": 148,
+  "chapter": "10_SET及panel拼板",
+  "description": "在同一step里面拼板的结果图：x方向3个、y方向2个零间距拼板，单元上有 y04f2118793a0 yz 字符，左下一个单元被选中显示为紫色"
+ },
+ {
+  "path": "10_SET及panel拼板/149_1.png",
+  "page": 149,
+  "chapter": "10_SET及panel拼板",
+  "description": "Job 10140266 的 set step 中打开的 Step & Repeat Table Popup 窗口，列有 Step（输入单只STEP，这里为 edit）、Anchor Point（基准点 3.9999200, -0.0003125）、Nx 1、Ny 2（拼板个数XY方向）、Dx 149.665 mm、Dy 81.2668 mm（拼板距离XY方向）、Angle 0（角度）、Mirror No（镜像）"
+ },
+ {
+  "path": "10_SET及panel拼板/150_1.png",
+  "page": 150,
+  "chapter": "10_SET及panel拼板",
+  "description": "Step panelizcation S&R EDIT 界面：右侧 S&R Edit Popup 有 Horiz gap/Vert gap（单元与单元之间间距）、Axis Step Center、添加简化打散对齐、复制移动替换删除、左右镜像上下镜像阴阳旋转、对齐、选择等图标按钮及 Margins/Table/Panel size（输入拼板尺寸）按钮；左上为 Step & Repeat Table Popup（edit 与 edit+flip 两行）和 Step & Repeat Active Popup（Top/Bottom/Left/Right margin 预留边均为 0 mm）"
+ },
+ {
+  "path": "10_SET及panel拼板/150_2.png",
+  "page": 150,
+  "chapter": "10_SET及panel拼板",
+  "description": "Panel Size Popup 窗口（输入拼板尺寸），Width 0 mm，Height 0 mm"
+ },
+ {
+  "path": "10_SET及panel拼板/151_1.png",
+  "page": 151,
+  "chapter": "10_SET及panel拼板",
+  "description": "成品拼板示例：两个单元上下拼板，左右两侧工艺边，四角工艺边上有定位孔和mark点（绿框标出）"
+ },
+ {
+  "path": "10_SET及panel拼板/152_1.png",
+  "page": 152,
+  "chapter": "10_SET及panel拼板",
+  "description": "建立panel 的菜单路径：Step → Panelization → Step & Repeat → Automatic...（红框标出）"
+ },
+ {
+  "path": "10_SET及panel拼板/152_2.png",
+  "page": 152,
+  "chapter": "10_SET及panel拼板",
+  "description": "Automatic Step & Repeat Popup 窗口：Step name 填 set（拼板对象），上方拼板示意图，Mode 选 Parameters（模式），Num steps 选 Multiple（拼板对象个数），Panel width 337 mm、Panel height 511 mm（拼板尺寸），Panel margin Top/Bottom/Left/Right 0 mm（到板边距离），Step X margin 1.6 mm、Step Y margin 1.6 mm（板与板之间距离），S&R orientation 下拉 Any/Horizontal/Vertical（拼板方向）；右侧结果 337.0x511.0，Steps 6(2x3)，Util 89%"
+ },
+ {
+  "path": "10_SET及panel拼板/153_1.png",
+  "page": 153,
+  "chapter": "10_SET及panel拼板",
+  "description": "填充板边的菜单路径：Step → Panelization → Pattern fill...（红框标出）"
+ },
+ {
+  "path": "10_SET及panel拼板/153_2.png",
+  "page": 153,
+  "chapter": "10_SET及panel拼板",
+  "description": "Step & Repeat fill pattern 窗口及标注：Fill parameters... 按钮（控制填充方式），Step & Repeat nesting Yes（是否填充Set连片与基材中的空白区域），Step margin X 0 Y 0 mm（与工作片Panel的Profile的间距），Step max dist X 2540 Y 2540 mm，S & R margin X 3 Y 3 mm（与连片Set的Profile的间距），S & R max dist X 0 Y 0 mm，Consider features No（考虑物件），Consider drill holes No（考虑钻孔，填充板边时可以避开原来添加的工艺孔等），Polarity Positive，Destination Affected layers"
+ },
+ {
+  "path": "10_SET及panel拼板/154_1.png",
+  "page": 154,
+  "chapter": "10_SET及panel拼板",
+  "description": "Fill parameters 弹出的 Contour Fill Parameters 窗口及标注：Type 选 Pattern（填充类型），Symbol 填 r2250（填充符号），Dx 2.8 mm、Dy 2.8 mm（填充符号之间的X，Y间距），Break partial Yes，Cut primitive No，Origin point Datum，Outline No，右侧预览为 3x3 红色圆形阻流块"
+ },
+ {
+  "path": "10_SET及panel拼板/155_1.png",
+  "page": 155,
+  "chapter": "10_SET及panel拼板",
+  "description": "Genesis 2000 中 Job 10140266 的 panel step：2x6 单元拼板后的生产板，板边已加定位孔、挂孔、AOI孔及铆钉孔等标志"
+ },
+ {
+  "path": "11_文件输出/156_1.png",
+  "page": 156,
+  "chapter": "11_文件输出",
+  "description": "打开输出窗口方法一：Engineering Toolkit 主界面（Job 10140266），点击 output 图标（红框标出）"
+ },
+ {
+  "path": "11_文件输出/156_2.png",
+  "page": 156,
+  "chapter": "11_文件输出",
+  "description": "打开输出窗口方法二：Engineering Toolkit 的 Windows 菜单，选 Output（红框标出）"
+ },
+ {
+  "path": "11_文件输出/157_1.png",
+  "page": 157,
+  "chapter": "11_文件输出",
+  "description": "点击Output弹出的 Output Package 窗口：Job 10140266，Step set，Format Group Gerber Based，Format Gerber274x，Dir path C:/genesis/fw/jobs/10140266/output，Anchor/Offset X Y 0 mm，下方层列表（gto-cad、gbo-cad、gto、gts、gtl、l2、l3、gbl、gbs、drl、gko、gbp）各列 Angle 0、Mirror No、X Scale/Y Scale 1.000000、Comp/ml 0、Polarity Positive，底部 Apply/Clear/Report.../Close 按钮"
+ },
+ {
+  "path": "11_文件输出/157_2.png",
+  "page": 157,
+  "chapter": "11_文件输出",
+  "description": "选择Job,Step,输出路径的三个弹窗：1 Jobs Popup 选择输出料号；2 Steps Popup 选择输出工作单元（orig/edit/panel）；3 Dir path 浏览文件夹选择输出路径"
+ },
+ {
+  "path": "11_文件输出/157_3.png",
+  "page": 157,
+  "chapter": "11_文件输出",
+  "description": "Output Package 层列表表头：Layer、Angle、Mirror、X Scale、Y Scale、Comp/ml、Polarity"
+ },
+ {
+  "path": "11_文件输出/158_1.png",
+  "page": 158,
+  "chapter": "11_文件输出",
+  "description": "gerber文件设计参数：Format Gerber274x 点 More... 弹出的 Output Parameters Popup，Break S&R Yes，Break symbols No，Break arcs Yes，Scale mode All，Surfaces mode Fill，Minimal brush 25.4 my，Units Inch，Coordinates Absolute，Zeroes omitted None，Number format 2 4，Wheel 空（红框标出 Surfaces mode/Minimal brush、Units、Zeroes omitted/Number format）"
+ },
+ {
+  "path": "11_文件输出/158_2.png",
+  "page": 158,
+  "chapter": "11_文件输出",
+  "description": "钻孔及锣带设计参数：Format Excellon2 点 More... 弹出的 Output Parameters Popup，Break S&R Yes，Break symbols Yes，Break arcs Yes，Scale mode All，Surfaces mode Fill，Minimal brush 25.4 my，Units MM，Coordinates Absolute，Decimal No，Zeroes omitted Trailing，Number format 3 3，Modal coords Yes，Tool units MM（红框标出 Units、Coordinates 至 Modal coords、Tool units）"
+ },
+ {
+  "path": "12_金手指板制作/159_1.png",
+  "page": 159,
+  "chapter": "12_金手指板制作",
+  "description": "金手指PCB实物图：三联拼板，左右两侧板边各有一排金黄色导电触片（金手指），用红框标出"
+ },
+ {
+  "path": "12_金手指板制作/160_1.png",
+  "page": 160,
+  "chapter": "12_金手指板制作",
+  "description": "PCB 中的45°倒角示意：黄色外形线在板边金手指两侧拐角处做45°倒角，红色箭头指向倒角位置，绿色为金手指焊盘"
+ },
+ {
+  "path": "12_金手指板制作/162_1.png",
+  "page": 162,
+  "chapter": "12_金手指板制作",
+  "description": "PCI卡金手指示意：四个相同长度、宽度整齐排列的长方形焊盘（常规金手指/齐平手指）"
+ },
+ {
+  "path": "12_金手指板制作/162_2.png",
+  "page": 162,
+  "chapter": "12_金手指板制作",
+  "description": "AGP卡金手指示意：长度不一、上下错位的长方形焊盘（长短金手指）"
+ },
+ {
+  "path": "12_金手指板制作/163_1.png",
+  "page": 163,
+  "chapter": "12_金手指板制作",
+  "description": "一般电信板设计金手指示意：两个宽的长方形焊盘中间夹一个窄的长方形焊盘"
+ },
+ {
+  "path": "13_锣带及模冲制作/170_1.png",
+  "page": 170,
+  "chapter": "13_锣带及模冲制作",
+  "description": "锣带一般流程图：创建外围→整理外围线→层别特性转换→确认及标示尺寸→刀具及切割路线设定→锣带文件输出"
+ },
+ {
+  "path": "13_锣带及模冲制作/171_1.png",
+  "page": 171,
+  "chapter": "13_锣带及模冲制作",
+  "description": "Design to Rout Popup 窗口：Maximum detected gap size（最大分析缺口）5 mil、Maximum auto repaired gap size（最大接合缺口）3 mil、Smoothing tolerance（平滑偏移误差）2 mil"
+ },
+ {
+  "path": "13_锣带及模冲制作/171_2.png",
+  "page": 171,
+  "chapter": "13_锣带及模冲制作",
+  "description": "Connections Popup 窗口：Mode 有 Corner/Round/Chamfer 三种（选取圆弧模式/导角模式），Radius 填 R角（半径），下方 Preview 预览按钮"
+ },
+ {
+  "path": "13_锣带及模冲制作/172_1.png",
+  "page": 172,
+  "chapter": "13_锣带及模冲制作",
+  "description": "Job Matrix Popup 窗口：gko 层的属性定义为 board / rout / positive（红框标出）"
+ },
+ {
+  "path": "13_锣带及模冲制作/172_2.png",
+  "page": 172,
+  "chapter": "13_锣带及模冲制作",
+  "description": "Rout→Dimensions 的 Dimensions Popup 窗口：顶部工具栏为量测与标示尺寸模式、删除/修改已标尺寸、通过点连线；Source Element 指定起点、Dest Element 指定终点，Mode 取点模式 All/PS/pe，Dx/Dy 调整标示位置，Prms 调整标示图示和字型大小"
+ },
+ {
+  "path": "13_锣带及模冲制作/173_1.png",
+  "page": 173,
+  "chapter": "13_锣带及模冲制作",
+  "description": "Rout Chain Definition Popup 窗口：上方为产生的Chain记录列表（Size/Comp/Flg/Feed/Speed），工具栏为添加、修改、删除、合并、优化、加导引孔等操作；Tool size 锣刀大小，Compensation 补偿下拉 None/Right/Left，Feed Rate/Spindle Speed 为 Router机台速度，Select order/Select first 选择起始点和终点"
+ },
+ {
+  "path": "14_半孔板及金属包边/176_1.png",
+  "page": 176,
+  "chapter": "14_半孔板及金属包边",
+  "description": "半孔板实物图：拼板上每个单元四周板边为一排金属化半孔"
+ },
+ {
+  "path": "14_半孔板及金属包边/177_1.png",
+  "page": 177,
+  "chapter": "14_半孔板及金属包边",
+  "description": "Genesis set 界面：外形层 gko1（红色）只做半孔部分，围绕每个单元的半孔位置画出锣槽"
+ },
+ {
+  "path": "14_半孔板及金属包边/178_1.png",
+  "page": 178,
+  "chapter": "14_半孔板及金属包边",
+  "description": "Genesis edit 界面：线路层（红色）半孔部分掏单边0.1MM，板边一圈孔位置用钻孔加挡点（紫色圆盘）"
+ },
+ {
+  "path": "14_半孔板及金属包边/179_1.png",
+  "page": 179,
+  "chapter": "14_半孔板及金属包边",
+  "description": "Genesis set 界面：阻焊层 gts（绿色）在 GKO1 半孔槽位置加挡点，红色箭头指向阻焊层及板边挡点"
+ },
+ {
+  "path": "14_半孔板及金属包边/180_1.png",
+  "page": 180,
+  "chapter": "14_半孔板及金属包边",
+  "description": "半孔二钻工艺放大图：半孔两端加孔（黄色 2rl 层二钻孔）先钻掉一点铜皮，紫色为半孔，红色为线路层，蓝色框为阻焊挡点范围"
+ },
+ {
+  "path": "14_半孔板及金属包边/181_1.png",
+  "page": 181,
+  "chapter": "14_半孔板及金属包边",
+  "description": "半孔常出现的不良问题表：1 拉丝、2 半孔形状异常、3 板边凸点、4 铜皮翻卷，各附板边半孔实物不良示意图（红圈标出）"
+ },
+ {
+  "path": "14_半孔板及金属包边/182_1.png",
+  "page": 182,
+  "chapter": "14_半孔板及金属包边",
+  "description": "金属包边板实物图：一叠蓝色阻焊的板子，板边全部金属化（板边金黄色）"
+ },
+ {
+  "path": "15_阻抗板基础知识/187_1.png",
+  "page": 187,
+  "chapter": "15_阻抗板基础知识",
+  "description": "POLAR SI9000 Surface Microstrip 1B 模型截面图，标注 H1、Er1、W1、W2、T1（外层阻焊前阻抗计算）"
+ },
+ {
+  "path": "15_阻抗板基础知识/188_1.png",
+  "page": 188,
+  "chapter": "15_阻抗板基础知识",
+  "description": "POLAR SI9000 Coated Microstrip 1B 模型截面图，标注 H1、Er1、W1、W2、T1、C1、C2、CEr（外层阻焊后阻抗计算）"
+ },
+ {
+  "path": "15_阻抗板基础知识/188_2.png",
+  "page": 188,
+  "chapter": "15_阻抗板基础知识",
+  "description": "POLAR SI9000 Embedded Microstrip 1B1A 模型截面图，标注 H1、H2、Er1、Er2、W1、W2、T1（两个VCC/GND夹一个线路层）"
+ },
+ {
+  "path": "15_阻抗板基础知识/189_1.png",
+  "page": 189,
+  "chapter": "15_阻抗板基础知识",
+  "description": "POLAR SI9000 Offset Stripline 1B1A 模型截面图，标注 H1、H2、Er1、Er2、W1、W2、T1（与外层相邻的第二个线路层阻抗计算）"
+ },
+ {
+  "path": "15_阻抗板基础知识/189_2.png",
+  "page": 189,
+  "chapter": "15_阻抗板基础知识",
+  "description": "POLAR SI9000 Offset Stripline 1B2A 模型截面图，标注 H1、H2、H3、Er1、Er2、Er3、W1、W2、T1（两个VCC/GND夹两个线路层）"
+ },
+ {
+  "path": "15_阻抗板基础知识/190_1.png",
+  "page": 190,
+  "chapter": "15_阻抗板基础知识",
+  "description": "POLAR SI9000 Coated Microstrip 2B 模型截面图（隔层参考，同 Coated Microstrip 仅多一介质层），标注 H1、H2、Er1、Er2、W1、W2、T1、C1、C2、CEr"
+ },
+ {
+  "path": "15_阻抗板基础知识/190_2.png",
+  "page": 190,
+  "chapter": "15_阻抗板基础知识",
+  "description": "POLAR SI9000 Offset Stripline 2B2A 模型截面图（隔层参考，同 Offset stripline 仅多两个介质层），标注 H1–H4、Er1–Er4、W1、W2、T1"
+ },
+ {
+  "path": "15_阻抗板基础知识/190_3.png",
+  "page": 190,
+  "chapter": "15_阻抗板基础知识",
+  "description": "POLAR SI9000 Edge-Coupled Surface Microstrip 1B 差动模型截面图，标注 H1、Er1、W1、W2、S1、T1（外层阻焊前差动阻抗计算）"
+ },
+ {
+  "path": "15_阻抗板基础知识/191_1.png",
+  "page": 191,
+  "chapter": "15_阻抗板基础知识",
+  "description": "POLAR SI9000 Edge-Coupled Coated Microstrip 1B 差动模型截面图，标注 H1、Er1、W1、W2、S1、T1、C1、C2、C3、CEr（外层阻焊后差动阻抗计算）"
+ },
+ {
+  "path": "15_阻抗板基础知识/191_2.png",
+  "page": 191,
+  "chapter": "15_阻抗板基础知识",
+  "description": "POLAR SI9000 Edge-Coupled Embedded Microstrip 1B1A 差动模型截面图，标注 H1、H2、Er1、Er2、W1、W2、S1、T1"
+ },
+ {
+  "path": "15_阻抗板基础知识/192_1.png",
+  "page": 192,
+  "chapter": "15_阻抗板基础知识",
+  "description": "POLAR SI9000 Edge-Coupled Offset Stripline 1B1A 差动模型截面图，标注 H1、H2、Er1、Er2、W1、W2、S1、T1（两个VCC/GND夹一个线路层）"
+ },
+ {
+  "path": "15_阻抗板基础知识/192_2.png",
+  "page": 192,
+  "chapter": "15_阻抗板基础知识",
+  "description": "POLAR SI9000 Edge-Coupled Offset Stripline 1B2A 差动模型截面图，标注 H1、H2、H3、Er1、Er2、Er3、W1、W2、S1、T1（两个VCC/GND夹两个线路层）"
+ },
+ {
+  "path": "15_阻抗板基础知识/193_1.png",
+  "page": 193,
+  "chapter": "15_阻抗板基础知识",
+  "description": "POLAR SI9000 Edge-Coupled Offset Stripline 1B2A1R 差动模型截面图，比 1B2A 多标注 REr（差分阻抗线间填充树脂的介电常数）"
+ },
+ {
+  "path": "15_阻抗板基础知识/193_2.png",
+  "page": 193,
+  "chapter": "15_阻抗板基础知识",
+  "description": "POLAR SI9000 Edge-Coupled Coated Microstrip 2B 差动模型截面图（隔层参考，同 2）仅多一介质层），标注 H1、H2、Er1、Er2、W1、W2、S1、T1、C1、C2、C3、CEr"
+ },
+ {
+  "path": "15_阻抗板基础知识/193_3.png",
+  "page": 193,
+  "chapter": "15_阻抗板基础知识",
+  "description": "POLAR SI9000 Edge-Coupled Offset Stripline 2B2A 差动模型截面图（隔层参考，同 4）仅多两个介质层），标注 H1–H4、Er1–Er4、W1、W2、S1、T1"
+ },
+ {
+  "path": "15_阻抗板基础知识/194_1.png",
+  "page": 194,
+  "chapter": "15_阻抗板基础知识",
+  "description": "POLAR SI9000 Surface Coplanar Waveguide 1B 共面模型截面图，标注 H1、Er1、W1、W2、D1、T1（外层蚀刻后单线共面阻抗）"
+ },
+ {
+  "path": "15_阻抗板基础知识/194_2.png",
+  "page": 194,
+  "chapter": "15_阻抗板基础知识",
+  "description": "POLAR SI9000 Coated Coplanar Waveguide 1B 共面模型截面图，标注 H1、Er1、W1、W2、D1、T1、C1、C2、CEr（阻焊后单线共面阻抗）"
+ },
+ {
+  "path": "15_阻抗板基础知识/195_1.png",
+  "page": 195,
+  "chapter": "15_阻抗板基础知识",
+  "description": "POLAR SI9000 Surface Coplanar Waveguide With Ground 1B 模型截面图，下方有GND/VCC参考层，标注 H1、Er1、W1、W2、D1、T1"
+ },
+ {
+  "path": "15_阻抗板基础知识/195_2.png",
+  "page": 195,
+  "chapter": "15_阻抗板基础知识",
+  "description": "POLAR SI9000 Coated Coplanar Waveguide With Ground 1B 模型截面图，下方有GND/VCC参考层，标注 H1、Er1、W1、W2、D1、T1、C1、C2、CEr"
+ },
+ {
+  "path": "15_阻抗板基础知识/196_1.png",
+  "page": 196,
+  "chapter": "15_阻抗板基础知识",
+  "description": "POLAR SI9000 Embedded Coplanar Waveguide 1B1A 模型截面图（内层单线共面阻抗），标注 H1、H2、Er1、Er2、W1、W2、D1、T1"
+ },
+ {
+  "path": "15_阻抗板基础知识/196_2.png",
+  "page": 196,
+  "chapter": "15_阻抗板基础知识",
+  "description": "POLAR SI9000 Embedded Coplanar Waveguide With Ground 1B1A 模型截面图（内层单线共面阻抗，邻近GND/VCC层），标注 H1、H2、Er1、Er2、W1、W2、D1、T1"
+ },
+ {
+  "path": "15_阻抗板基础知识/197_1.png",
+  "page": 197,
+  "chapter": "15_阻抗板基础知识",
+  "description": "POLAR SI9000 Offset Coplanar Waveguide 1B1A 模型截面图（内层单线共面阻抗，上下两个GND/VCC层），标注 H1、H2、Er1、Er2、W1、W2、D1、T1"
+ },
+ {
+  "path": "15_阻抗板基础知识/197_2.png",
+  "page": 197,
+  "chapter": "15_阻抗板基础知识",
+  "description": "POLAR SI9000 Diff Surface Coplanar Waveguide 1B 差分共面模型截面图，标注 H1、Er1、W1、W2、S1、D1、T1（外层蚀刻后差分共面阻抗）"
+ },
+ {
+  "path": "15_阻抗板基础知识/198_1.png",
+  "page": 198,
+  "chapter": "15_阻抗板基础知识",
+  "description": "POLAR SI9000 Diff Coated Coplanar Waveguide 1B 差分共面模型截面图，标注 H1、Er1、W1、W2、S1、D1、T1、C1、C2、C3、CEr（阻焊后差分共面阻抗）"
+ },
+ {
+  "path": "15_阻抗板基础知识/198_2.png",
+  "page": 198,
+  "chapter": "15_阻抗板基础知识",
+  "description": "POLAR SI9000 Diff Surface Coplanar Waveguide With Ground 1B 模型截面图，下方有GND/VCC参考层，标注 H1、Er1、W1、W2、S1、D1、T1"
+ },
+ {
+  "path": "15_阻抗板基础知识/199_1.png",
+  "page": 199,
+  "chapter": "15_阻抗板基础知识",
+  "description": "POLAR SI9000 Diff Coated Coplanar Waveguide With Ground 1B 模型截面图，下方有GND/VCC参考层，标注 H1、Er1、W1、W2、S1、D1、T1、C1、C2、C3、CEr"
+ },
+ {
+  "path": "15_阻抗板基础知识/199_2.png",
+  "page": 199,
+  "chapter": "15_阻抗板基础知识",
+  "description": "POLAR SI9000 Diff Embedded Coplanar Waveguide 1B1A 模型截面图（内层差动共面阻抗），标注 H1、H2、Er1、Er2、W1、W2、S1、D1、T1"
+ },
+ {
+  "path": "15_阻抗板基础知识/200_1.png",
+  "page": 200,
+  "chapter": "15_阻抗板基础知识",
+  "description": "POLAR SI9000 Diff Embedded Coplanar Waveguide With Ground 1B1A 模型截面图（内层差分共面阻抗，邻近GND/VCC层），标注 H1、H2、Er1、Er2、W1、W2、S1、D1、T1"
+ },
+ {
+  "path": "15_阻抗板基础知识/200_2.png",
+  "page": 200,
+  "chapter": "15_阻抗板基础知识",
+  "description": "POLAR SI9000 Diff Offset Coplanar Waveguide 1B1A 模型截面图（内层差分共面阻抗，上下两个GND/VCC层），标注 H1、H2、Er1、Er2、W1、W2、S1、D1、T1"
+ },
+ {
+  "path": "15_阻抗板基础知识/201_1.png",
+  "page": 201,
+  "chapter": "15_阻抗板基础知识",
+  "description": "POLAR SI9000 Coated Microstrip 1B 计算界面截图：H1=2.9528、Er1=4.2、W1=4.5、W2=4.0、T1=1.4、C1=0.8、C2=0.5、CEr=3.5，Impedance Zo=50.15（阻抗实例：GTL&GBL 线宽4.5mil 阻值50欧姆）"
+ },
+ {
+  "path": "15_阻抗板基础知识/201_2.png",
+  "page": 201,
+  "chapter": "15_阻抗板基础知识",
+  "description": "POLAR SI9000 Edge-Coupled Coated Microstrip 1B 计算界面截图：H1=2.9528、Er1=4.2、W1=5.1、W2=4.6、S1=6.0、T1=1.4、C1=0.8、C2=0.5、C3=0.8、CEr=3.5，Differential Impedance Zdiff=85.26（阻抗实例：线宽5.1mil 线距6mil 阻值85欧姆）"
+ },
+ {
+  "path": "16_盲孔及HDI板/205_1.png",
+  "page": 205,
+  "chapter": "16_盲孔及HDI板",
+  "description": "Genesis Graphic Editor（Job: hdi, Step: orig）与 Job Matrix Popup 窗口：层叠顺序 gto/gts/gtl/l2…l11/gbl/gbs/gbo，钻孔层 drl1_12、drl1-2、drl1-3、drl10-12、drl11-12、drl3-10 及 gko，左侧连线示意各钻带对应的起止层（按客户提供的钻层排列层叠顺序）"
+ },
+ {
+  "path": "16_盲孔及HDI板/206_1.png",
+  "page": 206,
+  "chapter": "16_盲孔及HDI板",
+  "description": "Job Matrix Popup（Job: hdi）放大图：signal 层 gtl、l2–l11、gbl，钻孔层 drl1_12、drl1-2、drl1-3、drl10-12、drl11-12、drl3-10，rt 层 gko，三个 step oriq/net/edit；左侧连线表示每个钻带跨越的层"
+ },
+ {
+  "path": "16_盲孔及HDI板/207_1.png",
+  "page": 207,
+  "chapter": "16_盲孔及HDI板",
+  "description": "四层板层叠结构示意：GTL 1OZ / PP / L2 1OZ / 芯板 / L3 1OZ / PP / GBL 1OZ，红色表示 1-2 和 3-4 盲孔、2-3 埋孔及通孔"
+ },
+ {
+  "path": "16_盲孔及HDI板/208_1.png",
+  "page": 208,
+  "chapter": "16_盲孔及HDI板",
+  "description": "六层板层叠示意 1）1-2，5-6，2-5：GTL–L5 各层 1OZ，PP/芯板交替，红色表示 1-2、5-6 盲孔、2-5 埋孔及通孔"
+ },
+ {
+  "path": "16_盲孔及HDI板/208_2.png",
+  "page": 208,
+  "chapter": "16_盲孔及HDI板",
+  "description": "六层板层叠示意 2）1-2和5-6：芯板/PP/芯板/PP/芯板 结构，红色表示 1-2、5-6 盲孔及通孔"
+ },
+ {
+  "path": "16_盲孔及HDI板/208_3.png",
+  "page": 208,
+  "chapter": "16_盲孔及HDI板",
+  "description": "六层板层叠示意 3）1-2；1-3；2-5；4-6；5-6：红色表示 1-2、1-3、4-6、5-6 盲孔、2-5 埋孔及通孔"
+ },
+ {
+  "path": "16_盲孔及HDI板/208_4.png",
+  "page": 208,
+  "chapter": "16_盲孔及HDI板",
+  "description": "六层板层叠示意 4）1-2；1-3；4-6；5-6：PP/芯板/PP/芯板/PP 结构，红色表示 1-2、1-3、4-6、5-6 盲孔及通孔"
+ },
+ {
+  "path": "16_盲孔及HDI板/209_1.png",
+  "page": 209,
+  "chapter": "16_盲孔及HDI板",
+  "description": "八层板层叠示意 1）1-2；7-8：各层 1OZ，芯板/PP 交替，红色表示 1-2、7-8 盲孔及通孔"
+ },
+ {
+  "path": "16_盲孔及HDI板/209_2.png",
+  "page": 209,
+  "chapter": "16_盲孔及HDI板",
+  "description": "八层板层叠示意 2）1-2；2-7；7-8：红色表示 1-2、7-8 盲孔、2-7 埋孔及通孔"
+ },
+ {
+  "path": "16_盲孔及HDI板/209_3.png",
+  "page": 209,
+  "chapter": "16_盲孔及HDI板",
+  "description": "八层板层叠示意 3）1-2；3-4；5-6；7-8：四张芯板以 PP 压合，红色表示 1-2、3-4、5-6、7-8 盲/埋孔及通孔"
+ },
+ {
+  "path": "16_盲孔及HDI板/210_1.png",
+  "page": 210,
+  "chapter": "16_盲孔及HDI板",
+  "description": "八层板层叠示意 4）1-2；3-4；1-4；5-6；7-8；5-8：红色表示 1-2、3-4、1-4、5-6、7-8、5-8 盲埋孔及通孔"
+ },
+ {
+  "path": "16_盲孔及HDI板/210_2.png",
+  "page": 210,
+  "chapter": "16_盲孔及HDI板",
+  "description": "八层板层叠示意 5）1-2；3-4；1-4；5-6；7-8；5-8；2-7：在 4）基础上增加 2-7 埋孔，红色表示各盲埋孔及通孔"
+ },
+ {
+  "path": "16_盲孔及HDI板/211_1.png",
+  "page": 211,
+  "chapter": "16_盲孔及HDI板",
+  "description": "十层板层叠示意 1）1-2；9-10：各层 1OZ，芯板/PP 交替，红色表示 1-2、9-10 盲孔及通孔"
+ },
+ {
+  "path": "16_盲孔及HDI板/211_2.png",
+  "page": 211,
+  "chapter": "16_盲孔及HDI板",
+  "description": "十层板层叠示意 2）1-2；2-9；9-10：红色表示 1-2、9-10 盲孔、2-9 埋孔及通孔"
+ },
+ {
+  "path": "16_盲孔及HDI板/211_3.png",
+  "page": 211,
+  "chapter": "16_盲孔及HDI板",
+  "description": "十层板层叠示意 3）1-2；2-9；9-10；1-5；6-10：红色表示 1-2、9-10、1-5、6-10 盲孔、2-9 埋孔及通孔"
+ },
+ {
+  "path": "17_工艺流程单制作/214_1.png",
+  "page": 214,
+  "chapter": "17_工艺流程单制作",
+  "description": "四层板压合结构图（4层一阶盲埋孔 压合图）：GTL 铜厚 H 0.0175mm / PP胶 1080 0.076mm / 芯板 1.3mm H/H 含铜 / PP胶 1080 0.076mm / GBL 铜厚 H 0.0175mm；压合厚度 1.49±0.10mm，成品板厚 1.60±0.10mm"
+ },
+ {
+  "path": "17_工艺流程单制作/214_2.png",
+  "page": 214,
+  "chapter": "17_工艺流程单制作",
+  "description": "4层一阶盲埋孔（激光/机械）混合型 盲埋孔类型示意：GTL/L2/L3/GBL 各 1OZ，PP/芯板/PP，红色表示 GTL-L2、L3-GBL 盲孔、L2-L3 埋孔及通孔"
+ },
+ {
+  "path": "17_工艺流程单制作/215_1.png",
+  "page": 215,
+  "chapter": "17_工艺流程单制作",
+  "description": "4层一阶盲孔（机械钻孔）盲孔类型示意：gtl/L2/L3/GBL 各 1OZ，芯板/PP/芯板，红色表示 gtl-L2、L3-GBL 盲孔及通孔"
+ },
+ {
+  "path": "17_工艺流程单制作/215_2.png",
+  "page": 215,
+  "chapter": "17_工艺流程单制作",
+  "description": "四层盲孔板压合结构图：GTL–L2 芯板 0.7mm H/H 含铜 / PP胶 1080*2 0.15mm / L3–GBL 芯板 0.7mm H/H 含铜；压合厚度 1.55±0.10mm，成品板厚 1.60±0.10mm"
+ },
+ {
+  "path": "17_工艺流程单制作/216_1.png",
+  "page": 216,
+  "chapter": "17_工艺流程单制作",
+  "description": "6层二阶盲孔（激光/机械）混合型 盲埋孔类型示意：GTL/GBL HOZ，L2–L5 1OZ，红色表示 GTL-L2、L5-GBL、L2-L3、L4-L5 盲孔、L3-L4 埋孔及通孔"
+ },
+ {
+  "path": "17_工艺流程单制作/216_2.png",
+  "page": 216,
+  "chapter": "17_工艺流程单制作",
+  "description": "六层板盲埋压合结构图（截图较模糊）：GTL 铜厚 H 0.0175 / PP胶 1080 0.076 / L2 铜厚 H / PP胶 1080 0.076 / L3–L4 芯板 1.10mm H/H 含铜 / PP胶 1080 0.076 / L5 铜厚 H / PP胶 1080 0.076 / GBL 铜厚 H；压合厚度 1.47±0.10mm，成品板厚 1.60±0.10mm"
+ },
+ {
+  "path": "17_工艺流程单制作/218_1.png",
+  "page": 218,
+  "chapter": "17_工艺流程单制作",
+  "description": "6层一阶盲孔（激光/机械）混合型 盲埋孔类型示意：各层 1OZ，PP/PP/芯板/PP/PP，红色表示 GTL-L2、L5-GBL 盲孔、L2-L5 埋孔及通孔"
+ },
+ {
+  "path": "17_工艺流程单制作/218_2.png",
+  "page": 218,
+  "chapter": "17_工艺流程单制作",
+  "description": "六层盲埋孔板压合图：GTL HOZ(0.0175MM) / PP(1080) 0.075MM / L2 HOZ(0.0175MM) / PP(2116) 0.125MM / L3 1OZ(0.035MM) / 含铜 1.1MM / L4 1OZ(0.035MM) / PP(2116) 0.125MM / L5 HOZ(0.0175MM) / PP(1080) 0.075MM / GBL HOZ(0.0175MM)；压和厚度 1.5+/-0.1MM，成品厚度 1.6MM+/-10%；红色表示 GTL-L2、L5-GBL 盲孔、L2-L5 埋孔及通孔"
+ }
+]

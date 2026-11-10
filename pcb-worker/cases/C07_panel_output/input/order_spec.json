@@ -1,0 +1,7 @@
+{
+  "panelization": "客户要求：2×3 拼板，V-CUT，工艺边 5mm 两侧加 mark 点（参考上一版本）",
+  "solder_mask_color": "绿色",
+  "customer_notes": [
+    "拼板方式参考前版本 A1234"
+  ]
+}

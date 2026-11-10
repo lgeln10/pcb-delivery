@@ -1,0 +1,103 @@
+apply plugin: 'com.android.application'
+
+// ── 正式签名 ────────────────────────────────────────────────────────────────
+// keystore 与口令**绝不进仓**:在 android/keystore.properties 里配(已 gitignore),
+// 文件不存在时下面的 signingConfig 整个不生成,assembleRelease 产出未签名包 ——
+// 这样 CI 和没有证书的同事照样能编,只是装不上。格式见 keystore.properties.example。
+def keystorePropsFile = rootProject.file('keystore.properties')
+def keystoreProps = new Properties()
+if (keystorePropsFile.exists()) {
+    keystorePropsFile.withInputStream { keystoreProps.load(it) }
+}
+def hasKeystore = keystoreProps.containsKey('storeFile')
+
+android {
+    namespace "ai.sixamtech.aios"
+    compileSdk rootProject.ext.compileSdkVersion
+    defaultConfig {
+        applicationId "ai.sixamtech.aios"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        // ★单一来源在 variables.gradle —— 三个商店(华为/小米/应用宝)都按 versionCode 判新旧,
+        //   在这写死过一次就会忘记改,升级包被商店当成同一版拒收。
+        versionCode rootProject.ext.appVersionCode
+        versionName rootProject.ext.appVersionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        aaptOptions {
+             // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
+             // Default: https://android.googlesource.com/platform/frameworks/base/+/282e181b58cf72b6ca770dc7ca5f91f135444502/tools/aapt/AaptAssets.cpp#61
+            ignoreAssetsPattern '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
+        }
+    }
+
+    if (hasKeystore) {
+        signingConfigs {
+            release {
+                storeFile file(keystoreProps['storeFile'])
+                storePassword keystoreProps['storePassword']
+                keyAlias keystoreProps['keyAlias']
+                keyPassword keystoreProps['keyPassword']
+                // v1 也要开:minSdk 23 的机器不认 v2/v3 单独签名
+                enableV1Signing true
+                enableV2Signing true
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            // ★保持关闭。R8 只在 release 生效,而 release 包只能靠真机跑 —— 打开它等于把一类
+            //   「只在正式包里出现」的故障引进来,换来的只是几 MB。Capacitor 的 keep 规则由
+            //   capacitor-android 的 consumerProguardFiles 自动带入,proguard-rules.pro 里
+            //   本项目自己的 keep 已经写好;要开就改这一行,然后**必须**真机回归一轮
+            //   (登录 → 跳租户域名 → 语音 → 定位 → 拍照上传,插件全是反射调用的)。
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            if (hasKeystore) signingConfig signingConfigs.release
+        }
+    }
+
+    // 上架国内商店(华为 AppGallery / 小米 / 应用宝)时这块 Play 专用的依赖清单没有用处,
+    // 反而会被部分审核当成「夹带未声明 SDK」来问,去掉省事。
+    dependenciesInfo {
+        includeInApk false
+        includeInBundle false
+    }
+
+    bundle {
+        // ★别按语言拆分:Play 之外的渠道装的是整包,拆了会出现「系统语言不是简中就没有中文」。
+        language { enableSplit = false }
+    }
+}
+
+repositories {
+    flatDir{
+        dirs '../capacitor-cordova-android-plugins/src/main/libs', 'libs'
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "androidx.appcompat:appcompat:$androidxAppCompatVersion"
+    implementation "androidx.coordinatorlayout:coordinatorlayout:$androidxCoordinatorLayoutVersion"
+    implementation "androidx.core:core-splashscreen:$coreSplashScreenVersion"
+    // ★capacitor-android 也依赖它,但那是 implementation(不传递到本模块)——
+    //   MainActivity 用 WebViewCompat.getCurrentWebViewPackage() 探内核版本,必须自己声明一遍。
+    implementation "androidx.webkit:webkit:$androidxWebkitVersion"
+    implementation project(':capacitor-android')
+    testImplementation "junit:junit:$junitVersion"
+    androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$androidxEspressoCoreVersion"
+    implementation project(':capacitor-cordova-android-plugins')
+}
+
+apply from: 'capacitor.build.gradle'
+
+try {
+    def servicesJSON = file('google-services.json')
+    if (servicesJSON.text) {
+        apply plugin: 'com.google.gms.google-services'
+    }
+} catch(Exception e) {
+    logger.info("google-services.json not found, google-services plugin not applied. Push Notifications won't work")
+}

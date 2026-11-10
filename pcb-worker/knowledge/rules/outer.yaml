@@ -1,0 +1,150 @@
+# 来源：《CAM工程技能培训》第7章 p135–139；quote 为原文逐字片段
+
+- id: outer.premise.delete_outline_align_drill
+  rule: "删除外围线及板外物，以钻孔为基准，校正PAD"
+  source_page: 135
+  quote: "删除外围线及板外物，以钻孔为基准，校正PAD"
+
+- id: outer.smd.attribute_required
+  rule: "非孔对应的焊盘有阻焊开窗要定义smd属性，特别有BGA的"
+  applies_to: smd_pad
+  source_page: 135
+  quote: "线路线宽及焊盘预大，非孔对应的焊盘有阻焊开窗要定义“smd”属性，特别有BGA的"
+
+- id: outer.check.ring_and_spacing
+  rule: "VIA，PTH孔的RING环是否够大。间距是否做够要求"
+  source_page: 135
+  quote: "VIA，PTH孔的RING环是否够大。间距是否做够要求"
+
+- id: outer.check.npth_copper_and_edge
+  rule: "非金属孔是否需要削铜及移线，线路及铜皮焊盘孔距外形是否足够"
+  source_page: 135
+  quote: "非金属孔是否需要削铜及移线，线路及铜皮焊盘孔距外形是否足够"
+
+- id: outer.check.vcut_testpoint
+  rule: "V-CUT是否需要加防V-CUT测试点"
+  source_page: 135
+  quote: "V-CUT是否需要加防V-CUT测试点"
+
+- id: outer.gold.no_oversize
+  rule: "电金板线路不需要预大"
+  applies_to: 电金板
+  source_page: 135
+  quote: "电金板线路不需要预大"
+
+- id: outer.pad.construct_by_reference.tolerance
+  rule: "转绿油Pad：Construct Pads by Reference 的 Tolerance 填同类物件之间的大小差别数值，如1或1.5"
+  value_min: 1
+  value_max: 1.5
+  source_page: 136
+  quote: "Tolerance处填的是要转PAD的同类物件之间的大小差别数值，如1或1.5其他不动运行即可"
+
+- id: outer.pad.construct_by_reference.manual_check
+  rule: "手动转PAD，转完仔细查看下是否全部转为PAD"
+  source_page: 136
+  quote: "这里用的是手动转PAD，转完仔细查看下是否全部转为PAD"
+
+- id: outer.pad.construct_auto.params
+  rule: "转线路PAD：ERF选Outers；Layer选要转PAD的外层名；Reference SM选转好PAD的对应防焊层；Tolreance/Minimum/Maximum 按说明"
+  source_page: 136
+  quote: "ERF：选Outers     Layer：选要转PAD的外层名"
+
+- id: outer.pad.construct_auto.one_layer_each
+  rule: "转线路PAD每次只是转一层，转完要查看"
+  source_page: 136
+  quote: "每次只是转一层，因为这里用的参考转PAD，同样转完要查看"
+
+- id: outer.smd.set_attribute.params
+  rule: "Set SMD Attribute：ERF选Non Drilled，Layer换成 .affected，其他不动"
+  source_page: 137
+  quote: "Set SMD Attribute ERF：选Non Drilled"
+
+- id: outer.smd.round_pad_manual
+  rule: "光学点、BGA之类的圆形PAD用 Set SMD Attribute 无效，要另外手动添加 .SMD 属性"
+  source_page: 137
+  quote: "象光学点、BGA之类的圆形PAD用上面的功能无效，要另外手动添加"
+
+- id: outer.surface.contourize
+  rule: "转Surface：选中大铜皮 Edit Reshape Contourize，参数不用设置；没有大铜皮则此步可省"
+  source_page: 137
+  quote: "转Surface   如果没有大铜皮则此步可省"
+
+- id: outer.surface.select_carefully
+  rule: "选大铜皮时不要把不是铜皮的物件也选进来"
+  source_page: 137
+  quote: "关键是不要把不是铜皮的物件也选进来了"
+
+- id: outer.line.compensation
+  rule: "线路补偿：小于15mil的线路 Resize Global，Size 填1（一般只要求补偿1mil，整体加大）"
+  value: 1
+  unit: mil
+  applies_to: 线宽小于15mil的线路
+  source_page: 138
+  quote: "在参数Size后填1点OK即可,因为一般只要求补偿1mil(在原来的基础上整体加大)"
+
+- id: outer.line.compensation_threshold
+  rule: "要求小于15mil的线路就要补偿"
+  value: 15
+  unit: mil
+  source_page: 138
+  quote: "比如要求小于15mil的线路就要补偿"
+
+- id: outer.line.min_width_from_mi
+  rule: "MI中有最小线宽要求时，没达到最小值的线直接改为最小值（Edit Reshape Change Symbol）"
+  source_page: 138
+  quote: "有的MI中有最小线宽要求，对于那些没达到最小值的线只有直接改为最小值"
+
+- id: outer.smd.pad_enlarge_same
+  rule: "加大SMD PAD方法同线路补偿，先用 User Filter 的 Select SMD Pad 选中影响层内带SMD属性的PAD"
+  source_page: 138
+  quote: "加大SMD PAD 方法同上，只不过先要选中SMD PAD"
+
+- id: outer.copper.cutout_same_as_inner
+  rule: "掏铜皮（与做内层一样）"
+  source_page: 138
+  quote: "掏铜皮（与做内层一样）"
+
+- id: outer.optimize.signal_layer
+  rule: "优化间距：DFM Optimization Signal Layer Optimization，根据优化结果手动修改，修改完再分析"
+  source_page: 138
+  quote: "根据优化后的结果进行手动修改，修改完之后进行分析，看是否还有需要修改的"
+
+- id: outer.final.net_compare
+  rule: "检测分析对原稿进行网络分析"
+  source_page: 138
+  quote: "检测分析对原稿进行网络分析"
+
+- id: outer.caution.surface_selection
+  rule: "选择铜皮线时不要把其它线选出来转化成 surface"
+  source_page: 139
+  quote: "选择铜皮线时，要特别注意不要把其它线选出来转化成 “surface”"
+
+- id: outer.caution.copper_cut_no_short
+  rule: "掏铜时连铜线不能掏断导致短路"
+  source_page: 139
+  quote: "掏铜时一定要注意连铜线不能掏断导致短路"
+
+- id: outer.caution.line_not_to_pad
+  rule: "线路转PAD时不能把线转成PAD"
+  source_page: 139
+  quote: "线路转PAD时，不能把线转成PAD"
+
+- id: outer.caution.npth_vcut_cut_no_break
+  rule: "非金属孔掏铜及外形V-CUT掏铜不能掏断线，特别是板边"
+  source_page: 139
+  quote: "非金属孔掏铜及外形V-CUT掏铜注意不能掏断线，特别是板边一定要注意"
+
+- id: outer.caution.same_net_small_gap_fill
+  rule: "同一网络很小的间距需要填实"
+  source_page: 139
+  quote: "同一网络很小的间距需要填实，方便生产"
+
+- id: outer.caution.isolated_extra_compensation
+  rule: "独立线，独立PAD在正常补偿基础上再补偿一点"
+  source_page: 139
+  quote: "独立线，独立PAD稍微在正常补偿基础上再补偿一点"
+
+- id: outer.caution.final_net_compare
+  rule: "资料做完之后一定要对原稿做网络比较"
+  source_page: 139
+  quote: "资料做完之后，一定要对原稿，做网络比较，保证资料正确性"

@@ -1,0 +1,33 @@
+{
+  "app": {
+    // ★signingConfigs 故意留空:签名证书是**账号级机密**,不进仓库。
+    //   第一次在 DevEco Studio 里打开本工程时,用「自动签名」生成本机调试证书
+    //   (File → Project Structure → Signing Configs → 勾 Automatically generate signature),
+    //   它会把配置写回本文件的这个数组 —— 提交前记得撤掉那段改动,别把证书路径和密码推上去。
+    "signingConfigs": [],
+    "products": [
+      {
+        "name": "default",
+        "signingConfig": "default",
+        "compatibleSdkVersion": "5.0.0(12)",
+        "runtimeOS": "HarmonyOS"
+      }
+    ],
+    "buildModeSet": [
+      { "name": "debug" },
+      { "name": "release" }
+    ]
+  },
+  "modules": [
+    {
+      "name": "entry",
+      "srcPath": "./entry",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": ["default"]
+        }
+      ]
+    }
+  ]
+}

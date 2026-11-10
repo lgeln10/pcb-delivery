@@ -1,0 +1,37 @@
+{
+  "order_no": "y6f085471a0",
+  "board_name": "六层板 THE-PCS100F1-MV-N-M2 V1.1",
+  "layer_count": 6,
+  "board_thickness_mm": 3.1,
+  "board_thickness_tolerance": "±10%",
+  "copper_outer_um": 105,
+  "copper_inner_um": 105,
+  "board_size_mm": "500x425",
+  "material": "FR-4 Tg≥150 CTI≥175",
+  "hole_wall_copper_um": 25,
+  "hole_tolerance": "PTH ±0.075mm, NPTH ±0.05mm",
+  "surface_finish": "无铅喷锡",
+  "solder_mask_color": "绿色",
+  "silkscreen_color": "白色",
+  "via_plugging": "绿油塞孔（所有非焊盘上的 0.5mm 孔）",
+  "ipc_class": "IPC-A-600 Class II",
+  "panelization": "",
+  "drill_overrides": [
+    {
+      "dia_mm": 4.2,
+      "pad_mm": 5.5,
+      "drill_mm": 4.15,
+      "rout_circle_mm": 5.0,
+      "note": "工程师判定：5.5 焊盘的 4.2 孔为压接孔，钻 4.15；内锣带上画的是 8 齿梅花（外圆 ⌀5.00、齿底 ⌀4.35，从 golden 量的，engine/geom/rout_shapes.py），不是圆 —— M6h 时误记成「画 ⌀5 圆，客户特殊设计」。外层焊盘按厂规 锣圆 + 2×0.5（drill.rout_circle_ring_mm）推出 6.0（golden 6.05，差 0.05 记第二轮问单）。什么时候用梅花、什么时候用圆：没规则，第二轮问单 C15。",
+      "rout_shape": {
+        "kind": "plum",
+        "teeth": 8,
+        "inner_dia_mm": 4.35
+      }
+    }
+  ],
+  "customer_notes": [
+    "所有非焊盘上的0.5mm孔绿油塞孔",
+    "叠层：TOP≥105um / PP≥0.4 / L2≥86.6um / core≥0.4 / L3 / PP / L4 / core / L5 / PP / BOT≥105um"
+  ]
+}

@@ -1,0 +1,232 @@
+# 来源：《CAM工程技能培训》第11章 p156–158；quote 为原文逐字片段
+# 说明：p158 正文只有 "gerber文件设计参数" / "钻孔及锣带设计参数" 两个标题，各参数值来自该页截图
+#       images/11_文件输出/158_1.png（Format: Gerber274x）与 158_2.png（Format: Excellon2），quote 只能引到标题。
+
+- id: output.open_window
+  rule: "打开输出窗口：方法一（Engineering Toolkit 的 output 图标）/ 方法二（Windows 菜单 Output）"
+  source_page: 156
+  quote: "一、打开输出窗口"
+
+- id: output.select_job_step_path
+  rule: "选择Job,Step,选择需要输出的路径"
+  source_page: 157
+  quote: "选择Job,Step,选择需要输出的路径"
+
+- id: output.select_format
+  rule: "选择输出格式和设定格式内的参数"
+  source_page: 157
+  quote: "选择输出格式和设定格式内的参数"
+
+# ---- gerber文件设计参数（158_1.png，Format: Gerber274x）----
+
+- id: output.gerber.format
+  rule: "gerber 输出格式 Gerber274x"
+  value: Gerber274x
+  applies_to: gerber
+  source_page: 158
+  quote: "gerber文件设计参数"
+  note: "数值来自截图 158_1.png"
+
+- id: output.gerber.break_sr
+  rule: "gerber：Break S&R = Yes"
+  value: "Yes"
+  applies_to: gerber
+  source_page: 158
+  quote: "gerber文件设计参数"
+  note: "数值来自截图 158_1.png"
+
+- id: output.gerber.break_symbols
+  rule: "gerber：Break symbols = No"
+  value: "No"
+  applies_to: gerber
+  source_page: 158
+  quote: "gerber文件设计参数"
+  note: "数值来自截图 158_1.png"
+
+- id: output.gerber.break_arcs
+  rule: "gerber：Break arcs = Yes"
+  value: "Yes"
+  applies_to: gerber
+  source_page: 158
+  quote: "gerber文件设计参数"
+  note: "数值来自截图 158_1.png"
+
+- id: output.gerber.scale_mode
+  rule: "gerber：Scale mode = All"
+  value: All
+  applies_to: gerber
+  source_page: 158
+  quote: "gerber文件设计参数"
+  note: "数值来自截图 158_1.png"
+
+- id: output.gerber.surfaces_mode
+  rule: "gerber：Surfaces mode = Fill"
+  value: Fill
+  applies_to: gerber
+  source_page: 158
+  quote: "gerber文件设计参数"
+  note: "数值来自截图 158_1.png"
+
+- id: output.gerber.minimal_brush
+  rule: "gerber：Minimal brush = 25.4 my"
+  value: 25.4
+  unit: my
+  applies_to: gerber
+  source_page: 158
+  quote: "gerber文件设计参数"
+  note: "数值来自截图 158_1.png"
+
+- id: output.gerber.units
+  rule: "gerber：Units = Inch"
+  value: Inch
+  applies_to: gerber
+  source_page: 158
+  quote: "gerber文件设计参数"
+  note: "数值来自截图 158_1.png"
+
+- id: output.gerber.coordinates
+  rule: "gerber：Coordinates = Absolute"
+  value: Absolute
+  applies_to: gerber
+  source_page: 158
+  quote: "gerber文件设计参数"
+  note: "数值来自截图 158_1.png"
+
+- id: output.gerber.zeroes_omitted
+  rule: "gerber：Zeroes omitted = None"
+  value: None
+  applies_to: gerber
+  source_page: 158
+  quote: "gerber文件设计参数"
+  note: "数值来自截图 158_1.png"
+
+- id: output.gerber.number_format
+  rule: "gerber：Number format = 2 4（整数位2，小数位4）"
+  value: "2.4"
+  applies_to: gerber
+  source_page: 158
+  quote: "gerber文件设计参数"
+  note: "数值来自截图 158_1.png"
+
+- id: output.gerber.wheel
+  rule: "gerber：Wheel 留空"
+  value: ""
+  applies_to: gerber
+  source_page: 158
+  quote: "gerber文件设计参数"
+  note: "数值来自截图 158_1.png"
+
+# ---- 钻孔及锣带设计参数（158_2.png，Format: Excellon2）----
+
+- id: output.drill_rout.format
+  rule: "钻孔及锣带输出格式 Excellon2"
+  value: Excellon2
+  applies_to: drill/rout
+  source_page: 158
+  quote: "钻孔及锣带设计参数"
+  note: "数值来自截图 158_2.png"
+
+- id: output.drill_rout.break_sr
+  rule: "钻孔及锣带：Break S&R = Yes"
+  value: "Yes"
+  applies_to: drill/rout
+  source_page: 158
+  quote: "钻孔及锣带设计参数"
+  note: "数值来自截图 158_2.png"
+
+- id: output.drill_rout.break_symbols
+  rule: "钻孔及锣带：Break symbols = Yes"
+  value: "Yes"
+  applies_to: drill/rout
+  source_page: 158
+  quote: "钻孔及锣带设计参数"
+  note: "数值来自截图 158_2.png"
+
+- id: output.drill_rout.break_arcs
+  rule: "钻孔及锣带：Break arcs = Yes"
+  value: "Yes"
+  applies_to: drill/rout
+  source_page: 158
+  quote: "钻孔及锣带设计参数"
+  note: "数值来自截图 158_2.png"
+
+- id: output.drill_rout.scale_mode
+  rule: "钻孔及锣带：Scale mode = All"
+  value: All
+  applies_to: drill/rout
+  source_page: 158
+  quote: "钻孔及锣带设计参数"
+  note: "数值来自截图 158_2.png"
+
+- id: output.drill_rout.surfaces_mode
+  rule: "钻孔及锣带：Surfaces mode = Fill"
+  value: Fill
+  applies_to: drill/rout
+  source_page: 158
+  quote: "钻孔及锣带设计参数"
+  note: "数值来自截图 158_2.png"
+
+- id: output.drill_rout.minimal_brush
+  rule: "钻孔及锣带：Minimal brush = 25.4 my"
+  value: 25.4
+  unit: my
+  applies_to: drill/rout
+  source_page: 158
+  quote: "钻孔及锣带设计参数"
+  note: "数值来自截图 158_2.png"
+
+- id: output.drill_rout.units
+  rule: "钻孔及锣带：Units = MM"
+  value: MM
+  applies_to: drill/rout
+  source_page: 158
+  quote: "钻孔及锣带设计参数"
+  note: "数值来自截图 158_2.png"
+
+- id: output.drill_rout.coordinates
+  rule: "钻孔及锣带：Coordinates = Absolute"
+  value: Absolute
+  applies_to: drill/rout
+  source_page: 158
+  quote: "钻孔及锣带设计参数"
+  note: "数值来自截图 158_2.png"
+
+- id: output.drill_rout.decimal
+  rule: "钻孔及锣带：Decimal = No"
+  value: "No"
+  applies_to: drill/rout
+  source_page: 158
+  quote: "钻孔及锣带设计参数"
+  note: "数值来自截图 158_2.png"
+
+- id: output.drill_rout.zeroes_omitted
+  rule: "钻孔及锣带：Zeroes omitted = Trailing"
+  value: Trailing
+  applies_to: drill/rout
+  source_page: 158
+  quote: "钻孔及锣带设计参数"
+  note: "数值来自截图 158_2.png"
+
+- id: output.drill_rout.number_format
+  rule: "钻孔及锣带：Number format = 3 3（整数位3，小数位3）"
+  value: "3.3"
+  applies_to: drill/rout
+  source_page: 158
+  quote: "钻孔及锣带设计参数"
+  note: "数值来自截图 158_2.png"
+
+- id: output.drill_rout.modal_coords
+  rule: "钻孔及锣带：Modal coords = Yes"
+  value: "Yes"
+  applies_to: drill/rout
+  source_page: 158
+  quote: "钻孔及锣带设计参数"
+  note: "数值来自截图 158_2.png"
+
+- id: output.drill_rout.tool_units
+  rule: "钻孔及锣带：Tool units = MM"
+  value: MM
+  applies_to: drill/rout
+  source_page: 158
+  quote: "钻孔及锣带设计参数"
+  note: "数值来自截图 158_2.png"

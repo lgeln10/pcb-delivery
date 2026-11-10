@@ -1,0 +1,90 @@
+# 来源：《CAM工程技能培训》第9章 p145–147；quote 为原文逐字片段
+
+- id: silkscreen.premise.align_and_clean
+  rule: "字符与线路阻焊钻孔层对齐，删掉板外物及外形线"
+  source_page: 145
+  quote: "字符与线路阻焊钻孔层对齐，删掉板外物及外形线"
+
+- id: silkscreen.width.min
+  rule: "字宽最小5mil"
+  value: 5
+  unit: mil
+  source_page: 145
+  quote: "一般字宽最小5mil"
+
+- id: silkscreen.height.min
+  rule: "字高最小30mil"
+  value: 30
+  unit: mil
+  source_page: 145
+  quote: "字高最小30mil"
+
+- id: silkscreen.height_width_ratio.min
+  rule: "字高与字宽比一般要6:1以上"
+  value: "6:1"
+  source_page: 145
+  quote: "字高与字宽比一般要6:1以上"
+
+- id: silkscreen.no_on_opening
+  rule: "一般字符不能上阻焊开窗"
+  source_page: 145
+  quote: "一般字符不能上阻焊开窗"
+
+- id: silkscreen.clearance_to_opening
+  rule: "字符离开窗一般要3mil以上"
+  value: 3
+  unit: mil
+  source_page: 145
+  quote: "离开窗一般要3mil以上"
+
+- id: silkscreen.on_copper_opening
+  rule: "字符可以上大铜皮开窗，但要先表面处理后印字符"
+  source_page: 145
+  quote: "字符可以上大铜皮开窗，但要先表面处理后印字符"
+
+- id: silkscreen.legible
+  rule: "一般字符要保证清晰可以认"
+  source_page: 145
+  quote: "一般字符要保证清晰可以认"
+
+- id: silkscreen.step.fix_width_height
+  rule: "文字线宽没达到要求的直接改为相应尺寸或在原来基础上加大；放大字高用 Edit Transform（Mode选Anchor，Operation选Scale）"
+  source_page: 146
+  quote: "文字线宽没达到要求的直接改为相应尺寸、或在原来基础上加大也行"
+
+- id: silkscreen.step.scale_example
+  rule: "Y Scale：1.2表示把该文字在Y方向上放大原来的0.2倍"
+  value: 1.2
+  source_page: 146
+  quote: "把该文字在Y方向上放大原来的0.2倍"
+  note: "原文 'Y Scale：1.2表示' 与本句之间被图注文字隔开"
+
+- id: silkscreen.step.check_outside_board
+  rule: "检查文字是否超出板外"
+  source_page: 146
+  quote: "检查文字是否超出板外"
+
+- id: silkscreen.step.check_on_opening
+  rule: "检查文字是否上阻焊开窗"
+  source_page: 146
+  quote: "检查文字是否上阻焊开窗"
+
+- id: silkscreen.step.cut_by_mask
+  rule: "用阻焊掏文字：把阻焊复制一层出来，清掉负性元素，加大用负性掏文字"
+  source_page: 146
+  quote: "用阻焊掏文字，把阻焊复制一层出来，清掉负性元素，加大用负性掏文字"
+
+- id: silkscreen.step.compare_original
+  rule: "分析检查对原稿，有不够的需要进行修改"
+  source_page: 147
+  quote: "分析检查对原稿"
+
+- id: silkscreen.on_copper.confirm_customer
+  rule: "字符上大铜皮一般要与客户确认是否需要保留"
+  source_page: 147
+  quote: "字符上大铜皮一般要与客户确认是否需要保留"
+
+- id: silkscreen.outside_board.delete
+  rule: "板外字符一定要删掉，不然拼板进入其它板子导致板子报废"
+  source_page: 147
+  quote: "板外字符一定要删掉，不然拼板进入其它板子导致板子报废"

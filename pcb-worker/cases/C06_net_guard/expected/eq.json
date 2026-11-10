@@ -1,0 +1,32 @@
+{
+  "_note": "C05 的 15 条 + 网表 3 条（短路 / 开路 / 内层减铜后开路），共 18；网表 3 条在 net_compare 一次出现。",
+  "count": 18,
+  "kinds": [
+    "annular_ring",
+    "copper_to_edge",
+    "hole_to_copper",
+    "isolation_ring",
+    "line_width",
+    "mask_sliver",
+    "missing_opening",
+    "negative_no_clearance",
+    "net_open",
+    "net_open_after_reduce",
+    "net_short",
+    "npth_clearance",
+    "opening_smaller_than_pad",
+    "partition_line_width",
+    "silk_on_opening",
+    "spacing"
+  ],
+  "by_stage": {
+    "intake": 0,
+    "align": 0,
+    "drill": 0,
+    "inner": 5,
+    "outer": 6,
+    "mask": 3,
+    "silk": 1,
+    "net_compare": 3
+  }
+}

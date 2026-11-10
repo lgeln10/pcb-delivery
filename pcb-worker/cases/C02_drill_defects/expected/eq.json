@@ -1,0 +1,16 @@
+{
+  "_note": "extra hole + overlapping hole are error items without an auto fix -> 2 EQ. missing_holes / npth_to_rout are warn only (no EQ) by current worker design. 2026-09-05 起 verify 跑到 silk：KiCad 板 NPTH 安装孔到铜 0.183mm < 12mil（p122）→ outer 每面 1 条 npth_clearance 决策（共 2）；mask 的 mask_expansion（KiCad 开窗=焊盘）/ npth_opening_small 只是 warn。 M2 W6: 外形层悬空线段 → align 1 条 outline_stray_segment 决策（转槽/删除）。",
+  "count": 5,
+  "kinds": [
+    "extra_holes",
+    "hole_separation",
+    "npth_clearance",
+    "outline_stray_segment"
+  ],
+  "by_stage": {
+    "intake": 0,
+    "align": 1,
+    "drill": 2,
+    "outer": 2
+  }
+}

@@ -1,0 +1,216 @@
+{
+  "_note": "板 = C01（无植入）。重点在拼板 / 输出 / 回读：profile.yaml 只给 406.4×508 工作板、板边 10、间距 2、输出主名 C07；order_spec 给客户拼板要求 → panel_customer_spec EQ。",
+  "status": {
+    "intake": "ok",
+    "align": "ok",
+    "drill": "ok",
+    "inner": "ok",
+    "outer": "needs_review",
+    "mask": "ok",
+    "silk": "ok",
+    "net_compare": "ok",
+    "panel": "needs_review",
+    "output": "ok",
+    "gatekeeper": "ok"
+  },
+  "must": [
+    {
+      "stage": "align",
+      "kind": "layer_empty",
+      "severity": "info",
+      "layer": "Flashpads-B_Silkscreen.gbr"
+    },
+    {
+      "stage": "align",
+      "kind": "profile_line_width",
+      "severity": "info"
+    },
+    {
+      "stage": "drill",
+      "kind": "drill_oversize",
+      "severity": "info",
+      "min_count": 9
+    },
+    {
+      "stage": "drill",
+      "kind": "hole_size",
+      "severity": "info"
+    },
+    {
+      "stage": "drill",
+      "kind": "power_ground_shorts",
+      "severity": "info"
+    },
+    {
+      "stage": "outer",
+      "kind": "npth_clearance",
+      "severity": "error",
+      "min_count": 2
+    },
+    {
+      "stage": "outer",
+      "kind": "smd_pads",
+      "severity": "info"
+    },
+    {
+      "stage": "mask",
+      "kind": "mask_expansion",
+      "severity": "warn"
+    },
+    {
+      "stage": "silk",
+      "kind": "silk_line_width",
+      "severity": "warn"
+    },
+    {
+      "stage": "panel",
+      "kind": "panel_plan",
+      "severity": "info"
+    },
+    {
+      "stage": "panel",
+      "kind": "panel_customer_spec",
+      "severity": "warn"
+    },
+    {
+      "stage": "output",
+      "kind": "gerber_output",
+      "severity": "info"
+    },
+    {
+      "stage": "output",
+      "kind": "drill_output",
+      "severity": "info"
+    },
+    {
+      "stage": "output",
+      "kind": "ipc356_output",
+      "severity": "info"
+    },
+    {
+      "stage": "gatekeeper",
+      "kind": "gate_ipc_ok",
+      "severity": "info"
+    },
+    {
+      "stage": "gatekeeper",
+      "kind": "gate_summary",
+      "severity": "info"
+    },
+    {
+      "stage": "net_compare",
+      "kind": "net_summary",
+      "severity": "info"
+    }
+  ],
+  "must_not": [
+    {
+      "stage": "intake",
+      "severity": "error"
+    },
+    {
+      "stage": "align",
+      "severity": "error"
+    },
+    {
+      "stage": "drill",
+      "severity": "error"
+    },
+    {
+      "stage": "inner",
+      "severity": "error"
+    },
+    {
+      "stage": "silk",
+      "severity": "error"
+    },
+    {
+      "stage": "intake",
+      "severity": "warn"
+    },
+    {
+      "stage": "align",
+      "severity": "warn"
+    },
+    {
+      "stage": "drill",
+      "severity": "warn"
+    },
+    {
+      "stage": "inner",
+      "severity": "warn"
+    },
+    {
+      "stage": "intake",
+      "kind": "sr_not_expanded"
+    },
+    {
+      "stage": "intake",
+      "kind": "layer_low_confidence"
+    },
+    {
+      "stage": "align",
+      "kind": "layer_offset"
+    },
+    {
+      "stage": "align",
+      "kind": "outside_profile"
+    },
+    {
+      "stage": "drill",
+      "kind": "extra_holes"
+    },
+    {
+      "stage": "drill",
+      "kind": "hole_separation"
+    },
+    {
+      "stage": "drill",
+      "kind": "missing_holes"
+    },
+    {
+      "stage": "drill",
+      "kind": "npth_to_rout"
+    },
+    {
+      "stage": "outer",
+      "kind": "line_width"
+    },
+    {
+      "stage": "outer",
+      "kind": "spacing"
+    },
+    {
+      "stage": "outer",
+      "kind": "annular_ring"
+    },
+    {
+      "stage": "mask",
+      "severity": "error"
+    },
+    {
+      "stage": "*",
+      "kind": "layer_parse_error"
+    },
+    {
+      "stage": "panel",
+      "kind": "panel_no_fit"
+    },
+    {
+      "stage": "output",
+      "kind": "roundtrip_diff"
+    },
+    {
+      "stage": "output",
+      "kind": "gerber_write_error"
+    },
+    {
+      "stage": "gatekeeper",
+      "severity": "error"
+    },
+    {
+      "stage": "net_compare",
+      "severity": "error"
+    }
+  ]
+}

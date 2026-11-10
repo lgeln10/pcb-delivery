@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  App 级隐私清单(Privacy Manifest)。2024-05-01 起 App Store 强制:用到「required reason API」
+  却不声明的包会在上传时被退回(ITMS-91053)。
+
+  ★为什么 App 级这一份非有不可:框架各自带的清单只覆盖框架自己。实测本工程里
+    只有 @capacitor/ios 与 CapacitorCordova 自带 PrivacyInfo.xcprivacy;
+    **@capacitor/preferences 没有**,而它 `UserDefaults.standard`
+    (node_modules/@capacitor/preferences/ios/.../Preferences.swift:19)——
+    这条就得由本文件替它声明。以后每加一个插件,先 find 一下它有没有自带清单。
+
+  ★NSPrivacyCollectedDataTypes 必须与 App Store Connect 里那份「App 隐私」问卷**逐项一致**,
+    也必须与隐私政策正文一致。三处不一致会被退,而且退回信息只说"不一致",不说哪一项。
+
+  ★口径:数据传出设备就算「收集」,即使目标是**客户自己的服务器**。本 App 把手机号/姓名/
+    员工 ID/位置/上传的图片发到租户自己的域名,所以照实声明。
+    语音**不在此列** —— 走系统 SpeechRecognizer,音频交给苹果、不经我们的服务器;
+    哪天做了服务端 ASR(设计文档 §11),要回来补 NSPrivacyCollectedDataTypeAudioData。
+-->
+<plist version="1.0">
+<dict>
+	<!-- 不做广告追踪,也不跨 App 关联。 -->
+	<key>NSPrivacyTracking</key>
+	<false/>
+	<key>NSPrivacyTrackingDomains</key>
+	<array/>
+
+	<key>NSPrivacyCollectedDataTypes</key>
+	<array>
+		<!-- 登录用手机号 -->
+		<dict>
+			<key>NSPrivacyCollectedDataType</key>
+			<string>NSPrivacyCollectedDataTypePhoneNumber</string>
+			<key>NSPrivacyCollectedDataTypeLinked</key>
+			<true/>
+			<key>NSPrivacyCollectedDataTypeTracking</key>
+			<false/>
+			<key>NSPrivacyCollectedDataTypePurposes</key>
+			<array>
+				<string>NSPrivacyCollectedDataTypePurposeAppFunctionality</string>
+			</array>
+		</dict>
+		<!-- 员工姓名(会话里带回,用于顶栏与消息署名) -->
+		<dict>
+			<key>NSPrivacyCollectedDataType</key>
+			<string>NSPrivacyCollectedDataTypeName</string>
+			<key>NSPrivacyCollectedDataTypeLinked</key>
+			<true/>
+			<key>NSPrivacyCollectedDataTypeTracking</key>
+			<false/>
+			<key>NSPrivacyCollectedDataTypePurposes</key>
+			<array>
+				<string>NSPrivacyCollectedDataTypePurposeAppFunctionality</string>
+			</array>
+		</dict>
+		<!-- 员工 ID(租户内的账号标识) -->
+		<dict>
+			<key>NSPrivacyCollectedDataType</key>
+			<string>NSPrivacyCollectedDataTypeUserID</string>
+			<key>NSPrivacyCollectedDataTypeLinked</key>
+			<true/>
+			<key>NSPrivacyCollectedDataTypeTracking</key>
+			<false/>
+			<key>NSPrivacyCollectedDataTypePurposes</key>
+			<array>
+				<string>NSPrivacyCollectedDataTypePurposeAppFunctionality</string>
+			</array>
+		</dict>
+		<!-- 精确位置:考勤工作轨迹(打上班卡到打下班卡之间),用户可拒绝,拒绝只影响该功能 -->
+		<dict>
+			<key>NSPrivacyCollectedDataType</key>
+			<string>NSPrivacyCollectedDataTypePreciseLocation</string>
+			<key>NSPrivacyCollectedDataTypeLinked</key>
+			<true/>
+			<key>NSPrivacyCollectedDataTypeTracking</key>
+			<false/>
+			<key>NSPrivacyCollectedDataTypePurposes</key>
+			<array>
+				<string>NSPrivacyCollectedDataTypePurposeAppFunctionality</string>
+			</array>
+		</dict>
+		<!-- 用户主动在对话/审批里上传的照片与附件 -->
+		<dict>
+			<key>NSPrivacyCollectedDataType</key>
+			<string>NSPrivacyCollectedDataTypePhotosorVideos</string>
+			<key>NSPrivacyCollectedDataTypeLinked</key>
+			<true/>
+			<key>NSPrivacyCollectedDataTypeTracking</key>
+			<false/>
+			<key>NSPrivacyCollectedDataTypePurposes</key>
+			<array>
+				<string>NSPrivacyCollectedDataTypePurposeAppFunctionality</string>
+			</array>
+		</dict>
+	</array>
+
+	<key>NSPrivacyAccessedAPITypes</key>
+	<array>
+		<!--
+		  UserDefaults:@capacitor/preferences 用它存 aios.server / aios.session /
+		  aios.lastPhone / aios.lastPassword。理由码 CA92.1 =「只读写本 App 自己的数据」,
+		  这正是我们的用法(没有 App Group、没有跨 App 共享)。
+		-->
+		<dict>
+			<key>NSPrivacyAccessedAPIType</key>
+			<string>NSPrivacyAccessedAPICategoryUserDefaults</string>
+			<key>NSPrivacyAccessedAPITypeReasons</key>
+			<array>
+				<string>CA92.1</string>
+			</array>
+		</dict>
+	</array>
+</dict>
+</plist>

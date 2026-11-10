@@ -1,0 +1,469 @@
+/* 壳登录页样式。色值从 standard-build/core/ui-kit/tokens.css 抄录(壳与 H5 不同源,
+   无法直接 import;改品牌色时两处同步)。深色跟随系统 prefers-color-scheme。 */
+:root {
+  --primary: #2f6bed;
+  --primary-hover: #1f56d3;
+  --primary-soft: #eef4ff;
+  --danger: #e0483d;
+  --bg: #f5f7fb;
+  --card: #ffffff;
+  --text: #1f2430;
+  --text-secondary: #5b6472;
+  --text-tertiary: #8a93a3;
+  --border: #e6eaf2;
+  --input-bg: #ffffff;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* 强调橙的暗面版本(brand/README.md §3:光面 #b65000 / 暗面 #FF9D4D)。
+       ★#b65000 在深色底上对比度只有 3 点几,当 11px 小字用不达标 —— 暗面必须换值,
+       不能只把亮色照搬过去。 */
+    --primary-soft: #1a2740;
+    --bg: #10141c;
+    --card: #181e29;
+    --text: #e8ecf4;
+    --text-secondary: #a8b0bf;
+    --text-tertiary: #717a8a;
+    --border: #2a3242;
+    --input-bg: #10141c;
+  }
+  .brand__eyebrow { color: #ff9d4d; }
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body { height: 100%; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', 'Microsoft YaHei', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  /* 壳登录页自己处理刘海/状态栏与 Home 条(手势条)的安全区。
+     ★与 H5 同一份契约:安卓上 env() 报不出状态栏和手势条高度(它只算刘海),
+       由 MainActivity 注入同名的 --sb-safe-* 行内变量覆盖下面这组默认值;
+       iOS 与浏览器里则回退到 env()。改名字要三处一起改:
+       MainActivity.java / standard-build/src/styles.css / 这里。 */
+  padding:
+    var(--sb-safe-top, env(safe-area-inset-top, 0px))
+    var(--sb-safe-right, env(safe-area-inset-right, 0px))
+    var(--sb-safe-bottom, env(safe-area-inset-bottom, 0px))
+    var(--sb-safe-left, env(safe-area-inset-left, 0px));
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.page {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+/* iso 星标。★这是公司商标本体(交锁六弦等距星),两版 svg 是 deck 仓
+   `assets/logos/mark-{graphite-light-bg,white-dark-bg}.svg` 的逐字节副本 ——
+   壳与 deck 不同源,只能拷;换 logo 时两处一起换(brand/README.md §5)。
+   明暗两版靠 <picture> 的 media 选,不靠 CSS filter —— 这个 mark 是 23 层堆叠的
+   graphite 3D,filter 会把层次糊成一片。 */
+.brand__mark {
+  display: block;
+  line-height: 0;
+}
+.brand__mark img {
+  width: 60px;
+  height: 60px;
+  display: block;
+}
+/* mono 眉标。★全页**唯一**一处强调橙 —— brand/README.md §3:强调色只用于文字强调,
+   永不用于按钮。所以下面的登录按钮仍是产品蓝(登进去之后整个 H5 都是那个蓝)。
+   字体退回系统等宽:壳不装网络字体(离线可用 + 冷启动路径)。这一串是纯拉丁,
+   系统等宽在两端都渲染得稳;中文若用等宽会掉进宋体,所以眉标只写拉丁。 */
+.brand__eyebrow {
+  font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  color: #b65000;
+  margin-top: 2px;
+}
+.brand__name {
+  font-size: 21px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  margin: 0;
+}
+.brand__sub {
+  font-size: 12.5px;
+  color: var(--text-tertiary);
+  margin: 0;
+}
+
+/* ★卡片不再画边框/阴影。三张带框的小卡叠在一张大卡里 = 一屏 6 条边框,
+   而这一页真正要人做的只有「填三样、点登录」。留白与分组已经足够说明结构。 */
+.card {
+  width: 100%;
+  max-width: 380px;
+  background: transparent;
+  padding: 0;
+}
+
+/* 三栏一组:边框只画外面一圈,里面用发丝线分隔 —— 数一数边框从 6 条降到 1 条。 */
+.fields {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--input-bg);
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+.fld {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 14px;
+  height: 52px;
+}
+.fld + .fld { border-top: 1px solid var(--border); }
+/* 标签定宽,三行的输入框左边缘因此对齐成一条线 */
+.fld__label {
+  flex: 0 0 76px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+.fld input {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  padding: 0;
+  font-size: 15px;
+  color: var(--text);
+  background: transparent;
+  border: 0;
+  outline: none;
+  appearance: none;
+}
+/* 焦点态落在整行上(输入框自己没有边框了)。★不用 outline —— 它会绕着行画一圈方角,
+   和 12px 圆角的外框对不上;这里改成把整行底色提亮一点。 */
+.fld:focus-within { background: var(--primary-soft); }
+
+/* 租户输入(409 AMBIGUOUS_TENANT 时才展开)仍是独立一块 */
+.field { margin-bottom: 14px; }
+.field label {
+  display: block;
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+.field input {
+  width: 100%;
+  height: 44px;
+  padding: 0 12px;
+  font-size: 15px;
+  color: var(--text);
+  background: var(--input-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  outline: none;
+  appearance: none;
+}
+.field input:focus { border-color: var(--primary); }
+.field .hint { margin-top: 5px; font-size: 12px; color: var(--text-tertiary); }
+
+/* 409 AMBIGUOUS_TENANT 时才显示的租户输入 */
+.field--tenant { display: none; }
+.field--tenant.show { display: block; }
+
+.error {
+  display: none;
+  margin-bottom: 14px;
+  padding: 10px 12px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--danger);
+  /* ★这是壳的**第一屏**,而壳装在什么内核上不由我们决定(国行 ROM 的系统 WebView 常年落后)。
+     color-mix 要 Chromium 111;不兜底的话老机器上这条错误提示退化成一段没有底色、没有边框的
+     浮字 —— 恰恰是「登录为什么失败」最需要被看见的时候。
+     --danger 是字面色 #e0483d,rgba() 与 color-mix 精确等价,兜底不打折。 */
+  background: rgba(224, 72, 61, 0.08);
+  background: color-mix(in srgb, var(--danger) 8%, transparent);
+  border: 1px solid rgba(224, 72, 61, 0.25);
+  border: 1px solid color-mix(in srgb, var(--danger) 25%, transparent);
+  border-radius: 10px;
+}
+.error.show { display: block; }
+
+.btn {
+  width: 100%;
+  height: 46px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.btn--primary { background: var(--primary); color: #fff; }
+.btn--primary:active { background: var(--primary-hover); }
+.btn--primary:disabled { opacity: 0.55; }
+.btn--ghost {
+  margin-top: 10px;
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  display: none;
+}
+.btn--ghost.show { display: block; }
+
+.foot {
+  margin-top: 18px;
+  font-size: 12px;
+  color: var(--text-tertiary);
+  text-align: center;
+  line-height: 1.6;
+}
+.foot__by {
+  /* 公司署名。★用等宽 + 字距,与顶部眉标呼应 —— 这是品牌的标签质感,不是随手挑的字体。 */
+  font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  opacity: 0.8;
+}
+
+
+/* 启动校验态:有存储会话时先验 token 再进入,避免登录页闪一下 */
+.boot {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  z-index: 10;
+}
+.boot.show { display: flex; }
+.boot__spinner {
+  width: 28px;
+  height: 28px;
+  border: 3px solid var(--border);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+}
+.boot__text { font-size: 14px; color: var(--text-secondary); }
+.boot__cancel {
+  margin-top: 8px;
+  background: none;
+  border: none;
+  font-size: 13px;
+  color: var(--text-tertiary);
+  text-decoration: underline;
+  cursor: pointer;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.preview-banner {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 6px;
+  text-align: center;
+  font-size: 12px;
+  background: var(--primary-soft);
+  color: var(--primary);
+}
+.preview-banner.show { display: block; }
+
+/* ── 扫码填域名 ────────────────────────────────────────────────────────────── */
+/* 输入框 + 扫码按钮同一行。按钮 44px 高与输入框齐平(触控下限,与 H5 同一把尺子) */
+.scanner {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  background: #000;
+}
+.scanner.show { display: block; }
+.scanner__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* 四周压暗 + 中间镂空:用一个超大 box-shadow 挖洞,不用第二层元素 */
+.scanner__mask {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  /* ★取景框铺满整个 video(inset:0)。不放行点击的话,「点画面重新对焦」永远收不到事件 ——
+     表现成点了没反应,而且一声不吭。「取消」是真按钮,不能跟着关(它是 .scanner 的直接子元素)。 */
+  pointer-events: none;
+}
+.scanner__box {
+  width: min(64vw, 260px);
+  aspect-ratio: 1;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  border-radius: 16px;
+  box-shadow: 0 0 0 100vmax rgba(0, 0, 0, 0.55);
+}
+.scanner__hint {
+  /* 同上:这条提示横贯一整行,压在画面上,不放行点击就挡掉下半屏的对焦点击 */
+  pointer-events: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(120px + var(--sb-safe-bottom, env(safe-area-inset-bottom, 0px)));
+  text-align: center;
+  font-size: 14px;
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+  padding: 0 24px;
+}
+.scanner__cancel {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: calc(40px + var(--sb-safe-bottom, env(safe-area-inset-bottom, 0px)));
+  min-width: 120px;
+  height: 44px;
+  padding: 0 20px;
+  font-size: 15px;
+  font-family: inherit;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 22px;
+  cursor: pointer;
+}
+
+/* ── 首次启动隐私同意闸 ─────────────────────────────────────────────
+   盖住整个界面,同意前什么都碰不到。★不是 z-index 高就行:app.js 的 boot()
+   会在这道闸之前停住,所以即便有人用 devtools 把它删掉,也读不到任何存储。 */
+.consent {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: calc(24px + var(--sb-safe-top, env(safe-area-inset-top, 0px))) 20px
+    calc(24px + var(--sb-safe-bottom, env(safe-area-inset-bottom, 0px)));
+  background: var(--bg, #0f1115);
+  overflow-y: auto;
+}
+.consent.show { display: flex; }
+.consent__card {
+  width: 100%;
+  max-width: 460px;
+  margin: auto;
+}
+.consent__title {
+  margin: 0 0 12px;
+  font-size: 22px;
+  font-weight: 700;
+}
+.consent__lede {
+  margin: 0 0 18px;
+  font-size: 15px;
+  line-height: 1.7;
+  opacity: 0.88;
+}
+.consent__list {
+  margin: 0 0 18px;
+  padding-left: 20px;
+  font-size: 14px;
+  line-height: 1.75;
+  opacity: 0.85;
+}
+.consent__list li { margin-bottom: 10px; }
+.consent__note {
+  margin: 0 0 20px;
+  font-size: 13.5px;
+  line-height: 1.7;
+  opacity: 0.72;
+}
+.consent__link {
+  display: inline-block;
+  margin-bottom: 22px;
+  font-size: 14px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+/* URL 还没确定时 app.js 会把它隐藏 —— 留一个点不动的死链比没有更糟 */
+.consent__link[hidden] { display: none; }
+.consent__actions { display: grid; gap: 10px; }
+.consent__decline {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  padding: 10px;
+  font-size: 14px;
+  opacity: 0.6;
+  cursor: pointer;
+}
+.consent__decline:focus-visible,
+.consent__link:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
+
+/* ── 扫码登录入口(登录表单最上面那颗大按钮)───────────────────────────────────
+   与「扫码填地址」那颗小的是同一个扫码器,分工见 shell/app.js 的 parseScan。
+   没有摄像头的环境里由 app.js 整个藏掉(连同下面那条分隔线),不留死按钮。 */
+.btn-qr {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  width: 100%;
+  padding: 14px 16px;
+  margin-bottom: 14px;
+  border: 1px solid var(--primary);
+  border-radius: 12px;
+  background: transparent;
+  color: var(--primary);
+  font: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn-qr:active { background: var(--primary-soft); }
+.btn-qr__ic {
+  width: 22px;
+  height: 22px;
+  /* 二维码的四个角:纯 CSS,不引图片资源(壳的冷启动路径上每个请求都算数) */
+  background:
+    linear-gradient(var(--primary), var(--primary)) 0 0 / 8px 2px no-repeat,
+    linear-gradient(var(--primary), var(--primary)) 0 0 / 2px 8px no-repeat,
+    linear-gradient(var(--primary), var(--primary)) 100% 0 / 8px 2px no-repeat,
+    linear-gradient(var(--primary), var(--primary)) 100% 0 / 2px 8px no-repeat,
+    linear-gradient(var(--primary), var(--primary)) 0 100% / 8px 2px no-repeat,
+    linear-gradient(var(--primary), var(--primary)) 0 100% / 2px 8px no-repeat,
+    linear-gradient(var(--primary), var(--primary)) 100% 100% / 8px 2px no-repeat,
+    linear-gradient(var(--primary), var(--primary)) 100% 100% / 2px 8px no-repeat;
+}
+.btn-qr__text { font-size: 16px; font-weight: 600; }
+.btn-qr__sub { font-size: 12px; opacity: 0.75; }
+
+/* 「或用账号密码登录」分隔线 */
+.or-sep {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 16px;
+  color: var(--text-tertiary);
+  font-size: 12px;
+}
+.or-sep::before,
+.or-sep::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}

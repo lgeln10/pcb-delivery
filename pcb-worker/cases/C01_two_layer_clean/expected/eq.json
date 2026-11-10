@@ -1,0 +1,7 @@
+{
+  "_note": "Node needs_decision rule: eq_question set, or severity=error without an applied fix 2026-09-05 起 verify 跑到 silk：KiCad 板 NPTH 安装孔到铜 0.183mm < 12mil（p122）→ outer 每面 1 条 npth_clearance 决策（共 2）；mask 的 mask_expansion（KiCad 开窗=焊盘）/ npth_opening_small 只是 warn。",
+  "count": 2,
+  "kinds": [
+    "npth_clearance"
+  ]
+}

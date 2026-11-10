@@ -1,0 +1,13 @@
+{
+  "_note": "无 EQ:所有层由规则命中或(drill.txt)由人工在层确认表定成 PTH。若不改 drill.txt 而直接确认,drill 阶段会多一条 drill_plating_unknown EQ —— 网页清单用它验证确认表真的生效。 2026-09-05 起 verify 跑到 silk：KiCad 板 NPTH 安装孔到铜 0.183mm < 12mil（p122）→ outer 每面 1 条 npth_clearance 决策（共 2）；mask 的 mask_expansion（KiCad 开窗=焊盘）/ npth_opening_small 只是 warn。",
+  "count": 2,
+  "kinds": [
+    "npth_clearance"
+  ],
+  "by_stage": {
+    "intake": 0,
+    "align": 0,
+    "drill": 0,
+    "outer": 2
+  }
+}

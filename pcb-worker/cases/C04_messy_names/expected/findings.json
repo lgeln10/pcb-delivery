@@ -1,0 +1,142 @@
+{
+  "_note": "intake 规则路径:8 个缩写命名文件由主文件名规则命中(0.85,不是 0.98 的属性路径);drill.txt = drill_unknown 0.65 → layer_low_confidence info;无 missing_layer。人工把 drill.txt 定成 drill_pth 后 align/drill 与 C01 完全一致,且不得出现 drill_plating_unknown。",
+  "status": {
+    "intake": "ok",
+    "align": "ok",
+    "drill": "ok",
+    "inner": "ok",
+    "outer": "needs_review",
+    "mask": "ok",
+    "silk": "ok"
+  },
+  "must": [
+    {
+      "stage": "intake",
+      "kind": "layer_low_confidence",
+      "severity": "info",
+      "layer": "drill.txt"
+    },
+    {
+      "stage": "align",
+      "kind": "layer_empty",
+      "severity": "info",
+      "layer": "ssb.gbr"
+    },
+    {
+      "stage": "align",
+      "kind": "profile_line_width",
+      "severity": "info",
+      "layer": "outline.gbr"
+    },
+    {
+      "stage": "drill",
+      "kind": "drill_oversize",
+      "severity": "info",
+      "min_count": 9
+    },
+    {
+      "stage": "drill",
+      "kind": "hole_size",
+      "severity": "info"
+    },
+    {
+      "stage": "drill",
+      "kind": "power_ground_shorts",
+      "severity": "info"
+    },
+    {
+      "stage": "outer",
+      "kind": "npth_clearance",
+      "severity": "error",
+      "min_count": 2
+    },
+    {
+      "stage": "outer",
+      "kind": "smd_pads",
+      "severity": "info"
+    },
+    {
+      "stage": "mask",
+      "kind": "mask_expansion",
+      "severity": "warn"
+    }
+  ],
+  "must_not": [
+    {
+      "stage": "intake",
+      "kind": "sr_not_expanded"
+    },
+    {
+      "stage": "intake",
+      "kind": "stackup_odd"
+    },
+    {
+      "stage": "intake",
+      "kind": "missing_layer"
+    },
+    {
+      "stage": "intake",
+      "kind": "layer_unrecognized"
+    },
+    {
+      "stage": "align",
+      "severity": "error"
+    },
+    {
+      "stage": "align",
+      "severity": "warn"
+    },
+    {
+      "stage": "align",
+      "kind": "layer_parse_error"
+    },
+    {
+      "stage": "drill",
+      "severity": "error"
+    },
+    {
+      "stage": "drill",
+      "severity": "warn"
+    },
+    {
+      "stage": "drill",
+      "kind": "drill_plating_unknown"
+    },
+    {
+      "stage": "drill",
+      "kind": "extra_holes"
+    },
+    {
+      "stage": "drill",
+      "kind": "hole_separation"
+    },
+    {
+      "stage": "drill",
+      "kind": "missing_holes"
+    },
+    {
+      "stage": "drill",
+      "kind": "npth_to_rout"
+    },
+    {
+      "stage": "outer",
+      "kind": "line_width"
+    },
+    {
+      "stage": "outer",
+      "kind": "spacing"
+    },
+    {
+      "stage": "outer",
+      "kind": "annular_ring"
+    },
+    {
+      "stage": "mask",
+      "severity": "error"
+    },
+    {
+      "stage": "*",
+      "kind": "layer_parse_error"
+    }
+  ]
+}

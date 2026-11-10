@@ -1,0 +1,85 @@
+{
+  "_note": "C03 确认后的规格(网页端 LLM 候选 + 人工确认的结果);verify 直接送给 drill stage",
+  "layers": 2,
+  "thickness_mm": 1.6,
+  "copper_oz": 1,
+  "surface_finish": "ENIG",
+  "mask_color": "green",
+  "silk_color": "white",
+  "min_trace_mil": 6,
+  "min_space_mil": 6,
+  "drill_table": [
+    {
+      "tool": "T01",
+      "file": "NPTH",
+      "dia_mm": 0.65,
+      "count": 3,
+      "plated": false,
+      "slot": false
+    },
+    {
+      "tool": "T02",
+      "file": "NPTH",
+      "dia_mm": 0.95,
+      "count": 1,
+      "plated": false,
+      "slot": false
+    },
+    {
+      "tool": "T01",
+      "file": "PTH",
+      "dia_mm": 0.7,
+      "count": 14,
+      "plated": true,
+      "slot": false
+    },
+    {
+      "tool": "T02",
+      "file": "PTH",
+      "dia_mm": 0.85,
+      "count": 2,
+      "plated": true,
+      "slot": false
+    },
+    {
+      "tool": "T03",
+      "file": "PTH",
+      "dia_mm": 1.2,
+      "count": 40,
+      "plated": true,
+      "slot": false
+    },
+    {
+      "tool": "T04",
+      "file": "PTH",
+      "dia_mm": 1.1,
+      "count": 4,
+      "plated": true,
+      "slot": false
+    },
+    {
+      "tool": "T05",
+      "file": "PTH",
+      "dia_mm": 0.6,
+      "count": 10,
+      "plated": true,
+      "slot": true
+    },
+    {
+      "tool": "T06",
+      "file": "PTH",
+      "dia_mm": 0.65,
+      "count": 2,
+      "plated": true,
+      "slot": true
+    },
+    {
+      "tool": "T07",
+      "file": "PTH",
+      "dia_mm": 0.7,
+      "count": 4,
+      "plated": true,
+      "slot": true
+    }
+  ]
+}

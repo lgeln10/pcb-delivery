@@ -1,0 +1,2571 @@
+[
+ {
+  "no": 1,
+  "zh": "印制电路",
+  "en": "printed circuit",
+  "category": "综合词汇",
+  "page": 6
+ },
+ {
+  "no": 2,
+  "zh": "印制线路",
+  "en": "printed wiring",
+  "category": "综合词汇",
+  "page": 6
+ },
+ {
+  "no": 3,
+  "zh": "印制板",
+  "en": "printed board",
+  "category": "综合词汇",
+  "page": 6
+ },
+ {
+  "no": 4,
+  "zh": "印制板电路",
+  "en": "printed circuit board (pcb)",
+  "category": "综合词汇",
+  "page": 6
+ },
+ {
+  "no": 5,
+  "zh": "印制线路板",
+  "en": "printed wiring board(pwb)",
+  "category": "综合词汇",
+  "page": 6
+ },
+ {
+  "no": 6,
+  "zh": "印制元件",
+  "en": "printed component",
+  "category": "综合词汇",
+  "page": 6
+ },
+ {
+  "no": 7,
+  "zh": "印制接点",
+  "en": "printed contact",
+  "category": "综合词汇",
+  "page": 6
+ },
+ {
+  "no": 8,
+  "zh": "印制板装配",
+  "en": "printed board assembly",
+  "category": "综合词汇",
+  "page": 6
+ },
+ {
+  "no": 9,
+  "zh": "板",
+  "en": "board",
+  "category": "综合词汇",
+  "page": 6
+ },
+ {
+  "no": 10,
+  "zh": "单面印制板",
+  "en": "single-sided printed board(ssb)",
+  "category": "综合词汇",
+  "page": 6
+ },
+ {
+  "no": 11,
+  "zh": "双面印制板",
+  "en": "double-sided printed board(dsb)",
+  "category": "综合词汇",
+  "page": 6
+ },
+ {
+  "no": 12,
+  "zh": "多层印制板",
+  "en": "mulitlayer printed board(mlb)",
+  "category": "综合词汇",
+  "page": 6
+ },
+ {
+  "no": 13,
+  "zh": "多层印制电路板",
+  "en": "mulitlayer printed circuit board",
+  "category": "综合词汇",
+  "page": 6
+ },
+ {
+  "no": 14,
+  "zh": "多层印制线路板",
+  "en": "mulitlayer prited wiring board",
+  "category": "综合词汇",
+  "page": 6
+ },
+ {
+  "no": 15,
+  "zh": "刚性印制板",
+  "en": "rigid printed board",
+  "category": "综合词汇",
+  "page": 6
+ },
+ {
+  "no": 16,
+  "zh": "刚性单面印制板",
+  "en": "rigid single-sided printed borad",
+  "category": "综合词汇",
+  "page": 6
+ },
+ {
+  "no": 17,
+  "zh": "刚性双面印制板",
+  "en": "rigid double-sided printed borad",
+  "category": "综合词汇",
+  "page": 6
+ },
+ {
+  "no": 18,
+  "zh": "刚性多层印制板",
+  "en": "rigid multilayer printed board",
+  "category": "综合词汇",
+  "page": 6
+ },
+ {
+  "no": 19,
+  "zh": "挠性多层印制板",
+  "en": "flexible multilayer printed board",
+  "category": "综合词汇",
+  "page": 6
+ },
+ {
+  "no": 20,
+  "zh": "挠性印制板",
+  "en": "flexible printed board",
+  "category": "综合词汇",
+  "page": 6
+ },
+ {
+  "no": 21,
+  "zh": "挠性单面印制板",
+  "en": "flexible single-sided printed board",
+  "category": "综合词汇",
+  "page": 6
+ },
+ {
+  "no": 22,
+  "zh": "挠性双面印制板",
+  "en": "flexible double-sided printed board",
+  "category": "综合词汇",
+  "page": 6
+ },
+ {
+  "no": 23,
+  "zh": "挠性印制电路",
+  "en": "flexible printed circuit (fpc)",
+  "category": "综合词汇",
+  "page": 6
+ },
+ {
+  "no": 24,
+  "zh": "挠性印制线路",
+  "en": "flexible printed wiring",
+  "category": "综合词汇",
+  "page": 6
+ },
+ {
+  "no": 25,
+  "zh": "刚性印制板",
+  "en": "flex-rigid printed board, rigid-flex printed board",
+  "category": "综合词汇",
+  "page": 6
+ },
+ {
+  "no": 26,
+  "zh": "刚性双面印制板",
+  "en": "flex-rigid double-sided printed board, rigid-flex double-sided printed",
+  "category": "综合词汇",
+  "page": 6
+ },
+ {
+  "no": 27,
+  "zh": "刚性多层印制板",
+  "en": "flex-rigid multilayer printed board, rigid-flex multilayer printed board",
+  "category": "综合词汇",
+  "page": 6
+ },
+ {
+  "no": 28,
+  "zh": "齐平印制板",
+  "en": "flush printed board",
+  "category": "综合词汇",
+  "page": 6
+ },
+ {
+  "no": 29,
+  "zh": "金属芯印制板",
+  "en": "metal core printed board",
+  "category": "综合词汇",
+  "page": 6
+ },
+ {
+  "no": 30,
+  "zh": "金属基印制板",
+  "en": "metal base printed board",
+  "category": "综合词汇",
+  "page": 6
+ },
+ {
+  "no": 31,
+  "zh": "多重布线印制板",
+  "en": "mulit-wiring printed board",
+  "category": "综合词汇",
+  "page": 6
+ },
+ {
+  "no": 32,
+  "zh": "陶瓷印制板",
+  "en": "ceramic substrate printed board",
+  "category": "综合词汇",
+  "page": 6
+ },
+ {
+  "no": 33,
+  "zh": "导电胶印制板",
+  "en": "electroconductive paste printed board",
+  "category": "综合词汇",
+  "page": 6
+ },
+ {
+  "no": 34,
+  "zh": "模塑电路板",
+  "en": "molded circuit board",
+  "category": "综合词汇",
+  "page": 7
+ },
+ {
+  "no": 35,
+  "zh": "模压印制板",
+  "en": "stamped printed wiring board",
+  "category": "综合词汇",
+  "page": 7
+ },
+ {
+  "no": 36,
+  "zh": "顺序层压多层印制板",
+  "en": "sequentially-laminated mulitlayer",
+  "category": "综合词汇",
+  "page": 7
+ },
+ {
+  "no": 37,
+  "zh": "散线印制板",
+  "en": "discrete wiring board",
+  "category": "综合词汇",
+  "page": 7
+ },
+ {
+  "no": 38,
+  "zh": "微线印制板",
+  "en": "micro wire board",
+  "category": "综合词汇",
+  "page": 7
+ },
+ {
+  "no": 39,
+  "zh": "积层印制板",
+  "en": "buile-up printed board",
+  "category": "综合词汇",
+  "page": 7
+ },
+ {
+  "no": 40,
+  "zh": "积层多层印制板",
+  "en": "build-up mulitlayer printed board (bum)",
+  "category": "综合词汇",
+  "page": 7
+ },
+ {
+  "no": 41,
+  "zh": "积层挠印制板",
+  "en": "build-up flexible printed board",
+  "category": "综合词汇",
+  "page": 7
+ },
+ {
+  "no": 42,
+  "zh": "表面层合电路板",
+  "en": "surface laminar circuit (slc)",
+  "category": "综合词汇",
+  "page": 7
+ },
+ {
+  "no": 43,
+  "zh": "埋入凸块连印制板",
+  "en": "b2it printed board",
+  "category": "综合词汇",
+  "page": 7
+ },
+ {
+  "no": 44,
+  "zh": "多层膜基板",
+  "en": "multi-layered film substrate(mfs)",
+  "category": "综合词汇",
+  "page": 7
+ },
+ {
+  "no": 45,
+  "zh": "层间全内导通多层印制板",
+  "en": "alivh multilayer printed board",
+  "category": "综合词汇",
+  "page": 7
+ },
+ {
+  "no": 46,
+  "zh": "载芯片板",
+  "en": "chip on board (cob)",
+  "category": "综合词汇",
+  "page": 7
+ },
+ {
+  "no": 47,
+  "zh": "埋电阻板",
+  "en": "buried resistance board",
+  "category": "综合词汇",
+  "page": 7
+ },
+ {
+  "no": 48,
+  "zh": "母板",
+  "en": "mother board",
+  "category": "综合词汇",
+  "page": 7
+ },
+ {
+  "no": 49,
+  "zh": "子板",
+  "en": "daughter board",
+  "category": "综合词汇",
+  "page": 7
+ },
+ {
+  "no": 50,
+  "zh": "背板",
+  "en": "backplane",
+  "category": "综合词汇",
+  "page": 7
+ },
+ {
+  "no": 51,
+  "zh": "裸板",
+  "en": "bare board",
+  "category": "综合词汇",
+  "page": 7
+ },
+ {
+  "no": 52,
+  "zh": "键盘板夹心板",
+  "en": "copper-invar-copper board",
+  "category": "综合词汇",
+  "page": 7
+ },
+ {
+  "no": 53,
+  "zh": "动态挠性板",
+  "en": "dynamic flex board",
+  "category": "综合词汇",
+  "page": 7
+ },
+ {
+  "no": 54,
+  "zh": "静态挠性板",
+  "en": "static flex board",
+  "category": "综合词汇",
+  "page": 7
+ },
+ {
+  "no": 55,
+  "zh": "可断拼板",
+  "en": "break-away planel",
+  "category": "综合词汇",
+  "page": 7
+ },
+ {
+  "no": 56,
+  "zh": "电缆",
+  "en": "cable",
+  "category": "综合词汇",
+  "page": 7
+ },
+ {
+  "no": 57,
+  "zh": "挠性扁平电缆",
+  "en": "flexible flat cable (ffc)",
+  "category": "综合词汇",
+  "page": 7
+ },
+ {
+  "no": 58,
+  "zh": "薄膜开关",
+  "en": "membrane switch",
+  "category": "综合词汇",
+  "page": 7
+ },
+ {
+  "no": 59,
+  "zh": "混合电路",
+  "en": "hybrid circuit",
+  "category": "综合词汇",
+  "page": 7
+ },
+ {
+  "no": 60,
+  "zh": "厚膜",
+  "en": "thick film",
+  "category": "综合词汇",
+  "page": 7
+ },
+ {
+  "no": 61,
+  "zh": "厚膜电路",
+  "en": "thick film circuit",
+  "category": "综合词汇",
+  "page": 7
+ },
+ {
+  "no": 62,
+  "zh": "薄膜",
+  "en": "thin film",
+  "category": "综合词汇",
+  "page": 7
+ },
+ {
+  "no": 63,
+  "zh": "薄膜混合电路",
+  "en": "thin film hybrid circuit",
+  "category": "综合词汇",
+  "page": 7
+ },
+ {
+  "no": 64,
+  "zh": "互连",
+  "en": "interconnection",
+  "category": "综合词汇",
+  "page": 7
+ },
+ {
+  "no": 65,
+  "zh": "导线",
+  "en": "conductor trace line",
+  "category": "综合词汇",
+  "page": 7
+ },
+ {
+  "no": 66,
+  "zh": "齐平导线",
+  "en": "flush conductor",
+  "category": "综合词汇",
+  "page": 7
+ },
+ {
+  "no": 67,
+  "zh": "传输线",
+  "en": "transmission line",
+  "category": "综合词汇",
+  "page": 7
+ },
+ {
+  "no": 68,
+  "zh": "跨交",
+  "en": "crossover",
+  "category": "综合词汇",
+  "page": 7
+ },
+ {
+  "no": 69,
+  "zh": "板边插头",
+  "en": "edge-board contact",
+  "category": "综合词汇",
+  "page": 7
+ },
+ {
+  "no": 70,
+  "zh": "增强板",
+  "en": "stiffener",
+  "category": "综合词汇",
+  "page": 7
+ },
+ {
+  "no": 71,
+  "zh": "基底",
+  "en": "substrate",
+  "category": "综合词汇",
+  "page": 7
+ },
+ {
+  "no": 72,
+  "zh": "基板面",
+  "en": "real estate",
+  "category": "综合词汇",
+  "page": 7
+ },
+ {
+  "no": 73,
+  "zh": "导线面",
+  "en": "conductor side",
+  "category": "综合词汇",
+  "page": 7
+ },
+ {
+  "no": 74,
+  "zh": "元件面",
+  "en": "component side",
+  "category": "综合词汇",
+  "page": 7
+ },
+ {
+  "no": 75,
+  "zh": "焊接面",
+  "en": "solder side",
+  "category": "综合词汇",
+  "page": 7
+ },
+ {
+  "no": 76,
+  "zh": "印制",
+  "en": "printing",
+  "category": "综合词汇",
+  "page": 7
+ },
+ {
+  "no": 77,
+  "zh": "网格",
+  "en": "grid",
+  "category": "综合词汇",
+  "page": 7
+ },
+ {
+  "no": 78,
+  "zh": "图形",
+  "en": "pattern",
+  "category": "综合词汇",
+  "page": 7
+ },
+ {
+  "no": 79,
+  "zh": "导电图形",
+  "en": "conductive pattern",
+  "category": "综合词汇",
+  "page": 7
+ },
+ {
+  "no": 80,
+  "zh": "非导电图形",
+  "en": "non-conductive pattern",
+  "category": "综合词汇",
+  "page": 7
+ },
+ {
+  "no": 81,
+  "zh": "字符",
+  "en": "legend",
+  "category": "综合词汇",
+  "page": 7
+ },
+ {
+  "no": 82,
+  "zh": "标志",
+  "en": "mark",
+  "category": "综合词汇",
+  "page": 7
+ },
+ {
+  "no": 1,
+  "zh": "基材",
+  "en": "base material",
+  "category": "基材",
+  "page": 8
+ },
+ {
+  "no": 2,
+  "zh": "层压板",
+  "en": "laminate",
+  "category": "基材",
+  "page": 8
+ },
+ {
+  "no": 3,
+  "zh": "覆金属箔基材",
+  "en": "metal-clad bade material",
+  "category": "基材",
+  "page": 8
+ },
+ {
+  "no": 4,
+  "zh": "覆铜箔层压板",
+  "en": "copper-clad laminate (ccl)",
+  "category": "基材",
+  "page": 8
+ },
+ {
+  "no": 5,
+  "zh": "单面覆铜箔层压板",
+  "en": "single-sided copper-clad laminate",
+  "category": "基材",
+  "page": 8
+ },
+ {
+  "no": 6,
+  "zh": "双面覆铜箔层压板",
+  "en": "double-sided copper-clad laminate",
+  "category": "基材",
+  "page": 8
+ },
+ {
+  "no": 7,
+  "zh": "复合层压板",
+  "en": "composite laminate",
+  "category": "基材",
+  "page": 8
+ },
+ {
+  "no": 8,
+  "zh": "薄层压板",
+  "en": "thin laminate",
+  "category": "基材",
+  "page": 8
+ },
+ {
+  "no": 9,
+  "zh": "金属芯覆铜箔层压板",
+  "en": "metal core copper-clad laminate",
+  "category": "基材",
+  "page": 8
+ },
+ {
+  "no": 10,
+  "zh": "金属基覆铜层压板",
+  "en": "metal base copper-clad laminate",
+  "category": "基材",
+  "page": 8
+ },
+ {
+  "no": 11,
+  "zh": "挠性覆铜箔绝缘薄膜",
+  "en": "flexible copper-clad dielectric film",
+  "category": "基材",
+  "page": 8
+ },
+ {
+  "no": 12,
+  "zh": "基体材料",
+  "en": "basis material",
+  "category": "基材",
+  "page": 8
+ },
+ {
+  "no": 13,
+  "zh": "预浸材料",
+  "en": "prepreg",
+  "category": "基材",
+  "page": 8
+ },
+ {
+  "no": 14,
+  "zh": "粘结片",
+  "en": "bonding sheet",
+  "category": "基材",
+  "page": 8
+ },
+ {
+  "no": 15,
+  "zh": "预浸粘结片",
+  "en": "preimpregnated bonding sheer",
+  "category": "基材",
+  "page": 8
+ },
+ {
+  "no": 16,
+  "zh": "环氧玻璃基板",
+  "en": "epoxy glass substrate",
+  "category": "基材",
+  "page": 8
+ },
+ {
+  "no": 17,
+  "zh": "加成法用层压板",
+  "en": "laminate for additive process",
+  "category": "基材",
+  "page": 8
+ },
+ {
+  "no": 18,
+  "zh": "预制内层覆箔板",
+  "en": "mass lamination panel",
+  "category": "基材",
+  "page": 8
+ },
+ {
+  "no": 19,
+  "zh": "内层芯板",
+  "en": "core material",
+  "category": "基材",
+  "page": 8
+ },
+ {
+  "no": 20,
+  "zh": "催化板材",
+  "en": "catalyzed board ,coated catalyzed laminate",
+  "category": "基材",
+  "page": 8
+ },
+ {
+  "no": 21,
+  "zh": "涂胶催化层压板",
+  "en": "adhesive-coated catalyzed laminate",
+  "category": "基材",
+  "page": 8
+ },
+ {
+  "no": 22,
+  "zh": "涂胶无催层压板",
+  "en": "adhesive-coated uncatalyzed laminate",
+  "category": "基材",
+  "page": 8
+ },
+ {
+  "no": 23,
+  "zh": "粘结层",
+  "en": "bonding layer",
+  "category": "基材",
+  "page": 8
+ },
+ {
+  "no": 24,
+  "zh": "粘结膜",
+  "en": "film adhesive",
+  "category": "基材",
+  "page": 8
+ },
+ {
+  "no": 25,
+  "zh": "涂胶粘剂绝缘薄膜",
+  "en": "adhesive coated dielectric film",
+  "category": "基材",
+  "page": 8
+ },
+ {
+  "no": 26,
+  "zh": "无支撑胶粘剂膜",
+  "en": "unsupported adhesive film",
+  "category": "基材",
+  "page": 8
+ },
+ {
+  "no": 27,
+  "zh": "覆盖层",
+  "en": "cover layer (cover lay)",
+  "category": "基材",
+  "page": 8
+ },
+ {
+  "no": 28,
+  "zh": "增强板材",
+  "en": "stiffener material",
+  "category": "基材",
+  "page": 8
+ },
+ {
+  "no": 29,
+  "zh": "铜箔面",
+  "en": "copper-clad surface",
+  "category": "基材",
+  "page": 8
+ },
+ {
+  "no": 30,
+  "zh": "去铜箔面",
+  "en": "foil removal surface",
+  "category": "基材",
+  "page": 8
+ },
+ {
+  "no": 31,
+  "zh": "层压板面",
+  "en": "unclad laminate surface",
+  "category": "基材",
+  "page": 9
+ },
+ {
+  "no": 32,
+  "zh": "基膜面",
+  "en": "base film surface",
+  "category": "基材",
+  "page": 9
+ },
+ {
+  "no": 33,
+  "zh": "胶粘剂面",
+  "en": "adhesive faec",
+  "category": "基材",
+  "page": 9
+ },
+ {
+  "no": 34,
+  "zh": "原始光洁面",
+  "en": "plate finish",
+  "category": "基材",
+  "page": 9
+ },
+ {
+  "no": 35,
+  "zh": "粗面",
+  "en": "matt finish",
+  "category": "基材",
+  "page": 9
+ },
+ {
+  "no": 36,
+  "zh": "纵向",
+  "en": "length wise direction",
+  "category": "基材",
+  "page": 9
+ },
+ {
+  "no": 37,
+  "zh": "模向",
+  "en": "cross wise direction",
+  "category": "基材",
+  "page": 9
+ },
+ {
+  "no": 38,
+  "zh": "剪切板",
+  "en": "cut to size panel",
+  "category": "基材",
+  "page": 9
+ },
+ {
+  "no": 39,
+  "zh": "酚醛纸质覆铜箔板",
+  "en": "phenolic cellulose paper copper-clad laminates(phenolic/paper ccl)",
+  "category": "基材",
+  "page": 9
+ },
+ {
+  "no": 40,
+  "zh": "环氧纸质覆铜箔板",
+  "en": "epoxide cellulose paper copper-clad laminates (epoxy/paper ccl)",
+  "category": "基材",
+  "page": 9
+ },
+ {
+  "no": 41,
+  "zh": "环氧玻璃布基覆铜箔板",
+  "en": "epoxide woven glass fabric copper-clad laminates",
+  "category": "基材",
+  "page": 9
+ },
+ {
+  "no": 42,
+  "zh": "环氧玻璃布纸复合覆铜箔板",
+  "en": "epoxide cellulose paper core, glass cloth surfaces copper-clad laminates",
+  "category": "基材",
+  "page": 9
+ },
+ {
+  "no": 43,
+  "zh": "环氧玻璃布玻璃纤维复合覆铜箔板",
+  "en": "epoxide non woven/woven glass reinforced copper-clad laminates",
+  "category": "基材",
+  "page": 9
+ },
+ {
+  "no": 44,
+  "zh": "聚酯玻璃布覆铜箔板",
+  "en": "ployester woven glass fabric copper-clad laminates",
+  "category": "基材",
+  "page": 9
+ },
+ {
+  "no": 45,
+  "zh": "聚酰亚胺玻璃布覆铜箔板",
+  "en": "polyimide woven glass fabric copper-clad laminates",
+  "category": "基材",
+  "page": 9
+ },
+ {
+  "no": 46,
+  "zh": "双马来酰亚胺三嗪环氧玻璃布覆铜箔板",
+  "en": "bismaleimide/triazine/epoxide woven glass fabric copper-clad lamimates",
+  "category": "基材",
+  "page": 9
+ },
+ {
+  "no": 47,
+  "zh": "环氧合成纤维布覆铜箔板",
+  "en": "epoxide synthetic fiber fabric copper-clad laminates",
+  "category": "基材",
+  "page": 9
+ },
+ {
+  "no": 48,
+  "zh": "聚四乙烯玻璃纤维覆铜箔板",
+  "en": "teflon/fiber glass copper-clad laminates",
+  "category": "基材",
+  "page": 9
+ },
+ {
+  "no": 49,
+  "zh": "超薄型层压板",
+  "en": "ultra thin laminate",
+  "category": "基材",
+  "page": 9
+ },
+ {
+  "no": 50,
+  "zh": "陶瓷基覆铜箔板",
+  "en": "ceramics base copper-clad laminates",
+  "category": "基材",
+  "page": 9
+ },
+ {
+  "no": 51,
+  "zh": "紫外线阻挡型覆铜箔板",
+  "en": "uv blocking copper-clad laminates",
+  "category": "基材",
+  "page": 9
+ },
+ {
+  "no": 1,
+  "zh": "a阶树脂",
+  "en": "a-stage resin",
+  "category": "基材的材料",
+  "page": 10
+ },
+ {
+  "no": 2,
+  "zh": "b阶树脂",
+  "en": "b-stage resin",
+  "category": "基材的材料",
+  "page": 10
+ },
+ {
+  "no": 3,
+  "zh": "c阶树脂",
+  "en": "c-stage resin",
+  "category": "基材的材料",
+  "page": 10
+ },
+ {
+  "no": 4,
+  "zh": "环氧树脂",
+  "en": "epoxy resin",
+  "category": "基材的材料",
+  "page": 10
+ },
+ {
+  "no": 5,
+  "zh": "酚醛树脂",
+  "en": "phenolic resin",
+  "category": "基材的材料",
+  "page": 10
+ },
+ {
+  "no": 6,
+  "zh": "聚酯树脂",
+  "en": "polyester resin",
+  "category": "基材的材料",
+  "page": 10
+ },
+ {
+  "no": 7,
+  "zh": "聚酰亚胺树脂",
+  "en": "polyimide resin",
+  "category": "基材的材料",
+  "page": 10
+ },
+ {
+  "no": 8,
+  "zh": "双马来酰亚胺三嗪树脂",
+  "en": "bismaleimide-triazine resin",
+  "category": "基材的材料",
+  "page": 10
+ },
+ {
+  "no": 9,
+  "zh": "丙烯酸树脂",
+  "en": "acrylic resin",
+  "category": "基材的材料",
+  "page": 10
+ },
+ {
+  "no": 10,
+  "zh": "三聚氰胺甲醛树脂",
+  "en": "melamine formaldehyde resin",
+  "category": "基材的材料",
+  "page": 10
+ },
+ {
+  "no": 11,
+  "zh": "多官能环氧树脂",
+  "en": "polyfunctional epoxy resin",
+  "category": "基材的材料",
+  "page": 10
+ },
+ {
+  "no": 12,
+  "zh": "溴化环氧树脂",
+  "en": "brominated epoxy resin",
+  "category": "基材的材料",
+  "page": 10
+ },
+ {
+  "no": 13,
+  "zh": "环氧酚醛",
+  "en": "epoxy novolac",
+  "category": "基材的材料",
+  "page": 10
+ },
+ {
+  "no": 14,
+  "zh": "氟树脂",
+  "en": "fluroresin",
+  "category": "基材的材料",
+  "page": 10
+ },
+ {
+  "no": 15,
+  "zh": "硅树脂",
+  "en": "silicone resin",
+  "category": "基材的材料",
+  "page": 10
+ },
+ {
+  "no": 16,
+  "zh": "硅烷",
+  "en": "silane",
+  "category": "基材的材料",
+  "page": 10
+ },
+ {
+  "no": 17,
+  "zh": "聚合物",
+  "en": "polymer",
+  "category": "基材的材料",
+  "page": 10
+ },
+ {
+  "no": 18,
+  "zh": "无定形聚合物",
+  "en": "amorphous polymer",
+  "category": "基材的材料",
+  "page": 10
+ },
+ {
+  "no": 19,
+  "zh": "结晶现象",
+  "en": "crystalline polamer",
+  "category": "基材的材料",
+  "page": 10
+ },
+ {
+  "no": 20,
+  "zh": "双晶现象",
+  "en": "dimorphism",
+  "category": "基材的材料",
+  "page": 10
+ },
+ {
+  "no": 21,
+  "zh": "共聚物",
+  "en": "copolymer",
+  "category": "基材的材料",
+  "page": 10
+ },
+ {
+  "no": 22,
+  "zh": "合成树脂",
+  "en": "synthetic",
+  "category": "基材的材料",
+  "page": 10
+ },
+ {
+  "no": 23,
+  "zh": "热固性树脂",
+  "en": "thermosetting resin",
+  "category": "基材的材料",
+  "page": 10
+ },
+ {
+  "no": 24,
+  "zh": "热塑性树脂",
+  "en": "thermoplastic resin",
+  "category": "基材的材料",
+  "page": 10
+ },
+ {
+  "no": 25,
+  "zh": "感光性树脂",
+  "en": "photosensitive resin",
+  "category": "基材的材料",
+  "page": 10
+ },
+ {
+  "no": 26,
+  "zh": "环氧当量",
+  "en": "weight per epoxy equivalent (wpe)",
+  "category": "基材的材料",
+  "page": 10
+ },
+ {
+  "no": 27,
+  "zh": "环氧值",
+  "en": "epoxy value",
+  "category": "基材的材料",
+  "page": 10
+ },
+ {
+  "no": 28,
+  "zh": "双氰胺",
+  "en": "dicyandiamide",
+  "category": "基材的材料",
+  "page": 10
+ },
+ {
+  "no": 29,
+  "zh": "粘结剂",
+  "en": "binder",
+  "category": "基材的材料",
+  "page": 10
+ },
+ {
+  "no": 30,
+  "zh": "胶粘剂",
+  "en": "adesive",
+  "category": "基材的材料",
+  "page": 10
+ },
+ {
+  "no": 31,
+  "zh": "固化剂",
+  "en": "curing agent",
+  "category": "基材的材料",
+  "page": 10
+ },
+ {
+  "no": 32,
+  "zh": "阻燃剂",
+  "en": "flame retardant",
+  "category": "基材的材料",
+  "page": 10
+ },
+ {
+  "no": 33,
+  "zh": "遮光剂",
+  "en": "opaquer",
+  "category": "基材的材料",
+  "page": 10
+ },
+ {
+  "no": 34,
+  "zh": "增塑剂",
+  "en": "plasticizers",
+  "category": "基材的材料",
+  "page": 10
+ },
+ {
+  "no": 35,
+  "zh": "不饱和聚酯",
+  "en": "unsatuiated polyester",
+  "category": "基材的材料",
+  "page": 10
+ },
+ {
+  "no": 36,
+  "zh": "聚酯薄膜",
+  "en": "polyester",
+  "category": "基材的材料",
+  "page": 10
+ },
+ {
+  "no": 37,
+  "zh": "聚酰亚胺薄膜",
+  "en": "polyimide film (pi)",
+  "category": "基材的材料",
+  "page": 10
+ },
+ {
+  "no": 38,
+  "zh": "聚四氟乙烯",
+  "en": "polytetrafluoetylene (ptfe)",
+  "category": "基材的材料",
+  "page": 10
+ },
+ {
+  "no": 39,
+  "zh": "聚全氟乙烯丙烯薄膜",
+  "en": "perfluorinated ethylene-propylene copolymer film (fep)",
+  "category": "基材的材料",
+  "page": 10
+ },
+ {
+  "no": 40,
+  "zh": "增强材料",
+  "en": "reinforcing material",
+  "category": "基材的材料",
+  "page": 10
+ },
+ {
+  "no": 41,
+  "zh": "玻璃纤维",
+  "en": "glass fiber",
+  "category": "基材的材料",
+  "page": 10
+ },
+ {
+  "no": 42,
+  "zh": "e玻璃纤维",
+  "en": "e-glass fibre",
+  "category": "基材的材料",
+  "page": 10
+ },
+ {
+  "no": 43,
+  "zh": "d玻璃纤维",
+  "en": "d-glass fibre",
+  "category": "基材的材料",
+  "page": 10
+ },
+ {
+  "no": 44,
+  "zh": "s玻璃纤维",
+  "en": "s-glass fibre",
+  "category": "基材的材料",
+  "page": 10
+ },
+ {
+  "no": 45,
+  "zh": "玻璃布",
+  "en": "glass fabric",
+  "category": "基材的材料",
+  "page": 10
+ },
+ {
+  "no": 46,
+  "zh": "非织布",
+  "en": "non-woven fabric",
+  "category": "基材的材料",
+  "page": 10
+ },
+ {
+  "no": 47,
+  "zh": "玻璃纤维垫",
+  "en": "glass mats",
+  "category": "基材的材料",
+  "page": 10
+ },
+ {
+  "no": 48,
+  "zh": "纱线",
+  "en": "yarn",
+  "category": "基材的材料",
+  "page": 10
+ },
+ {
+  "no": 49,
+  "zh": "单丝",
+  "en": "filament",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 50,
+  "zh": "绞股",
+  "en": "strand",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 51,
+  "zh": "纬纱",
+  "en": "weft yarn",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 52,
+  "zh": "经纱",
+  "en": "warp yarn",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 53,
+  "zh": "但尼尔",
+  "en": "denier",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 54,
+  "zh": "经向",
+  "en": "warp-wise",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 55,
+  "zh": "纬向",
+  "en": "weft-wise, filling-wise",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 56,
+  "zh": "织物经纬密度",
+  "en": "thread count",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 57,
+  "zh": "织物组织",
+  "en": "weave structure",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 58,
+  "zh": "平纹组织",
+  "en": "plain structure",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 59,
+  "zh": "坏布",
+  "en": "grey fabric",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 60,
+  "zh": "稀松织物",
+  "en": "woven scrim",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 61,
+  "zh": "弓纬",
+  "en": "bow of weave",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 62,
+  "zh": "断经",
+  "en": "end missing",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 63,
+  "zh": "缺纬",
+  "en": "mis-picks",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 64,
+  "zh": "纬斜",
+  "en": "bias",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 65,
+  "zh": "折痕",
+  "en": "crease",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 66,
+  "zh": "云织",
+  "en": "waviness",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 67,
+  "zh": "鱼眼",
+  "en": "fish eye",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 68,
+  "zh": "毛圈长",
+  "en": "feather length",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 69,
+  "zh": "厚薄段",
+  "en": "mark",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 70,
+  "zh": "裂缝",
+  "en": "split",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 71,
+  "zh": "捻度",
+  "en": "twist of yarn",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 72,
+  "zh": "浸润剂含量",
+  "en": "size content",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 73,
+  "zh": "浸润剂残留量",
+  "en": "size residue",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 74,
+  "zh": "处理剂含量",
+  "en": "finish level",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 75,
+  "zh": "浸润剂",
+  "en": "size",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 76,
+  "zh": "偶联剂",
+  "en": "couplint agent",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 77,
+  "zh": "处理织物",
+  "en": "finished fabric",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 78,
+  "zh": "聚酰胺纤维",
+  "en": "polyarmide fiber",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 79,
+  "zh": "聚酯纤维非织布",
+  "en": "non-woven polyester fabric",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 80,
+  "zh": "浸渍绝缘纵纸",
+  "en": "impregnating insulation paper",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 81,
+  "zh": "聚芳酰胺纤维纸",
+  "en": "aromatic polyamide paper",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 82,
+  "zh": "断裂长",
+  "en": "breaking length",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 83,
+  "zh": "吸水高度",
+  "en": "height of capillary rise",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 84,
+  "zh": "湿强度保留率",
+  "en": "wet strength retention",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 85,
+  "zh": "白度",
+  "en": "whitenness",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 86,
+  "zh": "陶瓷",
+  "en": "ceramics",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 87,
+  "zh": "导电箔",
+  "en": "conductive foil",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 88,
+  "zh": "铜箔",
+  "en": "copper foil",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 89,
+  "zh": "电解铜箔",
+  "en": "electrodeposited copper foil (ed copper foil)",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 90,
+  "zh": "压延铜箔",
+  "en": "rolled copper foil",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 91,
+  "zh": "退火铜箔",
+  "en": "annealed copper foil",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 92,
+  "zh": "压延退火铜箔",
+  "en": "rolled annealed copper foil (ra copper foil)",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 93,
+  "zh": "薄铜箔",
+  "en": "thin copper foil",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 94,
+  "zh": "涂胶铜箔",
+  "en": "adhesive coated foil",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 95,
+  "zh": "涂胶脂铜箔",
+  "en": "resin coated copper foil (rcc)",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 96,
+  "zh": "复合金属箔",
+  "en": "composite metallic material",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 97,
+  "zh": "载体箔",
+  "en": "carrier foil",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 98,
+  "zh": "殷瓦",
+  "en": "invar",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 99,
+  "zh": "箔（剖面）轮廓",
+  "en": "foil profile",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 100,
+  "zh": "光面",
+  "en": "shiny side",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 101,
+  "zh": "粗糙面",
+  "en": "matte side",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 102,
+  "zh": "处理面",
+  "en": "treated side",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 103,
+  "zh": "防锈处理",
+  "en": "stain proofing",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 104,
+  "zh": "双面处理铜箔",
+  "en": "double treated foil",
+  "category": "基材的材料",
+  "page": 11
+ },
+ {
+  "no": 1,
+  "zh": "原理图",
+  "en": "shematic diagram",
+  "category": "设计",
+  "page": 12
+ },
+ {
+  "no": 2,
+  "zh": "逻辑图",
+  "en": "logic diagram",
+  "category": "设计",
+  "page": 12
+ },
+ {
+  "no": 3,
+  "zh": "印制线路布设",
+  "en": "printed wire layout",
+  "category": "设计",
+  "page": 12
+ },
+ {
+  "no": 4,
+  "zh": "布设总图",
+  "en": "master drawing",
+  "category": "设计",
+  "page": 12
+ },
+ {
+  "no": 5,
+  "zh": "可制造性设计",
+  "en": "design-for-manufacturability",
+  "category": "设计",
+  "page": 12
+ },
+ {
+  "no": 6,
+  "zh": "计算机辅助设计",
+  "en": "computer-aided design.(cad)",
+  "category": "设计",
+  "page": 12
+ },
+ {
+  "no": 7,
+  "zh": "计算机辅助制造",
+  "en": "computer-aided manufacturing.(cam)",
+  "category": "设计",
+  "page": 12
+ },
+ {
+  "no": 8,
+  "zh": "计算机集成制造",
+  "en": "computer integrat manufacturing.(cim)",
+  "category": "设计",
+  "page": 12
+ },
+ {
+  "no": 9,
+  "zh": "计算机辅助工程",
+  "en": "computer-aided engineering.(cae)",
+  "category": "设计",
+  "page": 12
+ },
+ {
+  "no": 10,
+  "zh": "计算机辅助测试",
+  "en": "computer-aided test.(cat)",
+  "category": "设计",
+  "page": 12
+ },
+ {
+  "no": 11,
+  "zh": "电子设计自动化",
+  "en": "electric design automation .(eda)",
+  "category": "设计",
+  "page": 12
+ },
+ {
+  "no": 12,
+  "zh": "工程设计自动化",
+  "en": "engineering design automaton .(eda2)",
+  "category": "设计",
+  "page": 12
+ },
+ {
+  "no": 13,
+  "zh": "组装设计自动化",
+  "en": "assembly aided architectural design. (aaad)",
+  "category": "设计",
+  "page": 12
+ },
+ {
+  "no": 14,
+  "zh": "计算机辅助制图",
+  "en": "computer aided drawing",
+  "category": "设计",
+  "page": 12
+ },
+ {
+  "no": 15,
+  "zh": "计算机控制显示",
+  "en": "computer controlled display .(ccd)",
+  "category": "设计",
+  "page": 12
+ },
+ {
+  "no": 16,
+  "zh": "布局",
+  "en": "placement",
+  "category": "设计",
+  "page": 12
+ },
+ {
+  "no": 17,
+  "zh": "布线",
+  "en": "routing",
+  "category": "设计",
+  "page": 12
+ },
+ {
+  "no": 18,
+  "zh": "布图设计",
+  "en": "layout",
+  "category": "设计",
+  "page": 12
+ },
+ {
+  "no": 19,
+  "zh": "重布",
+  "en": "rerouting",
+  "category": "设计",
+  "page": 12
+ },
+ {
+  "no": 20,
+  "zh": "模拟",
+  "en": "simulation",
+  "category": "设计",
+  "page": 12
+ },
+ {
+  "no": 21,
+  "zh": "逻辑模拟",
+  "en": "logic simulation",
+  "category": "设计",
+  "page": 12
+ },
+ {
+  "no": 22,
+  "zh": "电路模拟",
+  "en": "circit simulation",
+  "category": "设计",
+  "page": 12
+ },
+ {
+  "no": 23,
+  "zh": "时序模拟",
+  "en": "timing simulation",
+  "category": "设计",
+  "page": 12
+ },
+ {
+  "no": 24,
+  "zh": "模块化",
+  "en": "modularization",
+  "category": "设计",
+  "page": 12
+ },
+ {
+  "no": 25,
+  "zh": "布线完成率",
+  "en": "layout effeciency",
+  "category": "设计",
+  "page": 12
+ },
+ {
+  "no": 26,
+  "zh": "机器描述格式",
+  "en": "machine descriptionm format .(mdf)",
+  "category": "设计",
+  "page": 12
+ },
+ {
+  "no": 27,
+  "zh": "机器描述格式数据库",
+  "en": "mdf databse",
+  "category": "设计",
+  "page": 12
+ },
+ {
+  "no": 28,
+  "zh": "设计数据库",
+  "en": "design database",
+  "category": "设计",
+  "page": 12
+ },
+ {
+  "no": 29,
+  "zh": "设计原点",
+  "en": "design origin",
+  "category": "设计",
+  "page": 12
+ },
+ {
+  "no": 30,
+  "zh": "优化（设计）",
+  "en": "optimization (design)",
+  "category": "设计",
+  "page": 12
+ },
+ {
+  "no": 31,
+  "zh": "供设计优化坐标轴",
+  "en": "predominant axis",
+  "category": "设计",
+  "page": 12
+ },
+ {
+  "no": 32,
+  "zh": "表格原点",
+  "en": "table origin",
+  "category": "设计",
+  "page": 12
+ },
+ {
+  "no": 33,
+  "zh": "镜像",
+  "en": "mirroring",
+  "category": "设计",
+  "page": 12
+ },
+ {
+  "no": 34,
+  "zh": "驱动文件",
+  "en": "drive file",
+  "category": "设计",
+  "page": 12
+ },
+ {
+  "no": 35,
+  "zh": "中间文件",
+  "en": "intermediate file",
+  "category": "设计",
+  "page": 12
+ },
+ {
+  "no": 36,
+  "zh": "制造文件",
+  "en": "manufacturing documentation",
+  "category": "设计",
+  "page": 12
+ },
+ {
+  "no": 37,
+  "zh": "队列支撑数据库",
+  "en": "queue support database",
+  "category": "设计",
+  "page": 12
+ },
+ {
+  "no": 38,
+  "zh": "元件安置",
+  "en": "component positioning",
+  "category": "设计",
+  "page": 12
+ },
+ {
+  "no": 39,
+  "zh": "图形显示",
+  "en": "graphics dispaly",
+  "category": "设计",
+  "page": 12
+ },
+ {
+  "no": 40,
+  "zh": "比例因子",
+  "en": "scaling factor",
+  "category": "设计",
+  "page": 13
+ },
+ {
+  "no": 41,
+  "zh": "扫描填充",
+  "en": "scan filling",
+  "category": "设计",
+  "page": 13
+ },
+ {
+  "no": 42,
+  "zh": "矩形填充",
+  "en": "rectangle filling",
+  "category": "设计",
+  "page": 13
+ },
+ {
+  "no": 43,
+  "zh": "填充域",
+  "en": "region filling",
+  "category": "设计",
+  "page": 13
+ },
+ {
+  "no": 44,
+  "zh": "实体设计",
+  "en": "physical design",
+  "category": "设计",
+  "page": 13
+ },
+ {
+  "no": 45,
+  "zh": "逻辑设计",
+  "en": "logic design",
+  "category": "设计",
+  "page": 13
+ },
+ {
+  "no": 46,
+  "zh": "逻辑电路",
+  "en": "logic circuit",
+  "category": "设计",
+  "page": 13
+ },
+ {
+  "no": 47,
+  "zh": "层次设计",
+  "en": "hierarchical design",
+  "category": "设计",
+  "page": 13
+ },
+ {
+  "no": 48,
+  "zh": "自顶向下设计",
+  "en": "top-down design",
+  "category": "设计",
+  "page": 13
+ },
+ {
+  "no": 49,
+  "zh": "自底向上设计",
+  "en": "bottom-up design",
+  "category": "设计",
+  "page": 13
+ },
+ {
+  "no": 50,
+  "zh": "线网",
+  "en": "net",
+  "category": "设计",
+  "page": 13
+ },
+ {
+  "no": 51,
+  "zh": "数字化",
+  "en": "digitzing",
+  "category": "设计",
+  "page": 13
+ },
+ {
+  "no": 52,
+  "zh": "设计规则检查",
+  "en": "design rule checking",
+  "category": "设计",
+  "page": 13
+ },
+ {
+  "no": 53,
+  "zh": "走（布）线器",
+  "en": "router (cad)",
+  "category": "设计",
+  "page": 13
+ },
+ {
+  "no": 54,
+  "zh": "网络表",
+  "en": "net list",
+  "category": "设计",
+  "page": 13
+ },
+ {
+  "no": 55,
+  "zh": "计算机辅助电路分析",
+  "en": "computer-aided circuit analysis",
+  "category": "设计",
+  "page": 13
+ },
+ {
+  "no": 56,
+  "zh": "子线网",
+  "en": "subnet",
+  "category": "设计",
+  "page": 13
+ },
+ {
+  "no": 57,
+  "zh": "目标函数",
+  "en": "objective function",
+  "category": "设计",
+  "page": 13
+ },
+ {
+  "no": 58,
+  "zh": "设计后处理",
+  "en": "post design processing (pdp)",
+  "category": "设计",
+  "page": 13
+ },
+ {
+  "no": 59,
+  "zh": "交互式制图设计",
+  "en": "interactive drawing design",
+  "category": "设计",
+  "page": 13
+ },
+ {
+  "no": 60,
+  "zh": "费用矩阵",
+  "en": "cost metrix",
+  "category": "设计",
+  "page": 13
+ },
+ {
+  "no": 61,
+  "zh": "工程图",
+  "en": "engineering drawing",
+  "category": "设计",
+  "page": 13
+ },
+ {
+  "no": 62,
+  "zh": "方块框图",
+  "en": "block diagram",
+  "category": "设计",
+  "page": 13
+ },
+ {
+  "no": 63,
+  "zh": "迷宫",
+  "en": "moze",
+  "category": "设计",
+  "page": 13
+ },
+ {
+  "no": 64,
+  "zh": "元件密度",
+  "en": "component density",
+  "category": "设计",
+  "page": 13
+ },
+ {
+  "no": 65,
+  "zh": "巡回售货员问题",
+  "en": "traveling salesman problem",
+  "category": "设计",
+  "page": 13
+ },
+ {
+  "no": 66,
+  "zh": "自由度",
+  "en": "degrees freedom",
+  "category": "设计",
+  "page": 13
+ },
+ {
+  "no": 67,
+  "zh": "入度",
+  "en": "out going degree",
+  "category": "设计",
+  "page": 13
+ },
+ {
+  "no": 68,
+  "zh": "出度",
+  "en": "incoming degree",
+  "category": "设计",
+  "page": 13
+ },
+ {
+  "no": 69,
+  "zh": "曼哈顿距离",
+  "en": "manhatton distance",
+  "category": "设计",
+  "page": 13
+ },
+ {
+  "no": 70,
+  "zh": "欧几里德距离",
+  "en": "euclidean distan",
+  "category": "设计",
+  "page": 13
+ },
+ {
+  "no": 71,
+  "zh": "网络",
+  "en": "network",
+  "category": "设计",
+  "page": 13
+ },
+ {
+  "no": 72,
+  "zh": "阵列",
+  "en": "array",
+  "category": "设计",
+  "page": 13
+ },
+ {
+  "no": 73,
+  "zh": "段",
+  "en": "segment",
+  "category": "设计",
+  "page": 13
+ },
+ {
+  "no": 74,
+  "zh": "逻辑",
+  "en": "logic",
+  "category": "设计",
+  "page": 13
+ },
+ {
+  "no": 75,
+  "zh": "逻辑设计自动化",
+  "en": "logic design automation",
+  "category": "设计",
+  "page": 13
+ },
+ {
+  "no": 76,
+  "zh": "分线",
+  "en": "separated time",
+  "category": "设计",
+  "page": 13
+ },
+ {
+  "no": 77,
+  "zh": "分层",
+  "en": "separated layer",
+  "category": "设计",
+  "page": 13
+ },
+ {
+  "no": 78,
+  "zh": "定顺序",
+  "en": "definite sequence",
+  "category": "设计",
+  "page": 13
+ },
+ {
+  "no": 1,
+  "zh": "导线（通道）",
+  "en": "conduction (track)",
+  "category": "形状与尺寸",
+  "page": 14
+ },
+ {
+  "no": 2,
+  "zh": "导线（体）宽度",
+  "en": "conductor width",
+  "category": "形状与尺寸",
+  "page": 14
+ },
+ {
+  "no": 3,
+  "zh": "导线距离",
+  "en": "conductor spacing",
+  "category": "形状与尺寸",
+  "page": 14
+ },
+ {
+  "no": 4,
+  "zh": "导线层",
+  "en": "conductor layer",
+  "category": "形状与尺寸",
+  "page": 14
+ },
+ {
+  "no": 5,
+  "zh": "导线宽度/间距",
+  "en": "conductor line/space",
+  "category": "形状与尺寸",
+  "page": 14
+ },
+ {
+  "no": 6,
+  "zh": "第一导线层",
+  "en": "conductor layer no.1",
+  "category": "形状与尺寸",
+  "page": 14
+ },
+ {
+  "no": 7,
+  "zh": "圆形盘",
+  "en": "round pad",
+  "category": "形状与尺寸",
+  "page": 14
+ },
+ {
+  "no": 8,
+  "zh": "方形盘",
+  "en": "square pad",
+  "category": "形状与尺寸",
+  "page": 14
+ },
+ {
+  "no": 9,
+  "zh": "菱形盘",
+  "en": "diamond pad",
+  "category": "形状与尺寸",
+  "page": 14
+ },
+ {
+  "no": 10,
+  "zh": "长方形焊盘",
+  "en": "oblong pad",
+  "category": "形状与尺寸",
+  "page": 14
+ },
+ {
+  "no": 11,
+  "zh": "子弹形盘",
+  "en": "bullet pad",
+  "category": "形状与尺寸",
+  "page": 14
+ },
+ {
+  "no": 12,
+  "zh": "泪滴盘",
+  "en": "teardrop pad",
+  "category": "形状与尺寸",
+  "page": 14
+ },
+ {
+  "no": 13,
+  "zh": "雪人盘",
+  "en": "snowman pad",
+  "category": "形状与尺寸",
+  "page": 14
+ },
+ {
+  "no": 14,
+  "zh": "v形盘",
+  "en": "v-shaped pad",
+  "category": "形状与尺寸",
+  "page": 14
+ },
+ {
+  "no": 15,
+  "zh": "环形盘",
+  "en": "annular pad",
+  "category": "形状与尺寸",
+  "page": 14
+ },
+ {
+  "no": 16,
+  "zh": "非圆形盘",
+  "en": "non-circular pad",
+  "category": "形状与尺寸",
+  "page": 14
+ },
+ {
+  "no": 17,
+  "zh": "隔离盘",
+  "en": "isolation pad",
+  "category": "形状与尺寸",
+  "page": 14
+ },
+ {
+  "no": 18,
+  "zh": "非功能连接盘",
+  "en": "monfunctional pad",
+  "category": "形状与尺寸",
+  "page": 14
+ },
+ {
+  "no": 19,
+  "zh": "偏置连接盘",
+  "en": "offset land",
+  "category": "形状与尺寸",
+  "page": 14
+ },
+ {
+  "no": 20,
+  "zh": "腹（背）裸盘",
+  "en": "back-bard land",
+  "category": "形状与尺寸",
+  "page": 14
+ },
+ {
+  "no": 21,
+  "zh": "盘址",
+  "en": "anchoring spaur",
+  "category": "形状与尺寸",
+  "page": 14
+ },
+ {
+  "no": 22,
+  "zh": "连接盘图形",
+  "en": "land pattern",
+  "category": "形状与尺寸",
+  "page": 14
+ },
+ {
+  "no": 23,
+  "zh": "连接盘网格阵列",
+  "en": "land grid array",
+  "category": "形状与尺寸",
+  "page": 14
+ },
+ {
+  "no": 24,
+  "zh": "孔环",
+  "en": "annular ring",
+  "category": "形状与尺寸",
+  "page": 14
+ },
+ {
+  "no": 25,
+  "zh": "元件孔",
+  "en": "component hole",
+  "category": "形状与尺寸",
+  "page": 14
+ },
+ {
+  "no": 26,
+  "zh": "安装孔",
+  "en": "mounting hole",
+  "category": "形状与尺寸",
+  "page": 14
+ },
+ {
+  "no": 27,
+  "zh": "支撑孔",
+  "en": "supported hole",
+  "category": "形状与尺寸",
+  "page": 14
+ },
+ {
+  "no": 28,
+  "zh": "非支撑孔",
+  "en": "unsupported hole",
+  "category": "形状与尺寸",
+  "page": 14
+ },
+ {
+  "no": 29,
+  "zh": "导通孔",
+  "en": "via",
+  "category": "形状与尺寸",
+  "page": 14
+ },
+ {
+  "no": 30,
+  "zh": "镀通孔",
+  "en": "plated through hole (pth)",
+  "category": "形状与尺寸",
+  "page": 14
+ },
+ {
+  "no": 31,
+  "zh": "余隙孔",
+  "en": "access hole",
+  "category": "形状与尺寸",
+  "page": 14
+ },
+ {
+  "no": 32,
+  "zh": "盲孔",
+  "en": "blind via (hole)",
+  "category": "形状与尺寸",
+  "page": 14
+ },
+ {
+  "no": 33,
+  "zh": "埋孔",
+  "en": "buried via hole",
+  "category": "形状与尺寸",
+  "page": 14
+ },
+ {
+  "no": 34,
+  "zh": "埋/盲孔",
+  "en": "buried /blind via",
+  "category": "形状与尺寸",
+  "page": 14
+ },
+ {
+  "no": 35,
+  "zh": "任意层内部导通孔",
+  "en": "any layer inner via hole (alivh)",
+  "category": "形状与尺寸",
+  "page": 14
+ },
+ {
+  "no": 36,
+  "zh": "全部钻孔",
+  "en": "all drilled hole",
+  "category": "形状与尺寸",
+  "page": 14
+ },
+ {
+  "no": 37,
+  "zh": "定位孔",
+  "en": "toaling hole",
+  "category": "形状与尺寸",
+  "page": 14
+ },
+ {
+  "no": 38,
+  "zh": "无连接盘孔",
+  "en": "landless hole",
+  "category": "形状与尺寸",
+  "page": 14
+ },
+ {
+  "no": 39,
+  "zh": "中间孔",
+  "en": "interstitial hole",
+  "category": "形状与尺寸",
+  "page": 14
+ },
+ {
+  "no": 40,
+  "zh": "无连接盘导通孔",
+  "en": "landless via hole",
+  "category": "形状与尺寸",
+  "page": 14
+ },
+ {
+  "no": 41,
+  "zh": "引导孔",
+  "en": "pilot hole",
+  "category": "形状与尺寸",
+  "page": 14
+ },
+ {
+  "no": 42,
+  "zh": "端接全隙孔",
+  "en": "terminal clearomee hole",
+  "category": "形状与尺寸",
+  "page": 14
+ },
+ {
+  "no": 43,
+  "zh": "准表面间镀覆孔",
+  "en": "quasi-interfacing plated-through hole",
+  "category": "形状与尺寸",
+  "page": 14
+ },
+ {
+  "no": 44,
+  "zh": "准尺寸孔",
+  "en": "dimensioned hole",
+  "category": "形状与尺寸",
+  "page": 14
+ },
+ {
+  "no": 45,
+  "zh": "在连接盘中导通孔",
+  "en": "via-in-pad",
+  "category": "形状与尺寸",
+  "page": 14
+ },
+ {
+  "no": 46,
+  "zh": "孔位",
+  "en": "hole location",
+  "category": "形状与尺寸",
+  "page": 14
+ },
+ {
+  "no": 47,
+  "zh": "孔密度",
+  "en": "hole density",
+  "category": "形状与尺寸",
+  "page": 14
+ },
+ {
+  "no": 48,
+  "zh": "孔图",
+  "en": "hole pattern",
+  "category": "形状与尺寸",
+  "page": 14
+ },
+ {
+  "no": 49,
+  "zh": "钻孔图",
+  "en": "drill drawing",
+  "category": "形状与尺寸",
+  "page": 14
+ },
+ {
+  "no": 50,
+  "zh": "装配图",
+  "en": "assembly drawing",
+  "category": "形状与尺寸",
+  "page": 14
+ },
+ {
+  "no": 51,
+  "zh": "印制板组装图",
+  "en": "printed board assembly drawing",
+  "category": "形状与尺寸",
+  "page": 14
+ },
+ {
+  "no": 52,
+  "zh": "参考基准",
+  "en": "datum referance",
+  "category": "形状与尺寸",
+  "page": 14
+ }
+]

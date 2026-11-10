@@ -1,0 +1,19 @@
+{
+  "_note": "C01 renamed, all %TF stripped -> rule path only. 2026-09-05 worker 加了「主文件名 = 扩展名表缩写」规则(classify_by_name),所以 top/bot/smt/smb/sst/ssb/spt/spb 都能以 0.85 命中;只有 drill.txt(Excellon 但无镀孔线索)是低置信 needs_llm。confirm_as 只用于模拟人工把 drill.txt 定成 PTH。",
+  "copper_layers": 2,
+  "files": [
+    { "file": "top.art", "type": "top_copper", "index": 1, "min_confidence": 0.8 },
+    { "file": "bot.art", "type": "bottom_copper", "index": 2, "min_confidence": 0.8 },
+    { "file": "smt.gbr", "type": "top_mask", "index": null, "min_confidence": 0.8 },
+    { "file": "smb.gbr", "type": "bottom_mask", "index": null, "min_confidence": 0.8 },
+    { "file": "sst.gbr", "type": "top_silk", "index": null, "min_confidence": 0.8 },
+    { "file": "ssb.gbr", "type": "bottom_silk", "index": null, "min_confidence": 0.8 },
+    { "file": "spt.gbr", "type": "top_paste", "index": null, "min_confidence": 0.8 },
+    { "file": "spb.gbr", "type": "bottom_paste", "index": null, "min_confidence": 0.8 },
+    { "file": "outline.gbr", "type": "outline", "index": null, "min_confidence": 0.85 },
+    { "file": "drill.txt", "type": "drill_unknown", "index": null, "min_confidence": 0.6, "confirm_as": "drill_pth" },
+    { "file": "npth.txt", "type": "drill_npth", "index": null, "min_confidence": 0.85 }
+  ],
+  "unmapped": [],
+  "needs_llm": ["drill.txt"]
+}

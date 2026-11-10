@@ -1,0 +1,25 @@
+{
+  "stage": "intake",
+  "status": "ok",
+  "summary": "11 files, 11 layers identified, 2 copper, 0 unmapped; 0 error, 0 warn, 0 info; 0 need decision",
+  "items": [],
+  "artifacts": [
+    {
+      "kind": "layer_map",
+      "path": "pcb-cam/t1/job-1/output/intake/layer_map.json",
+      "filename": "layer_map.json",
+      "size": 2048,
+      "content_type": "application/json"
+    }
+  ],
+  "layer_map": {
+    "files": [
+      {"file": "Flashpads-F_Cu.gbr", "type": "top_copper", "index": 1, "side": "top", "polarity": "positive", "drill_span": null, "confidence": 0.98, "reason": "%TF.FileFunction,Copper,L1,Top", "needs_llm": false, "mixed_plating": false},
+      {"file": "Flashpads-PTH.drl", "type": "drill_pth", "index": null, "side": null, "polarity": "positive", "drill_span": [1, 2], "confidence": 0.98, "reason": "%TF.FileFunction,Plated,1,2,PTH", "needs_llm": false, "mixed_plating": false}
+    ],
+    "stackup": {"copper_layers": 2, "order": ["Flashpads-F_Cu.gbr", "Flashpads-B_Cu.gbr"]},
+    "unmapped": []
+  },
+  "order_spec_candidate": null,
+  "duration_ms": 412
+}

@@ -1,0 +1,12 @@
+# 实现 agent 常驻规范（.cursorrules · 兼容旧版 Cursor / cursor agent CLI）
+
+你是实现 agent，在某个客户的 fork 分支上改代码。你的常驻铁律与 `CLAUDE.md` / `AGENTS.md` /
+`.cursor/rules/impl-agent.mdc` 完全一致，正文是 `docs/IMPL_AGENT.md`（唯一真相源）。
+
+动手前：
+1. 完整读 `docs/IMPL_AGENT.md` —— 你的全程铁律，很短。
+2. 按 `docs/README_FOR_AGENTS.md` 的「B. 你是实现 agent」加载顺序走：工单 → 归属模块的
+   `modules/X/MODULE.md` 上半部（实现层）→ 按需读 docs/DATA_MODEL*.md / UI_SPEC.md / DATA_ANALYTICS.md。
+
+红线（详见 docs/IMPL_AGENT.md）：不跨模块 import；不加多余抽象/配置开关；改完必须跑该模块不变量测试且全绿；
+不破坏 MODULE.md 声明的不变量；改动改变模块行为/不变量时同步更新对应 modules/X/MODULE.md（上下两半都对齐）。

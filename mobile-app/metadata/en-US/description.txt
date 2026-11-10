@@ -1,0 +1,32 @@
+Enterprise AI OS is an all-in-one internal workplace app. CRM, approvals, attendance, HR, expenses, projects and knowledge live in one system, on one set of data.
+
+What makes it different: you can just say what you want done, instead of learning which menu it lives in.
+
+■ Say it, don't hunt for it
+
+- "List the clients I followed up with last week"
+- "Where is that travel expense claim right now"
+- "Turn this lead into a client, owner Zhang Wei"
+
+It works out what you meant, checks whether you are allowed to do it, and then actually does it. Anything that needs approval still goes through approval — the flow is never bypassed.
+
+■ Built for the phone
+
+- Clock in/out and field check-in, with work-hours location tracking
+- Handle approvals anywhere, dictate by voice
+- Photograph and upload receipts and contract attachments
+- Internal messaging and push notifications
+
+■ About location
+
+Your work track is recorded only after you clock in, and stops the moment you clock out. While it is recording, a persistent notification stays in your notification tray — we think being tracked has to be visible. Declining location permission does not affect clocking in or any other feature.
+
+■ About your data
+
+The app is self-hosted: your company runs its own server and database. Your data stays with your employer — it is never pooled with ours and never shared between companies. We do not sell data, do not use it for advertising, and embed no advertising or analytics SDK.
+
+■ Getting started
+
+This app is for employees of companies that have deployed the system. There is no public sign-up. On first launch you enter the server address your administrator gives you (or scan their QR code), plus your phone number and password.
+
+If your company has not deployed the system yet, get in touch.

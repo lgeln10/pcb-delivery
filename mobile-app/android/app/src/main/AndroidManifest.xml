@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--
+      android:usesCleartextTraffic="false"
+        明文 HTTP 一律不收(壳的 normalizeServer 也只接受 https)。显式写出来既是文档也是护栏:
+        哪天有人为了迁就某个 onprem 环境想临时放开,得先改这一行。
+
+      android:enableOnBackInvokedCallback="true"
+        Android 13+ 的预测式返回。不声明的话在 14/15 上没有返回预览动画,部分 OEM 还会退化成
+        「一划直接退出 App」—— 而本 App 的返回要退的是 webview 内的历史栈
+        (native-app.ts 走 history.back())。
+    -->
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:usesCleartextTraffic="false"
+        android:enableOnBackInvokedCallback="true"
+        android:theme="@style/AppTheme">
+        <!--
+          configChanges 里补了 density|fontScale:
+            国产 ROM 的「字体大小 / 显示大小」是系统设置里的一级项,用户改一下就会重建 Activity。
+            重建 = webview 重新加载 = 正在写的那条消息、正在填的表单全丢。自己接住,页面用
+            CSS 相对单位本来就跟着变,不需要重建。
+          resizeableActivity:
+            三星折叠屏/平板与国产 ROM 的分屏、小窗靠它;不声明在部分 ROM 上会被当成
+            「不支持多窗口」,折叠展开时整页重建甚至黑一下。
+        -->
+        <activity
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode|navigation|density|fontScale"
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBarLaunch"
+            android:launchMode="singleTask"
+            android:resizeableActivity="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/file_paths" />
+        </provider>
+        <!--
+          工作时段位置追踪的前台服务(LocationTrackerPlugin 拉起/停掉)。
+          ★foregroundServiceType="location" 是**必填**:Android 10+ 不声明它,
+            startForeground 会抛,服务起不来 —— 表现成「息屏后轨迹照样断」,与没做一样。
+          ★exported="false":外部应用无权拉起它。
+        -->
+        <service
+            android:name=".LocationForegroundService"
+            android:exported="false"
+            android:foregroundServiceType="location" />
+    </application>
+
+    <!-- Permissions -->
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 网络状态:webview 加载失败时要能分清「没网」和「服务器挂了」 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- 语音输入(系统 SpeechRecognizer) -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <!-- 对话里的拍照上传(webview 文件选择的相机入口) -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <!-- 定位能力(@capacitor/geolocation;H5 侧按业务需要取用) -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!--
+      ★工作时段轨迹要在**息屏/切后台**时继续,这三条缺一不可(2026-08-16 补):
+        · ACCESS_BACKGROUND_LOCATION —— Android 10+ 没有它,App 一进后台位置就取不到;
+          它必须**单独**申请(系统强制与「使用期间」分两步弹,一次要两个会被直接拒)。
+        · FOREGROUND_SERVICE / _LOCATION —— 前台服务是安卓上唯一稳定的后台定位做法
+          (Android 8 起后台定位被限频,国产 ROM 还会冻结进程);14+ 起要按类型单独声明。
+      在这三条之前,安卓压根没有后台定位:H5 退化成前台 watchPosition,员工把手机揣兜里
+      上报就停,而服务端的失联判定会给管理者发预警 —— **人正常上班,系统说他失联**。
+    -->
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
+    <!--
+      ★Android 13(API 33)起通知是**运行时权限**,不声明这一条,
+        PushNotifications.requestPermissions() 直接返回 denied,通知**静默不出**,
+        而日志里什么都看不到 —— 而 13+ 恰好覆盖近三年的绝大多数机器。
+        (安卓侧的推送通道本身还是另一回事,见 docs/design/PUSH_NOTIFICATIONS.md §3:
+         FCM 在国行机上收不到。但权限这条无论走哪个通道都要。)
+    -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <!--
+      ★★ uses-feature 必须逐条写 required="false"。
+
+      声明 CAMERA 权限会让系统**隐式**推断出 `android.hardware.camera` +
+      `android.hardware.camera.autofocus` 两个 required=true 的 feature;
+      声明定位权限同理推断出 `android.hardware.location.gps`。
+      后果是应用商店按 feature 过滤机型 —— 没有自动对焦相机的设备、没有 GPS 的
+      纯 WiFi 平板(华为 MatePad WiFi 版、部分企业定制机)在商店里**根本搜不到本 App**,
+      而这些正是「给员工统一发一批平板」最常见的机型。
+      本 App 这几项能力全是「有就用、没有就退化」,一个都不是硬需求。
+    -->
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+    <uses-feature android:name="android.hardware.camera.any" android:required="false" />
+    <uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
+    <uses-feature android:name="android.hardware.location" android:required="false" />
+    <uses-feature android:name="android.hardware.location.gps" android:required="false" />
+    <uses-feature android:name="android.hardware.location.network" android:required="false" />
+    <uses-feature android:name="android.hardware.microphone" android:required="false" />
+    <!-- 触摸屏:不写的话默认 required=true,会挡掉少数带触控板的二合一设备 -->
+    <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
+
+    <!-- Android 11+ 包可见性:不声明的话 isRecognitionAvailable 恒 false,语音按钮不出现 -->
+    <queries>
+        <intent>
+            <action android:name="android.speech.RecognitionService" />
+        </intent>
+        <!--
+          「去应用商店更新内核」那个按钮走 market:// —— Android 11+ 的包可见性同样管到它,
+          不声明的话 startActivity 会以 ActivityNotFoundException 结束,即便机器上装着应用市场。
+        -->
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="market" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="https" />
+        </intent>
+    </queries>
+</manifest>

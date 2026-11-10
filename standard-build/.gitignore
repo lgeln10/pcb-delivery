@@ -1,0 +1,15 @@
+node_modules/
+# ★不带斜杠那条不能省:`node_modules/` 只匹配**目录**,匹配不到同名的**符号链接**。
+#   仓里已经栽过四次(607f36320 / 5533bde78 / 563281fdc,以及 2026-08-27 的 89d82a821)——
+#   一个指向本机绝对路径的软链混进提交,别的环境检出后 node_modules 直接是断链,
+#   npm run typecheck / 跑测试全部失败,而且症状看着像「依赖没装」,很难往版本控制上想。
+node_modules
+dist/
+dist-website/
+.env
+.env.local
+.deploy_version
+.pm2.config.cjs
+.mail-seen-*.json
+*.log
+.enrolled

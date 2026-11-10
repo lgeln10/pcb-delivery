@@ -1,0 +1,7 @@
+{
+  "modelVersion": "5.0.0",
+  "name": "aios-harmony-shell",
+  "version": "0.1.0",
+  "description": "AIOS HarmonyOS NEXT shell — 登录后在 Web 组件里跑租户 H5,原生能力经 window.Capacitor 垫片提供",
+  "dependencies": {}
+}

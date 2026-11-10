@@ -1,0 +1,5 @@
+{
+  "keyId": "填 App Store Connect 生成密钥时给的 Key ID(10 位)",
+  "issuerId": "填同一页顶部的 Issuer ID(UUID 形状)",
+  "keyFile": "AuthKey_XXXXXXXXXX.p8"
+}

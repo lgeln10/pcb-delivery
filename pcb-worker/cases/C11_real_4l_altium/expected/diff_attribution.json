@@ -1,0 +1,366 @@
+{
+ "note": "C 档（带宽 > 0.1 mm 的形体差异）逐簇归属。门禁只问『归不归得了』，不问『修没修』—— status=open 就是已知待修。归不了的必须为 0。2026-09-18 首次建档，只登记有实测依据的，其余一律留红。",
+ "skip_layers": [
+  ".gto",
+  ".gbo"
+ ],
+ "skip_reason": "字符层：我们用 Hershey 笔画字体，工程师用 Altium 内置字形。底面 XOR 128% 但只有 2 种形状 ×9（26.4×6.5 少 / 28.1×6.4 多）—— 同一块文字两种字体，几何比毫无意义。该层要比『文字内容 + 位置』，还没做。",
+ "max_report": 6,
+ "attributions": [
+  {
+   "id": "rail_fill",
+   "layers": [
+    ".gtl",
+    ".l2",
+    ".l3",
+    ".gbl"
+   ],
+   "edge_margin_mm": 5,
+   "min_area_mm2": 0.02,
+   "reason": "工艺边铺铜：我们比工程师多铺，最大两条是下边 145.5×4.13（60.7 mm²）和上边 116.8×2.8（50.6 mm²）。和 C09/C12 同一个根因 —— 铺铜带的上下沿和内部避让都没反推准。",
+   "status": "open",
+   "ref": "docs/ROADMAP.md §M6k",
+   "expect": {
+    "clusters": 36,
+    "area_mm2": 128,
+    "tolerance": 0.15
+   }
+  },
+  {
+   "id": "rail_fill_narrow",
+   "layers": [
+    ".gtl",
+    ".l2",
+    ".l3",
+    ".gbl"
+   ],
+   "direction": "extra",
+   "regions": [
+    [
+     -1,
+     -0.2,
+     200,
+     3.0
+    ],
+    [
+     -1,
+     98.0,
+     200,
+     101.2
+    ]
+   ],
+   "reason": "上下两条窄工艺边（y 0..3 / y 98..101）：工程师只铺一段一段的短块（下边 x3.741..6.628、9.373..42.047、53.007..70.313、74.341..91.597…，上边分得更碎），我们从 x8.903 一直铺到 135.747 连成一条。他的带是 y0.674..2.399 / 98.400..100.125，内外层同一个值；我们是外层 0.600..2.400、内层 0.750..2.250。断法和 0.675 这个内缩值都还没反推出来。",
+   "status": "question",
+   "ref": "docs/M6h_对标确认单_第二轮问题.md C12",
+   "expect": {
+    "clusters": 12,
+    "area_mm2": 120,
+    "tolerance": 0.4
+   }
+  },
+  {
+   "id": "vcut_end_hole_windows",
+   "layers": [
+    ".gts",
+    ".gbs"
+   ],
+   "min_area_mm2": 0.3,
+   "reason": "V-cut 端孔（每条 V-cut 线两端板边外侧 ⌀0.6/0.9/1.2 三连孔，共 36 个）的开窗：孔没打，窗自然没有。2026-09-20 量清了作图规律 —— 孔心离板边 0.229/0.380/0.541，即每个孔的缘切进板内 0.065；直板边处三孔在 V-cut 线上一字排开，单元倒角处沿板边走。倒角那半的方向不唯一，猜错就是 36 个孔打错位置，先问。",
+   "status": "question",
+   "ref": "docs/M6h_对标确认单_第二轮问题.md#C27",
+   "expect": {
+    "clusters": 30,
+    "area_mm2": 30,
+    "tolerance": 0.3
+   },
+   "sizes_mm": [
+    [
+     2.1,
+     1.1
+    ],
+    [
+     1.1,
+     2.1
+    ],
+    [
+     2.1,
+     10.3
+    ],
+    [
+     10.3,
+     2.1
+    ],
+    [
+     1.81,
+     1.47
+    ],
+    [
+     1.47,
+     1.81
+    ]
+   ],
+   "size_tol_mm": 0.35
+  },
+  {
+   "id": "rail_marks_and_edge_stroke",
+   "layers": [
+    ".gts",
+    ".gbs"
+   ],
+   "edge_margin_mm": 4.2,
+   "min_area_mm2": 0.05,
+   "reason": "工艺边上的东西：光学点对、⌀6.7 无铜圆窗、末端铜条、V 形细线（都要工程师给规则），外加工艺边与单元之间那条外形描边我们画在 y 97.8、终稿在 98.101（差 0.3，属外形详图那条）。",
+   "status": "question",
+   "ref": "docs/M6h_对标确认单_第二轮问题.md#C7",
+   "expect": {
+    "clusters": 30,
+    "area_mm2": 60,
+    "tolerance": 0.35
+   }
+  },
+  {
+   "id": "outline_rail_step",
+   "layers": [
+    ".gko"
+   ],
+   "min_area_mm2": 0.05,
+   "reason": "外形层剩下的：工艺边与单元之间那条边（我们 97.8 / 终稿 98.101）、V-cut 让刀缺口、工艺边末端的小凸块。V-cut 线本身已经按板材裁断（第 4 轮，14.91% → 12.20%）。",
+   "status": "question",
+   "ref": "docs/M6h_对标确认单_第二轮问题.md#C8",
+   "expect": {
+    "clusters": 16,
+    "area_mm2": 34,
+    "tolerance": 0.3
+   }
+  },
+  {
+   "id": "mask_edge_stroke_bits",
+   "layers": [
+    ".gts",
+    ".gbs"
+   ],
+   "max_area_mm2": 5.0,
+   "min_area_mm2": 0.02,
+   "reason": "阻焊上外形描边一带的零头：单元之间那条 31 mm 长的描边（我们画在 y 97.8、终稿 98.101，差 0.3）、板边上每个半孔/边孔处描边与孔窗交叠差的一点点（每只单元 8 处、合计 0.81 mm²）、0.1×0.6 小竖条、0.4×0.1 碎屑。单块都 ≤0.3 mm²，和外形详图（C8）同一族。",
+   "status": "question",
+   "ref": "docs/M6h_对标确认单_第二轮问题.md#C8",
+   "expect": {
+    "clusters": 70,
+    "area_mm2": 22,
+    "tolerance": 0.4
+   },
+   "sizes_mm": [
+    [
+     0.1,
+     0.6
+    ],
+    [
+     31.1,
+     0.8
+    ],
+    [
+     31.0,
+     0.7
+    ],
+    [
+     0.4,
+     0.1
+    ],
+    [
+     8.19,
+     16.1
+    ],
+    [
+     16.1,
+     8.19
+    ],
+    [
+     19.94,
+     31.0
+    ]
+   ],
+   "size_tol_mm": 0.45
+  },
+  {
+   "id": "unit_edge_slivers",
+   "layers": [
+    ".l2",
+    ".l3"
+   ],
+   "max_area_mm2": 0.08,
+   "min_area_mm2": 0.02,
+   "reason": "内层单元边上 0.12×0.47 的细屑 ×24（每块 0.04 mm²，合计 0.9 mm²）：单元外形拐角处铜的退让差一点点，肉眼不可见。",
+   "status": "open",
+   "ref": "docs/M6h_对标确认单_第二轮问题.md#C8",
+   "expect": {
+    "clusters": 28,
+    "area_mm2": 1.3,
+    "tolerance": 0.3
+   },
+   "sizes_mm": [
+    [
+     0.12,
+     0.47
+    ],
+    [
+     0.12,
+     0.4
+    ]
+   ],
+   "size_tol_mm": 0.12
+  },
+  {
+   "id": "vcut_relief_notch",
+   "layers": [
+    ".gts",
+    ".gbs",
+    ".gko"
+   ],
+   "sizes_mm": [
+    [
+     5.85,
+     1.93
+    ],
+    [
+     5.9,
+     28.7
+    ],
+    [
+     5.85,
+     28.74
+    ],
+    [
+     1.93,
+     5.85
+    ]
+   ],
+   "size_tol_mm": 0.6,
+   "max_area_mm2": 3.0,
+   "reason": "V-cut 让刀缺口：终稿在每条竖锣槽与工艺边交界处画一个 5.85×1.93 的缺口，我们画的形状不一样（profile 的 rail_vcut_notch_mm = [3.7,1.5,0.75] 是按 C09 的方口反推的）。要工程师给这块的画法。",
+   "status": "question",
+   "ref": "docs/M6h_对标确认单_第二轮问题.md#C6",
+   "expect": {
+    "clusters": 8,
+    "area_mm2": 6,
+    "tolerance": 0.35
+   }
+  },
+  {
+   "id": "mask_scattered_bits",
+   "layers": [
+    ".gts",
+    ".gbs"
+   ],
+   "max_area_mm2": 5.0,
+   "min_area_mm2": 0.05,
+   "reason": "每只单元里散布的阻焊零头：一簇十来块、单块都 ≤0.3 mm²，集中在板边描边和半孔/边孔的窗口交界处（和 mask_edge_stroke_bits 同一族，只是串成了跨单元的长簇）。合计十几 mm²。",
+   "status": "question",
+   "ref": "docs/M6h_对标确认单_第二轮问题.md#C8",
+   "expect": {
+    "clusters": 20,
+    "area_mm2": 36,
+    "tolerance": 0.35
+   }
+  },
+  {
+   "id": "unit_lcut_wall_hairline",
+   "layers": [
+    ".l2",
+    ".l3"
+   ],
+   "direction": "missing",
+   "sizes_mm": [
+    [
+     8.35,
+     16.39
+    ]
+   ],
+   "size_tol_mm": 0.3,
+   "max_area_mm2": 0.2,
+   "min_area_mm2": 0.05,
+   "reason": "内层 L 形挖口的整圈边上一条发丝差（每只单元 0.14 mm²，框 8.35×16.39，周长约 50 mm → 平均宽 0.003 mm）：edge_clearance 0.40 按拼板外缘取，挖口竖边工程师不退（35.585 vs 原稿 35.598）。第 14 轮工艺边修好后从大簇里分出来成了独立簇。",
+   "status": "open",
+   "ref": "docs/M6h_对标确认单_第二轮问题.md#C8",
+   "expect": {
+    "clusters": 18,
+    "area_mm2": 2.6,
+    "tolerance": 0.3
+   }
+  },
+  {
+   "id": "unit_channel_wall_inset",
+   "layers": [
+    ".l2",
+    ".l3"
+   ],
+   "direction": "missing",
+   "sizes_mm": [
+    [
+     0.12,
+     13.28
+    ]
+   ],
+   "size_tol_mm": 0.15,
+   "max_area_mm2": 0.12,
+   "min_area_mm2": 0.02,
+   "reason": "内层铺铜离锣通道墙：工程师退 0.28（铜到 47.27，墙 47.55），我们按 edge_clearance 0.40 退到 47.15 —— 一条 0.12×13.28 的细条 ×6（每条 0.05 mm²）。外缘 0.40 / 通道墙 0.28 / 椭圆挖空 0.152 / L 切口竖边 0 ，一个值做不到，工艺边是工程师自己拼的 → C8。",
+   "status": "open",
+   "ref": "docs/M6h_对标确认单_第二轮问题.md#C8",
+   "expect": {
+    "clusters": 6,
+    "area_mm2": 0.3,
+    "tolerance": 0.3
+   }
+  }
+ ],
+ "drill": {
+  "attributions": [
+   {
+    "id": "via_plug_9",
+    "sizes": [
+     {
+      "dia_mm": 0.35,
+      "kind": "hole",
+      "ours": 1620,
+      "golden": 1611
+     },
+     {
+      "dia_mm": 0.45,
+      "kind": "hole",
+      "ours": 342,
+      "golden": 351
+     }
+    ],
+    "reason": "9 个骑在露铜线边上的过孔，工程师塞、我们开。和 C09 的 23 个同一类判据问题。",
+    "status": "open",
+    "ref": "DECISIONS #18-17"
+   },
+   {
+    "id": "vcut_end_holes",
+    "sizes": [
+     {
+      "dia_mm": 0.6,
+      "kind": "hole",
+      "ours": 0,
+      "golden": 12
+     },
+     {
+      "dia_mm": 0.9,
+      "kind": "hole",
+      "ours": 0,
+      "golden": 12
+     },
+     {
+      "dia_mm": 1.2,
+      "kind": "hole",
+      "ours": 0,
+      "golden": 12
+     }
+    ],
+    "reason": "V-cut 线两端的三孔（⌀0.6/0.9/1.2 各 12 个）我们一个都没打 —— 36 个孔完全缺失。左端一字排、右端斜排，规则未知。这是这三块板上唯一一处「整类特征没做」，XOR 上几乎看不见（钻孔层不参与面积比），但板子分板时会崩边。",
+    "status": "open",
+    "ref": "DECISIONS #18-11"
+   }
+  ]
+ }
+}

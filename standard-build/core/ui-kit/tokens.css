@@ -1,0 +1,240 @@
+/* core/ui-kit/tokens.css — design token 唯一来源。
+   页面/组件禁止写裸色值、裸像素(质量红线),全部引用这些变量或 styles.css 的角色工具类。
+   分三层:① 原始刻度(灰阶/间距/字号) ② 语义角色(文本/背景/边框/状态/侧栏) ③ 组件级。
+   ★主题:默认浅色;深色主题通过 <html data-theme="dark"> 覆盖②的语义 token(见文件底部)。
+   写页面时优先用②③和排版角色类,尽量不直接碰①。 */
+:root {
+  /* ───────── ① 中性灰阶(固定刻度,9 阶)───────── */
+  --sb-gray-50: #f8fafc;
+  --sb-gray-100: #f1f5f9;
+  --sb-gray-200: #e6ebf2;
+  --sb-gray-300: #d3dbe6;
+  --sb-gray-400: #9aa6b8;
+  --sb-gray-500: #6b7688;
+  --sb-gray-600: #4d5666;
+  --sb-gray-700: #374151;
+  --sb-gray-800: #1f2733;
+  --sb-gray-900: #111827;
+
+  /* ───────── 主色 / 语义色(清新基调:主色略亮,各带 -soft 浅底)───────── */
+  --sb-color-primary: #2f6bed;
+  --sb-color-primary-hover: #1f56d3;
+  --sb-color-primary-soft: #eef4ff;
+  --sb-color-success: #15a36e;
+  /* PCB 比对层透明度的初值。工作台用行内样式按滑块覆盖,这里只保证变量有定义。 */
+  --cmp-ours-opacity: 0.35;
+  --sb-color-success-soft: #e9f9f1;
+  --sb-color-warning: #c2790a;
+  --sb-color-warning-soft: #fdf4e3;
+  --sb-color-danger: #e0483d;
+  --sb-color-danger-hover: #c43a30;
+  --sb-color-danger-soft: #fdeeec;
+  --sb-color-danger-border: #f2c6c2; /* 红软边(失败/异常项的描边,与 warning-border 对称) */
+  --sb-color-info: var(--sb-gray-500);
+  --sb-color-info-soft: var(--sb-gray-100);
+  --sb-color-warning-border: #f0d9a8; /* 琥珀软边(审批闸卡片/标签描边) */
+
+  /* ───────── 企业智能体专用语义 ─────────
+     审批闸(gate)= warning 的语义别名:表示「需人工点头才生效」的动作/卡片。
+     组件引用 --sb-gate* 表达意图,底色仍跟随主题的 warning。 */
+  --sb-gate: var(--sb-color-warning);
+  --sb-gate-soft: var(--sb-color-warning-soft);
+  --sb-gate-border: var(--sb-color-warning-border);
+  /* 数字员工头像身份色板(装饰性:按 id 稳定取色,让每个员工有辨识度)。
+     唯一允许的「多彩」出口,仅用于头像/交付物图标,不用于功能语义。 */
+  --sb-avatar-1: #3355e0;
+  --sb-avatar-2: #0f9d76;
+  --sb-avatar-3: #8a5cf0;
+  --sb-avatar-4: #c2681c;
+  --sb-avatar-5: #c0396b;
+  --sb-avatar-6: #0e8fb8;
+
+  /* ───────── 终端 / 命令回显块 ─────────
+     agent 跑过的 shell 命令、工作流步骤的原始输出这类「终端里的东西」。
+     它在三个主题下都是深底 —— 终端就是深底,这是内容的属性不是主题的属性;
+     所以这里只在暗金下换成暖调近黑(冷石板色配暖金界面会跳出来),明暗两档共用一份。
+     ★别再往组件里写 #0f172a / #93c5fd(原来 4 处):那是事实上的第二份 token 表。 */
+  --sb-term-bg: #0f172a;
+  --sb-term-fg: #e2e8f0; /* 普通输出 */
+  --sb-term-cmd: #93c5fd; /* 命令行本身(比输出亮一档,一眼能分出「我敲的」和「它答的」) */
+
+  /* ───────── ② 文本(四级层次)───────── */
+  --sb-text-primary: var(--sb-gray-800);
+  --sb-text-secondary: var(--sb-gray-500);
+  --sb-text-tertiary: var(--sb-gray-400);
+  --sb-text-placeholder: var(--sb-gray-400);
+  --sb-text-inverse: #ffffff;
+
+  /* ───────── ② 背景 / 表面层次(elevation)───────── */
+  --sb-bg-page: #f5f7fb; /* 应用底,带一丝冷调=清新 */
+  --sb-bg-card: #ffffff; /* 抬起卡片 */
+  --sb-bg-subtle: var(--sb-gray-50); /* 表头/分组/只读底 */
+  --sb-bg-hover: var(--sb-gray-100);
+  --sb-bg-sunken: var(--sb-gray-50);
+  --sb-border: var(--sb-gray-200);
+  --sb-border-strong: var(--sb-gray-300);
+
+  /* ───────── ② 侧栏(★浅色导航,默认主题)───────── */
+  --sb-sidebar-bg: #ffffff;
+  --sb-sidebar-border: var(--sb-gray-200);
+  --sb-sidebar-text: var(--sb-gray-600);
+  --sb-sidebar-text-active: var(--sb-color-primary);
+  --sb-sidebar-group: var(--sb-gray-400); /* 分组标题 */
+  --sb-sidebar-hover: var(--sb-gray-100);
+  --sb-sidebar-active: var(--sb-color-primary-soft);
+  --sb-sidebar-accent: var(--sb-color-primary);
+
+  /* ───────── ① 间距(4 基数)+ 语义密度 ───────── */
+  --sb-space-1: 4px;
+  --sb-space-2: 8px;
+  --sb-space-3: 12px;
+  --sb-space-4: 16px;
+  --sb-space-5: 20px;
+  --sb-space-6: 24px;
+  --sb-space-8: 32px;
+  --sb-space-10: 40px;
+  --sb-gap-tight: var(--sb-space-2);
+  --sb-gap-control: var(--sb-space-3);
+  --sb-gap-block: var(--sb-space-4);
+  --sb-gap-section: var(--sb-space-6);
+  --sb-pad-card: var(--sb-space-6);
+  /* 右下角固定「提需求」浮动按钮(FeedbackWidget)的横向占位:列表分页须让出这段宽度,
+     确保分页右边缘落在按钮左侧不被遮挡(见各列表页 .list-pager)。移动端留白按钮实际
+     占位收窄(--sb-fab-clearance-mobile),分页仍右对齐与按钮同排,不再居中堆叠。 */
+  --sb-fab-clearance: 160px;
+  --sb-fab-clearance-mobile: 132px;
+
+  /* ───────── ① 字号 + 行高 + 字距(排版角色见 styles.css 的 .t-* 类)───────── */
+  --sb-font-mono: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace;
+  --sb-font-xs: 12px;
+  --sb-font-sm: 13px;
+  --sb-font-md: 14px;
+  --sb-font-lg: 16px;
+  --sb-font-xl: 20px;
+  --sb-font-2xl: 26px;
+  --sb-leading-tight: 1.25;
+  --sb-leading-normal: 1.5;
+  --sb-leading-relaxed: 1.7;
+  --sb-tracking-tight: -0.01em;
+  --sb-tracking-wide: 0.05em;
+  --sb-tracking-caps: 0.08em;
+
+  /* ───────── 圆角 / 阴影(清新:更轻的阴影)───────── */
+  --sb-radius-sm: 6px;
+  --sb-radius-md: 8px;
+  --sb-radius-lg: 12px;
+  --sb-radius-pill: 999px;
+  --sb-shadow-card: 0 1px 2px rgba(16, 24, 40, 0.03), 0 1px 3px rgba(16, 24, 40, 0.05);
+  --sb-shadow-raised: 0 4px 12px -2px rgba(16, 24, 40, 0.08);
+  --sb-shadow-pop: 0 16px 40px -12px rgba(16, 24, 40, 0.18);
+  --sb-focus-ring: 0 0 0 3px rgba(47, 107, 237, 0.16);
+
+  /* 侧栏几何(壳层与 el-menu 共用) */
+  --sb-sidebar-w: 236px;
+  --sb-sidebar-w-collapsed: 64px;
+
+  /* 主区水平内边距(单一来源)。.app-main 的左右 padding、顶栏与全幅页的负边距都引用它,
+     三档断点只在 :root 上改这个值 —— 否则负边距(-32px)对不上收窄后的 padding,
+     961–1100 一段每边多出 12px,.app-main 出横向滚动条(2026-08-27 实测修复)。 */
+  --sb-main-pad-x: var(--sb-space-8);
+  --sb-main-pad-b: var(--sb-space-10);
+
+  /* 抽屉几何:按浏览器视口计算,再用上下限兜住宽屏和窄窗口。 */
+  --sb-drawer-list: min(clamp(720px, 61.8vw, 960px), 96vw);
+  --sb-drawer-compact: min(clamp(480px, 38.2vw, 640px), 96vw);
+  --sb-drawer-wide: min(clamp(900px, 75vw, 1200px), 96vw);
+}
+
+/* ════════ ★深色主题:只覆盖②语义 token,①刻度不动 ════════ */
+:root[data-theme='dark'] {
+  --sb-text-primary: #e6eaf2;
+  --sb-text-secondary: #9aa6b8;
+  --sb-text-tertiary: #6b7688;
+  --sb-text-placeholder: #6b7688;
+
+  --sb-bg-page: #0f1218;
+  --sb-bg-card: #181c24;
+  --sb-bg-subtle: #1f242e;
+  --sb-bg-hover: #232936;
+  --sb-bg-sunken: #14181f;
+  --sb-border: #2a313d;
+  --sb-border-strong: #39414f;
+
+  --sb-color-primary-soft: rgba(47, 107, 237, 0.16);
+  --sb-color-success-soft: rgba(21, 163, 110, 0.16);
+  --sb-color-warning-soft: rgba(194, 121, 10, 0.18);
+  --sb-color-warning-border: #4a3d1c;
+  --sb-color-danger-soft: rgba(224, 72, 61, 0.16);
+  --sb-color-danger-border: #55302c;
+  --sb-color-info-soft: #232936;
+  /* info 的前景在浅色下是 gray-500(#6b7280),配上面那块深底只有约 3:1 —— 暗色下提到
+     次级文字色(#9aa6b8),「未打卡」这类 info 标签/提示才读得清。其余语义色的前景
+     在深底上本来就够(success/warning/danger 实测 4.5–6:1),不动。 */
+  --sb-color-info: var(--sb-text-secondary);
+
+  --sb-sidebar-bg: #14181f;
+  --sb-sidebar-border: #2a313d;
+  --sb-sidebar-text: #9aa6b8;
+  --sb-sidebar-text-active: #ffffff;
+  --sb-sidebar-group: #6b7688;
+  --sb-sidebar-hover: #232936;
+  --sb-sidebar-active: rgba(47, 107, 237, 0.22);
+
+  --sb-shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --sb-shadow-raised: 0 4px 14px rgba(0, 0, 0, 0.5);
+  --sb-shadow-pop: 0 18px 44px -12px rgba(0, 0, 0, 0.7);
+}
+
+/* ════════ 暗金主题(沉稳低调:暖调近黑底 + 哑光金主色)════════
+   结构同 dark:只覆盖 --sb-* 语义 token,EP 与所有选中/hover 态经 styles.css
+   的统一映射自动跟随(选中底=半透明金 + 暖白字,杜绝白底白字)。 */
+:root[data-theme='gold'] {
+  /* 文字:暖白,层级递减 */
+  --sb-text-primary: #ece7da;
+  --sb-text-secondary: #a89e86;
+  --sb-text-tertiary: #7c7359;
+  --sb-text-placeholder: #7c7359;
+
+  /* 表面:暖调近黑,沉稳不刺眼 */
+  --sb-bg-page: #13110a;
+  --sb-bg-card: #1c1811;
+  --sb-bg-subtle: #232016;
+  --sb-bg-hover: #2b261a;
+  --sb-bg-sunken: #100e08;
+  --sb-border: #332d1c;
+  --sb-border-strong: #473f2a;
+
+  /* 主色:哑光暗金(沉稳低调,非高调亮金) */
+  --sb-color-primary: #c6a02e;
+  --sb-color-primary-hover: #d8b240;
+  --sb-color-primary-soft: rgba(198, 160, 46, 0.18);
+
+  /* 语义色 soft 用半透明叠深底,保证选中/标签底在暗背景上文字可读 */
+  --sb-color-success-soft: rgba(21, 163, 110, 0.16);
+  --sb-color-warning-soft: rgba(194, 121, 10, 0.18);
+  --sb-color-warning-border: #473f2a;
+  --sb-color-danger-soft: rgba(224, 72, 61, 0.16);
+  --sb-color-danger-border: #55302c;
+  --sb-color-info-soft: #232016;
+
+  /* 侧栏:深底 + 金色描边/选中(选中字用更亮的金,保证可读) */
+  --sb-sidebar-bg: #15120b;
+  --sb-sidebar-border: #332d1c;
+  --sb-sidebar-text: #a89e86;
+  --sb-sidebar-text-active: #ecc861;
+  --sb-sidebar-group: #7c7359;
+  --sb-sidebar-hover: #252013;
+  --sb-sidebar-active: rgba(198, 160, 46, 0.22);
+  --sb-sidebar-accent: #c6a02e;
+
+  /* 终端块跟着换暖调近黑:冷石板底(#0f172a)摆在暖金界面里会整块跳出来 */
+  --sb-term-bg: #14110a;
+  --sb-term-fg: #e4dcc8;
+  --sb-term-cmd: #e0c477;
+
+  /* 焦点环改金色,阴影同暗色加深 */
+  --sb-focus-ring: 0 0 0 3px rgba(198, 160, 46, 0.22);
+  --sb-shadow-card: 0 1px 2px rgba(0, 0, 0, 0.45);
+  --sb-shadow-raised: 0 4px 14px rgba(0, 0, 0, 0.55);
+  --sb-shadow-pop: 0 18px 44px -12px rgba(0, 0, 0, 0.72);
+}

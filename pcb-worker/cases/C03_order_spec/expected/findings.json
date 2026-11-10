@@ -1,0 +1,131 @@
+{
+  "_note": "Board = C01, so intake/align are identical to C01 (plus the two attachments as aux/unmapped, no items). drill gets input/order_spec.json (drill_table with T03 written as 1.2) -> compare_with_order_spec (p113): spec 1.2 has no Excellon match, and Excellon ⌀1.0 ×40 is not in the table -> 2 drill_table_mismatch errors.",
+  "status": {
+    "intake": "ok",
+    "align": "ok",
+    "drill": "needs_review",
+    "inner": "ok",
+    "outer": "needs_review",
+    "mask": "ok",
+    "silk": "ok"
+  },
+  "must": [
+    {
+      "stage": "align",
+      "kind": "layer_empty",
+      "severity": "info",
+      "layer": "Flashpads-B_Silkscreen.gbr"
+    },
+    {
+      "stage": "align",
+      "kind": "profile_line_width",
+      "severity": "info"
+    },
+    {
+      "stage": "drill",
+      "kind": "drill_table_mismatch",
+      "severity": "error",
+      "min_count": 2
+    },
+    {
+      "stage": "drill",
+      "kind": "drill_table_mismatch",
+      "severity": "error",
+      "layer": "Flashpads-PTH.drl"
+    },
+    {
+      "stage": "drill",
+      "kind": "drill_oversize",
+      "severity": "info",
+      "min_count": 9
+    },
+    {
+      "stage": "drill",
+      "kind": "hole_size",
+      "severity": "info"
+    },
+    {
+      "stage": "drill",
+      "kind": "power_ground_shorts",
+      "severity": "info"
+    },
+    {
+      "stage": "outer",
+      "kind": "npth_clearance",
+      "severity": "error",
+      "min_count": 2
+    },
+    {
+      "stage": "outer",
+      "kind": "smd_pads",
+      "severity": "info"
+    },
+    {
+      "stage": "mask",
+      "kind": "mask_expansion",
+      "severity": "warn"
+    }
+  ],
+  "must_not": [
+    {
+      "stage": "intake",
+      "severity": "error"
+    },
+    {
+      "stage": "intake",
+      "severity": "warn"
+    },
+    {
+      "stage": "intake",
+      "kind": "layer_unrecognized"
+    },
+    {
+      "stage": "align",
+      "severity": "error"
+    },
+    {
+      "stage": "align",
+      "severity": "warn"
+    },
+    {
+      "stage": "drill",
+      "kind": "drill_table_dia_diff"
+    },
+    {
+      "stage": "drill",
+      "kind": "extra_holes"
+    },
+    {
+      "stage": "drill",
+      "kind": "hole_separation"
+    },
+    {
+      "stage": "drill",
+      "kind": "missing_holes"
+    },
+    {
+      "stage": "drill",
+      "kind": "npth_to_rout"
+    },
+    {
+      "stage": "outer",
+      "kind": "line_width"
+    },
+    {
+      "stage": "outer",
+      "kind": "spacing"
+    },
+    {
+      "stage": "outer",
+      "kind": "annular_ring"
+    },
+    {
+      "stage": "mask",
+      "severity": "error"
+    },
+    {
+      "stage": "*",
+      "kind": "layer_parse_error"
+    }
+  ]
+}

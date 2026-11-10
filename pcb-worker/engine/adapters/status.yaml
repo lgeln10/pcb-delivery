@@ -1,0 +1,54 @@
+# Per-op executor status — the HybridEngine routing table and the progress board for the two
+# tracks (docs/PLAN_TWO_TRACKS.md §0 S0). Edit by hand when an op is verified; tests check
+# every CamOp has a row and values are from the allowed sets.
+#
+#   genesis: unverified | verified | failed        (A 线：COM 草稿是否在工厂 Genesis 上验证过)
+#   native:  none | in_stage | partial | verified   (B 线：Python 几何实现；in_stage = 现有 stage 里已直接做)
+#
+# Routing (engine/adapters/status.py): applied-in-stage → nothing to do; native verified → NativeEngine;
+# otherwise genesis (when configured) → report_only.
+ops:
+  ImportFiles:          {genesis: unverified, native: in_stage}
+  SetLayerTypes:        {genesis: unverified, native: in_stage}
+  AlignToDrill:         {genesis: unverified, native: verified}   # 整层平移（外框同尺寸）才自动；否则 NeedsHuman
+  SetProfile:           {genesis: unverified, native: verified}   # B1
+  DeleteOutsideProfile: {genesis: unverified, native: verified}   # B1
+  CopyStep:             {genesis: unverified, native: in_stage}
+  SetDrillAttrs:        {genesis: unverified, native: in_stage}
+  ResizeDrills:         {genesis: unverified, native: in_stage}
+  DrillChecks:          {genesis: unverified, native: in_stage}
+  NfpRemoval:           {genesis: unverified, native: verified}   # B2.1 独立 PAD（本层无连接，含有孔）
+  Contourize:           {genesis: unverified, native: verified}   # B2.2 重叠画铜 → surface，附着线不动
+  LineCompensation:     {genesis: unverified, native: verified}   # B1
+  SignalLayerOptimize:  {genesis: unverified, native: verified}   # B3.1 PadUp：焊环向目标加大到间距/隔离允许为止；不削铜
+  Teardrops:            {genesis: unverified, native: verified}   # B2.5 小焊环孔的直泪滴，间距/孔守卫
+  NpthClearance:        {genesis: unverified, native: verified}   # B1
+  SliverFill:           {genesis: unverified, native: verified}   # B2.4 同连通块间隙闭运算填实，不跨网、不进孔
+  BorderClearance:      {genesis: unverified, native: verified}   # B1 + ②：正负片都有「不削有用物件」守卫 → NeedsHuman
+  SignalLayerChecks:    {genesis: unverified, native: in_stage}
+  MaskConstructPads:    {genesis: unverified, native: verified}   # B2.3 画的开窗按线路 PAD 转 PAD；缺开窗按参考补
+  MaskResize:           {genesis: unverified, native: verified}   # B1 + ②：按发现类型分路（整层 / 单开窗 / NPTH / 包边 / 金手指整块）
+  MaskOptimize:         {genesis: unverified, native: verified}   # B3.2 盖线位不够缩开窗（≥PAD+clearance_min）；同网桥太薄合窗；异网留 EQ
+  MaskChecks:           {genesis: unverified, native: in_stage}
+  SilkChecks:           {genesis: unverified, native: in_stage}
+  SilkClearByMask:      {genesis: unverified, native: verified}   # B2.6 阻焊开窗+间距做负性掏字符
+  StepRepeat:           {genesis: unverified, native: verified}   # B2.8 客户 SET 要求 → NeedsHuman；无要求则直接出 panel
+  PanelBuild:           {genesis: unverified, native: verified}   # B2.8 steps/panel/ 出层（nx×ny + 板框）
+  PatternFill:          {genesis: unverified, native: verified}   # B2.8 板边阻流点（正片）
+  AddTooling:           {genesis: unverified, native: verified}   # B2.8 四角定位孔
+  ExportGerber:         {genesis: unverified, native: verified}   # 审核版 in_stage；B2.8 生产版从 panel step 出（step=panel）
+  ExportExcellon:       {genesis: unverified, native: verified}   # 同上
+  NetlistExtract:       {genesis: unverified, native: in_stage}
+  NetlistCompare:       {genesis: unverified, native: in_stage}
+  SetSmdAttribute:      {genesis: unverified, native: verified}   # B1
+  NegativePadReshape:   {genesis: unverified, native: verified}   # B1
+  CopperCutout:         {genesis: unverified, native: verified}   # B2.7 金手指内层削铜；穿线/外层 → NeedsHuman
+  MaskDams:             {genesis: unverified, native: verified}   # B1.10 合成层验证：NPTH/≥0.6 过孔开窗内加 clear 挡点
+  RoutDesign:           {genesis: unverified, native: verified}   # B3.4 外形右补偿 + 单元/半孔 GKO1/包边 GKO2 链，出 rout 成果物
+  SilkTransform:        {genesis: unverified, native: verified}   # B1
+  AddHolesFromDrawing:  {genesis: unverified, native: verified}   # 分孔图同径圆补进钻孔层；外形层宽悬空线转 G85 槽
+  AddText:              {genesis: unverified, native: none}   # 二次审计 4：只出草稿 + EQ
+  RailFill:             {genesis: unverified, native: verified}   # 第一块真板对标：工艺边铺铜（rails.wkb + copper.rail_fill；work/ 六层全铺）
+  TerminalPad:          {genesis: unverified, native: verified}
+  VcutClearance:        {genesis: unverified, native: verified}
+  VcutCoupon:           {genesis: unverified, native: verified}   # 2026-09-20 M6o 两块真板终稿量出来：防 V-cut 测试点（两个 ⌀1.05 盘 + 0.35 Λ 线顶到 V-cut 线，⌀1.3 窗）   # 四层拼板真板看图反推：V-cut 线两侧铜皮退 0.4（set/ 0.36–0.40，客户原稿 0.13）   # 第一块真板看图反推：≥4 mm 锣槽/方孔端子焊盘各层加大；订单 outer_pad_mm 的孔外层焊盘

@@ -1,0 +1,328 @@
+# Default factory profile. Values are copied from knowledge/rules/*.yaml; the page numbers
+# refer to 《CAM工程技能培训》 (see knowledge/chapters/04_文件初步整理.md, 05_钻孔制作.md).
+# A job may override any of these by sending `profile_yaml` in the stage request body.
+
+layer:
+  # p111 "把外形线变成0.15MM,定义 Profile"  (layer.prep.profile_line_width)
+  profile_line_width_mm: 0.15
+  # p111 "资料对齐，以钻孔层为基准"  (layer.prep.align_to_drill); the 5 mm warning threshold is
+  # an M1 engineering default, not from the book.
+  align_offset_warn_mm: 5.0
+  # board-outside check tolerance: objects farther than this outside the profile are "板外物"
+  outside_profile_tolerance_mm: 0.5
+  rail_vcut_notch_mm: null        # V-cut 线穿出工艺边处的让刀缺口 [沿线长, 离线深, 端头圆角]：六层真板 [3, 1.5, 0]、3×3 四层 [3.7, 1.5, 0.75]，2×2 四层没有——按板给
+  outline_choice: auto            # 资料里有多个外形层时选哪个：auto = 包住最多层物件的那个（客户自己画了工艺边的板，GM1 含边、GM 不含）；也可写文件名
+
+# Native is the preferred B-line executor.  Release stays separate: a factory Profile may be
+# ``certified`` only after its golden-board evidence has been accepted.
+release:
+  mode: review                    # review | certified — review never auto-releases a B-line result
+
+drill:
+  # p114 孔径预大一般要求 (drill.oversize.*)
+  oversize_mm:
+    plated: 0.15        # "一般plated预大0.15MM"
+    non_plated: 0.05    # "non_plated一般预大0.05MM"
+    via: 0.0            # "VIA孔一般不做预大"
+  # 表面处理分档（工程师 2026-09-16 回复 C09 对标确认单一-6）：喷锡 PTH +0.15，非喷锡 PTH +0.10，
+  # NPTH 两档都 +0.05。表里写了哪档就覆盖 oversize_mm 的同名项；null = 不分档（按上面的 p114 默认）。
+  # hasl 的判定：order_spec.surface_finish 里出现「喷锡 / HASL / 喷锡类」字样。
+  oversize_by_finish: null   # {hasl: {plated: 0.15}, other: {plated: 0.10}}
+  min_slot_width_mm: 0.5  # p113 外形层悬空线宽 ≥ 此值才当作槽转钻孔层（M6c 默认）
+  via_min_mm: 0          # 厂最小过孔：小于它的过孔按它做（3×3 四层真板：⌀0.2 过孔全按 0.3 钻 0.35）；0 = 不限
+  plug_oversize_mm: 0.1  # p140 要求3 铝片/树脂塞孔钻带比孔径整体大 0.1–0.15MM（取下限）
+  # 绿油塞孔（订单写了「塞孔」才生效）：只塞「不在焊盘上」的过孔 —— 两面阻焊开窗都只是过孔自己那一小块
+  # （面积 ≤ 本孔开窗 × opening_ratio_max），落在大开窗（露铜焊盘）里的过孔留着不塞。
+  # 塞孔过孔的钻嘴单独给（这家 3oz 厂缩孔 -0.05，普通过孔 +0.15）
+  plug:
+    oversize_mm: 0.0
+    opening_ratio_max: 1.6
+    method: opening_ratio         # 「在画出来的开窗里」的判法：opening_ratio = 所在开窗比过孔自己的大（C09 3339/3362：客户阻焊层全是 PAD，露铜是大焊盘的开窗）；drawn = 过孔中心落在客户用线/弧/面画的开窗里（C11 342/351 + 1611/1611：露铜是 Top Solder 上画的 1 mm 线）；ring = 过孔盘自己开窗外面一圈仍无阻焊（对得最差，留作参考；DECISIONS #18-17）
+    via_opening_expansion_mm: 0.1016  # ring 判法用：导出时过孔盘的开窗单边（Altium 默认 4 mil）
+    drawn_margin_mm: 0            # drawn 判法用：画出来的开窗先放大多少再看过孔中心在不在里面（C11 用 0：差的 9 个正好骑在线边上，放大只会把另外 9 个塞的也放开）
+    open_sides: any               # 过孔落在「画出来的开窗」（露铜线路/散热窗，判法：过孔自己开窗外面一圈仍无阻焊）里就不塞——哪一面的窗算：any（C09：一面露就不塞，3339/3362）/ top（四层拼板真板 set/：顶面露铜走线里的 315 个不塞，底面散热窗里的 567 个照塞）/ bottom / both
+    # overlap 判法（洲旭工程师 2026-09-16 回复 C09 确认单五-1 给的判据：「过孔与焊盘接触面积小于 1/2 孔径时按塞孔制作，用比孔大 3mil 来套焊盘开窗」）：
+    # 过孔按孔径 +overlap_expand_mm/边 套一个圆，看它落在「比自己大的开窗」（焊盘开窗，不算过孔自己那一小块）里的面积占比，
+    # < overlap_min → 塞；≥ → 露铜不塞。骑在焊盘开窗边上的过孔由此有了确定答案（C09 那 23 个）
+    overlap_expand_mm: 0.0762
+    overlap_min: 0.5
+    mode: auto                    # 塞孔分组三档：auto = 照做；ask = 照做但报告项进 EQ 等人点过（洲旭：「非通用规则…要人工处理」）；off = 不分组
+  # ---- 厂规开关的三档（auto | ask | off），洲旭 2026-09-16 回复 C09 确认单要求「设为可选项 / 要人工处理」的几类 ----
+  via_oversize_mode: auto             # 过孔预大（oversize_mm.via / plug.oversize_mm）：ask = 每种过孔钻嘴的预大项进 EQ
+  override_mode: auto                 # 订单 drill_overrides 指定钻嘴（⌀4.2 分组、公差孔）：ask = 进 EQ
+  overlap_confirm: false              # overlap: delete_smaller 删了相交小孔之后：true = 进 EQ 等人确认（原本就带 eq_question，这里只是把「已执行」也留在 EQ 里）
+  # 大孔先钻小孔再扩（工厂工艺；min_dia_mm 0 = 不做）
+  predrill:
+    min_dia_mm: 0
+    bit_mm: 3.175
+  # 槽两端先钻孔（按槽宽给钻嘴；空 = 不做）：[{width_mm: 1.0, bit_mm: 0.7}]
+  slot_end_predrill: []
+  short_slot_max_travel_ratio: 0      # 槽端预钻只做「短槽」：行程 ≤ 比例×名义槽宽 才预钻（第一块真板：2.15 宽行程 2.0 的 36 条预钻、行程 7.5 的 8 条不预钻，1.35 宽行程 1.9 也不 → 1.0；教材 p118 短槽各厂不同）；0 = 表里的槽都预钻
+  rect_rout_oversize_mm: 0            # 矩形锣孔的锣带轮廓比名义大多少（总量；第一块真板 4×11 → 4.1×11.1 = 0.1），四角预钻贴这个轮廓
+  # 二钻：none | npth_without_pad（没有铜盘的非金属孔另出一套钻带，电镀后再钻）
+  second_drill: none                  # none | npth_without_pad（无铜盘的 NPTH 二钻）| npth_small（≤ second_drill_max_mm 的 NPTH 二钻，干膜盖不住的小孔电镀后再钻）
+  second_drill_max_mm: 1.0            # second_drill: npth_small 的孔径上限
+  overlap: ask                        # 重叠孔：ask = 只在 Drill Checks 里报；delete_smaller = 孔圈与更大的孔相交的小孔按厂规删掉（第一块真板：压接孔周围 8 个 ⌀1.0 全删）
+  rect_corner_predrill:               # 矩形锣孔四角先钻小孔（锣刀留方角；第一块真板：4 mm 宽的矩形每个四角 ⌀0.8，1.2 mm 的没有）；bit_mm 0 = 不做
+    bit_mm: 0
+    min_width_mm: 2.0
+  # 大孔另一档预大：工程师回复「超出 6.45mm 钻孔，采用扩孔钻，比正常补偿多补 0.05mm」
+  # （C09 ⌀6.55 → 0.15 + 0.05 = 6.75，与原来写死的 add_mm 0.2 同值）。孔径 > min_dia_mm 才生效；
+  # extra_mm = 在本来那档预大之上再加多少（优先）；add_mm = 直接指定预大总量（旧写法）。
+  oversize_large:
+    min_dia_mm: 0                     # 0 = 不启用
+    extra_mm: 0.05
+  # 板边定位孔（相对外形四角：ll/lr/ul/ur + 偏移；空 = 不加）：[{corner: ll, dx_mm: 30, dy_mm: 5.5, dia_mm: 3.5}]
+  tooling_holes: []
+  # 订单 drill_overrides 里只给了 rout_circle_mm（内锣带上孔位画圆的压接/梅花孔）而没给 outer_pad_mm 时，外层焊盘按
+  # 「锣圆 + 2×此环宽」推出来（洲旭工程师 2026-09-16 回复 C09 确认单三-5：「梅花孔客户原稿外层焊盘小，我们直接加大到单边 0.5mm 宽」；
+  # golden 量到 6.05 = ⌀5 + 2×0.525，规则给 6.0，差 0.05 记在第二轮问单里）；订单显式写了 outer_pad_mm 的以订单为准
+  rout_circle_ring_mm: 0.5
+  # 客户钻孔报告（Altium .DRR）里标 Rectangle 的孔改锣（进内锣带 gko1），不进钻带
+  rect_to_rout: false
+  # 外形层上画的小圆（钻孔层没有）按 NPTH 加进钻带（p113）；false = 只报告，人来决定
+  drawn_holes_to_drill: false
+  vcut_end_holes:                     # V-cut 端孔（工厂标准；VcutEndHoles）：单元之间的 V-cut 线进入每只单元处，单元边内沿线打几个 NPTH（3×3 板终稿：⌀1.201/0.901/0.6 @ 1.112/1.427/1.785，只在每只单元的进刀边；铜皮不让位，阻焊按 NPTH 开窗）
+    enabled: false
+    side: low                         # low = 每只单元坐标小的那一边（左/下）；high = 另一边
+    holes: []                         # [{dia_mm:, from_edge_mm:}]
+    exit_holes: []                    # 单元沿线的材料在外框之前就断了（角上有挖口）时，从挖口角量的那组：[{dia_mm:, along_mm: 沿线往回为负, into_mm: 进单元为正}]
+  # actual drill bit sizes are stocked in 0.05 mm steps (M1 default)
+  round_step_mm: 0.05
+  # p114 "ViA(只是导通作用的金属孔)" -- M1 simplification: plated and <= via_max_mm => via
+  via_max_mm: 0.5
+  # p116 Hole Separation / p118 "近孔及相交孔制作要求（根据工厂不同要求不同）" -> factory_specific
+  hole_separation_min_mm: 0.10
+  # p116/p117 NPTH to Rout 非金属孔距板边距离 (threshold is an M1 default, factory_specific)
+  npth_to_rout_min_mm: 0.30
+  # order_spec.drill_table comparison tolerances (p113 核对孔径大小及孔数)
+  table_dia_tolerance_mm: 0.02
+  # Missing Holes heuristic (p116 "非SMD Pads的缺孔"): only pads at least this big are checked
+  missing_hole_pad_min_area_mm2: 0.8
+
+excellon:
+  # output format of the oversized drill tape written by the drill stage
+  unit: METRIC          # METRIC | INCH
+  zeros: TZ             # TZ (trailing zeros kept, leading suppressed) | LZ | DECIMAL
+  format: [3, 3]        # integer / fractional digits
+
+copper:
+  # 蚀刻补偿按铜厚查表（订单 copper_outer_um / copper_inner_um → oz）；空表 = 用各面的 line_compensation_mm
+  compensation_by_oz: []          # [{oz: 1, add_mm: 0.0254}, {oz: 2, add_mm: 0.05}, {oz: 3, add_mm: 0.1}]
+  compensation_scope: thin_lines  # thin_lines = 只加大 <compensation_threshold 的线（p122）；all = 全部线和 PAD 都加（厚铜厂做法）
+  compensation_default_oz: null   # 订单没写铜箔厚度时按这一档查 compensation_by_oz（厂里的标准铜厚）；null = 不猜，退回教材的 line_compensation_mm
+  rail_fill:                          # 工艺边铺铜（工厂标准，教材无此步；RailFill）：并入 Profile 的工艺边上铺实铜
+    enabled: false
+    inset_mm: 0.6                     # 外层离拼板外缘
+    inner_inset_mm: 0.75              # 内层离拼板外缘
+    vcut_gap_mm: 0.75                 # 离 V-cut（工艺边与板的交界）
+    hole_clearance_mm: 0.5            # 孔周留空（单边）
+    copper_clearance_mm: 0.9          # 离客户自己画在工艺边上的铜（基准点等）
+    corner_radius_mm: 0.5             # 铺铜块外角倒圆
+    corner_radius_after_cuts: false   # true = 圆角在孔/留空/外形避让都挖完之后做（每个端头都圆，3×3 板）；false = 只圆轮廓角，挖空处直角（六层板）
+    keepout_layers: []                # 客户机械层上画在工艺边里的留空标记（文件名通配，如 "*.GM6"、"*.GM7"）：该跨度整条工艺边不铺
+    keepout_shrink_mm: 0              # 留空跨度两端各收窄多少（第一块真板：10 mm 的标记 → 8.7 mm 的缺口，0.65）
+    customer_fill_min_ratio: 0.5      # 「客户有铺铜的按客户资料，没有的我们自行铺铜」（洲旭工程师 2026-09-16 回复 C09 确认单四-6）：客户自己的铜已盖住工艺边这一比例以上的，这条工艺边不铺；0 = 一律铺
+    gaps_mm: []                       # 终稿量出来的留空段：{x: [x0, x1]} 只作用于横向工艺边（整条宽度），{y: [y0, y1]} 只作用于竖向（六层板两处 8.7/7.4 mm；2×2 板每只单元正中 3.3 mm）
+    outline_clearance_mm: 0           # 铜带离客户画在工艺边里的**短**外形线（U 口、连接筋、单元 R 角）的距离（3×3 板终稿 0.45）；0 = 不看外形线
+    outline_segment_max_mm: 10        # 多长以内算「短」外形线（长的板边/V-cut 线由 inset/vcut_gap 管）
+    channel_gap_max_mm: 0             # 两只单元之间不超过这么宽的空隙是锣通道不是工艺边：外圈铜带在通道两侧各留 outline_clearance_mm（3×3 板 6 mm 通道 → 7）；0 = 不管
+    cut_round_mm: 0                   # 孔/铜避让处铜带端头倒圆 R、并去掉挖空旁比 2R 窄的细条（2×2 板 0.25：光学点处铜带断干净，端头 R0.25，留空段和四角仍直角）；0 = 不倒
+    inner_follow_outer: true          # 内层铜带带上外层铜带的挖空（光学点环、测试点）：三块真板终稿每层工艺边铜都是同一块，只差外层独有的环/盘/测试点
+  vcut_coupon:                        # 防 V-cut 测试点（工厂标准；教材 p135 只问「是否需要加」；VcutCoupon）：每条挨着工艺边的 V-cut 线上，外层两个圆盘 + 顶到线上的 Λ 形连线，同面阻焊开窗
+    enabled: false
+    pad_mm: 1.05                      # 盘径（两块真板终稿都是 1.05）
+    pitch_mm: 1.779                   # 两盘心距
+    from_line_mm: 1.415               # 盘心离 V-cut 线（进工艺边方向）
+    trace_mm: 0.35                    # 连线宽；顶点正好落在 V-cut 线上
+    apex_half_mm: 0.23                # 顶上那段横线的半长
+    opening_mm: 1.30                  # 阻焊窗径
+    band_clearance_mm: 0.38           # 工艺边铺铜离测试点的距离（2×2 板终稿 0.38；先做测试点再铺铜）
+    at: []                            # 每条线上的位置：{y: 线的 y, x: 位置}（横线）/ {x: 线的 x, y: 位置}（竖线）；没写的取线中点
+    straight:                         # 线两侧都是工艺边时的跨线式（2×2 板中间 V-cut、行间 V-cut 穿过左工艺边处）：两盘各在线两侧 half_gap，直线相连
+      pad_mm: 1.0
+      half_gap_mm: 1.5
+      trace_mm: 1.0
+      opening_mm: 1.254
+  vcut_clearance_mm: 0                # V-cut 线两侧退铜（工厂标准，教材无此步；VcutClearance）：每个线路层上离 V-cut/工艺边分界线不足此值的铺铜和线削掉，PAD 不动（四层拼板真板 set/：0.36–0.40，客户原稿只有 0.13）；0 = 不做
+  terminal_pad:                       # 大端子焊盘（工厂标准，教材无此步；TerminalPad）：≥ min_hole_width_mm 宽的锣槽/方孔端子，各线路层焊盘总加大 grow_mm，阻焊随焊盘；订单 drill_overrides 的 outer_pad_mm 孔外层焊盘做到该尺寸
+    enabled: false
+    min_hole_width_mm: 4.0
+    grow_mm: 3.0                      # 第一块真板：14×7 → 17.04×10.04
+  npth_in_pad: ask                # 非金属孔落在焊盘内：ask = 出 EQ 问客户是否 PTH；clear = 按 NPTH 削铜（NpthClearance）
+  # 比较时容差 0.003mm（engine/checks/common.py TOL）：4mil=0.1016mm 与 0.1mm 设计值视为相同。
+  # 第6章 p122（内层正片制作要求）/ 第7章 p135（外层检查项）。文档给了数值的标页码，
+  # 没给的标「M2 默认」，进场后按工厂制程能力表改。
+  inner:
+    min_line_width_mm: 0.1          # M2 默认 4 mil ≈ 0.1mm（文档只给线距 p122，未给最小线宽）
+    min_spacing_mm: 0.1             # p122 线距一般≥4mil(0.1mm)
+    min_annular_ring_mm: 0.2        # p122 RING 环一般 8mil(0.2mm)，特殊可做到 5mil(0.127mm)
+    hole_clearance_mm: 0.2032       # p122 孔到线 8mil
+    via_isolated_annular_ring_mm: 0   # 孤立过孔盘（本层不连线、不在铺铜里）的最优环；0 = 同 via_annular_ring_mm（六层板终稿：外层孤立的 12 mil、其余 10 mil）
+    drill_isolation_mm: 0.254       # p122 钻孔隔离要 10mil 以上 / p124 SLO Drill to Cu 10；8–10mil 之间只报 info（优化处理）
+    npth_clearance_mm: 0.305        # p122 NPTH 削铜 单边≥12mil(0.305mm)
+    edge_clearance_mm: 0.381        # p122 削外围 内层尽量多削，比如单边15mil
+    compensation_threshold_mm: 0.381  # p122 <15mil 的加大
+    line_compensation_mm: 0.0254    # p122 加大 1mil
+    teardrop_ar_max_mm: 0.2286      # p125 泪滴：焊环 ≤9mil 的孔加泪滴（Genesis adv_teardrops ar_min=9，M6b 默认）
+    pad_enlarge_limit_mm: 0.3       # p124 SLO PadUp 单个 PAD 最多加大（直径，M6c 默认；Genesis Pad Enlarge limit）
+    pad_up_base: finished           # PadUp 的焊环从哪里量：finished = 成品孔径（教材）；drill = 钻嘴（Genesis 在预大后的钻孔层上做 SLO；第一块真板如此）
+    via_open_annular_ring_mm: 0     # 塞孔/盖油板上留开窗的过孔（在焊盘开窗里）的 PadUp 目标环宽；0 = 同 via_annular_ring_mm（四层拼板真板 set/：塞的 6mil、开的 8mil）
+    via_annular_ring_mm: 0          # 过孔的 PadUp 目标环宽；0 = 与 min_annular_ring_mm 相同（第一块真板：PTH 14mil、过孔 12mil）
+    nfp_removal: true               # p123/p134 内层正片删独立 PAD 三档：true/auto = 删；ask = 删了但报告项进 EQ 等人点过；false/off = 不删（洲旭：「部分客户内层独立 PAD 不可以删除，应设置为可选项」）
+    nfp_keep_vias: false            # NFP 只删元件孔的独立 PAD，过孔的内层 PAD 保留（第一块真板工程师的做法）
+    nfp_keep_pad_min_mm: 0          # 这么大及以上的独立 PAD 不删（第一块真板：6.75 孔的 9 mm 方盘、压接孔的 5.5 盘都留了）；0 = 都删
+    nfp_keep_slot_pads: false         # true = 槽（G85）上的独立盘不删（六层板终稿：⌀1.6 短槽上的圆盘留、长圆槽上的盘删 —— 规律未定，默认照删）
+    nfp_keep_connected_pads: false  # 「完全独立的焊盘直接删，多焊盘相连的不删」（洲旭工程师 2026-09-16 回复 C09 确认单五-3：几个 ⌀1.45 孔的 ⌀3.15 盘留着）：同一连通体里 ≥2 个 PAD 相连就整体保留
+    negative:                       # 第6章 p119–121 负片
+      isolation_ring_mm: 0.254      # p120 隔离 PAD 单边 10mil
+      thermal_ring_mm: 0.2032       # p119 散热 PAD 孔到内环/内环到外环 8mil
+      thermal_opening_mm: 0.2032    # p119 散热 PAD 开口的长度 ≥8mil
+      thermal_min_openings: 2       # p119 散热 PAD 最少有两个开口
+      partition_line_width_mm: 0.254  # p121 分区线 10mil
+  outer:
+    min_line_width_mm: 0.1          # M2 默认 4 mil ≈ 0.1mm
+    min_spacing_mm: 0.1             # M2 默认 4 mil ≈ 0.1mm（p135 间距是否做够要求）
+    min_annular_ring_mm: 0.1        # M2 默认 4 mil（p135 VIA/PTH 的 RING 环是否够大）
+    hole_clearance_mm: 0.2032       # M2 默认 8 mil（同内层 p122）
+    via_isolated_annular_ring_mm: 0   # 孤立过孔盘（本层不连线、不在铺铜里）的最优环；0 = 同 via_annular_ring_mm（六层板终稿：外层孤立的 12 mil、其余 10 mil）
+    npth_clearance_mm: 0.305        # p135 非金属孔是否需要削铜（数值沿用 p122 12mil）
+    edge_clearance_mm: 0.254        # M2 默认 10 mil（p135 线路及铜皮焊盘孔距外形是否足够）
+    compensation_threshold_mm: 0.381  # p138 <15mil
+    line_compensation_mm: 0.0254    # p138 加大 1mil
+    pad_enlarge_limit_mm: 0.3       # p138 SLO PadUp 单个 PAD 最多加大（直径；同内层）
+    pad_up_base: finished           # 同 inner.pad_up_base
+    via_annular_ring_mm: 0          # 同 inner.via_annular_ring_mm
+    via_open_annular_ring_mm: 0     # 同 inner.via_open_annular_ring_mm
+
+# 第12章 金手指 p159–169：客户 Gerber 没有金手指属性，按「板边成排等宽矩形焊盘」识别，识别到就问倒角/硬金
+gold_finger:
+  enabled: true                   # 关掉则不识别、不检查
+  min_pads: 4                     # 至少几只成排焊盘才算金手指（M5 默认；单排少于 4 只的当普通焊盘）
+  edge_distance_mm: 3.0           # 焊盘离板边多近才算「板边」（M5 默认）
+  max_pad_area_mm2: 40            # 单只手指面积上限，排除大铜块（M5 默认）
+  pad_to_finger_mm: 1.0           # p161 建议焊盘距离手指位 1mm 以上（含过孔焊盘）；表层不要铺铜
+  inner_cut_mm: 3.0               # p161 内层所有层面削铜，通常宽 3mm
+
+mask:
+  # 第8章 p140–144
+  coverage_mm: 0.0508             # p141 要求1 阻焊开窗及盖线位一般要在 2mil 以上
+  clearance_min_mm: 0.0254        # p142 SMO 开窗最小单边余量（Clearance Min，M6c 默认 1mil）：盖线位不够时开窗最多缩到 PAD+此值
+  npth_opening_oversize_mm: 0.1   # p141 要求1 非金属孔开窗一般比孔单边大 0.1MM
+  npth_dams: true                 # p144 #6 NPTH 加挡点；false = 这家厂 NPTH 只开窗不加挡点
+  via_opening_delete: auto        # 塞孔/盖油过孔的开窗删除三档：auto = 删；ask = 删了但报告项进 EQ 等人点过；off = 不删、只报（洲旭：「不能直接删除过孔开窗，需要人工挑选…可以设置一个选项」）
+  npth_open_covered: false        # 无开窗的 NPTH（含外形层画的孔/挖空）也开窗 孔 + npth_opening_oversize_mm/边（四层拼板真板 set/：⌀2.55 → 2.75）
+  regenerate_openings: false      # 阻焊按最终焊盘重做：每个焊盘自己的开窗 = 焊盘 + coverage_mm/边，大的缩小的放大（set/：客户 4 mil 的开窗做成 2 mil；C09 因焊盘撑大后与 per_opening 结果一致）
+  fiducial_opening_shrink_mm: 0   # p144 例外：光标点大开窗上了铜皮（环）时按这一档（单边）往里缩到离铜 ≥ fiducial_opening_min_clear_mm（2×2 板终稿 ⌀2.6 → 2.3968 = 4 mil/边一档）；0 = 大开窗一律按原稿
+  fiducial_opening_min_clear_mm: 0.0762   # 缩完离环铜至少 3 mil
+  # 曾有过 isolated_smd_opening（跑道 ×√2+0.18）/ drawn_thermal_window（散热窗 ×1.4）/ fine_pitch_merge（QFP 合窗）三条「厂规」，
+  # 2026-09-19 查明全是比对器把方光圈画的线渲染成对角线宽的圆头线造出来的假象（ROADMAP §M6m），已删。成品就是焊盘 + 2mil / 大铜面上 + 1mil。
+  # 开窗余量按四周有没有大铜面分档（洲旭工程师 2026-09-16 回复 C09 确认单五-2：「开窗全部位于大铜面上的，单边 1mil；不完全在大铜面上的，单边 2mil」）：
+  # 焊盘四周 ring_mm 环内铜覆盖 ≥ pour_coverage_min 的，开窗 = 焊盘 + coverage_mm/边；其余仍用上面的 coverage_mm。null = 不分档
+  coverage_on_pour: null          # {coverage_mm: 0.0254, ring_mm: 0.2, pour_coverage_min: 0.9}
+  resize_mode: global             # mask_expansion 的修法：global = p141 整层 Resize；per_opening = 只把露铜不足的开窗各自加大到焊盘 + coverage（第一块真板）
+  via_dam_min_mm: 0.6             # p141 要求2 ≥0.6MM 过孔需要加挡点
+  via_plug_max_mm: 0.5            # p141 要求2 需要塞孔的过孔不能大于 0.5MM
+  bridge_min_mm:                  # p141 要求5 阻焊桥（按油色）
+    green: 0.0762                 #   绿油最小 3mil
+    white_black: 0.127            #   白油黑油 5–6mil，取 5
+    other: 0.1016                 #   其他杂油 4mil 以上
+  opening_to_profile_mm: 0.2      # M2 默认（p143 #8 Rout 只说报告最近距离）
+  dam_oversize_mm: 0.05           # p144 #6 挡点：挡点比孔单边大多少（文档写「按工厂标准」，M6 默认 0.05）
+  construct_pads_min_mm: 0.254    # p135 转绿油 PAD（construct_pads_auto）只构造这个范围内的 PAD：最小 10mil（M6e 默认）
+  construct_pads_max_mm: 6.35     # p135 同上，最大 250mil
+
+silk:
+  # 第9章 p145–147
+  min_line_width_mm: 0.127        # p145 要求1 字宽最小 5mil
+  min_height_mm: 0.762            # p145 要求1 字高最小 30mil —— 按笔画聚类估算（连成一行的 ≥2 个小连通块），低于则出 EQ
+  min_height_ratio: 6             # p145 要求2 字高与字宽（笔画）比一般 6:1 以上，低于只报 info
+  clearance_to_opening_mm: 0.0762 # p145 要求2 离开窗一般要 3mil 以上
+  edge_delete_mm: 0               # p147 字符不能压板边：离 Profile 边（含 V-cut 线）这么近的字符删掉/削掉；0 = 只报告
+  mount_hole_ring:                # 螺丝孔外客户画的字符圈统一尺寸（第一块真板看图反推：12 个 ⌀4.2 孔外的 ⌀9.3 圈全改 ⌀10、线 0.25；没画圈的孔不加）；dia_mm 0 = 不做
+    dia_mm: 0
+    width_mm: 0.25
+    min_hole_mm: 4.0
+    max_hole_mm: 4.5
+
+edge_plating:
+  # 第14章 半孔板及金属包边 p176–184：客户 Gerber 里半孔 = 板边上被外形切一半的镀孔；包边多在制作要求里说明
+  half_hole_min_dia_mm: 0.5       # p181 最小半孔 0.5MM
+  half_hole_min_gap_mm: 0.4       # p181 半孔孔与孔之间间距最小 0.4MM（孔边到孔边）
+  mask_dam_oversize_mm: 0.1       # p179/p180 阻焊挡点比槽/孔单边大 0.1MM
+  copper_cut_per_side_mm: 0.1     # p178 线路层半孔部分掏单边 0.1MM
+  annular_ring_mm: 0.254          # p182 包边焊环单边 10mil 以上（防碎膜）
+  half_hole_rout_tool_mm: 1.6     # p177 半孔锣槽宽度一般 1.6MM（GKO1）
+  rout_tool_mm: 1.6               # p183 金属包边槽刀一般 1.6 或 2.0MM（GKO2）
+  to_pad_mm: 0.2032               # p182 包边距附近焊盘至少 8mil，不够反馈客户
+
+rout:
+  # 第13章 p173 锣带：刀径、右补偿、起刀点选最长直边（M6c 默认；工厂锣刀表进场后改）
+  tool_mm: 2.0
+  design2rout_max_gap_mm: 0.05        # p172 Design→Rout：外形线断口小于此值视为相连（M6e 默认 2mil）
+  design2rout_max_join_mm: 0.05       # p172 同上，合并相邻线段的最大距离
+  design2rout_smooth_tol_mm: 0.0254   # p172 圆弧/折线平滑容差 1mil
+
+hdi:
+  # 第16章 盲孔及 HDI p202–211
+  laser_max_dia_mm: 0.1524        # p203 盲孔孔径 ≤6mil 需激光钻孔
+  mechanical_min_dia_mm: 0.20     # p206 钻嘴 ≥0.20mm 可考虑机械钻孔
+  teardrop_ring_mm: 0.127         # p205 PAD 比孔径大 5mil 以下建议加 TEARDROP
+  ldi_max_dia_mm: 0.4             # p208 盲孔 ≤0.4MM 用 LDI 曝盲孔，否则菲林
+  aspect_ratio_film: 0.8          # p207 纵横比 L/D ≤0.8 整板曝光，>0.8 要曝点菲林/LDI（L=介质厚+铜厚，需订单给介质厚）
+
+netlist:
+  # 第6章 p130 网络分析：第一次正常比较，第二次减铜「缩小铜皮 0.15MM 左右」再比较
+  reduce_mm: 0.15
+  ignore_nets: ["N/C", "", "unconnected"]   # KiCad 把未连接引脚标 N/C
+  reduce_cap_ratio: 0.8   # M3 默认：减铜量不超过板上最细画线宽 ×0.8（设计线路不是「细连铜」）
+
+panel:
+  # 第10章 p152 建立 panel：拼板尺寸 / 到板边距离 / 板与板之间距离 —— 文档只有图注，数值取工厂标准
+  working_panels_mm: [[406.4, 508.0], [457.2, 609.6]]   # M3 默认：16×20 / 18×24 英寸常用工作板
+  rail_mm: 8.0        # 到板边距离（工艺边，放定位孔/挂孔/AOI 孔 p155）
+  gap_mm: 2.0         # 板与板之间距离（p148 例：x 方向拼 2MM 间距）
+  rotations: [0, 90]
+  fill:                 # p153 阻流块（工作板板边铺铜点，平衡电镀；文档未给尺寸，M6b 默认）
+    dot_mm: 1.5
+    pitch_mm: 3.0
+    panel_margin_mm: 3.0   # 离工作板边
+    unit_margin_mm: 3.0    # 离单只外形
+  tooling:              # p155 板边定位孔（M6b 默认：四角、非金属化 1/8"）
+    dia_mm: 3.175
+    inset_mm: 4.0
+
+output:
+  # 第11章 p156–158 输出参数
+  stem: "{job}"                        # 输出文件主名；工厂通常用料号/订单号（order_spec）
+  outline_source: profile              # 外形层怎么出：profile = 按 Profile 重画（外框 + 挖空 + V-cut 线 + 让刀口）；customer = 客户外形层上画的线原样出（客户给了完整拼板图时，3×3 板终稿就是那张图）
+  gerber:                              # Gerber274x：Units Inch / Coordinates Absolute / Zeroes omitted None / 2.4 (p157)
+    unit: inch
+    number_format: [2, 4]
+    zeros: none
+    notation: absolute
+  naming:                              # 输出文件名规则（工厂各不同；默认 Protel 扩展名）
+    top_copper: "{stem}.GTL"
+    inner_copper: "{stem}.G{n}"
+    bottom_copper: "{stem}.GBL"
+    top_mask: "{stem}.GTS"
+    bottom_mask: "{stem}.GBS"
+    top_silk: "{stem}.GTO"
+    bottom_silk: "{stem}.GBO"
+    top_paste: "{stem}.GTP"
+    bottom_paste: "{stem}.GBP"
+    outline: "{stem}.GKO"
+    drill_pth: "{stem}.TXT"
+    drill_npth: "{stem}-NPTH.TXT"
+    drill_blind: "{stem}-{span}.TXT"
+    ipc356: "{stem}.IPC"
+    rout: "{stem}-ROUT.TXT"
+    inner_rout: "{stem}-ROUT1.GBR"    # 内锣（矩形孔 / 外形内的挖空轮廓）
+    drill_gerber: "{stem}-DRL.GBR"    # drill_as_gerber 时的钻孔层 Gerber
+    drill_second: "{stem}-2ND.TXT"    # second_drill 的二钻钻带
+  origin: keep                         # keep = 保持客户坐标；profile_ll = 外形左下角移到 (0,0)（Genesis 出图习惯）
+  outline_on_mask_mm: 0                # 阻焊层上画 Profile 描边（外形 + V-cut 线）的线宽；0 = 不画（第一块真板：0.1）
+  rout_on_mask_mm: null                # 阻焊层上锣槽 / 缺口轮廓的描边线宽；null = 同 outline_on_mask_mm（2×2 / 3×3 板终稿：外缘 + V-cut 0.15、锣槽 0.2；六层板全 0.2）
+  outline_from_profile: false          # true = 外形层按 Profile 重画（0.15 线 + 定位孔），不照抄客户外形层
+  drill_as_gerber: false               # true = 钻孔层另出一份 Gerber（每把刀一个 C 光圈，槽为线），Genesis 工程资料习惯
+  roundtrip_max_ratio: 0.005           # M3 默认：写出→回读 XOR 面积占比上限；与「周长×量化步长×2」取大（细线层按后者）

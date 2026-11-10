@@ -1,0 +1,309 @@
+{
+  "_note": "C05 全部项 + 网表三缺陷：F_Cu 上 NET_A/NET_B 被一条线连起来（net_short）、两个 NET_C 焊盘没连（net_open）、In2 两个 1.5mm 方块只在角上重叠 0.05mm（net_open_after_reduce，内层 → EQ）。样板本身无真实网名（KiCad 全 N/C），所以 net_short/net_open 各恰好 1 次。",
+  "status": {
+    "intake": "ok",
+    "align": "ok",
+    "drill": "ok",
+    "inner": "needs_review",
+    "outer": "needs_review",
+    "mask": "needs_review",
+    "silk": "needs_review",
+    "net_compare": "needs_review",
+    "panel": "ok",
+    "output": "ok",
+    "gatekeeper": "ok"
+  },
+  "must": [
+    {
+      "stage": "align",
+      "kind": "outside_profile",
+      "severity": "warn",
+      "layer": "Flashpads-F_Silkscreen.gbr"
+    },
+    {
+      "stage": "drill",
+      "kind": "drill_oversize",
+      "severity": "info",
+      "min_count": 10
+    },
+    {
+      "stage": "inner",
+      "kind": "partition_line_width",
+      "severity": "error",
+      "layer": "Flashpads-In1_Cu.gbr"
+    },
+    {
+      "stage": "inner",
+      "kind": "isolation_ring",
+      "severity": "error",
+      "layer": "Flashpads-In1_Cu.gbr"
+    },
+    {
+      "stage": "inner",
+      "kind": "negative_no_clearance",
+      "severity": "warn",
+      "layer": "Flashpads-In1_Cu.gbr",
+      "min_count": 2
+    },
+    {
+      "stage": "inner",
+      "kind": "copper_to_edge",
+      "severity": "warn",
+      "layer": "Flashpads-In1_Cu.gbr"
+    },
+    {
+      "stage": "inner",
+      "kind": "isolated_pad",
+      "severity": "warn",
+      "layer": "Flashpads-In2_Cu.gbr"
+    },
+    {
+      "stage": "inner",
+      "kind": "hole_to_copper",
+      "severity": "error",
+      "layer": "Flashpads-In2_Cu.gbr"
+    },
+    {
+      "stage": "inner",
+      "kind": "copper_to_edge",
+      "severity": "warn",
+      "layer": "Flashpads-In2_Cu.gbr"
+    },
+    {
+      "stage": "inner",
+      "kind": "line_compensation",
+      "severity": "info",
+      "layer": "Flashpads-In2_Cu.gbr"
+    },
+    {
+      "stage": "outer",
+      "kind": "line_width",
+      "severity": "error",
+      "layer": "Flashpads-F_Cu.gbr"
+    },
+    {
+      "stage": "outer",
+      "kind": "spacing",
+      "severity": "error",
+      "layer": "Flashpads-F_Cu.gbr"
+    },
+    {
+      "stage": "outer",
+      "kind": "annular_ring",
+      "severity": "error",
+      "layer": "Flashpads-F_Cu.gbr"
+    },
+    {
+      "stage": "outer",
+      "kind": "annular_ring",
+      "severity": "error",
+      "layer": "Flashpads-B_Cu.gbr"
+    },
+    {
+      "stage": "outer",
+      "kind": "npth_clearance",
+      "severity": "error",
+      "layer": "Flashpads-F_Cu.gbr"
+    },
+    {
+      "stage": "outer",
+      "kind": "smd_pads",
+      "severity": "info",
+      "layer": "Flashpads-F_Cu.gbr"
+    },
+    {
+      "stage": "mask",
+      "kind": "opening_smaller_than_pad",
+      "severity": "error",
+      "layer": "Flashpads-F_Mask.gbr"
+    },
+    {
+      "stage": "mask",
+      "kind": "missing_opening",
+      "severity": "error",
+      "layer": "Flashpads-F_Mask.gbr"
+    },
+    {
+      "stage": "mask",
+      "kind": "mask_sliver",
+      "severity": "error",
+      "layer": "Flashpads-F_Mask.gbr"
+    },
+    {
+      "stage": "mask",
+      "kind": "mask_expansion",
+      "severity": "warn",
+      "layer": "Flashpads-F_Mask.gbr"
+    },
+    {
+      "stage": "mask",
+      "kind": "via_mask_summary",
+      "severity": "info"
+    },
+    {
+      "stage": "silk",
+      "kind": "silk_on_opening",
+      "severity": "warn",
+      "layer": "Flashpads-F_Silkscreen.gbr",
+      "min_count": 2
+    },
+    {
+      "stage": "silk",
+      "kind": "silk_line_width",
+      "severity": "warn",
+      "layer": "Flashpads-F_Silkscreen.gbr"
+    },
+    {
+      "stage": "silk",
+      "kind": "silk_outside_profile",
+      "severity": "warn",
+      "layer": "Flashpads-F_Silkscreen.gbr"
+    },
+    {
+      "stage": "net_compare",
+      "kind": "net_short",
+      "severity": "error",
+      "min_count": 1
+    },
+    {
+      "stage": "net_compare",
+      "kind": "net_open",
+      "severity": "error",
+      "min_count": 1
+    },
+    {
+      "stage": "net_compare",
+      "kind": "net_open_after_reduce",
+      "severity": "warn",
+      "layer": "Flashpads-In2_Cu.gbr"
+    },
+    {
+      "stage": "net_compare",
+      "kind": "net_summary",
+      "severity": "info"
+    },
+    {
+      "stage": "output",
+      "kind": "gerber_output",
+      "severity": "info"
+    },
+    {
+      "stage": "output",
+      "kind": "ipc356_output",
+      "severity": "info"
+    },
+    {
+      "stage": "gatekeeper",
+      "kind": "gate_summary",
+      "severity": "info"
+    },
+    {
+      "stage": "panel",
+      "kind": "panel_plan",
+      "severity": "info"
+    },
+    {
+      "stage": "net_compare",
+      "kind": "net_short",
+      "severity": "warn",
+      "layer": "Flashpads-F_Cu.gbr"
+    },
+    {
+      "stage": "net_compare",
+      "kind": "net_open",
+      "severity": "warn",
+      "layer": "Flashpads-F_Cu.gbr"
+    }
+  ],
+  "must_not": [
+    {
+      "stage": "*",
+      "kind": "layer_parse_error"
+    },
+    {
+      "stage": "intake",
+      "kind": "missing_layer"
+    },
+    {
+      "stage": "intake",
+      "kind": "stackup_odd"
+    },
+    {
+      "stage": "drill",
+      "severity": "error"
+    },
+    {
+      "stage": "inner",
+      "kind": "line_width"
+    },
+    {
+      "stage": "inner",
+      "kind": "spacing"
+    },
+    {
+      "stage": "inner",
+      "kind": "npth_in_pad"
+    },
+    {
+      "stage": "outer",
+      "kind": "npth_in_pad"
+    },
+    {
+      "stage": "outer",
+      "kind": "line_width",
+      "layer": "Flashpads-B_Cu.gbr"
+    },
+    {
+      "stage": "outer",
+      "kind": "spacing",
+      "layer": "Flashpads-B_Cu.gbr"
+    },
+    {
+      "stage": "mask",
+      "kind": "opening_smaller_than_pad",
+      "layer": "Flashpads-B_Mask.gbr"
+    },
+    {
+      "stage": "mask",
+      "kind": "missing_opening",
+      "layer": "Flashpads-B_Mask.gbr"
+    },
+    {
+      "stage": "mask",
+      "kind": "mask_sliver",
+      "layer": "Flashpads-B_Mask.gbr"
+    },
+    {
+      "stage": "mask",
+      "kind": "opening_not_pad"
+    },
+    {
+      "stage": "mask",
+      "kind": "via_plug_too_large"
+    },
+    {
+      "stage": "silk",
+      "kind": "silk_crossing_profile"
+    },
+    {
+      "stage": "silk",
+      "severity": "error"
+    },
+    {
+      "stage": "net_compare",
+      "kind": "no_reference_netlist"
+    },
+    {
+      "stage": "net_compare",
+      "kind": "net_reduce_capped"
+    },
+    {
+      "stage": "output",
+      "kind": "roundtrip_diff"
+    },
+    {
+      "stage": "gatekeeper",
+      "severity": "error"
+    }
+  ]
+}

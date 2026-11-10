@@ -1,0 +1,100 @@
+# 来源：《CAM工程技能培训》第13章 p170–175；quote 为原文逐字片段
+
+- id: rout.process_sequence
+  rule: "锣带一般流程：创建外围 整理外围线 层别特性转换 确认及标示尺寸 刀具及切割路线设定 锣带文件输出"
+  source_page: 170
+  quote: "1.一般流程"
+  note: "流程本身在图片 images/13_锣带及模冲制作/170_1.png 中：创建外围→整理外围线→层别特性转换→确认及标示尺寸→刀具及切割路线设定→锣带文件输出"
+
+- id: rout.outline.create_if_missing
+  rule: "创建外形，如果有就不需要重新创建"
+  source_page: 170
+  quote: "创建外形，如果有就不需要重新创建"
+
+- id: rout.outline.source_layer
+  rule: "创建外形时尽量选择外框接触物件不多的层，Copy Other Layer 取名为Rout"
+  source_page: 170
+  quote: "尽量选择外框接触物件不多的层 选中外框 EditCopy Other Layer 取名为Rout 其他参数都不用设置点 OK 把Rout层中多余的不属于外围的物件删除掉"
+
+- id: rout.outline.arc_replace
+  rule: "整理外围线：接合不佳处重新接合，并以ARC取代线段组成圆弧"
+  source_page: 170
+  quote: "将接合不佳处重新接合,并以ARC取代线段,组成圆弧"
+
+- id: rout.connections.shortcut
+  rule: "Rout→Connection 或 Edit→Connections 快捷键 Alt__O"
+  source_page: 171
+  quote: "Rout Connection或Edit Connections 快捷键 Alt__O"
+
+- id: rout.layer_attributes
+  rule: "Job Matrix 中将 rout 层定义属性 Board；Rout；Positive"
+  source_page: 172
+  quote: "进入Job Matrix ，将rout层定义属性（Board；Rout；Positive）"
+
+- id: rout.dimensions.no_repeat_end
+  rule: "标示尺寸时不可重复标示同一终点线段"
+  source_page: 172
+  quote: "注意：不可重复标"
+  note: "原文为截图标注，分栏错位断成两行：\"注意：不可重复标\" / \"示同一终点线段。\"，中间夹有其它标注文字"
+
+- id: rout.chains.compensation_default
+  rule: "补偿分左补偿、右补偿、不补偿三种，一般按右补偿"
+  source_page: 173
+  quote: "偿三种）一般按右补偿"
+  note: "原文为截图标注，分栏错位断成两行：\"补偿（左补偿，右补偿，不补\" / \"偿三种）一般按右补偿\"，中间夹有\"锣刀大小\""
+
+- id: rout.chains.plunge_holes
+  rule: "Rout→Chains 可设定刀具及切割路线，加引导孔优化下刀及起刀点"
+  source_page: 173
+  quote: "可设定刀具及切割路线，加引导孔优化下刀及起刀点"
+
+- id: rout.output.same_as_drill
+  rule: "锣带输出与钻带输出是一样的"
+  source_page: 174
+  quote: "锣带输出，输出与钻带输出是一样的，在此就不做讲解"
+
+- id: punch.process_sequence
+  rule: "模冲流程：创建外形 增加定位孔 加防爆孔（一般拐角处需要加） 外形标数及标注模冲方向"
+  source_page: 174
+  quote: "创建外形 增加定位孔 加防爆孔（一般拐角处需要加） 外形标数及 标注模冲方向"
+
+- id: punch.locating_holes.count
+  rule: "一般选择四个非金属孔作为定位孔"
+  value: 4
+  unit: 个
+  applies_to: 定位孔
+  source_page: 174
+  quote: "一般选择四个非金属孔作为定位孔（定位孔一般为3.0、2.0、1.5MM三种）"
+
+- id: punch.locating_holes.size
+  rule: "定位孔一般为3.0、2.0、1.5MM三种"
+  unit: mm
+  applies_to: 定位孔
+  source_page: 174
+  quote: "定位孔一般为3.0、2.0、1.5MM三种"
+  note: "可选值 3.0 / 2.0 / 1.5"
+
+- id: punch.anti_burst_holes
+  rule: "为防止爆板，一般在槽的两端或拐角处加一些孔或槽"
+  source_page: 174
+  quote: "为了防止爆板，一般在槽的两端或拐角处加一些孔或槽，提高生产品质及效率，降低生产成本"
+
+- id: punch.dimension_in_autocad
+  rule: "外形标数一般把外形转化成AUTOcad格式，在AUTOCAD里面标数"
+  source_page: 174
+  quote: "一般我们是把外形转化成 AUTOcad格式，在AUTOCAD里面标数"
+
+- id: punch.direction_marking
+  rule: "模冲一定要在模冲图上表明模冲的进板方向"
+  source_page: 174
+  quote: "模冲一定要模冲图上表明模冲的进板方向"
+
+- id: punch.panel_flip
+  rule: "模冲生产拼板一定要倒扣拼板，注意拼板方向"
+  source_page: 174
+  quote: "要特别注意的是模冲生产拼板一定要倒扣拼板，注意拼板方向，方便生产"
+
+- id: punch.scope
+  rule: "模冲适用：单面板孔及外形复杂的板、FPC；大批量板；外形倒角要求为直角、锣板没办法成型的板"
+  source_page: 175
+  quote: "外形倒角要求为直角的板子，角度要求比较严，锣板没有办法成型的"

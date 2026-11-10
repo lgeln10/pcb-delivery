@@ -1,0 +1,152 @@
+# 来源：《CAM工程技能培训》第6章 p119–121；quote 为原文逐字片段
+
+# ---- 前提条件 (p119) ----
+- id: inner.neg.precondition
+  rule: "层要对齐;要正确删除了外围框和外围资料;校正好孔偏(对PAD)；确认当前层是内层负片"
+  source_page: 119
+  quote: "层要对齐;要正确删除了外围框和外围资料;校正好孔偏(对PAD) 确认当前层是内层负片"
+
+# ---- 制作要求 (p119) ----
+- id: inner.neg.thermal.hole_to_inner_ring
+  rule: "散热PAD 孔边缘到内圆的距离要 >=8mil"
+  value_min: 8
+  unit: mil
+  applies_to: thermal_pad
+  source_page: 119
+  quote: "孔边缘到内圆的距离要 >=8mil"
+
+- id: inner.neg.thermal.inner_to_outer_ring
+  rule: "散热PAD 内圆到外圆的距离要>=8mil"
+  value_min: 8
+  unit: mil
+  applies_to: thermal_pad
+  source_page: 119
+  quote: "内圆到外圆的距离要>=8mil"
+
+- id: inner.neg.thermal.opening_length
+  rule: "散热PAD 开口的长度要>=8mil"
+  value_min: 8
+  unit: mil
+  applies_to: thermal_pad
+  source_page: 119
+  quote: "开口的长度要>=8mil"
+
+- id: inner.neg.thermal.min_openings
+  rule: "散热PAD 最少有两个开口"
+  value_min: 2
+  unit: 个
+  applies_to: thermal_pad
+  source_page: 119
+  quote: "并且最少有两个开口"
+
+- id: inner.neg.isolation_pad.ring
+  rule: "隔离PAD 令环单边>=10mil"
+  value_min: 10
+  unit: mil
+  applies_to: isolation_pad
+  source_page: 119
+  quote: "隔离PAD做够规定要求           比如令环单边>=10mil"
+
+- id: inner.neg.partition_line.width
+  rule: "分区线线宽要>=10mil"
+  value_min: 10
+  unit: mil
+  applies_to: partition_line
+  source_page: 119
+  quote: "分区线是否合格             比如分区线线宽要>=10mil"
+
+- id: inner.neg.npth.ring
+  rule: "NPTH孔削铜 令环单边≥12mil(0.305mm)"
+  value_min: 12
+  unit: mil
+  applies_to: npth
+  source_page: 119
+  quote: "NPTH孔是否削铜        比如令环单边≥12mil(0.305mm)]"
+  note: "括号内换算 0.305mm"
+
+- id: inner.neg.outer_trim
+  rule: "外围削够：板薄少削，内层尽量多削，比如单边15mil"
+  value: 15
+  unit: mil
+  applies_to: outer_trim
+  source_page: 119
+  quote: "外围是否做够。    根据情况而言,板薄少削,内层尽量多削,比如单边15mil"
+
+# ---- 一般流程 (p119) ----
+- id: inner.neg.flow
+  rule: "顺序：做够散热PAD → 做够隔离PAD → 做够分区线 → NPTH孔削铜 → 削外围 → 检测并根据检测结果报告修正错误"
+  source_page: 119
+  quote: "做够散热PAD   做够隔离PAD 做够分区线    NPTH孔削铜削外围检测并根据检测结果报告修正错误"
+
+# ---- 散热PAD 表示方法 (p120) ----
+- id: inner.neg.thermal.symbol_square
+  rule: "方形散热PAD为 ths 外圆直径x内圆直径x旋转角度x开口个数x开口长度"
+  applies_to: thermal_pad
+  source_page: 120
+  quote: "方形散热PAD为 ths 外圆直径x内圆直径x旋转角度x开口个数x开口长度"
+
+- id: inner.neg.thermal.symbol_round
+  rule: "圆形散热PAD为 thr 外圆直径x内圆直径x旋转角度x开口个数x开口长度"
+  applies_to: thermal_pad
+  source_page: 120
+  quote: "圆形散热PAD为 thr 外圆直径x内圆直径x旋转角度x开口个数x开口长度"
+
+- id: inner.neg.thermal.symbol_example
+  rule: "如ths2150x1650x45x4x250：外径2150，内径1650，旋转角度45，四个开口，开口长度250，单位 MY"
+  unit: MY
+  applies_to: thermal_pad
+  source_page: 120
+  quote: "如ths2150x1650x45x4x250 表示该方形散热PAD,外径为2150,内径为1650,旋转角度为45,有四个开口并且开口的长度为250. 圆形散热PAD则只要改其中的s为r即可,如thr2150x1650x45x4x250 （单位：MY)"
+
+- id: inner.neg.thermal.change_to_round
+  rule: "物件统计表 Pad List 中以ths开头的都为散热PAD，按顺序改为圆形（Edit Reshape Change Symbol），同时修正内径外径开口度"
+  applies_to: thermal_pad
+  source_page: 120
+  quote: "在物件统计表里Pad List 中以ths开头的都为散热PAD, 我们可以按顺序把它们改为圆形的,在改的过程中也修正内径和外径以及开口度等参数. Edit Reshape  Change Symbol"
+
+- id: inner.neg.isolation_pad.identify
+  rule: "Pad List 中除了以th开头的，其他一般全是隔离PAD，按顺序查看不符合则改之"
+  applies_to: isolation_pad
+  source_page: 120
+  quote: "在Pad List中除了以th开头的,其他一般全是隔离PAD,一样按顺序做先选中,查看符合要求么,不符合则改之.改完做下一类隔离PAD,直到改完为止"
+
+# ---- 分区线 (p121) ----
+- id: inner.neg.partition_line.skip_if_none
+  rule: "如无分区线则此步省，有则先测量其线宽，不符合要求就改"
+  applies_to: partition_line
+  source_page: 121
+  quote: "如无分区线则此步省,有则先测量其线宽,不符合要求就改。"
+
+# ---- NPTH 削铜 (p121) ----
+- id: inner.neg.npth.copy_positive
+  rule: "负片 NPTH孔削铜：加大NPTH孔用正的去复制过去，Edit Copy Other Layer 选Affected，Invert选No，Resize 填在原基础上加大的数值"
+  applies_to: npth
+  source_page: 121
+  quote: "没达到就加大NPTH孔用正的去复制过去 设置好影响层选中钻孔层里的NPTH孔EditCopyOther Layer选Affected Invert选NoResize：填要在原基础上加大的数值其他不改点OK即可"
+
+# ---- 削外围 (p121) ----
+- id: inner.neg.outer_trim.change_symbol_r40
+  rule: "削外围：选中外围线 EDIT Reshape Change Symbol 输入 r40，把外围加大到40mil（加大到多少视具体情况而言）"
+  value: 40
+  unit: mil
+  applies_to: outer_trim
+  source_page: 121
+  quote: "输入r40点OK,就把外围加大到40mil(Resize 操作是在原来基础上加大,而这里是加大到多少)加大到多少视具体情况而言"
+
+- id: inner.neg.outer_trim.compare_before_cut
+  rule: "把加大的外围线跟要削的层比较，看是否会削掉有用的东西，如会则酌情处理"
+  applies_to: outer_trim
+  source_page: 121
+  quote: "把加大的外围线跟要削的层比较,看是否会削掉有用的东西,如会则酌情处理"
+
+- id: inner.neg.outer_trim.invert_no
+  rule: "削负片的外围用正的去削，Invert 选 No；削内层正片须把外围转成负的去削，Invert 选 Yes"
+  applies_to: outer_trim
+  source_page: 121
+  quote: "Invert:转换极性用,象现在削负片的外围是用正的去削,选No 如果削内层正片,就必须把外围转成负的去削,所以选Yes"
+
+- id: inner.neg.outer_trim.resize_by_meaning
+  rule: "Copy Other Layer 下面参数一般都不设置；Resize By 是在原来基础上加大多少的意思，要设置一定要弄清楚再填"
+  applies_to: outer_trim
+  source_page: 121
+  quote: "下面参数一般都不设置,点OK即可.值得注意的是,Resize By:是在原来基础上加大多少的意思.要设置的话一定要弄清楚再填数字."

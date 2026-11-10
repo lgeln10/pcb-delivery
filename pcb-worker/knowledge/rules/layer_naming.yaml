@@ -1,0 +1,128 @@
+# 来源：《CAM工程技能培训》第4章 p110–110；quote 为原文逐字片段
+# 注意：p110 层命名表在 pdftotext 导出中仅剩 "board / positive / signal" 三个词，
+# 各行 quote 为本页渲染图中表格行的逐字转录（quote_source: page_render），无法在 pages/110.txt 中逐字检索。
+
+- id: layer.name.factory_specific
+  rule: "文件/层命名根据每个工厂有所不同，按实际工厂要求命名"
+  source_page: 110
+  quote: "一般命名规则：根据每个工厂有所不同，按实际工厂要求命名"
+  factory_specific: true
+
+- id: layer.name.top_silk
+  rule: "顶层字符 命名为 GTO"
+  applies_to: silk_screen
+  source_page: 110
+  quote: "顶层字符 GTO board silk_screen positive"
+  quote_source: page_render
+  note: "表格列：board / silk_screen / positive"
+
+- id: layer.name.top_solder_mask
+  rule: "顶层阻焊 命名为 GTS"
+  applies_to: solder_mask
+  source_page: 110
+  quote: "顶层阻焊 GTS board solder_mask positive"
+  quote_source: page_render
+
+- id: layer.name.top_signal
+  rule: "顶层线路 命名为 GTL"
+  applies_to: signal
+  source_page: 110
+  quote: "顶层线路 GTL board signal positive"
+  quote_source: page_render
+
+- id: layer.name.l2
+  rule: "第二层 命名为 L2"
+  applies_to: signal
+  source_page: 110
+  quote: "第二层 L2 board signal positive"
+  quote_source: page_render
+
+- id: layer.name.l3
+  rule: "第三层 命名为 L3"
+  applies_to: signal
+  source_page: 110
+  quote: "第三层 L3 board signal positive"
+  quote_source: page_render
+
+- id: layer.name.l4
+  rule: "第四层 命名为 L4"
+  applies_to: signal
+  source_page: 110
+  quote: "第四层 L4 board signal positive"
+  quote_source: page_render
+
+- id: layer.name.l5
+  rule: "第五层 命名为 L5"
+  applies_to: signal
+  source_page: 110
+  quote: "第五层 L5 board signal positive"
+  quote_source: page_render
+
+- id: layer.name.ln
+  rule: "第N层 命名为 LN"
+  applies_to: signal
+  source_page: 110
+  quote: "第N层 LN board signal positive"
+  quote_source: page_render
+
+- id: layer.name.bottom_signal
+  rule: "底层线路 命名为 GBL"
+  applies_to: signal
+  source_page: 110
+  quote: "底层线路 GBL board signal positive"
+  quote_source: page_render
+
+- id: layer.name.bottom_solder_mask
+  rule: "底层阻焊 命名为 GBS"
+  applies_to: solder_mask
+  source_page: 110
+  quote: "底层阻焊 GBS board solder_mask positive"
+  quote_source: page_render
+
+- id: layer.name.bottom_silk
+  rule: "底层字符 命名为 GBO"
+  applies_to: silk_screen
+  source_page: 110
+  quote: "底层字符 GBO board silk_screen positive"
+  quote_source: page_render
+
+- id: layer.name.rout
+  rule: "外形层 命名为 GKO"
+  applies_to: rout
+  source_page: 110
+  quote: "外形层 GKO board rout positive"
+  quote_source: page_render
+
+- id: layer.name.drill
+  rule: "钻孔层 命名为 DRL"
+  applies_to: drill
+  source_page: 110
+  quote: "钻孔层 DRL board drill positive"
+  quote_source: page_render
+
+- id: layer.prep.align_to_drill
+  rule: "资料对齐以钻孔层为基准"
+  source_page: 111
+  quote: "资料对齐，以钻孔层为基准，对齐，定义层属性及板属性"
+
+- id: layer.prep.profile_line_width
+  rule: "把外形线变成0.15MM，定义 Profile"
+  value: 0.15
+  unit: mm
+  source_page: 111
+  quote: "把外形线变成0.15MM,定义 “Profile”"
+
+- id: layer.prep.backup_plus1
+  rule: "把所有板属性的层复制一个 +1 放在下面，方便做完之后对原稿用"
+  source_page: 111
+  quote: "把所有板属性的复制一个 “+1”放在下面，如图：方便做完之后对原稿用"
+
+- id: layer.prep.net_step
+  rule: "复制step net，在 net 删掉 Profile 以外的东西，钻孔定义好孔属性，做完资料后做网络比较"
+  source_page: 111
+  quote: "复制step “net”在 “net”删掉“Profile”以外的东西，钻孔定义好孔属性，方便做完资料后做网络比较，检查资料是否因为误操作导致开短路"
+
+- id: layer.prep.edit_step
+  rule: "用 Orig 复制 step 改成 Edit，删掉板外物"
+  source_page: 112
+  quote: "用“Orig”复制step 改成 “Edit” 删掉板外物"

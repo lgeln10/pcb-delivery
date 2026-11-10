@@ -1,0 +1,39 @@
+{
+  "order_no": "y4f086060a0",
+  "board_name": "1H-WSL007-2-1 (四层喷锡1.6mm板厚 内外1oz)",
+  "layer_count": 4,
+  "board_thickness_mm": 1.6,
+  "copper_outer_um": 35,
+  "copper_inner_um": 35,
+  "board_size_mm": "146.65x100.8",
+  "unit_size_mm": "31.61x47.55",
+  "units_per_panel": 9,
+  "material": "FR4 (普通)",
+  "surface_finish": "无铅喷锡",
+  "solder_mask_color": "绿色亚光",
+  "silkscreen_color": "白色",
+  "silkscreen_sides": "双面印",
+  "solder_mask_sides": "双面印",
+  "via_plugging": "阻焊塞孔",
+  "ipc_class": "IPC-A-600G II级",
+  "panelization": "V-CUT连片（客户已在 PcbDoc 内 3×3 拼好，带邮票孔连接桥；拼板尺寸 146.65×100.8）",
+  "marks": {
+    "ul_logo": "不加",
+    "date_code": "加",
+    "pb_free": "加",
+    "customer_mark": "不加"
+  },
+  "stencil": "是",
+  "impedance": "否",
+  "same_size_pad_hole_as_npth": true,
+  "source": "制板说明.xlsx（下拉框/复选框读出）+ 客户拼版要求.png",
+  "customer_notes": [
+    "焊盘与孔径等大（内外径相同）的孔按 NPTH 制作",
+    "文件格式填 GERBER 但实际提供的是 Altium PcbDoc 源文件",
+    "set_size_mm = 客户给的拼板尺寸（含工艺边）；外形层里的单元不够这个尺寸时，两边等分补工艺边"
+  ],
+  "set_size_mm": [
+    146.65,
+    100.8
+  ]
+}

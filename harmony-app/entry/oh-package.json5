@@ -1,0 +1,7 @@
+{
+  "name": "entry",
+  "version": "0.1.0",
+  "description": "壳入口模块:登录页 + Web 宿主 + 原生桥",
+  "main": "",
+  "dependencies": {}
+}

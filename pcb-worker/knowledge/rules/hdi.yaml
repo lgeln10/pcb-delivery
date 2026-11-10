@@ -1,0 +1,304 @@
+# 来源：《CAM工程技能培训》第16章 p202–211；quote 为原文逐字片段
+
+# ---------- 概述 / 激光钻孔 ----------
+- id: hdi.purpose
+  rule: "盲埋孔，HDI板是高密度，小微孔板制作，目的在于节省线路空间，减少PCB体积"
+  source_page: 202
+  quote: "盲埋孔，HDI板是高密度，小微孔板制作 ,目的在于节省线路空间 , 从而达到减少PCB体积的 目的,如手机板"
+
+- id: hdi.laser.reason.customer
+  rule: "客户资料要求用激光钻孔"
+  source_page: 202
+  quote: "客户资料要求用激光钻孔"
+
+- id: hdi.laser.reason.small_hole
+  rule: "盲孔孔径很小<=6MIL ,需用激光才能钻孔"
+  value: 6
+  unit: mil
+  applies_to: blind_via
+  source_page: 202
+  quote: "因盲孔孔径很小<=6MIL ,需用激光才能钻孔"
+
+- id: hdi.laser.reason.stacked
+  rule: "特殊盲埋孔（如L1到L2有盲孔,L2到L3有埋孔）必须用激光钻孔"
+  source_page: 202
+  quote: "特殊盲埋孔 ,如L1到L2有盲孔,L2到L3有埋孔,就 必须用激光钻孔"
+
+- id: hdi.laser.material.rcc
+  rule: "激光钻孔板材必需有吸光性，一般用RCC材料（无玻璃纤维布，不会反光）"
+  source_page: 202
+  quote: "板材必需有吸光性 ,故一般RCC 材料 ,因为RCC中无玻璃纤维布 ,不会反光"
+
+- id: hdi.rcc.resin_thickness
+  rule: "RCC 树脂厚度 50 65 70 75 80 (um) 等"
+  unit: um
+  source_page: 202
+  quote: "树脂厚度 50 65 70 75 80 (um) 等"
+  note: "值列表：50/65/70/75/80"
+
+- id: hdi.rcc.foil_thickness
+  rule: "RCC 铜箔厚度 12 18 (um)等"
+  unit: um
+  source_page: 202
+  quote: "铜箔厚度 12 18 (um)等"
+  note: "值列表：12/18"
+
+- id: hdi.rcc.er
+  rule: "RCC料介电常数比正常的FR4小，例如生益 S6018介电常数为3.8，有阻抗控制时要注意"
+  value: 3.8
+  source_page: 202
+  quote: "介电常数比正常的FR4小 ,例如广东生益公司的 S6018介电常数为3.8 ,所以当有阻抗控制时要注意"
+
+- id: hdi.laser.cu_clearance
+  rule: "激光钻孔前要在盲孔位蚀出跟完成孔径等大的Cu Clearance"
+  source_page: 202
+  quote: "激光很难烧穿铜皮，故在激光钻孔前要在盲孔位蚀出跟完成孔径等大的Cu Clearance"
+
+- id: hdi.laser.fiducial_layer
+  rule: "激光钻孔的定位标记加在L2/LN-1层，要在MI菲林修改页注明"
+  source_page: 202
+  quote: "激光钻孔的定位标记加在L2/LN-1层，要在MI菲林修改页注明"
+
+- id: hdi.laser.ldi_film
+  rule: "蚀盲孔点菲林必须用LDI制作，开料要用LDI板材尺寸"
+  source_page: 202
+  quote: "蚀盲孔点菲林必须用LDI制作，开料要用LDI板材尺寸"
+
+- id: hdi.laser.flow
+  rule: "激光盲孔板流程：L2—Ln-1 层先按正常板流程制作完毕；压完板、锣完外围后：钻LDI定位孔→干膜→蚀盲孔点→激光钻孔→钻通孔→沉铜→(正常工序)"
+  source_page: 203
+  quote: "压完板，锣完外围后 流程改为：--->钻LDI定位孔--->干膜--->蚀盲孔点--->激光钻孔--->钻通孔 --->沉铜----(正常工序)"
+  note: "steps: [钻LDI定位孔, 干膜, 蚀盲孔点, 激光钻孔, 钻通孔, 沉铜, 正常工序]"
+
+- id: hdi.rcc.no_ul_mark
+  rule: "RCC料未通过UL认证，此类板暂不加UL标记"
+  source_page: 203
+  quote: "由于RCC料都未通过UL认证,故此类板暂不加UL标记"
+
+- id: hdi.mi.stackup_rcc_separate
+  rule: "画排板结构时，RCC料要与L2或Ln-1层分开，避免当假层板排板"
+  source_page: 203
+  quote: "我们在画排板结构时, 要注意RCC料与L2或Ln-1层分开"
+
+- id: hdi.ipc6016.hole_wall_cu
+  rule: "IPC-6016 HDI板标准：激光盲孔孔壁铜厚 0.4mil(min)"
+  value: 0.4
+  unit: mil
+  applies_to: laser_blind_via
+  source_page: 203
+  quote: "IPC-6016是HDI板标准：激光盲孔孔壁铜厚： 0.4mil(min)"
+
+- id: hdi.ipc6016.annular_ring
+  rule: "焊锡圈要求：允许相切；如果PAD尺寸比孔径大5mil以下，要建议加TEARDROP"
+  value: 5
+  unit: mil
+  source_page: 203
+  quote: "焊锡圈要求 ：允许相切 如果PAD尺寸比孔径大5mil以下，要建议加TEARDROP"
+
+- id: hdi.board_edge.min
+  rule: "板边>=0.8”"
+  value: 0.8
+  unit: inch
+  source_page: 203
+  quote: "板边>=0.8”"
+
+# ---------- 机械钻盲/埋孔 ----------
+- id: hdi.mechanical.min_drill
+  rule: "钻嘴尺寸>=0.20mm时可考虑用机械钻孔"
+  value: 0.20
+  unit: mm
+  source_page: 203
+  quote: "钻嘴尺寸>=0.20mm时可考虑用机械钻孔"
+
+- id: hdi.plating.once_panel_once_pattern
+  rule: "任何层线路铜面只可1次板电镀+1次图形电镀"
+  source_page: 203
+  quote: "正常情况下,任何层线路铜面只可1次板电镀+1次 图形电镀"
+
+- id: hdi.plating.thick_board_no_panel_plate
+  rule: "全压板流程完成后板厚>=80MIL，通孔需板电镀+图形电镀，因此盲孔电镀时外层板面不能板电镀"
+  value: 80
+  unit: mil
+  source_page: 203
+  quote: "全压板流程完成后,板厚>=80MIL ,通孔需板 电镀+图形电镀,因此, 盲孔电镀时 外层板面不能板电镀"
+
+- id: hdi.plating.case1
+  rule: "外层线宽大于6MIL且通孔板厚小于80MIL时，盲孔电镀中外层板面可整板电镀"
+  source_page: 203
+  quote: "外层线路线宽度大于6MIL , 且通孔板厚小于80MIL时,在盲孔电镀中 外层板面可整板电镀"
+
+- id: hdi.plating.case2
+  rule: "外层线宽大于6MIL但通孔板厚大于80MIL时，盲孔电镀中外层板面需贴膜保护板面"
+  source_page: 203
+  quote: "外层线路线宽大于6MIL , 但通孔板厚大 于80MIL时,在盲孔电镀中外层板面需贴膜保护板面"
+
+- id: hdi.plating.case3
+  rule: "外层线宽小于6MIL且通孔板厚>=80MIL时，盲孔电镀中外层板面需贴膜保护板面"
+  source_page: 203
+  quote: "外层线路线宽小于6MIL , 且通孔板厚>=80MIL时, 在盲孔电镀中外层板面需贴膜保护板面"
+
+- id: hdi.film.aspect_ratio_le_0.8
+  rule: "盲孔纵横比<=0.8 (L/D) 时，外层板面贴干膜整板曝光，内层盲孔板面整板电镀"
+  value: 0.8
+  applies_to: blind_via
+  source_page: 203
+  quote: "盲孔纵横比<=0.8 (L/D) 时,外层板面贴干膜整板曝光,内层盲孔板面整板电镀"
+
+- id: hdi.film.aspect_ratio_gt_0.8
+  rule: "盲孔纵横比>0.8 (L/D) 时，外层板面贴干膜盲孔曝光，需制作电镀曝点菲林或LDI曝光，内层盲孔板面整板电镀"
+  value: 0.8
+  applies_to: blind_via
+  source_page: 203
+  quote: "盲孔 纵横比>0.8时(L/D) 时,外层板面贴干膜盲孔曝光, 需制作电镀曝点菲林或LDI曝光 ,内层盲孔板面整板电 镀"
+
+- id: hdi.expose.ldi_le_0.4mm
+  rule: "盲孔<=0.4MM (16MIL)时，用LDI曝盲孔"
+  value: 0.4
+  unit: mm
+  applies_to: blind_via
+  source_page: 203
+  quote: "盲孔<=0.4MM (16MIL)时,用LDI曝盲孔"
+
+- id: hdi.expose.film_gt_0.4mm
+  rule: "盲孔>0.4MM (16MIL)时，用菲林曝盲孔"
+  value: 0.4
+  unit: mm
+  applies_to: blind_via
+  source_page: 203
+  quote: "盲孔>0.4MM (16MIL)时,用菲林曝盲孔"
+
+- id: hdi.buried.film_le_4mil
+  rule: "当埋孔面的线宽<=4MIL时，埋孔板面需贴膜曝点"
+  value: 4
+  unit: mil
+  applies_to: buried_via
+  source_page: 204
+  quote: "当埋孔面的线宽<=4MIL时,埋孔板面需贴膜曝点"
+
+- id: hdi.buried.panel_plate_gt_4mil
+  rule: "当埋孔面的线宽>4MIL时，埋孔板面直接板电镀"
+  value: 4
+  unit: mil
+  applies_to: buried_via
+  source_page: 204
+  quote: "当埋孔面的线宽>4MIL时 , 埋孔 板面直接板电镀"
+
+- id: hdi.aspect_ratio.definition
+  rule: "纵横比 L/D：L=介质厚+铜厚，D=盲孔/埋孔直径"
+  source_page: 204
+  quote: "纵横比中 L/D : L=介质厚+铜厚 , D=盲孔/埋孔直径"
+
+- id: hdi.expose_dot.diameter
+  rule: "盲孔/埋孔电镀菲林曝光点的直径 D=D-6 (MIL)"
+  value: 6
+  unit: mil
+  source_page: 204
+  quote: "曝光点的 直径D=D-6 (MIL)"
+
+- id: hdi.expose_dot.fiducial
+  rule: "曝光点菲林加对位点，其坐标与外围参考孔一致"
+  source_page: 204
+  quote: "曝光点菲林加对位点 , 其坐标与外围参考孔一致"
+
+- id: hdi.plating.pulse_current
+  rule: "需贴膜的盲孔在电镀时一般使用脉冲电流 (AC)"
+  source_page: 204
+  quote: "需贴膜的盲孔在电镀时一般使 用脉冲电流 (AC)"
+
+# ---------- 盲孔板特别要求 ----------
+- id: hdi.resin_plug.buried
+  rule: "埋孔尺寸较大且孔数较多时，经R&D要求可在压板前用树脂将埋孔预先塞住，塞孔方式参照绿油塞孔"
+  source_page: 204
+  quote: "经R&D要求时, 可在压板前用树脂将埋孔预先塞住, 塞孔方式应可参照绿油塞孔"
+
+- id: hdi.outer_blind.desmear
+  rule: "外层有盲孔时，压板后需要有一除胶工序"
+  source_page: 204
+  quote: "因压板时外层会有胶流出 ,所以在压板后需要有一除胶工序"
+
+- id: hdi.outer_blind.panel_plate
+  rule: "化学沉铜很薄（0.05MIL 到 0.1MI），易在磨板时磨掉，故加一板电镀工序加厚铜"
+  value_min: 0.05
+  value_max: 0.1
+  unit: mil
+  source_page: 204
+  quote: "化学沉铜很薄,仅 0.05MIL 到 0.1MI 故很容易在磨板时磨掉, 所以我们会加一板电 镀工序,加厚铜"
+
+- id: hdi.outer_blind.flow
+  rule: "外层有盲孔时相关工序：压板—除胶—钻孔—沉铜—板电镀—干膜—图形电镀"
+  source_page: 204
+  quote: "其相关工序如 : 压板—除胶—钻孔—沉铜—板电镀—干膜—图形电镀"
+  note: "steps: [压板, 除胶, 钻孔, 沉铜, 板电镀, 干膜, 图形电镀]"
+
+- id: hdi.pin_lam.core_limit
+  rule: "只有 CORE的厚度小于30MIL时，机器才能打PIN-LAM孔"
+  value: 30
+  unit: mil
+  source_page: 204
+  quote: "只有 CORE的厚度小于30MIL时, 我们 的机器才能打PIN-LAM孔"
+
+- id: hdi.board_edge.multi_lam
+  rule: "盲孔板考虑多次压板及工艺孔较多，板边尽量留到0.8”以上"
+  value: 0.8
+  unit: inch
+  source_page: 204
+  quote: "关于盲孔板板边 ,考虑有多次压板 ,及工艺孔较多 ,所以尽量把板边留到0.8”以上"
+
+- id: hdi.lot_card.sub_flow
+  rule: "写LOT卡时副流程要写单个副流程的排板结构，还要在特别要求里写上主流程的排板结构"
+  source_page: 204
+  quote: "关于副流程 ,即要写单个副流程的排板结构 ,还要在特别要求里写上主流程的排板结构"
+
+# ---------- 工程处理 ----------
+- id: hdi.cam.drill_layer_mapping
+  rule: "按客户提供的钻层排列层叠顺序，一定是相应的钻孔对应相应的层，不能搞错"
+  source_page: 205
+  quote: "一定是相应的钻孔对应相应的层，如果错了，处理资料 就会搞错"
+
+- id: hdi.cam.check
+  rule: "做完之后一定要仔细检查，资料不能有任何差错，如果工程资料错了整个板子就报废"
+  source_page: 206
+  quote: "做完之后一定要仔细检查，资料不能有任何差错，如果工程资料错了整个板子就报废"
+
+- id: hdi.stackup.12L.thickness
+  rule: "十二层HDI板压合结构：压和厚度为1.5+/-0.1MM，成品板厚1.6MM+/-10%"
+  source_page: 206
+  quote: "度为1.5+/-"
+  note: "图注「十二层HDI板压合结构图，压和厚度为1.5+/-0.1MM成品板厚1.6MM+/-10%」在 -layout 中被逐行拆入各层行之间，无连续片段，quote 仅取一段"
+
+- id: hdi.flow.12L
+  rule: "十二层HDI生产流程：开料（三张0.2MM含铜1/1OZ）→内层→一次压合（3-10层）→钻孔（drl3-10）→沉铜→树脂塞孔→线路（L3&L10）→二次压合（2-11层）→激光钻孔(drl2-3和10-11)→沉铜→线路（L2&L3）→三次压合（整板压合）→激光钻孔（drl1-2和11-12）→沉铜→树脂塞孔→钻通孔（后面为正常流程）"
+  source_page: 207
+  quote: "开料（三张0.2MM含铜1/1OZ) 内层 一次压合（3-10层） 钻孔（drl3-10) 沉 铜 树脂塞孔 线路（L3&L10) 二 次压合（2-11层） 激光钻孔 (drl2-3和10- 11） 沉铜 线路（L2&L3) 三次压合（整板压合） 激光钻孔（drl1-2和11- 12） 沉铜 树脂塞孔 钻通孔（后面为正常流程）"
+  note: "steps: [开料（三张0.2MM含铜1/1OZ), 内层, 一次压合（3-10层）, 钻孔（drl3-10), 沉铜, 树脂塞孔, 线路（L3&L10), 二次压合（2-11层）, 激光钻孔 (drl2-3和10-11）, 沉铜, 线路（L2&L3), 三次压合（整板压合）, 激光钻孔（drl1-2和11-12）, 沉铜, 树脂塞孔, 钻通孔（后面为正常流程）]"
+
+# ---------- 常见层叠结构（盲埋孔类型） ----------
+- id: hdi.stackup.4L.types
+  rule: "四层板盲埋孔类型：1）1-2和3-4盲孔；2）1-2和3-4盲孔 2-3埋"
+  applies_to: 4L
+  source_page: 207
+  quote: "1）、1-2和3-4盲孔 2）、1-2和3-4盲孔 2-3埋"
+
+- id: hdi.stackup.6L.types
+  rule: "六层板盲埋孔类型：1）1-2，5-6，2-5；2）1-2和5-6；3）1-2；1-3；2-5；4-6；5-6；4）1-2；1-3；4-6；5-6"
+  applies_to: 6L
+  source_page: 208
+  quote: "1）1-2，5-6 ，2-5 2）1-2和5-6 3）1-2；1-3；2-5；4-6；5-6 4）1-2；1-3；4-6；5-6"
+
+- id: hdi.stackup.8L.types
+  rule: "八层板盲埋孔类型：1）1-2；7-8；2）1-2；2-7；7-8；3）1-2；3-4；5-6；7-8；4）1-2；3-4；1-4；5-6；7-8；5-8；5）1-2；3-4；1-4；5-6；7-8；5-8；2-7"
+  applies_to: 8L
+  source_page: 209
+  quote: "1）1-2；7-8 2）1-2；2-7；7-8 3）1-2；3-4；5-6；7-8"
+  note: "4）5）在 p210：1-2；3-4；1-4；5-6；7-8；5-8 / 1-2；3-4；1-4；5-6；7-8；5-8 ；2-7"
+
+- id: hdi.stackup.10L.types
+  rule: "十层板盲埋孔类型：1）1-2；9-10；2）1-2；2-9；9-10；3）1-2；2-9；9-10；1-5；6-10"
+  applies_to: 10L
+  source_page: 211
+  quote: "1）、1-2；9-10 2）1-2；2-9；9-10 3）1-2；2-9；9-10 ；1-5；6-10"
+
+- id: hdi.stackup.by_customer
+  rule: "具体如何选择芯板PP及叠层结构需要根据客户提供的资料来定"
+  source_page: 211
+  quote: "具体如何选择芯板PP及叠层结构我们需要根据客户提供的资料来定"

@@ -1,0 +1,160 @@
+{
+  "_note": "C01 + planted drill defects (make_input.py). Gerber copper/mask/silk/paste untouched. The open 3 mm segment added to Edge_Cuts is reported by align as outline_stray_segment (M2 W6: polygonize still closes the profile, so no profile_not_closed / profile_extra_rings).",
+  "status": {
+    "intake": "ok",
+    "align": "needs_review",
+    "drill": "needs_review",
+    "inner": "ok",
+    "outer": "needs_review",
+    "mask": "ok",
+    "silk": "ok"
+  },
+  "must": [
+    {
+      "stage": "align",
+      "kind": "layer_empty",
+      "severity": "info",
+      "layer": "Flashpads-B_Silkscreen.gbr"
+    },
+    {
+      "stage": "align",
+      "kind": "profile_line_width",
+      "severity": "info"
+    },
+    {
+      "stage": "drill",
+      "kind": "extra_holes",
+      "severity": "error",
+      "layer": "Flashpads-PTH.drl"
+    },
+    {
+      "stage": "drill",
+      "kind": "hole_separation",
+      "severity": "error",
+      "layer": "Flashpads-PTH.drl"
+    },
+    {
+      "stage": "drill",
+      "kind": "missing_holes",
+      "severity": "warn",
+      "layer": "Flashpads-F_Cu.gbr"
+    },
+    {
+      "stage": "drill",
+      "kind": "missing_holes",
+      "severity": "warn",
+      "layer": "Flashpads-B_Cu.gbr"
+    },
+    {
+      "stage": "drill",
+      "kind": "npth_to_rout",
+      "severity": "warn",
+      "layer": "Flashpads-NPTH.drl"
+    },
+    {
+      "stage": "drill",
+      "kind": "drill_oversize",
+      "severity": "info",
+      "min_count": 9
+    },
+    {
+      "stage": "drill",
+      "kind": "hole_size",
+      "severity": "info"
+    },
+    {
+      "stage": "drill",
+      "kind": "power_ground_shorts",
+      "severity": "info"
+    },
+    {
+      "stage": "outer",
+      "kind": "npth_clearance",
+      "severity": "error",
+      "min_count": 2
+    },
+    {
+      "stage": "outer",
+      "kind": "smd_pads",
+      "severity": "info"
+    },
+    {
+      "stage": "mask",
+      "kind": "mask_expansion",
+      "severity": "warn"
+    },
+    {
+      "stage": "align",
+      "kind": "outline_stray_segment",
+      "severity": "warn",
+      "layer": "Flashpads-Edge_Cuts.gbr",
+      "min_count": 2
+    }
+  ],
+  "must_not": [
+    {
+      "stage": "intake",
+      "severity": "error"
+    },
+    {
+      "stage": "intake",
+      "severity": "warn"
+    },
+    {
+      "stage": "intake",
+      "kind": "layer_low_confidence"
+    },
+    {
+      "stage": "align",
+      "severity": "error"
+    },
+    {
+      "stage": "align",
+      "kind": "profile_not_closed"
+    },
+    {
+      "stage": "align",
+      "kind": "profile_extra_rings"
+    },
+    {
+      "stage": "drill",
+      "kind": "drill_table_mismatch"
+    },
+    {
+      "stage": "drill",
+      "kind": "drill_plating_unknown"
+    },
+    {
+      "stage": "drill",
+      "kind": "layer_parse_error"
+    },
+    {
+      "stage": "outer",
+      "kind": "line_width"
+    },
+    {
+      "stage": "outer",
+      "kind": "spacing"
+    },
+    {
+      "stage": "outer",
+      "kind": "annular_ring"
+    },
+    {
+      "stage": "mask",
+      "severity": "error"
+    },
+    {
+      "stage": "*",
+      "kind": "layer_parse_error"
+    },
+    {
+      "stage": "align",
+      "kind": "profile_not_closed"
+    },
+    {
+      "stage": "align",
+      "kind": "profile_extra_rings"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "app": {
+    // ★与 iOS/安卓壳同一个包名:同一个产品的三端,便于在 AGC / 各商店里对上号
+    "bundleName": "ai.sixamtech.aios",
+    "vendor": "SixAM Tech",
+    "versionCode": 1,
+    "versionName": "0.1.0",
+    "icon": "$media:app_icon",
+    "label": "$string:app_name"
+  }
+}

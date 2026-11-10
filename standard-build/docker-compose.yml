@@ -1,0 +1,106 @@
+# PCB CAM 本地化部署:应用 + Postgres + Caddy(自动 HTTPS)。
+# 用法:复制 .env.docker.example 为 .env 并填好,然后 docker compose up -d --build。
+# 数据库与 Caddy 镜像钉到小版本,并设 pull_policy: missing,避免浮动 tag 在发版时被静默换成新 digest。
+# 升数据库大版本时,Dockerfile 的 ARG PG_MAJOR 要一起改。
+services:
+  db:
+    image: ${DB_IMAGE:-postgres:16.15}
+    pull_policy: missing
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: aios
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: aios
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U aios -d aios"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  app:
+    image: ${AIOS_IMAGE:-aios:latest}
+    build: .
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      # 定时任务按进程本地时区判断「几点」。容器默认 UTC,中国部署保持 Asia/Shanghai。
+      TZ: ${TZ:-Asia/Shanghai}
+      DATABASE_URL: postgres://aios:${DB_PASSWORD}@db:5432/aios
+      AUTH_SECRET: ${AUTH_SECRET}
+      CONFIG_ENC_KEY: ${CONFIG_ENC_KEY}
+      PUBLIC_BASE_URL: ${PUBLIC_BASE_URL}
+      DASHSCOPE_API_KEY: ${DASHSCOPE_API_KEY}
+      # 授权(本地化部署):LICENSE_REQUIRED=true → 强制授权(未激活则只读+提示上传授权文件)。
+      # 客户无需填 LICENSE_KEY —— 首启后在系统里「上传授权文件(.lic)」即可激活(含心跳地址)。
+      LICENSE_REQUIRED: ${LICENSE_REQUIRED:-true}
+      LICENSE_KEY: ${LICENSE_KEY:-}
+      LICENSE_SERVER_URL: ${LICENSE_SERVER_URL:-}
+      # 首次建管理员(库空时);建完可从 .env 移除
+      BOOTSTRAP_ADMIN_PHONE: ${BOOTSTRAP_ADMIN_PHONE:-}
+      BOOTSTRAP_ADMIN_PASSWORD: ${BOOTSTRAP_ADMIN_PASSWORD:-}
+      # 试用/演示:SEED_DEMO=true → 空库写入 PCB 演示租户(王老板 13800000001 / demo-pass-123)。正式使用请留空。
+      # 用了 SEED_DEMO 就不要再设 BOOTSTRAP_ADMIN_*(示例数据自带老板账号)。
+      SEED_DEMO: ${SEED_DEMO:-}
+      # PCB CAM 几何引擎地址(modules/pcb-cam):同 compose 内的 pcb-worker 服务;不用 PCB CAM 的交付可留默认,推进器空跑不报错。
+      PCB_WORKER_URL: ${PCB_WORKER_URL:-http://pcb-worker:8000}
+      PCB_CAM_CASES_DIR: /data/pcb-cases
+    volumes:
+      - uploads:/app/uploads
+      # ★备份落点。**不挂这个卷,备份就是写进容器可写层** —— 跑得再成功,
+      #   下一次 `docker compose up -d` 重建容器就全没了,而且不会有任何报错。
+      #   路径要与 core/backup/config.ts 的默认值一致(cwd=/app + `backups`)。
+      - backups:/app/backups
+      - ../pcb-worker/cases:/data/pcb-cases:ro
+
+  # PCB CAM 几何引擎：从本仓 pcb-worker/ 构建，无需另克隆引擎仓库。
+  # ★与 app 共享 uploads 卷:core/storage 本地模式把上传落在 /app/uploads/<key>,worker 用同一路径读输入、写成果物。
+  #   切到 OSS/TOS 云存储后这条共享卷不够用(worker 读不到云上对象)—— 到时 worker 侧要接 readObject 等价物,见 pcb 仓 engine/storage.py。
+  # ★镜像钉版本 + pull_policy: missing,与 db/caddy 同一条纪律;国内客户用 PCB_WORKER_IMAGE 指到自有镜像仓。
+  pcb-worker:
+    image: ${PCB_WORKER_IMAGE:-pcb-worker:bundled-f0a5a89}
+    build:
+      context: ../pcb-worker
+    pull_policy: missing
+    restart: unless-stopped
+    environment:
+      PCB_STORAGE_ROOT: /data/storage
+      PCB_WORK_ROOT: /data/work
+      # B 线优先产出候选终稿；未经认证的 factory profile 会在 worker gatekeeper 停到 EQ，
+      # 不会因为 native 默认执行而自动放行。仍可在 .env 设 lite/genesis/hybrid。
+      PCB_CAM_ENGINE: ${PCB_CAM_ENGINE:-native}
+    volumes:
+      - uploads:/data/storage
+      - pcb-work:/data/work
+
+  caddy:
+    image: ${CADDY_IMAGE:-caddy:2.11.4}
+    pull_policy: missing
+    restart: unless-stopped
+    depends_on:
+      - app
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      SITE_ADDRESS: ${SITE_ADDRESS}
+      # 可选:再开一个无域名入口(如 http://<公网IP>)**只放官网**,管理端仍只走 SITE_ADDRESS。
+      # 两个必须一起设 —— Caddy 要把 Host 改写成 WEBSITE_HOST,后端才把它认成官网。见 Caddyfile。
+      # ★兜底值由 compose 给(`:-` 对「未设」和「设成空」都生效),不指望 Caddy 的 {$VAR:默认}——
+      #   那个默认到底吃不吃空字符串,不同版本上没把握,而赌错的代价是 Caddy 起不来、连管理端一起挂。
+      WEBSITE_ALT_ADDRESS: ${WEBSITE_ALT_ADDRESS:-http://127.0.0.1:9}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+
+volumes:
+  db-data:
+  uploads:
+  backups:
+  pcb-work:
+  caddy-data:
+  caddy-config:
